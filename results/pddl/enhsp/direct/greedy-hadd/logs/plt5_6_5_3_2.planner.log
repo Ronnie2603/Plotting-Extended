@@ -1,0 +1,98 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 24762
+Aibr Preprocessing
+UFX:false
+|F|:155
+|X|:1
+|A|:207
+|P|:0
+|E|:0
+Numeric Error for Complex Condition Activated
+H1 Setup Time (msec): 1759
+h(I):28.0
+ g(n)= 1.0 h(n)=25.0
+ g(n)= 2.0 h(n)=22.0
+ g(n)= 3.0 h(n)=20.0
+ g(n)= 4.0 h(n)=17.0
+ g(n)= 5.0 h(n)=16.0
+ g(n)= 6.0 h(n)=15.0
+ g(n)= 7.0 h(n)=14.0
+ g(n)= 8.0 h(n)=13.0
+ g(n)= 9.0 h(n)=12.0
+ g(n)= 10.0 h(n)=11.0
+ g(n)= 11.0 h(n)=9.0
+ g(n)= 12.0 h(n)=7.0
+ g(n)= 13.0 h(n)=5.0
+ g(n)= 14.0 h(n)=4.0
+ g(n)= 15.0 h(n)=3.0
+ g(n)= 16.0 h(n)=2.0
+-------------Time: 10s ; Expanded Nodes: 47 (Avg-Speed 4.0 n/s); Evaluated States: 78
+-------------Time: 20s ; Expanded Nodes: 132 (Avg-Speed 6.0 n/s); Evaluated States: 164
+-------------Time: 30s ; Expanded Nodes: 225 (Avg-Speed 7.0 n/s); Evaluated States: 257
+-------------Time: 40s ; Expanded Nodes: 331 (Avg-Speed 8.0 n/s); Evaluated States: 353
+-------------Time: 50s ; Expanded Nodes: 423 (Avg-Speed 8.0 n/s); Evaluated States: 447
+-------------Time: 60s ; Expanded Nodes: 504 (Avg-Speed 8.0 n/s); Evaluated States: 530
+-------------Time: 70s ; Expanded Nodes: 597 (Avg-Speed 8.0 n/s); Evaluated States: 623
+-------------Time: 80s ; Expanded Nodes: 690 (Avg-Speed 8.0 n/s); Evaluated States: 713
+-------------Time: 90s ; Expanded Nodes: 776 (Avg-Speed 8.0 n/s); Evaluated States: 799
+-------------Time: 100s ; Expanded Nodes: 867 (Avg-Speed 8.0 n/s); Evaluated States: 891
+-------------Time: 111s ; Expanded Nodes: 951 (Avg-Speed 8.0 n/s); Evaluated States: 977
+-------------Time: 121s ; Expanded Nodes: 1041 (Avg-Speed 8.0 n/s); Evaluated States: 1063
+-------------Time: 131s ; Expanded Nodes: 1127 (Avg-Speed 8.0 n/s); Evaluated States: 1153
+-------------Time: 141s ; Expanded Nodes: 1228 (Avg-Speed 8.0 n/s); Evaluated States: 1250
+-------------Time: 151s ; Expanded Nodes: 1321 (Avg-Speed 8.0 n/s); Evaluated States: 1340
+-------------Time: 161s ; Expanded Nodes: 1410 (Avg-Speed 8.0 n/s); Evaluated States: 1428
+-------------Time: 171s ; Expanded Nodes: 1481 (Avg-Speed 8.0 n/s); Evaluated States: 1511
+-------------Time: 181s ; Expanded Nodes: 1581 (Avg-Speed 8.0 n/s); Evaluated States: 1603
+-------------Time: 191s ; Expanded Nodes: 1671 (Avg-Speed 8.0 n/s); Evaluated States: 1697
+-------------Time: 201s ; Expanded Nodes: 1754 (Avg-Speed 8.0 n/s); Evaluated States: 1782
+-------------Time: 212s ; Expanded Nodes: 1852 (Avg-Speed 8.0 n/s); Evaluated States: 1874
+-------------Time: 222s ; Expanded Nodes: 1945 (Avg-Speed 8.0 n/s); Evaluated States: 1967
+-------------Time: 232s ; Expanded Nodes: 2039 (Avg-Speed 8.0 n/s); Evaluated States: 2062
+-------------Time: 242s ; Expanded Nodes: 2115 (Avg-Speed 8.0 n/s); Evaluated States: 2139
+-------------Time: 252s ; Expanded Nodes: 2214 (Avg-Speed 8.0 n/s); Evaluated States: 2233
+-------------Time: 262s ; Expanded Nodes: 2297 (Avg-Speed 8.0 n/s); Evaluated States: 2317
+-------------Time: 272s ; Expanded Nodes: 2387 (Avg-Speed 8.0 n/s); Evaluated States: 2407
+-------------Time: 282s ; Expanded Nodes: 2478 (Avg-Speed 8.0 n/s); Evaluated States: 2500
+-------------Time: 293s ; Expanded Nodes: 2571 (Avg-Speed 8.0 n/s); Evaluated States: 2594
+-------------Time: 303s ; Expanded Nodes: 2670 (Avg-Speed 8.0 n/s); Evaluated States: 2691
+-------------Time: 313s ; Expanded Nodes: 2749 (Avg-Speed 8.0 n/s); Evaluated States: 2772
+-------------Time: 323s ; Expanded Nodes: 2836 (Avg-Speed 8.0 n/s); Evaluated States: 2852
+-------------Time: 333s ; Expanded Nodes: 2912 (Avg-Speed 8.0 n/s); Evaluated States: 2929
+-------------Time: 343s ; Expanded Nodes: 2998 (Avg-Speed 8.0 n/s); Evaluated States: 3020
+-------------Time: 353s ; Expanded Nodes: 3066 (Avg-Speed 8.0 n/s); Evaluated States: 3102
+ g(n)= 15.0 h(n)=1.0
+Problem Solved
+
+Found Plan:
+0.0: (shoot-partial-row r1c3 c1)
+1.0: (shoot-partial-row r3c3 c2)
+2.0: (shoot-partial-row r5c1 c3)
+3.0: (shoot-column r1c5 c2)
+4.0: (shoot-column r2c4 c1)
+5.0: (shoot-partial-row r3c2 c2)
+6.0: (shoot-column r5c1 c1)
+7.0: (shoot-column r6c2 c3)
+8.0: (shoot-partial-row r4c3 c3)
+9.0: (shoot-column r5c3 c2)
+10.0: (shoot-partial-row r3c5 c1)
+11.0: (shoot-partial-row r5c5 c1)
+12.0: (shoot-partial-row r6c2 c1)
+13.0: (shoot-row-and-column r3c5 r5c5 c2)
+14.0: (shoot-partial-row r6c3 c1)
+15.0: (shoot-row-and-column r3c5 r6c5 c2)
+
+Plan-Length:16
+Metric (Search):16.0
+Planning Time (msec): 354899
+Heuristic Time (msec): 354528
+Search Time (msec): 354897
+Expanded Nodes:3077
+States Evaluated:3114
+Number of Dead-Ends detected:2846
+Number of Duplicates detected:3445
+
+Tempo esecuzione ENHSP: 388.284 sec

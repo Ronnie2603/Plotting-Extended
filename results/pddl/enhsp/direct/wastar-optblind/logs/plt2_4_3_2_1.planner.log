@@ -1,0 +1,39 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 1075
+UFX:false
+|F|:52
+|X|:1
+|A|:72
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 2, Evaluated States: 9, Time: 0.004) Frontier Size: 7
+f(n) = 2.0 (Expanded Nodes: 10, Evaluated States: 36, Time: 0.009) Frontier Size: 26
+f(n) = 3.0 (Expanded Nodes: 37, Evaluated States: 111, Time: 0.012) Frontier Size: 74
+f(n) = 4.0 (Expanded Nodes: 112, Evaluated States: 269, Time: 0.015) Frontier Size: 157
+f(n) = 5.0 (Expanded Nodes: 270, Evaluated States: 538, Time: 0.019) Frontier Size: 268
+f(n) = 6.0 (Expanded Nodes: 539, Evaluated States: 763, Time: 0.024) Frontier Size: 224
+Problem Solved
+
+Found Plan:
+0.0: (shoot-partial-row r1c1 c1)
+1.0: (shoot-partial-row r2c1 c2)
+2.0: (shoot-partial-row r1c2 c1)
+3.0: (shoot-row-and-column r3c3 r4c3 c2)
+4.0: (shoot-partial-row r3c2 c2)
+5.0: (shoot-partial-row r4c3 c1)
+
+Plan-Length:6
+Metric (Search):6.0
+Planning Time (msec): 26
+Heuristic Time (msec): 1
+Search Time (msec): 26
+Expanded Nodes:679
+States Evaluated:802
+Number of Dead-Ends detected:0
+Number of Duplicates detected:1112
+
+Tempo esecuzione ENHSP: 1.601 sec

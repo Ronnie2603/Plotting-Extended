@@ -1,0 +1,74 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 12538
+UFX:false
+|F|:126
+|X|:1
+|A|:200
+|P|:0
+|E|:0
+[CustomColourHeuristic] Activated
+[CustomColourHeuristic] goalTotalBlock=4.0  initialTotalBlock=20.0  cells=20
+h(I):3.0
+f(n) = 3.0 (Expanded Nodes: 1, Evaluated States: 1, Time: 0.002) Frontier Size: 0
+f(n) = 3.999 (Expanded Nodes: 3, Evaluated States: 14, Time: 0.007) Frontier Size: 11
+f(n) = 4.998 (Expanded Nodes: 11, Evaluated States: 31, Time: 0.009) Frontier Size: 20
+f(n) = 5.995 (Expanded Nodes: 32, Evaluated States: 78, Time: 0.011) Frontier Size: 46
+f(n) = 5.9960003 (Expanded Nodes: 34, Evaluated States: 79, Time: 0.012) Frontier Size: 45
+f(n) = 5.9969997 (Expanded Nodes: 36, Evaluated States: 84, Time: 0.012) Frontier Size: 48
+f(n) = 6.994 (Expanded Nodes: 79, Evaluated States: 176, Time: 0.015) Frontier Size: 97
+f(n) = 6.995 (Expanded Nodes: 81, Evaluated States: 181, Time: 0.015) Frontier Size: 100
+f(n) = 6.9960003 (Expanded Nodes: 92, Evaluated States: 198, Time: 0.016) Frontier Size: 106
+f(n) = 7.992 (Expanded Nodes: 177, Evaluated States: 371, Time: 0.019) Frontier Size: 194
+f(n) = 7.993 (Expanded Nodes: 178, Evaluated States: 373, Time: 0.02) Frontier Size: 195
+f(n) = 7.994 (Expanded Nodes: 193, Evaluated States: 393, Time: 0.02) Frontier Size: 200
+f(n) = 7.995 (Expanded Nodes: 230, Evaluated States: 465, Time: 0.022) Frontier Size: 235
+f(n) = 8.99 (Expanded Nodes: 378, Evaluated States: 737, Time: 0.026) Frontier Size: 359
+f(n) = 8.991 (Expanded Nodes: 385, Evaluated States: 748, Time: 0.027) Frontier Size: 363
+f(n) = 8.992001 (Expanded Nodes: 406, Evaluated States: 774, Time: 0.027) Frontier Size: 368
+f(n) = 8.993 (Expanded Nodes: 470, Evaluated States: 867, Time: 0.03) Frontier Size: 397
+f(n) = 8.9939995 (Expanded Nodes: 612, Evaluated States: 1091, Time: 0.034) Frontier Size: 479
+f(n) = 9.986 (Expanded Nodes: 856, Evaluated States: 1522, Time: 0.04) Frontier Size: 666
+f(n) = 9.9869995 (Expanded Nodes: 857, Evaluated States: 1522, Time: 0.04) Frontier Size: 665
+f(n) = 9.988 (Expanded Nodes: 861, Evaluated States: 1528, Time: 0.041) Frontier Size: 667
+f(n) = 9.989 (Expanded Nodes: 886, Evaluated States: 1562, Time: 0.042) Frontier Size: 676
+f(n) = 9.99 (Expanded Nodes: 925, Evaluated States: 1635, Time: 0.044) Frontier Size: 710
+f(n) = 9.991 (Expanded Nodes: 1042, Evaluated States: 1817, Time: 0.047) Frontier Size: 775
+f(n) = 9.992001 (Expanded Nodes: 1282, Evaluated States: 2184, Time: 0.054) Frontier Size: 902
+f(n) = 9.993 (Expanded Nodes: 1465, Evaluated States: 2465, Time: 0.059) Frontier Size: 1000
+f(n) = 10.985 (Expanded Nodes: 2027, Evaluated States: 3297, Time: 0.076) Frontier Size: 1270
+f(n) = 10.986 (Expanded Nodes: 2028, Evaluated States: 3297, Time: 0.076) Frontier Size: 1269
+f(n) = 10.9869995 (Expanded Nodes: 2055, Evaluated States: 3320, Time: 0.077) Frontier Size: 1265
+f(n) = 10.988 (Expanded Nodes: 2169, Evaluated States: 3420, Time: 0.08) Frontier Size: 1248
+f(n) = 10.989 (Expanded Nodes: 2386, Evaluated States: 3625, Time: 0.086) Frontier Size: 1232
+f(n) = 10.99 (Expanded Nodes: 2518, Evaluated States: 3777, Time: 0.089) Frontier Size: 1252
+f(n) = 10.991 (Expanded Nodes: 2922, Evaluated States: 4254, Time: 0.099) Frontier Size: 1323
+f(n) = 10.992001 (Expanded Nodes: 3500, Evaluated States: 4980, Time: 0.114) Frontier Size: 1469
+Problem Solved
+
+Found Plan:
+0.0: (shoot-column r1c3 c3)
+1.0: (shoot-partial-row r3c1 c1)
+2.0: (shoot-partial-row r4c1 c3)
+3.0: (shoot-partial-row r3c2 c1)
+4.0: (shoot-partial-row r2c2 c2)
+5.0: (shoot-column r5c2 c3)
+6.0: (shoot-column r1c4 c3)
+7.0: (shoot-column r4c1 c4)
+8.0: (shoot-partial-row r3c4 c1)
+9.0: (shoot-partial-row r4c3 c1)
+10.0: (shoot-partial-row r5c3 c4)
+
+Plan-Length:11
+Metric (Search):11.0
+Planning Time (msec): 131
+Heuristic Time (msec): 19
+Search Time (msec): 129
+Expanded Nodes:4088
+States Evaluated:5754
+Number of Dead-Ends detected:0
+Number of Duplicates detected:1548
+
+Tempo esecuzione ENHSP: 15.929 sec

@@ -1,0 +1,96 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 232
+Aibr Preprocessing
+UFX:false
+|F|:301
+|X|:0
+|A|:10571
+|P|:0
+|E|:0
+Numeric Error for Complex Condition Activated
+H1 Setup Time (msec): 241
+h(I):24.0
+ g(n)= 1.0 h(n)=0.0
+Problem Solved
+
+Found Plan:
+0.0: (shooting_row_6)
+1.0: (colour_roulette red)
+2.0: (horizontal_bullet_advancing_absorbing loc_1_6 loc_2_6 red n15 n14)
+3.0: (horizontal_bullet_advancing_absorbing loc_2_6 loc_3_6 red n14 n13)
+4.0: (horizontal_bullet_advancing_absorbing loc_3_6 loc_4_6 red n13 n12)
+5.0: (horizontal_bullet_advancing_reaching_end loc_4_6 loc_5_6)
+6.0: (vertical_bullet_bouncing loc_4_6 loc_4_5 red yellow)
+7.0: (shooting_row_4)
+8.0: (horizontal_bullet_advancing_absorbing loc_1_4 loc_2_4 yellow n12 n11)
+9.0: (horizontal_bullet_bouncing loc_2_4 loc_3_4 yellow green)
+10.0: (fall_block loc_2_5 loc_2_4 green)
+11.0: (shooting_row_2)
+12.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 green n11 n10)
+13.0: (horizontal_bullet_bouncing loc_2_2 loc_3_2 green blue)
+14.0: (fall_block loc_2_3 loc_2_2 blue)
+15.0: (fall_block loc_2_4 loc_2_3 green)
+16.0: (shooting_row_2)
+17.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 blue n10 n9)
+18.0: (horizontal_bullet_bouncing loc_2_2 loc_3_2 blue green)
+19.0: (fall_block loc_2_3 loc_2_2 green)
+20.0: (shooting_column_2)
+21.0: (vertical_bullet_advancing_non_absorbing loc_2_7 loc_2_6)
+22.0: (vertical_bullet_advancing_non_absorbing loc_2_6 loc_2_5)
+23.0: (vertical_bullet_advancing_non_absorbing loc_2_5 loc_2_4)
+24.0: (vertical_bullet_advancing_non_absorbing loc_2_4 loc_2_3)
+25.0: (vertical_bullet_advancing_absorbing loc_2_3 loc_2_2 green n9 n8)
+26.0: (vertical_bullet_advancing_reaching_end loc_2_2 loc_2_1)
+27.0: (shooting_row_5)
+28.0: (horizontal_bullet_advancing_non_absorbing loc_1_5 loc_2_5)
+29.0: (horizontal_bullet_bouncing loc_2_5 loc_3_5 green blue)
+30.0: (shooting_row_2)
+31.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 blue n8 n7)
+32.0: (horizontal_bullet_advancing_non_absorbing loc_1_2 loc_2_2)
+33.0: (horizontal_bullet_advancing_absorbing loc_3_2 loc_4_2 blue n7 n6)
+34.0: (horizontal_bullet_advancing_non_absorbing loc_2_2 loc_3_2)
+35.0: (horizontal_bullet_advancing_reaching_end loc_4_2 loc_5_2)
+36.0: (vertical_bullet_advancing_reaching_end loc_3_2 loc_3_1)
+37.0: (fall_block loc_3_3 loc_3_2 red)
+38.0: (fall_block loc_4_3 loc_4_2 blue)
+39.0: (fall_block loc_3_4 loc_3_3 yellow)
+40.0: (fall_block loc_4_4 loc_4_3 green)
+41.0: (fall_block loc_3_5 loc_3_4 green)
+42.0: (fall_block loc_4_5 loc_4_4 red)
+43.0: (shooting_row_2)
+44.0: (horizontal_bullet_advancing_reaching_end loc_4_2 loc_5_2)
+45.0: (vertical_bullet_advancing_reaching_end loc_1_2 loc_1_1)
+46.0: (shooting_row_5)
+47.0: (horizontal_bullet_advancing_non_absorbing loc_1_2 loc_2_2)
+48.0: (horizontal_bullet_advancing_non_absorbing loc_1_5 loc_2_5)
+49.0: (horizontal_bullet_advancing_non_absorbing loc_2_5 loc_3_5)
+50.0: (horizontal_bullet_advancing_non_absorbing loc_3_5 loc_4_5)
+51.0: (horizontal_bullet_advancing_absorbing loc_3_2 loc_4_2 blue n6 n5)
+52.0: (horizontal_bullet_advancing_reaching_end loc_4_5 loc_5_5)
+53.0: (vertical_bullet_bouncing loc_4_5 loc_4_4 blue red)
+54.0: (fall_block loc_4_3 loc_4_2 green)
+55.0: (fall_block loc_4_4 loc_4_3 blue)
+56.0: (shooting_row_3)
+57.0: (horizontal_bullet_advancing_non_absorbing loc_1_3 loc_2_3)
+58.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 red n5 n4)
+59.0: (horizontal_bullet_bouncing loc_3_2 loc_4_2 red green)
+60.0: (fall_block loc_3_3 loc_3_2 yellow)
+61.0: (fall_block loc_3_4 loc_3_3 green)
+62.0: (shooting_row_6)
+63.0: (horizontal_bullet_advancing_absorbing loc_2_3 loc_3_3 green n4 n3)
+64.0: (horizontal_bullet_bouncing loc_3_3 loc_4_3 green blue)
+
+Plan-Length:65
+Metric (Search):11.0
+Planning Time (msec): 5248
+Heuristic Time (msec): 4630
+Search Time (msec): 5246
+Expanded Nodes:470
+States Evaluated:824
+Number of Dead-Ends detected:116
+Number of Duplicates detected:304
+
+Tempo esecuzione ENHSP: 6.698 sec

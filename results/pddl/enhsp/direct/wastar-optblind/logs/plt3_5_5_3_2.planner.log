@@ -1,0 +1,51 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 12168
+UFX:false
+|F|:130
+|X|:1
+|A|:189
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 2, Evaluated States: 11, Time: 0.004) Frontier Size: 9
+f(n) = 2.0 (Expanded Nodes: 12, Evaluated States: 31, Time: 0.008) Frontier Size: 19
+f(n) = 3.0 (Expanded Nodes: 32, Evaluated States: 77, Time: 0.01) Frontier Size: 45
+f(n) = 4.0 (Expanded Nodes: 78, Evaluated States: 162, Time: 0.012) Frontier Size: 84
+f(n) = 5.0 (Expanded Nodes: 163, Evaluated States: 331, Time: 0.017) Frontier Size: 168
+f(n) = 6.0 (Expanded Nodes: 332, Evaluated States: 791, Time: 0.021) Frontier Size: 459
+f(n) = 7.0 (Expanded Nodes: 792, Evaluated States: 1829, Time: 0.033) Frontier Size: 1037
+f(n) = 8.0 (Expanded Nodes: 1830, Evaluated States: 4150, Time: 0.055) Frontier Size: 2320
+f(n) = 9.0 (Expanded Nodes: 4151, Evaluated States: 8776, Time: 0.103) Frontier Size: 4625
+f(n) = 10.0 (Expanded Nodes: 8777, Evaluated States: 16847, Time: 0.198) Frontier Size: 8070
+f(n) = 11.0 (Expanded Nodes: 16848, Evaluated States: 28562, Time: 0.368) Frontier Size: 11714
+f(n) = 12.0 (Expanded Nodes: 28563, Evaluated States: 41782, Time: 0.602) Frontier Size: 13219
+Problem Solved
+
+Found Plan:
+0.0: (shoot-partial-row r1c5 c1)
+1.0: (shoot-column r3c4 c1)
+2.0: (shoot-column r2c1 c2)
+3.0: (shoot-column r2c5 c3)
+4.0: (shoot-partial-row r2c2 c1)
+5.0: (shoot-partial-row r5c2 c3)
+6.0: (shoot-partial-row r4c3 c2)
+7.0: (shoot-column r4c3 c1)
+8.0: (shoot-column r3c5 c3)
+9.0: (shoot-partial-row r5c3 c1)
+10.0: (shoot-column r4c5 c3)
+11.0: (shoot-partial-row r4c5 c2)
+
+Plan-Length:12
+Metric (Search):12.0
+Planning Time (msec): 613
+Heuristic Time (msec): 1
+Search Time (msec): 612
+Expanded Nodes:29098
+States Evaluated:42287
+Number of Dead-Ends detected:0
+Number of Duplicates detected:29985
+
+Tempo esecuzione ENHSP: 16.131 sec

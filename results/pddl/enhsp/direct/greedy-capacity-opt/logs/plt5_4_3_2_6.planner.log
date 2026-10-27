@@ -1,0 +1,32 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 168
+UFX:false
+|F|:0
+|X|:14
+|A|:60
+|P|:0
+|E|:0
+[CapacityOptHeuristic-HybridFast] Activated
+[CapacityOptHeuristic-HybridFast] goalTotalBlock=6.0  initialTotalBlock=12.0  cells=12  rows=4  cols=3  maxLine=4  maxActionCapacity=6  unblockedRows=4  unblockedCols=3  numericColourFluents=12
+h(I):1.0
+ g(n)= 1.0 h(n)=0.997
+Problem Solved
+
+Found Plan:
+0.0: (shoot-partial-row r3c3 c1)
+1.0: (shoot-partial-row r2c3 c1)
+
+Plan-Length:2
+Metric (Search):2.0
+Planning Time (msec): 10
+Heuristic Time (msec): 1
+Search Time (msec): 9
+Expanded Nodes:3
+States Evaluated:13
+Number of Dead-Ends detected:0
+Number of Duplicates detected:1
+
+Tempo esecuzione ENHSP: 0.460 sec

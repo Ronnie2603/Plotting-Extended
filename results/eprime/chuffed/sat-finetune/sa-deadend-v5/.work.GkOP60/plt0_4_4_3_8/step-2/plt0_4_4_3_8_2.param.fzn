@@ -1,0 +1,18 @@
+var 1..2: fpRow_00002:: output_var ;
+var {0,1}: grid_00002_00003_00004_INTEGER :: output_var ;
+var bool: aux23_BOOL:: var_is_introduced ;
+var bool: aux24_BOOL:: var_is_introduced ;
+var bool: aux26_BOOL:: var_is_introduced ;
+var {0,1}: aux27_INTEGER :: var_is_introduced ;
+var bool: aux28_BOOL:: var_is_introduced ;
+var bool: aux29_BOOL:: var_is_introduced ;
+constraint int_eq_reif(0,grid_00002_00003_00004_INTEGER,aux24_BOOL);
+constraint int_eq_reif(1,grid_00002_00003_00004_INTEGER,aux26_BOOL);
+constraint int_lin_eq([1,1,-1],[fpRow_00002,-1,aux27_INTEGER],0);
+constraint set_in_reif(aux27_INTEGER,{1,2,3,4},aux28_BOOL);
+constraint array_bool_and([aux26_BOOL,aux28_BOOL],aux29_BOOL);
+constraint int_le_reif(fpRow_00002, 1,aux23_BOOL);
+constraint bool_clause([aux24_BOOL],[aux23_BOOL]);
+constraint array_bool_or([aux29_BOOL,aux23_BOOL],true);
+
+solve :: int_search([fpRow_00002, grid_00002_00003_00004_INTEGER], input_order, indomain_min, complete) satisfy;

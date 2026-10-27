@@ -1,0 +1,58 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 182
+Aibr Preprocessing
+UFX:false
+|F|:266
+|X|:0
+|A|:8859
+|P|:0
+|E|:0
+Numeric Error for Complex Condition Activated
+H1 Setup Time (msec): 207
+h(I):16.0
+ g(n)= 1.0 h(n)=0.0
+Problem Solved
+
+Found Plan:
+0.0: (shooting_column_2)
+1.0: (colour_roulette red)
+2.0: (vertical_bullet_advancing_absorbing loc_2_7 loc_2_6 red n15 n14)
+3.0: (vertical_bullet_advancing_absorbing loc_2_6 loc_2_5 red n14 n13)
+4.0: (vertical_bullet_bouncing loc_2_5 loc_2_4 red blue)
+5.0: (shooting_column_4)
+6.0: (vertical_bullet_advancing_absorbing loc_4_7 loc_4_6 blue n13 n12)
+7.0: (vertical_bullet_advancing_absorbing loc_4_6 loc_4_5 blue n12 n11)
+8.0: (vertical_bullet_bouncing loc_4_5 loc_4_4 blue red)
+9.0: (shooting_row_4)
+10.0: (horizontal_bullet_advancing_absorbing loc_1_4 loc_2_4 red n11 n10)
+11.0: (horizontal_bullet_bouncing loc_2_4 loc_3_4 red blue)
+12.0: (shooting_row_5)
+13.0: (horizontal_bullet_advancing_non_absorbing loc_1_5 loc_2_5)
+14.0: (horizontal_bullet_advancing_absorbing loc_2_5 loc_3_5 blue n10 n9)
+15.0: (horizontal_bullet_advancing_non_absorbing loc_3_5 loc_4_5)
+16.0: (horizontal_bullet_advancing_reaching_end loc_4_5 loc_5_5)
+17.0: (vertical_bullet_advancing_absorbing loc_4_5 loc_4_4 blue n9 n8)
+18.0: (vertical_bullet_bouncing loc_4_4 loc_4_3 blue red)
+19.0: (fall_block loc_3_6 loc_3_5 green)
+20.0: (shooting_row_4)
+21.0: (horizontal_bullet_advancing_non_absorbing loc_1_4 loc_2_4)
+22.0: (horizontal_bullet_advancing_absorbing loc_2_4 loc_3_4 red n8 n7)
+23.0: (horizontal_bullet_advancing_non_absorbing loc_3_4 loc_4_4)
+24.0: (horizontal_bullet_advancing_reaching_end loc_4_4 loc_5_4)
+25.0: (vertical_bullet_bouncing loc_4_4 loc_4_3 red blue)
+26.0: (fall_block loc_3_5 loc_3_4 green)
+
+Plan-Length:27
+Metric (Search):5.0
+Planning Time (msec): 611
+Heuristic Time (msec): 497
+Search Time (msec): 610
+Expanded Nodes:102
+States Evaluated:120
+Number of Dead-Ends detected:41
+Number of Duplicates detected:13
+
+Tempo esecuzione ENHSP: 1.681 sec

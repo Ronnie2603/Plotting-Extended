@@ -1,0 +1,10 @@
+language ESSENCE' 1.0
+letting fpCol be [2, 4]
+letting fpRow be [0, 0]
+letting grid be [[[1, 2, 1, 2], 
+[1, 2, 2, 2]], 
+[[1, 0, 1, 2], 
+[1, 0, 2, 2]], 
+[[1, 0, 1, 0], 
+[1, 0, 2, 0]];int(0..2)]
+letting hand be [2, 2, 2;int(0..2)]

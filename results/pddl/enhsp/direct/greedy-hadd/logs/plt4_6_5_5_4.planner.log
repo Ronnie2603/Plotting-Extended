@@ -1,0 +1,51 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 63320
+Aibr Preprocessing
+UFX:false
+|F|:217
+|X|:1
+|A|:349
+|P|:0
+|E|:0
+Numeric Error for Complex Condition Activated
+H1 Setup Time (msec): 24188
+h(I):26.0
+ g(n)= 1.0 h(n)=24.0
+ g(n)= 2.0 h(n)=23.0
+ g(n)= 4.0 h(n)=22.0
+-------------Time: 10s ; Expanded Nodes: 8 (Avg-Speed 0.0 n/s); Evaluated States: 13
+ g(n)= 4.0 h(n)=21.0
+ g(n)= 5.0 h(n)=18.0
+ g(n)= 6.0 h(n)=17.0
+ g(n)= 7.0 h(n)=16.0
+-------------Time: 20s ; Expanded Nodes: 19 (Avg-Speed 0.0 n/s); Evaluated States: 29
+ g(n)= 8.0 h(n)=15.0
+ g(n)= 9.0 h(n)=14.0
+ g(n)= 10.0 h(n)=13.0
+-------------Time: 30s ; Expanded Nodes: 34 (Avg-Speed 1.0 n/s); Evaluated States: 42
+-------------Time: 42s ; Expanded Nodes: 48 (Avg-Speed 1.0 n/s); Evaluated States: 58
+ g(n)= 9.0 h(n)=11.0
+ g(n)= 10.0 h(n)=10.0
+ g(n)= 11.0 h(n)=9.0
+ g(n)= 12.0 h(n)=7.0
+-------------Time: 53s ; Expanded Nodes: 66 (Avg-Speed 1.0 n/s); Evaluated States: 74
+-------------Time: 63s ; Expanded Nodes: 80 (Avg-Speed 1.0 n/s); Evaluated States: 87
+-------------Time: 74s ; Expanded Nodes: 91 (Avg-Speed 1.0 n/s); Evaluated States: 101
+-------------Time: 85s ; Expanded Nodes: 108 (Avg-Speed 1.0 n/s); Evaluated States: 114
+-------------Time: 96s ; Expanded Nodes: 122 (Avg-Speed 1.0 n/s); Evaluated States: 128
+-------------Time: 106s ; Expanded Nodes: 138 (Avg-Speed 1.0 n/s); Evaluated States: 142
+-------------Time: 117s ; Expanded Nodes: 154 (Avg-Speed 1.0 n/s); Evaluated States: 156
+Problem unsolvable
+Metric (Search):-1.0
+Planning Time (msec): 122716
+Heuristic Time (msec): 122660
+Search Time (msec): 0
+Expanded Nodes:162
+States Evaluated:162
+Number of Dead-Ends detected:199
+Number of Duplicates detected:26
+
+Tempo esecuzione ENHSP: 227.360 sec

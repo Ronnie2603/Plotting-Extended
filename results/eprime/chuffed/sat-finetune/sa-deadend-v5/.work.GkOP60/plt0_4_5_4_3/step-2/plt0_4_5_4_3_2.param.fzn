@@ -1,0 +1,96 @@
+var 0..1 : fpRow_00001:: output_var ;
+var 0..1 : fpRow_00002:: output_var ;
+var 0..1 : fpCol_00001:: output_var ;
+var 0..1 : fpCol_00002:: output_var ;
+var 0..1 : grid_00001_00001_00001:: output_var ;
+var 0..1 : grid_00001_00001_00002:: output_var ;
+var 0..1 : grid_00001_00001_00003:: output_var ;
+var 0..1 : grid_00001_00001_00004:: output_var ;
+var 0..1 : grid_00001_00001_00005:: output_var ;
+var 0..1 : grid_00001_00002_00001:: output_var ;
+var 0..1 : grid_00001_00002_00002:: output_var ;
+var 0..1 : grid_00001_00002_00003:: output_var ;
+var 0..1 : grid_00001_00002_00004:: output_var ;
+var 0..1 : grid_00001_00002_00005:: output_var ;
+var 0..1 : grid_00001_00003_00001:: output_var ;
+var 0..1 : grid_00001_00003_00002:: output_var ;
+var 0..1 : grid_00001_00003_00003:: output_var ;
+var 0..1 : grid_00001_00003_00004:: output_var ;
+var 0..1 : grid_00001_00003_00005:: output_var ;
+var 0..1 : grid_00001_00004_00001:: output_var ;
+var 0..1 : grid_00001_00004_00002:: output_var ;
+var 0..1 : grid_00001_00004_00003:: output_var ;
+var 0..1 : grid_00001_00004_00004:: output_var ;
+var 0..1 : grid_00001_00004_00005:: output_var ;
+var 0..1 : grid_00002_00001_00001:: output_var ;
+var 0..1 : grid_00002_00001_00002:: output_var ;
+var 0..1 : grid_00002_00001_00003:: output_var ;
+var 0..1 : grid_00002_00001_00004:: output_var ;
+var 0..1 : grid_00002_00001_00005:: output_var ;
+var 0..1 : grid_00002_00002_00001:: output_var ;
+var 0..1 : grid_00002_00002_00002:: output_var ;
+var 0..1 : grid_00002_00002_00003:: output_var ;
+var 0..1 : grid_00002_00002_00004:: output_var ;
+var 0..1 : grid_00002_00002_00005:: output_var ;
+var 0..1 : grid_00002_00003_00001:: output_var ;
+var 0..1 : grid_00002_00003_00002:: output_var ;
+var 0..1 : grid_00002_00003_00003:: output_var ;
+var 0..1 : grid_00002_00003_00004:: output_var ;
+var 0..1 : grid_00002_00003_00005:: output_var ;
+var 0..1 : grid_00002_00004_00001:: output_var ;
+var 0..1 : grid_00002_00004_00002:: output_var ;
+var 0..1 : grid_00002_00004_00003:: output_var ;
+var 0..1 : grid_00002_00004_00004:: output_var ;
+var 0..1 : grid_00002_00004_00005:: output_var ;
+var 0..1 : hand_00000:: output_var ;
+var 0..1 : hand_00001:: output_var ;
+var 0..1 : hand_00002:: output_var ;
+constraint int_eq(0,1); % Variable fpRow_00001 has empty domain.
+constraint int_eq(0,1); % Variable fpRow_00002 has empty domain.
+constraint int_eq(0,1); % Variable fpCol_00001 has empty domain.
+constraint int_eq(0,1); % Variable fpCol_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00001_00001 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00001_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00001_00003 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00001_00004 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00001_00005 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00002_00001 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00002_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00002_00003 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00002_00004 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00002_00005 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00003_00001 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00003_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00003_00003 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00003_00004 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00003_00005 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00004_00001 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00004_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00004_00003 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00004_00004 has empty domain.
+constraint int_eq(0,1); % Variable grid_00001_00004_00005 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00001_00001 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00001_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00001_00003 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00001_00004 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00001_00005 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00002_00001 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00002_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00002_00003 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00002_00004 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00002_00005 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00003_00001 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00003_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00003_00003 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00003_00004 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00003_00005 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00004_00001 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00004_00002 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00004_00003 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00004_00004 has empty domain.
+constraint int_eq(0,1); % Variable grid_00002_00004_00005 has empty domain.
+constraint int_eq(0,1); % Variable hand_00000 has empty domain.
+constraint int_eq(0,1); % Variable hand_00001 has empty domain.
+constraint int_eq(0,1); % Variable hand_00002 has empty domain.
+constraint bool_eq(true,false);
+solve :: int_search([fpRow_00001, fpCol_00001, grid_00001_00001_00001, grid_00001_00001_00002, grid_00001_00001_00003, grid_00001_00001_00004, grid_00001_00001_00005, grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005, grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005, grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005, hand_00001, fpRow_00002, fpCol_00002, grid_00002_00001_00001, grid_00002_00001_00002, grid_00002_00001_00003, grid_00002_00001_00004, grid_00002_00001_00005, grid_00002_00002_00001, grid_00002_00002_00002, grid_00002_00002_00003, grid_00002_00002_00004, grid_00002_00002_00005, grid_00002_00003_00001, grid_00002_00003_00002, grid_00002_00003_00003, grid_00002_00003_00004, grid_00002_00003_00005, grid_00002_00004_00001, grid_00002_00004_00002, grid_00002_00004_00003, grid_00002_00004_00004, grid_00002_00004_00005, hand_00002], input_order, indomain_min, complete) satisfy;

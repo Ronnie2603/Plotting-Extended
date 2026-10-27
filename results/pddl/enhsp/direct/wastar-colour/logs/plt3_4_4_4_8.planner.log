@@ -1,0 +1,37 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 5425
+UFX:false
+|F|:102
+|X|:1
+|A|:160
+|P|:0
+|E|:0
+[CustomColourHeuristic] Activated
+[CustomColourHeuristic] goalTotalBlock=8.0  initialTotalBlock=16.0  cells=16
+h(I):3.0
+f(n) = 3.0 (Expanded Nodes: 1, Evaluated States: 1, Time: 0.002) Frontier Size: 0
+f(n) = 3.996 (Expanded Nodes: 4, Evaluated States: 10, Time: 0.009) Frontier Size: 6
+f(n) = 3.998 (Expanded Nodes: 10, Evaluated States: 20, Time: 0.01) Frontier Size: 10
+f(n) = 3.999 (Expanded Nodes: 12, Evaluated States: 21, Time: 0.01) Frontier Size: 9
+Problem Solved
+
+Found Plan:
+0.0: (shoot-column r4c2 c1)
+1.0: (shoot-column r2c1 c1)
+2.0: (shoot-partial-row r1c3 c2)
+3.0: (shoot-column r3c1 c1)
+
+Plan-Length:4
+Metric (Search):4.0
+Planning Time (msec): 13
+Heuristic Time (msec): 2
+Search Time (msec): 11
+Expanded Nodes:18
+States Evaluated:35
+Number of Dead-Ends detected:0
+Number of Duplicates detected:1
+
+Tempo esecuzione ENHSP: 7.028 sec

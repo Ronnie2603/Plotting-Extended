@@ -1,0 +1,65 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 24948
+UFX:false
+|F|:155
+|X|:1
+|A|:240
+|P|:0
+|E|:0
+[CustomColourHeuristic] Activated
+[CustomColourHeuristic] goalTotalBlock=2.0  initialTotalBlock=30.0  cells=30
+h(I):3.0
+ g(n)= 1.0 h(n)=2.997
+ g(n)= 2.0 h(n)=2.994
+ g(n)= 3.0 h(n)=2.992
+ g(n)= 4.0 h(n)=2.989
+ g(n)= 5.0 h(n)=2.988
+ g(n)= 6.0 h(n)=2.987
+ g(n)= 7.0 h(n)=2.986
+ g(n)= 8.0 h(n)=2.985
+ g(n)= 9.0 h(n)=0.983
+ g(n)= 10.0 h(n)=0.982
+ g(n)= 12.0 h(n)=0.981
+ g(n)= 13.0 h(n)=0.979
+ g(n)= 14.0 h(n)=0.978
+ g(n)= 15.0 h(n)=0.977
+ g(n)= 16.0 h(n)=0.975
+ g(n)= 17.0 h(n)=0.974
+ g(n)= 18.0 h(n)=0.973
+Problem Solved
+
+Found Plan:
+0.0: (shoot-partial-row r1c3 c1)
+1.0: (shoot-partial-row r3c3 c2)
+2.0: (shoot-partial-row r6c2 c3)
+3.0: (shoot-row-and-column r2c5 r3c5 c1)
+4.0: (shoot-column r4c2 c2)
+5.0: (shoot-partial-row r6c1 c3)
+6.0: (shoot-column r5c2 c2)
+7.0: (shoot-partial-row r4c3 c3)
+8.0: (shoot-column r6c2 c2)
+9.0: (shoot-row-and-column r1c5 r3c5 c2)
+10.0: (shoot-column r2c4 c1)
+11.0: (shoot-row-and-column r1c5 r4c5 c2)
+12.0: (shoot-column r6c1 c1)
+13.0: (shoot-column r4c3 c1)
+14.0: (shoot-column r5c5 c2)
+15.0: (shoot-partial-row r5c5 c1)
+16.0: (shoot-column r4c4 c1)
+17.0: (shoot-partial-row r6c3 c3)
+18.0: (shoot-row-and-column r2c5 r6c5 c2)
+
+Plan-Length:19
+Metric (Search):19.0
+Planning Time (msec): 14
+Heuristic Time (msec): 4
+Search Time (msec): 12
+Expanded Nodes:27
+States Evaluated:73
+Number of Dead-Ends detected:0
+Number of Duplicates detected:13
+
+Tempo esecuzione ENHSP: 31.679 sec

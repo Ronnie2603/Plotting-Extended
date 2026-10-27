@@ -1,0 +1,208 @@
+INFO     planner time limit: 900s
+INFO     planner memory limit: 24576 MB
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: 899s
+INFO     translator memory limit: 24576 MB
+INFO     translator command line string: /usr/bin/python3 /app/paper_2024/planners/symk/builds/release/bin/translate/translate.py /app/paper_2024/pddl/instances/plt1_4_4_3_3-domain.pddl /app/paper_2024/pddl/instances/plt1_4_4_3_3-problem.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.000s CPU, 0.002s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.001s wall-clock]
+Normalizing Datalog program...
+Trivial rules: Converted to facts.
+Normalizing Datalog program: [0.000s CPU, 0.002s wall-clock]
+Preparing model... [0.000s CPU, 0.001s wall-clock]
+Generated 135 rules.
+Computing model... [0.040s CPU, 0.036s wall-clock]
+10640 relevant atoms
+4721 auxiliary atoms
+15361 final queue length
+48442 total queue pushes
+Completing instantiation... [0.180s CPU, 0.178s wall-clock]
+Instantiating: [0.220s CPU, 0.219s wall-clock]
+Computing fact groups...
+Finding invariants...
+10 initial candidates
+Finding invariants: [0.000s CPU, 0.002s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+252 uncovered facts
+Choosing groups: [0.000s CPU, 0.000s wall-clock]
+Building translation key... [0.000s CPU, 0.000s wall-clock]
+Computing fact groups: [0.000s CPU, 0.003s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Translator axioms removed by simplifying: 0
+Processing axioms: [0.010s CPU, 0.010s wall-clock]
+Translating task: [0.260s CPU, 0.253s wall-clock]
+19190 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+2600 operators removed
+5 axioms removed
+14 propositions removed
+Detecting unreachable propositions: [0.130s CPU, 0.135s wall-clock]
+Reordering and filtering variables...
+249 of 249 variables necessary.
+0 of 2 mutex groups necessary.
+6227 of 6227 operators necessary.
+29 of 29 axiom rules necessary.
+Reordering and filtering variables: [0.040s CPU, 0.035s wall-clock]
+Translator variables: 249
+Translator derived variables: 2
+Translator facts: 516
+Translator goal facts: 1
+Translator mutex groups: 0
+Translator total mutex groups size: 0
+Translator operators: 6227
+Translator axioms: 29
+Translator task size: 74405
+Translator peak memory: 89412 KB
+Writing output... [0.030s CPU, 0.027s wall-clock]
+Done! [0.690s CPU, 0.690s wall-clock]
+translate exit code: 0
+
+INFO     Running preprocessor (release).
+INFO     preprocess stdin: output.sas
+INFO     preprocess time limit: 899s
+INFO     preprocess memory limit: 24576 MB
+INFO     preprocess command line string: /app/paper_2024/planners/symk/builds/release/bin/preprocess < output.sas
+Building causal graph...
+The causal graph is not acyclic.
+249 variables of 249 necessary
+0 of 0 mutex groups necessary.
+6227 of 6227 operators necessary.
+29 of 29 axiom rules necessary.
+Disabling h2 analysis because it does not currently support axioms
+Preprocessor variables: 249
+Preprocessor facts: 516
+Preprocessor derived variables: 2
+Preprocessor operators: 6227
+Preprocessor mutex groups: 0
+Preprocessor task size: 74405
+Writing output...
+done
+preprocess exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: 899s
+INFO     search memory limit: 24576 MB
+INFO     search command line string: /app/paper_2024/planners/symk/builds/release/bin/downward --search 'sym-bd()' --internal-plan-file sas_plan < output.sas
+[t=0s, 12148 KB] reading input...
+[t=0.0249324s, 15428 KB] done reading input!
+[t=0.0259196s, 15824 KB] Building successor generator...done!
+[t=0.0279094s, 16812 KB] peak memory difference for successor generator creation: 988 KB
+[t=0.0279094s, 16812 KB] time for successor generation creation: 0.00198979s
+[t=0.0279094s, 16812 KB] Variables: 249
+[t=0.0279094s, 16812 KB] FactPairs: 516
+[t=0.0279094s, 16812 KB] Bytes per state: 32
+[t=0.0279094s, 16812 KB] Mutex type changed to mutex_and because the domain has conditional effects, axioms and/or sdac.
+
+[t=0.0279094s, 16812 KB] CUDD Init: nodes=16000000 cache=16000000 max_memory=0
+[t=0.0279094s, 16812 KB] Variable Ordering: gamer
+[t=0.0279094s, 16812 KB] Dynamic reordering: False
+
+[t=0.0279094s, 16812 KB] TR(time=60000, nodes=100000)
+[t=0.0279094s, 16812 KB] Mutex(time=60000, nodes=100000, type=and)
+[t=0.0279094s, 16812 KB] Aux(time=2000, nodes=1000000)
+
+[t=0.0279094s, 16812 KB] Max alloted time (for bd): 60.000000s nodes: 10000000
+[t=0.0279094s, 16812 KB] Mult alloted time (for bd): 2 nodes: 2
+
+[t=0.0279094s, 16812 KB] building causal graph...done! [t=0.00693583s]
+[t=0.0358436s, 17540 KB] Optimizing variable ordering...done! [t=0.532129s]
+[t=0.567973s, 17540 KB] Sym variable order: 2 1 3 0 18 12 53 52 55 54 64 178 65 181 67 24 66 68 71 69 223 180 70 6 72 75 179 224 182 73 74 176 13 60 61 62 63 225 37 19 226 38 97 99 98 207 96 117 39 202 118 119 116 25 184 211 138 137 227 197 36 139 136 157 228 156 30 158 192 185 159 7 79 230 14 78 77 76 42 41 40 43 208 231 102 103 101 100 212 20 123 204 122 121 120 215 26 229 143 141 199 142 140 45 46 160 232 162 31 161 163 194 80 44 235 15 105 83 189 209 82 81 35 244 247 243 245 246 47 104 8 236 107 106 213 125 127 205 216 21 124 126 146 145 147 144 233 200 166 27 164 165 195 190 167 84 85 32 237 86 87 9 217 240 49 239 50 51 90 109 48 89 88 91 108 111 191 110 218 10 168 170 169 16 128 210 129 171 196 131 242 201 206 130 214 148 92 149 33 150 28 22 95 11 234 151 241 93 183 94 188 222 172 174 238 173 193 153 58 175 34 221 57 56 154 155 198 152 59 186 177 113 114 112 187 203 134 133 220 115 219 135 132 5 17 4 29 23 248 
+[t=0.567973s, 17540 KB] Initializing Symbolic Variables
+[t=0.567973s, 17540 KB] Num variables: 249 => 255
+[t=0.567973s, 17540 KB] Initialize Symbolic Manager(510, 31372, 16000000, 0)
+[t=0.603975s, 418440 KB] Generating binary variables
+[t=0.603975s, 418440 KB] Symbolic Variables... Done.
+[t=0.603975s, 418440 KB] Creating Primary Representation for Derived Predicates...
+[t=0.603975s, 418440 KB] LAYER 0...done!
+[t=0.604244s, 418440 KB] LAYER 1...done!
+[t=0.60434s, 418440 KB] Symbolic Axiom initialization: 0.000365s
+[t=0.604340s, 418440 KB] Primary Representation... Done!
+
+[t=0.604340s, 418440 KB] Symbolic Bidirectional Uniform Cost Search
+[t=0.604340s, 418440 KB] Plan Selector: Top-K
+[t=0.604340s, 418440 KB] Plan files: sas_plan
+
+[t=0.605999s, 418600 KB] Creating 6227 transition relations...Done!
+[t=0.644520s, 431532 KB] Merging transition relations: 6227 => 5
+
+[t=3.239306s, 750688 KB] BOUND: 0 < 2147483647 [0/1 plans], total time: 3.239306s, 
+[t=3.375858s, 763624 KB] BOUND: 1 < 2147483647 [0/1 plans], dir: FW, total time: 3.375858s, 
+[t=3.382859s, 764104 KB] BOUND: 2 < 2147483647 [0/1 plans], dir: FW, total time: 3.382859s, 
+[t=3.394899s, 765220 KB] BOUND: 3 < 2147483647 [0/1 plans], dir: FW, total time: 3.394899s, 
+[t=3.418230s, 767300 KB] BOUND: 4 < 2147483647 [0/1 plans], dir: FW, total time: 3.418230s, 
+[t=3.480574s, 773376 KB] BOUND: 5 < 2147483647 [0/1 plans], dir: FW, total time: 3.480574s, 
+[t=3.742414s, 800724 KB] BOUND: 6 < 2147483647 [0/1 plans], dir: FW, total time: 3.742414s, 
+[t=65.657557s, 882124 KB] BOUND: 7 < 2147483647 [0/1 plans], dir: FW, total time: 65.657557s, 
+
+[t=72.921162s, 883424 KB] Actual search time: 69.681856s
+[t=72.921162s, 883424 KB] Best plan:
+colour_roulette green (0)
+shooting_column_4  (1)
+vertical_bullet_advancing_absorbing loc_4_6 loc_4_5 green n16 n15 (0)
+vertical_bullet_advancing_absorbing loc_4_5 loc_4_4 green n15 n14 (0)
+vertical_bullet_bouncing loc_4_4 loc_4_3 green red (0)
+shooting_column_2  (1)
+vertical_bullet_advancing_absorbing loc_2_6 loc_2_5 red n14 n13 (0)
+vertical_bullet_bouncing loc_2_5 loc_2_4 red green (0)
+shooting_column_4  (1)
+vertical_bullet_advancing_non_absorbing loc_4_6 loc_4_5 (0)
+vertical_bullet_advancing_non_absorbing loc_4_5 loc_4_4 (0)
+vertical_bullet_advancing_absorbing loc_4_4 loc_4_3 green n13 n12 (0)
+vertical_bullet_advancing_absorbing loc_4_3 loc_4_2 green n12 n11 (0)
+vertical_bullet_advancing_reaching_end loc_4_2 loc_4_1 (0)
+shooting_column_4  (1)
+vertical_bullet_advancing_non_absorbing loc_4_6 loc_4_5 (0)
+vertical_bullet_advancing_non_absorbing loc_4_5 loc_4_4 (0)
+vertical_bullet_advancing_non_absorbing loc_4_4 loc_4_3 (0)
+vertical_bullet_advancing_reaching_end loc_4_2 loc_4_1 (0)
+shooting_row_5  (1)
+horizontal_bullet_advancing_non_absorbing loc_1_5 loc_2_5 (0)
+horizontal_bullet_advancing_absorbing loc_2_5 loc_3_5 green n11 n10 (0)
+horizontal_bullet_advancing_non_absorbing loc_3_5 loc_4_5 (0)
+horizontal_bullet_advancing_absorbing loc_4_3 loc_5_3 green n10 n9 (0)
+horizontal_bullet_advancing_absorbing loc_4_2 loc_5_2 green n9 n8 (0)
+horizontal_bullet_bouncing loc_4_5 loc_5_5 green blue (0)
+fall_block loc_5_4 loc_5_3 red (0)
+fall_block loc_5_5 loc_5_4 green (0)
+fall_block loc_5_3 loc_5_2 red (0)
+fall_block loc_5_4 loc_5_3 green (0)
+shooting_row_3  (1)
+horizontal_bullet_advancing_absorbing loc_1_3 loc_2_3 blue n8 n7 (0)
+horizontal_bullet_advancing_absorbing loc_2_3 loc_3_3 blue n7 n6 (0)
+horizontal_bullet_advancing_reaching_end loc_5_2 loc_6_2 (0)
+vertical_bullet_advancing_absorbing loc_3_3 loc_3_2 blue n6 n5 (0)
+vertical_bullet_bouncing loc_5_3 loc_5_2 blue red (0)
+fall_block loc_3_4 loc_3_3 green (0)
+fall_block loc_3_3 loc_3_2 green (0)
+fall_block loc_2_4 loc_2_3 red (0)
+shooting_row_3  (1)
+horizontal_bullet_advancing_absorbing loc_1_3 loc_2_3 red n5 n4 (0)
+horizontal_bullet_advancing_reaching_end loc_5_2 loc_6_2 (0)
+vertical_bullet_advancing_absorbing loc_2_3 loc_2_2 red n4 n3 (0)
+vertical_bullet_advancing_reaching_end loc_2_2 loc_2_1 (0)
+[t=72.921162s, 883424 KB] Plan length: 44 step(s).
+[t=72.921162s, 883424 KB] Plan cost: 7
+[t=72.921162s, 883424 KB] Search time: 72.316822s
+[t=72.921162s, 883424 KB] Total time: 72.921162s
+Solutions found.
+Peak memory: 883424 KB
+Remove intermediate file output.sas
+search exit code: 0
+
+INFO     Planner time: 7.4e+01s

@@ -1,0 +1,98 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 4626
+UFX:false
+|F|:0
+|X|:51
+|A|:714
+|P|:0
+|E|:0
+[ColourOptHeuristic-HybridFast] Activated
+[ColourOptHeuristic-HybridFast] goalTotalBlock=6.0  initialTotalBlock=49.0  cells=49  rows=7  cols=7  maxLine=7  unblockedRows=7  unblockedCols=7  numericColourFluents=49
+h(I):18.0
+ g(n)= 1.0 h(n)=17.997
+ g(n)= 2.0 h(n)=17.996
+ g(n)= 3.0 h(n)=16.995
+ g(n)= 5.0 h(n)=16.993
+ g(n)= 6.0 h(n)=16.992
+ g(n)= 7.0 h(n)=16.991
+ g(n)= 7.0 h(n)=16.99
+ g(n)= 8.0 h(n)=16.988
+ g(n)= 9.0 h(n)=15.986
+ g(n)= 10.0 h(n)=15.985
+ g(n)= 11.0 h(n)=15.984
+ g(n)= 12.0 h(n)=14.983
+ g(n)= 13.0 h(n)=13.981
+ g(n)= 14.0 h(n)=12.98
+ g(n)= 15.0 h(n)=12.978
+ g(n)= 16.0 h(n)=11.977
+ g(n)= 17.0 h(n)=11.976
+ g(n)= 18.0 h(n)=11.975
+ g(n)= 19.0 h(n)=11.974
+ g(n)= 20.0 h(n)=11.973
+ g(n)= 21.0 h(n)=10.972
+ g(n)= 22.0 h(n)=10.971
+ g(n)= 23.0 h(n)=9.97
+ g(n)= 25.0 h(n)=8.968
+ g(n)= 27.0 h(n)=7.966
+ g(n)= 28.0 h(n)=6.965
+ g(n)= 29.0 h(n)=5.964
+ g(n)= 30.0 h(n)=4.962
+ g(n)= 32.0 h(n)=3.961
+ g(n)= 33.0 h(n)=2.96
+ g(n)= 34.0 h(n)=1.959
+ g(n)= 34.0 h(n)=0.959
+ g(n)= 35.0 h(n)=0.958
+Problem Solved
+
+Found Plan:
+0.0: (shoot-column r3c7 c1)
+1.0: (shoot-partial-row r6c1 c5)
+2.0: (shoot-partial-row r7c1 c1)
+3.0: (shoot-partial-row r6c1 c3)
+4.0: (shoot-partial-row r2c2 c5)
+5.0: (shoot-partial-row r3c2 c6)
+6.0: (shoot-partial-row r6c2 c3)
+7.0: (shoot-partial-row r2c4 c5)
+8.0: (shoot-partial-row r6c2 c4)
+9.0: (shoot-partial-row r1c5 c3)
+10.0: (shoot-column r5c2 c1)
+11.0: (shoot-row-and-column r1c7 r3c7 c3)
+12.0: (shoot-partial-row r6c2 c1)
+13.0: (shoot-partial-row r7c1 c4)
+14.0: (shoot-partial-row r6c3 c1)
+15.0: (shoot-column r4c7 c3)
+16.0: (shoot-partial-row r5c3 c2)
+17.0: (shoot-partial-row r5c3 c6)
+18.0: (shoot-partial-row r2c4 c2)
+19.0: (shoot-partial-row r6c3 c5)
+20.0: (shoot-column r3c4 c1)
+21.0: (shoot-column r5c7 c3)
+22.0: (shoot-column r6c3 c2)
+23.0: (shoot-column r7c2 c4)
+24.0: (shoot-column r2c6 c4)
+25.0: (shoot-partial-row r6c4 c5)
+26.0: (shoot-partial-row r4c5 c1)
+27.0: (shoot-column r7c3 c2)
+28.0: (shoot-column r3c5 c2)
+29.0: (shoot-column r5c4 c1)
+30.0: (shoot-partial-row r5c5 c6)
+31.0: (shoot-column r5c5 c2)
+32.0: (shoot-partial-row r7c5 c5)
+33.0: (shoot-column r6c7 c3)
+34.0: (shoot-column r7c4 c1)
+35.0: (shoot-partial-row r4c7 c1)
+
+Plan-Length:36
+Metric (Search):36.0
+Planning Time (msec): 520
+Heuristic Time (msec): 7
+Search Time (msec): 518
+Expanded Nodes:3235
+States Evaluated:3276
+Number of Dead-Ends detected:0
+Number of Duplicates detected:546
+
+Tempo esecuzione ENHSP: 6.444 sec

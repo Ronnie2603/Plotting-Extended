@@ -1,0 +1,40 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 124
+UFX:false
+|F|:202
+|X|:0
+|A|:5250
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 4, Evaluated States: 27, Time: 0.01) Frontier Size: 23
+f(n) = 2.0 (Expanded Nodes: 63, Evaluated States: 118, Time: 0.049) Frontier Size: 55
+Problem Solved
+
+Found Plan:
+0.0: (colour_roulette red)
+1.0: (shooting_column_4)
+2.0: (vertical_bullet_advancing_absorbing loc_4_5 loc_4_4 red n12 n11)
+3.0: (vertical_bullet_advancing_absorbing loc_4_4 loc_4_3 red n11 n10)
+4.0: (vertical_bullet_advancing_absorbing loc_4_3 loc_4_2 red n10 n9)
+5.0: (vertical_bullet_advancing_reaching_end loc_4_2 loc_4_1)
+6.0: (shooting_column_2)
+7.0: (vertical_bullet_advancing_absorbing loc_2_5 loc_2_4 red n9 n8)
+8.0: (vertical_bullet_advancing_absorbing loc_2_4 loc_2_3 red n8 n7)
+9.0: (vertical_bullet_advancing_absorbing loc_2_3 loc_2_2 red n7 n6)
+10.0: (vertical_bullet_advancing_reaching_end loc_2_2 loc_2_1)
+
+Plan-Length:11
+Metric (Search):2.0
+Planning Time (msec): 113
+Heuristic Time (msec): 2
+Search Time (msec): 112
+Expanded Nodes:238
+States Evaluated:600
+Number of Dead-Ends detected:0
+Number of Duplicates detected:67
+
+Tempo esecuzione ENHSP: 0.614 sec

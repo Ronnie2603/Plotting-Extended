@@ -1,0 +1,39 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 462
+UFX:false
+|F|:0
+|X|:22
+|A|:184
+|P|:0
+|E|:0
+Numeric Error for Complex Condition Activated
+H1 Setup Time (msec): 76
+h(I):16.0
+ g(n)= 1.0 h(n)=9.0
+ g(n)= 2.0 h(n)=8.0
+ g(n)= 3.0 h(n)=4.0
+ g(n)= 4.0 h(n)=2.0
+Problem Solved
+
+Found Plan:
+0.0: (shoot-row-and-column r1c5 r3c5 c1)
+1.0: (shoot-partial-row r3c1 c2)
+2.0: (shoot-row-and-column r2c5 r4c5 c1)
+3.0: (shoot-partial-row r4c1 c1)
+4.0: (shoot-partial-row r3c2 c2)
+5.0: (shoot-partial-row r4c2 c1)
+
+Plan-Length:6
+Metric (Search):6.0
+Planning Time (msec): 308
+Heuristic Time (msec): 297
+Search Time (msec): 307
+Expanded Nodes:8
+States Evaluated:21
+Number of Dead-Ends detected:13
+Number of Duplicates detected:2
+
+Tempo esecuzione ENHSP: 1.200 sec

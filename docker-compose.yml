@@ -1,0 +1,30 @@
+services:
+  pddl-plotting:
+    build:
+      context: .
+      dockerfile: docker/pddl.Dockerfile
+    container_name: pddl-plotting
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    volumes:
+      - .:/app
+      - ./enhsp-heuristics/ENHSP.java:/opt/planners/enhsp/src/planners/ENHSP.java
+    environment:
+      JAVA_OPTS: "-Xmx24G"
+      FAST_DOWNWARD: /opt/planners/fast-downward/fast-downward.py
+      SYMK: /opt/planners/symk/fast-downward.py
+    stdin_open: true
+    tty: true
+    restart: no
+
+  chuffed-plotting:
+    build:
+      context: ./docker
+      dockerfile: eprime.Dockerfile
+      args:
+        CHUFFED_REF: develop
+        SAVILEROW_VERSION: "1.11.1"
+    container_name: chuffed-plotting
+    image: chuffed-savilerow:1.11.1
+    user: "${LOCAL_UID:-1000}:${LOCAL_GID:-1000}"
+    volumes:
+      - .:/app

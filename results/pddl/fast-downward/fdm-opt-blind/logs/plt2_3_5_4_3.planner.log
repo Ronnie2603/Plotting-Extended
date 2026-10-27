@@ -1,0 +1,156 @@
+INFO     planner time limit: None
+INFO     planner memory limit: 24576 MB
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: 24576 MB
+INFO     translator command line string: /usr/bin/python3 /app/paper_2024/planners/fast-downward/builds/release/bin/translate/translate.py /app/paper_2024/pddl/instances/plt2_3_5_4_3-domain.pddl /app/paper_2024/pddl/instances/plt2_3_5_4_3-problem.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.000s CPU, 0.002s wall-clock]
+Normalizing task... [0.000s CPU, 0.000s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.000s wall-clock]
+Normalizing Datalog program...
+Trivial rules: Converted to facts.
+Normalizing Datalog program: [0.000s CPU, 0.001s wall-clock]
+Preparing model... [0.000s CPU, 0.001s wall-clock]
+Generated 135 rules.
+Computing model... [0.040s CPU, 0.039s wall-clock]
+11686 relevant atoms
+4950 auxiliary atoms
+16636 final queue length
+52216 total queue pushes
+Completing instantiation... [0.240s CPU, 0.229s wall-clock]
+Instantiating: [0.280s CPU, 0.273s wall-clock]
+Computing fact groups...
+Finding invariants...
+10 initial candidates
+Finding invariants: [0.000s CPU, 0.002s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+279 uncovered facts
+Choosing groups: [0.000s CPU, 0.000s wall-clock]
+Building translation key... [0.000s CPU, 0.000s wall-clock]
+Computing fact groups: [0.000s CPU, 0.002s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.000s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.000s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.000s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.000s wall-clock]
+Translator axioms removed by simplifying: 0
+Skipping negative axioms because FD_DISABLE_NEGATIVE_AXIOMS is set.
+Processing axioms: [0.010s CPU, 0.011s wall-clock]
+Translating task: [0.240s CPU, 0.244s wall-clock]
+22420 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+2586 operators removed
+6 axioms removed
+16 propositions removed
+Detecting unreachable propositions: [0.140s CPU, 0.140s wall-clock]
+Reordering and filtering variables...
+275 of 275 variables necessary.
+0 of 2 mutex groups necessary.
+7129 of 7129 operators necessary.
+26 of 26 axiom rules necessary.
+Reordering and filtering variables: [0.040s CPU, 0.038s wall-clock]
+Translator variables: 275
+Translator derived variables: 2
+Translator facts: 568
+Translator goal facts: 1
+Translator mutex groups: 0
+Translator total mutex groups size: 0
+Translator operators: 7129
+Translator axioms: 26
+Translator task size: 86261
+Translator peak memory: 95712 KB
+Writing output... [0.030s CPU, 0.030s wall-clock]
+Done! [0.750s CPU, 0.748s wall-clock]
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: None
+INFO     search memory limit: 24576 MB
+INFO     search command line string: /app/paper_2024/planners/fast-downward/builds/release/bin/downward --search 'astar(blind())' --internal-plan-file /app/paper_2024/results/samples-instances/fdm-opt-blind/plan/plt2_3_5_4_3.plan < output.sas
+[t=0.000512561s, 11640 KB] reading input...
+[t=0.0298219s, 15360 KB] done reading input!
+[t=0.0307269s, 15624 KB] Initializing blind search heuristic...
+[t=0.0307991s, 15624 KB] Building successor generator...done!
+[t=0.032521s, 16464 KB] peak memory difference for successor generator creation: 840 KB
+[t=0.0325297s, 16464 KB] time for successor generation creation: 0.0016264s
+[t=0.0325426s, 16464 KB] Variables: 275
+[t=0.0325533s, 16464 KB] FactPairs: 568
+[t=0.0325602s, 16464 KB] Bytes per state: 36
+[t=0.0325809s, 16464 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+[t=0.0326065s, 16464 KB] New best heuristic value for blind(): 0
+[t=0.0326142s, 16464 KB] g=0, 1 evaluated, 0 expanded
+[t=0.0326369s, 16464 KB] f = 0, 1 evaluated, 0 expanded
+[t=0.0326717s, 16464 KB] Initial heuristic value for blind(): 0
+[t=0.0326789s, 16464 KB] pruning method: none
+[t=0.0328027s, 16464 KB] f = 1, 50 evaluated, 5 expanded
+[t=0.0334306s, 16464 KB] f = 2, 190 evaluated, 118 expanded
+[t=0.034555s, 16464 KB] f = 3, 521 evaluated, 312 expanded
+[t=0.0421634s, 16464 KB] f = 4, 2852 evaluated, 1336 expanded
+[t=0.172222s, 19624 KB] f = 5, 53117 evaluated, 23845 expanded
+[t=2.46534s, 91716 KB] f = 6, 985534 evaluated, 428106 expanded
+[t=13.1981s, 387592 KB] Solution found!
+[t=13.1982s, 387592 KB] Actual search time: 13.1655s
+colour_roulette blue (0)
+shooting_column_6  (1)
+vertical_bullet_advancing_absorbing loc_6_5 loc_6_4 blue n15 n14 (0)
+vertical_bullet_advancing_absorbing loc_6_4 loc_6_3 blue n14 n13 (0)
+vertical_bullet_advancing_absorbing loc_6_3 loc_6_2 blue n13 n12 (0)
+vertical_bullet_advancing_reaching_end loc_6_2 loc_6_1 (0)
+shooting_row_3  (1)
+horizontal_bullet_bouncing loc_1_3 loc_2_3 blue red (0)
+shooting_column_4  (1)
+vertical_bullet_advancing_absorbing loc_4_5 loc_4_4 red n12 n11 (0)
+vertical_bullet_advancing_absorbing loc_4_4 loc_4_3 red n11 n10 (0)
+vertical_bullet_advancing_reaching_end loc_6_2 loc_6_1 (0)
+shooting_row_4  (1)
+horizontal_bullet_advancing_absorbing loc_1_4 loc_2_4 red n10 n9 (0)
+horizontal_bullet_advancing_absorbing loc_2_4 loc_3_4 red n9 n8 (0)
+horizontal_bullet_advancing_absorbing loc_4_3 loc_5_3 red n8 n7 (0)
+horizontal_bullet_advancing_reaching_end loc_6_2 loc_7_2 (0)
+vertical_bullet_advancing_absorbing loc_3_4 loc_3_3 red n7 n6 (0)
+vertical_bullet_bouncing loc_5_3 loc_5_2 red green (0)
+fall_block loc_5_4 loc_5_3 green (0)
+shooting_column_5  (1)
+vertical_bullet_advancing_absorbing loc_3_3 loc_3_2 green n6 n5 (0)
+vertical_bullet_advancing_non_absorbing loc_5_5 loc_5_4 (0)
+vertical_bullet_advancing_absorbing loc_5_4 loc_5_3 green n5 n4 (0)
+vertical_bullet_advancing_reaching_end loc_3_2 loc_3_1 (0)
+shooting_row_2  (1)
+horizontal_bullet_advancing_absorbing loc_3_2 loc_4_2 green n4 n3 (0)
+horizontal_bullet_bouncing loc_1_2 loc_2_2 green yellow (0)
+[t=13.1982s, 387592 KB] Plan length: 28 step(s).
+[t=13.1982s, 387592 KB] Plan cost: 6
+[t=13.1982s, 387592 KB] Expanded 2050650 state(s).
+[t=13.1982s, 387592 KB] Reopened 0 state(s).
+[t=13.1982s, 387592 KB] Evaluated 5326853 state(s).
+[t=13.1982s, 387592 KB] Evaluations: 5326853
+[t=13.1982s, 387592 KB] Generated 9473445 state(s).
+[t=13.1982s, 387592 KB] Dead ends: 0 state(s).
+[t=13.1982s, 387592 KB] Expanded until last jump: 428106 state(s).
+[t=13.1982s, 387592 KB] Reopened until last jump: 0 state(s).
+[t=13.1982s, 387592 KB] Evaluated until last jump: 985534 state(s).
+[t=13.1982s, 387592 KB] Generated until last jump: 1662951 state(s).
+[t=13.1982s, 387592 KB] Number of registered states: 5326853
+[t=13.1982s, 387592 KB] Int hash set load factor: 5326853/8388608 = 0.63501
+[t=13.1982s, 387592 KB] Int hash set resizes: 23
+[t=13.1982s, 387592 KB] Search time: 13.1657s
+[t=13.1982s, 387592 KB] Total time: 13.1982s
+Solution found.
+Peak memory: 387592 KB
+Remove intermediate file output.sas
+search exit code: 0
+
+INFO     Planner time: 14.01s
+
+Tempo esecuzione Fast Downward: 14.059 sec

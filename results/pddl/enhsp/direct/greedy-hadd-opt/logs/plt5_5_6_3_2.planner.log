@@ -1,0 +1,63 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 674
+UFX:false
+|F|:0
+|X|:32
+|A|:210
+|P|:0
+|E|:0
+Numeric Error for Complex Condition Activated
+H1 Setup Time (msec): 117
+h(I):28.0
+ g(n)= 1.0 h(n)=25.0
+ g(n)= 2.0 h(n)=24.0
+ g(n)= 3.0 h(n)=22.0
+ g(n)= 4.0 h(n)=20.0
+ g(n)= 5.0 h(n)=15.0
+ g(n)= 6.0 h(n)=13.0
+ g(n)= 7.0 h(n)=12.0
+ g(n)= 8.0 h(n)=11.0
+ g(n)= 9.0 h(n)=9.0
+ g(n)= 10.0 h(n)=8.0
+ g(n)= 11.0 h(n)=7.0
+ g(n)= 12.0 h(n)=6.0
+ g(n)= 13.0 h(n)=5.0
+ g(n)= 14.0 h(n)=3.0
+ g(n)= 15.0 h(n)=2.0
+ g(n)= 17.0 h(n)=1.0
+Problem Solved
+
+Found Plan:
+0.0: (shoot-column r3c4 c2)
+1.0: (shoot-column r1c1 c1)
+2.0: (shoot-partial-row r5c2 c2)
+3.0: (shoot-column r4c1 c1)
+4.0: (shoot-row-and-column r2c6 r3c6 c2)
+5.0: (shoot-partial-row r5c2 c1)
+6.0: (shoot-column r2c3 c2)
+7.0: (shoot-partial-row r5c2 c3)
+8.0: (shoot-row-and-column r2c6 r3c6 c1)
+9.0: (shoot-column r4c4 c2)
+10.0: (shoot-column r3c5 c3)
+11.0: (shoot-partial-row r5c2 c1)
+12.0: (shoot-column r4c5 c3)
+13.0: (shoot-partial-row r5c3 c1)
+14.0: (shoot-column r4c3 c2)
+15.0: (shoot-column r5c4 c1)
+16.0: (shoot-column r4c6 c1)
+17.0: (shoot-column r5c5 c3)
+
+Plan-Length:18
+Metric (Search):18.0
+Planning Time (msec): 936
+Heuristic Time (msec): 925
+Search Time (msec): 934
+Expanded Nodes:23
+States Evaluated:60
+Number of Dead-Ends detected:16
+Number of Duplicates detected:12
+
+Tempo esecuzione ENHSP: 2.080 sec

@@ -1,0 +1,51 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 24787
+UFX:false
+|F|:155
+|X|:1
+|A|:240
+|P|:0
+|E|:0
+[CustomColourHeuristic] Activated
+[CustomColourHeuristic] goalTotalBlock=15.0  initialTotalBlock=30.0  cells=30
+h(I):3.0
+f(n) = 3.0 (Expanded Nodes: 1, Evaluated States: 1, Time: 0.003) Frontier Size: 0
+f(n) = 3.996 (Expanded Nodes: 2, Evaluated States: 12, Time: 0.008) Frontier Size: 10
+f(n) = 3.997 (Expanded Nodes: 3, Evaluated States: 18, Time: 0.009) Frontier Size: 15
+f(n) = 3.998 (Expanded Nodes: 4, Evaluated States: 25, Time: 0.01) Frontier Size: 21
+f(n) = 3.999 (Expanded Nodes: 6, Evaluated States: 31, Time: 0.01) Frontier Size: 25
+f(n) = 4.993 (Expanded Nodes: 13, Evaluated States: 60, Time: 0.012) Frontier Size: 47
+f(n) = 4.994 (Expanded Nodes: 16, Evaluated States: 71, Time: 0.013) Frontier Size: 55
+f(n) = 4.995 (Expanded Nodes: 24, Evaluated States: 105, Time: 0.015) Frontier Size: 81
+f(n) = 4.9960003 (Expanded Nodes: 29, Evaluated States: 123, Time: 0.015) Frontier Size: 94
+f(n) = 4.9969997 (Expanded Nodes: 37, Evaluated States: 155, Time: 0.016) Frontier Size: 118
+f(n) = 4.998 (Expanded Nodes: 47, Evaluated States: 180, Time: 0.018) Frontier Size: 133
+f(n) = 5.986 (Expanded Nodes: 69, Evaluated States: 261, Time: 0.02) Frontier Size: 192
+f(n) = 5.987 (Expanded Nodes: 71, Evaluated States: 265, Time: 0.02) Frontier Size: 194
+f(n) = 5.988 (Expanded Nodes: 78, Evaluated States: 277, Time: 0.021) Frontier Size: 199
+f(n) = 5.989 (Expanded Nodes: 89, Evaluated States: 297, Time: 0.021) Frontier Size: 208
+f(n) = 5.991 (Expanded Nodes: 93, Evaluated States: 306, Time: 0.022) Frontier Size: 213
+f(n) = 5.992 (Expanded Nodes: 113, Evaluated States: 366, Time: 0.023) Frontier Size: 253
+Problem Solved
+
+Found Plan:
+0.0: (shoot-partial-row r2c4 c2)
+1.0: (shoot-partial-row r3c1 c1)
+2.0: (shoot-partial-row r6c3 c3)
+3.0: (shoot-column r5c2 c1)
+4.0: (shoot-partial-row r5c5 c2)
+
+Plan-Length:5
+Metric (Search):5.0
+Planning Time (msec): 25
+Heuristic Time (msec): 8
+Search Time (msec): 25
+Expanded Nodes:135
+States Evaluated:441
+Number of Dead-Ends detected:0
+Number of Duplicates detected:65
+
+Tempo esecuzione ENHSP: 31.630 sec

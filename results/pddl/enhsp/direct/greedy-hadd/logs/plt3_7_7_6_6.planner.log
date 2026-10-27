@@ -1,0 +1,26 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+	at org.apache.commons.lang3.tuple.Pair.of(Pair.java:59)
+	at com.hstairs.ppmajal.expressions.NumFluent.createNumFluent(NumFluent.java:59)
+	at com.hstairs.ppmajal.expressions.NumFluent.getNumFluent(NumFluent.java:49)
+	at com.hstairs.ppmajal.expressions.NumFluent.ground(NumFluent.java:143)
+	at com.hstairs.ppmajal.expressions.NumFluent.ground(NumFluent.java:37)
+	at com.hstairs.ppmajal.conditions.Comparison.ground(Comparison.java:128)
+	at com.hstairs.ppmajal.conditions.ComplexCondition.ground(ComplexCondition.java:192)
+	at com.hstairs.ppmajal.conditions.ConditionalEffectAsACondition.ground(ConditionalEffectAsACondition.java:92)
+	at com.hstairs.ppmajal.conditions.ConditionalEffectAsACondition.ground(ConditionalEffectAsACondition.java:34)
+	at com.hstairs.ppmajal.conditions.ForAll.ground(ForAll.java:269)
+	at com.hstairs.ppmajal.propositionalFactory.Grounder.ground(Grounder.java:651)
+	at com.hstairs.ppmajal.propositionalFactory.Grounder.Propositionalize(Grounder.java:532)
+	at com.hstairs.ppmajal.propositionalFactory.Grounder.Propositionalize(Grounder.java:520)
+	at com.hstairs.ppmajal.PDDLProblem.PDDLProblem.generateTransitions(PDDLProblem.java:298)
+	at com.hstairs.ppmajal.PDDLProblem.PDDLProblem.groundingActionProcessesConstraints(PDDLProblem.java:404)
+	at com.hstairs.ppmajal.PDDLProblem.PDDLProblem.prepareForSearch(PDDLProblem.java:329)
+	at planners.ENHSP.parseDomainProblem(ENHSP.java:143)
+	at planners.ENHSP.parsingDomainAndProblem(ENHSP.java:177)
+	at main.main(main.java:30)
+
+Tempo esecuzione ENHSP: 440.703 sec

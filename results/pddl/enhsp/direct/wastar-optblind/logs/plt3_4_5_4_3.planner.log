@@ -1,0 +1,53 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 9093
+UFX:false
+|F|:126
+|X|:1
+|A|:184
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 2, Evaluated States: 10, Time: 0.004) Frontier Size: 8
+f(n) = 2.0 (Expanded Nodes: 11, Evaluated States: 28, Time: 0.01) Frontier Size: 17
+f(n) = 3.0 (Expanded Nodes: 29, Evaluated States: 67, Time: 0.012) Frontier Size: 38
+f(n) = 4.0 (Expanded Nodes: 68, Evaluated States: 139, Time: 0.015) Frontier Size: 71
+f(n) = 5.0 (Expanded Nodes: 140, Evaluated States: 259, Time: 0.017) Frontier Size: 119
+f(n) = 6.0 (Expanded Nodes: 260, Evaluated States: 424, Time: 0.019) Frontier Size: 164
+f(n) = 7.0 (Expanded Nodes: 425, Evaluated States: 651, Time: 0.023) Frontier Size: 226
+f(n) = 8.0 (Expanded Nodes: 652, Evaluated States: 936, Time: 0.027) Frontier Size: 284
+f(n) = 9.0 (Expanded Nodes: 937, Evaluated States: 1275, Time: 0.032) Frontier Size: 338
+f(n) = 10.0 (Expanded Nodes: 1276, Evaluated States: 1672, Time: 0.038) Frontier Size: 396
+f(n) = 11.0 (Expanded Nodes: 1673, Evaluated States: 2052, Time: 0.045) Frontier Size: 379
+f(n) = 12.0 (Expanded Nodes: 2053, Evaluated States: 2362, Time: 0.051) Frontier Size: 309
+f(n) = 13.0 (Expanded Nodes: 2363, Evaluated States: 2612, Time: 0.056) Frontier Size: 249
+Problem Solved
+
+Found Plan:
+0.0: (shoot-column r1c2 c2)
+1.0: (shoot-partial-row r2c1 c3)
+2.0: (shoot-column r1c4 c2)
+3.0: (shoot-partial-row r4c1 c3)
+4.0: (shoot-partial-row r3c1 c1)
+5.0: (shoot-column r4c4 c2)
+6.0: (shoot-partial-row r1c4 c2)
+7.0: (shoot-partial-row r3c4 c1)
+8.0: (shoot-partial-row r4c1 c4)
+9.0: (shoot-partial-row r2c5 c3)
+10.0: (shoot-partial-row r3c2 c3)
+11.0: (shoot-partial-row r4c4 c4)
+12.0: (shoot-partial-row r3c5 c1)
+
+Plan-Length:13
+Metric (Search):13.0
+Planning Time (msec): 60
+Heuristic Time (msec): 0
+Search Time (msec): 59
+Expanded Nodes:2516
+States Evaluated:2714
+Number of Dead-Ends detected:0
+Number of Duplicates detected:587
+
+Tempo esecuzione ENHSP: 11.714 sec

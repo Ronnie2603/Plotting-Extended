@@ -1,0 +1,116 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 252
+UFX:false
+|F|:350
+|X|:0
+|A|:13828
+|P|:0
+|E|:0
+[CustomColourHeuristic] Activated
+[CustomColourHeuristic] goalTotalBlock=4.0  initialTotalBlock=18.0  cells=40
+h(I):9.0
+ g(n)= 1.0 h(n)=6.999
+ g(n)= 2.0 h(n)=6.998
+ g(n)= 3.0 h(n)=5.997
+ g(n)= 4.0 h(n)=5.994
+ g(n)= 4.0 h(n)=4.994
+ g(n)= 5.0 h(n)=3.993
+ g(n)= 6.0 h(n)=3.992
+ g(n)= 6.0 h(n)=3.991
+ g(n)= 6.0 h(n)=2.99
+ g(n)= 8.0 h(n)=1.989
+ g(n)= 10.0 h(n)=0.988
+ g(n)= 11.0 h(n)=0.987
+ g(n)= 11.0 h(n)=0.0
+Problem Solved
+
+Found Plan:
+0.0: (colour_roulette green)
+1.0: (shooting_row_3)
+2.0: (horizontal_bullet_advancing_absorbing loc_1_3 loc_2_3 green n18 n17)
+3.0: (horizontal_bullet_advancing_absorbing loc_2_3 loc_3_3 green n17 n16)
+4.0: (horizontal_bullet_advancing_absorbing loc_3_3 loc_4_3 green n16 n15)
+5.0: (horizontal_bullet_advancing_reaching_end loc_4_3 loc_5_3)
+6.0: (vertical_bullet_bouncing loc_4_3 loc_4_2 green blue)
+7.0: (fall_block loc_4_4 loc_4_3 red)
+8.0: (fall_block loc_3_4 loc_3_3 green)
+9.0: (fall_block loc_3_5 loc_3_4 blue)
+10.0: (fall_block loc_2_4 loc_2_3 green)
+11.0: (fall_block loc_2_5 loc_2_4 yellow)
+12.0: (fall_block loc_2_6 loc_2_5 blue)
+13.0: (fall_block loc_2_7 loc_2_6 red)
+14.0: (fall_block loc_3_6 loc_3_5 red)
+15.0: (fall_block loc_3_7 loc_3_6 red)
+16.0: (fall_block loc_4_5 loc_4_4 yellow)
+17.0: (fall_block loc_4_6 loc_4_5 yellow)
+18.0: (fall_block loc_4_7 loc_4_6 green)
+19.0: (shooting_row_5)
+20.0: (horizontal_bullet_advancing_absorbing loc_1_5 loc_2_5 blue n15 n14)
+21.0: (horizontal_bullet_bouncing loc_2_5 loc_3_5 blue red)
+22.0: (fall_block loc_2_6 loc_2_5 red)
+23.0: (shooting_row_6)
+24.0: (horizontal_bullet_advancing_non_absorbing loc_1_6 loc_2_6)
+25.0: (horizontal_bullet_advancing_absorbing loc_2_6 loc_3_6 red n14 n13)
+26.0: (horizontal_bullet_bouncing loc_3_6 loc_4_6 red green)
+27.0: (shooting_row_2)
+28.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 green n13 n12)
+29.0: (horizontal_bullet_bouncing loc_2_2 loc_3_2 green yellow)
+30.0: (fall_block loc_2_3 loc_2_2 green)
+31.0: (fall_block loc_2_4 loc_2_3 yellow)
+32.0: (fall_block loc_2_5 loc_2_4 red)
+33.0: (shooting_row_3)
+34.0: (horizontal_bullet_advancing_absorbing loc_1_3 loc_2_3 yellow n12 n11)
+35.0: (horizontal_bullet_bouncing loc_2_3 loc_3_3 yellow green)
+36.0: (fall_block loc_2_4 loc_2_3 red)
+37.0: (shooting_row_2)
+38.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 green n11 n10)
+39.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 green n10 n9)
+40.0: (horizontal_bullet_advancing_absorbing loc_3_2 loc_4_2 green n9 n8)
+41.0: (horizontal_bullet_advancing_reaching_end loc_4_2 loc_5_2)
+42.0: (vertical_bullet_advancing_reaching_end loc_4_2 loc_4_1)
+43.0: (fall_block loc_3_3 loc_3_2 yellow)
+44.0: (fall_block loc_2_3 loc_2_2 red)
+45.0: (fall_block loc_3_4 loc_3_3 blue)
+46.0: (fall_block loc_3_5 loc_3_4 blue)
+47.0: (fall_block loc_4_3 loc_4_2 red)
+48.0: (fall_block loc_4_4 loc_4_3 yellow)
+49.0: (fall_block loc_4_5 loc_4_4 yellow)
+50.0: (fall_block loc_4_6 loc_4_5 red)
+51.0: (shooting_row_2)
+52.0: (horizontal_bullet_bouncing loc_1_2 loc_2_2 green red)
+53.0: (shooting_row_5)
+54.0: (horizontal_bullet_advancing_non_absorbing loc_1_5 loc_2_5)
+55.0: (horizontal_bullet_advancing_non_absorbing loc_2_5 loc_3_5)
+56.0: (horizontal_bullet_advancing_absorbing loc_3_5 loc_4_5 red n8 n7)
+57.0: (horizontal_bullet_advancing_reaching_end loc_4_2 loc_5_2)
+58.0: (vertical_bullet_advancing_reaching_end loc_4_2 loc_4_1)
+59.0: (shooting_row_5)
+60.0: (horizontal_bullet_advancing_non_absorbing loc_1_5 loc_2_5)
+61.0: (horizontal_bullet_advancing_non_absorbing loc_2_5 loc_3_5)
+62.0: (horizontal_bullet_advancing_reaching_end loc_4_2 loc_5_2)
+63.0: (vertical_bullet_bouncing loc_3_5 loc_3_4 red blue)
+64.0: (shooting_row_3)
+65.0: (horizontal_bullet_advancing_non_absorbing loc_1_3 loc_2_3)
+66.0: (horizontal_bullet_advancing_absorbing loc_2_3 loc_3_3 blue n7 n6)
+67.0: (horizontal_bullet_advancing_reaching_end loc_4_2 loc_5_2)
+68.0: (vertical_bullet_bouncing loc_3_3 loc_3_2 blue yellow)
+69.0: (fall_block loc_3_4 loc_3_3 red)
+70.0: (shooting_column_4)
+71.0: (vertical_bullet_advancing_absorbing loc_4_5 loc_4_4 yellow n6 n5)
+72.0: (vertical_bullet_advancing_absorbing loc_4_4 loc_4_3 yellow n5 n4)
+73.0: (vertical_bullet_advancing_reaching_end loc_4_2 loc_4_1)
+
+Plan-Length:74
+Metric (Search):11.0
+Planning Time (msec): 1771
+Heuristic Time (msec): 73
+Search Time (msec): 1769
+Expanded Nodes:913
+States Evaluated:1969
+Number of Dead-Ends detected:0
+Number of Duplicates detected:970
+
+Tempo esecuzione ENHSP: 2.646 sec

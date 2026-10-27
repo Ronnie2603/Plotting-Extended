@@ -1,0 +1,4 @@
+run,instances,solved,coverage_percent,par2_timeout_sec,par2_score,best_runtime_sec,median_solved_runtime_sec,mean_solved_runtime_sec,worst_solved_runtime_sec,mean_expanded_nodes,median_expanded_nodes,mean_states_evaluated,expanded_nodes_per_sec,states_evaluated_per_sec,mean_peak_memory_mb
+EPrime chuffed / default-models / sa-nosymm,261,237/261,90.805,900.000,50314.127,0.626,6.272,30.017,687.257,,,,,,
+EPrime chuffed / sat-finetune / sa-deadend-v5,261,236/261,90.421,900.000,51917.130,0.586,6.914,29.310,595.818,,,,,,
+EPrime sat / sat-finetune / sa-deadend-v5,261,238/261,91.188,900.000,46864.198,0.620,7.258,22.959,597.572,,,,,,

@@ -1,0 +1,69 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 195
+UFX:false
+|F|:279
+|X|:0
+|A|:9582
+|P|:0
+|E|:0
+[CustomColourHeuristic] Activated
+[CustomColourHeuristic] goalTotalBlock=8.0  initialTotalBlock=16.0  cells=36
+h(I):6.0
+ g(n)= 1.0 h(n)=4.999
+ g(n)= 2.0 h(n)=4.998
+ g(n)= 2.0 h(n)=3.997
+ g(n)= 2.0 h(n)=2.997
+ g(n)= 3.0 h(n)=2.996
+ g(n)= 4.0 h(n)=1.995
+ g(n)= 5.0 h(n)=0.994
+ g(n)= 5.0 h(n)=0.993
+ g(n)= 6.0 h(n)=0.0
+Problem Solved
+
+Found Plan:
+0.0: (colour_roulette red)
+1.0: (shooting_column_5)
+2.0: (vertical_bullet_advancing_absorbing loc_5_6 loc_5_5 red n16 n15)
+3.0: (vertical_bullet_bouncing loc_5_5 loc_5_4 red green)
+4.0: (shooting_row_2)
+5.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 green n15 n14)
+6.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 green n14 n13)
+7.0: (horizontal_bullet_bouncing loc_3_2 loc_4_2 green red)
+8.0: (fall_block loc_3_3 loc_3_2 blue)
+9.0: (fall_block loc_3_4 loc_3_3 blue)
+10.0: (fall_block loc_3_5 loc_3_4 green)
+11.0: (fall_block loc_2_3 loc_2_2 blue)
+12.0: (fall_block loc_2_4 loc_2_3 green)
+13.0: (fall_block loc_2_5 loc_2_4 red)
+14.0: (shooting_row_4)
+15.0: (horizontal_bullet_advancing_absorbing loc_1_4 loc_2_4 red n13 n12)
+16.0: (horizontal_bullet_bouncing loc_2_4 loc_3_4 red green)
+17.0: (shooting_row_3)
+18.0: (horizontal_bullet_advancing_absorbing loc_1_3 loc_2_3 green n12 n11)
+19.0: (horizontal_bullet_bouncing loc_2_3 loc_3_3 green blue)
+20.0: (shooting_row_2)
+21.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 blue n11 n10)
+22.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 blue n10 n9)
+23.0: (horizontal_bullet_bouncing loc_3_2 loc_4_2 blue green)
+24.0: (fall_block loc_3_3 loc_3_2 green)
+25.0: (fall_block loc_3_4 loc_3_3 red)
+26.0: (shooting_row_2)
+27.0: (horizontal_bullet_advancing_non_absorbing loc_1_2 loc_2_2)
+28.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 green n9 n8)
+29.0: (horizontal_bullet_bouncing loc_3_2 loc_4_2 green blue)
+30.0: (fall_block loc_3_3 loc_3_2 red)
+
+Plan-Length:31
+Metric (Search):6.0
+Planning Time (msec): 124
+Heuristic Time (msec): 20
+Search Time (msec): 122
+Expanded Nodes:66
+States Evaluated:132
+Number of Dead-Ends detected:0
+Number of Duplicates detected:7
+
+Tempo esecuzione ENHSP: 0.771 sec

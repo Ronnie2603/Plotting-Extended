@@ -1,0 +1,65 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 98
+UFX:false
+|F|:162
+|X|:0
+|A|:3169
+|P|:0
+|E|:0
+[CustomColourHeuristic] Activated
+[CustomColourHeuristic] goalTotalBlock=2.0  initialTotalBlock=8.0  cells=24
+h(I):5.0
+ g(n)= 1.0 h(n)=3.999
+ g(n)= 1.0 h(n)=2.999
+ g(n)= 2.0 h(n)=2.998
+ g(n)= 2.0 h(n)=1.997
+ g(n)= 3.0 h(n)=0.996
+ g(n)= 4.0 h(n)=0.995
+ g(n)= 5.0 h(n)=0.0
+Problem Solved
+
+Found Plan:
+0.0: (colour_roulette red)
+1.0: (shooting_column_2)
+2.0: (vertical_bullet_advancing_absorbing loc_2_6 loc_2_5 red n8 n7)
+3.0: (vertical_bullet_bouncing loc_2_5 loc_2_4 red green)
+4.0: (shooting_row_2)
+5.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 green n7 n6)
+6.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 green n6 n5)
+7.0: (horizontal_bullet_advancing_reaching_end loc_3_2 loc_4_2)
+8.0: (vertical_bullet_advancing_reaching_end loc_3_2 loc_3_1)
+9.0: (fall_block loc_3_3 loc_3_2 green)
+10.0: (fall_block loc_3_4 loc_3_3 red)
+11.0: (fall_block loc_2_3 loc_2_2 red)
+12.0: (fall_block loc_2_4 loc_2_3 red)
+13.0: (fall_block loc_3_5 loc_3_4 green)
+14.0: (shooting_row_4)
+15.0: (horizontal_bullet_advancing_non_absorbing loc_1_4 loc_2_4)
+16.0: (horizontal_bullet_advancing_absorbing loc_2_4 loc_3_4 green n5 n4)
+17.0: (horizontal_bullet_advancing_reaching_end loc_3_2 loc_4_2)
+18.0: (vertical_bullet_bouncing loc_3_4 loc_3_3 green red)
+19.0: (shooting_row_2)
+20.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 red n4 n3)
+21.0: (horizontal_bullet_bouncing loc_2_2 loc_3_2 red green)
+22.0: (fall_block loc_2_3 loc_2_2 red)
+23.0: (shooting_row_4)
+24.0: (horizontal_bullet_advancing_non_absorbing loc_1_4 loc_2_4)
+25.0: (horizontal_bullet_advancing_non_absorbing loc_2_4 loc_3_4)
+26.0: (horizontal_bullet_advancing_reaching_end loc_3_2 loc_4_2)
+27.0: (vertical_bullet_advancing_absorbing loc_3_4 loc_3_3 green n3 n2)
+28.0: (vertical_bullet_advancing_reaching_end loc_3_2 loc_3_1)
+
+Plan-Length:29
+Metric (Search):5.0
+Planning Time (msec): 87
+Heuristic Time (msec): 32
+Search Time (msec): 85
+Expanded Nodes:92
+States Evaluated:208
+Number of Dead-Ends detected:0
+Number of Duplicates detected:24
+
+Tempo esecuzione ENHSP: 0.485 sec

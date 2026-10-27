@@ -1,0 +1,112 @@
+INFO     planner time limit: None
+INFO     planner memory limit: 24576 MB
+
+INFO     Running translator.
+INFO     translator stdin: None
+INFO     translator time limit: None
+INFO     translator memory limit: 24576 MB
+INFO     translator command line string: /usr/bin/python3 /app/paper_2024/planners/fast-downward/builds/release/bin/translate/translate.py /app/paper_2024/pddl/instances/plt3_7_7_6_24-domain.pddl /app/paper_2024/pddl/instances/plt3_7_7_6_24-problem.pddl --sas-file output.sas
+Parsing...
+Parsing: [0.010s CPU, 0.010s wall-clock]
+Normalizing task... [0.000s CPU, 0.001s wall-clock]
+Instantiating...
+Generating Datalog program... [0.000s CPU, 0.002s wall-clock]
+Normalizing Datalog program...
+Trivial rules: Converted to facts.
+Normalizing Datalog program: [0.000s CPU, 0.005s wall-clock]
+Preparing model... [0.010s CPU, 0.005s wall-clock]
+Generated 189 rules.
+Computing model... [1.770s CPU, 1.797s wall-clock]
+87722 relevant atoms
+13760 auxiliary atoms
+101482 final queue length
+413515 total queue pushes
+Completing instantiation... [6.950s CPU, 7.040s wall-clock]
+Instantiating: [8.780s CPU, 8.893s wall-clock]
+Computing fact groups...
+Finding invariants...
+10 initial candidates
+Finding invariants: [0.030s CPU, 0.031s wall-clock]
+Checking invariant weight... [0.000s CPU, 0.000s wall-clock]
+Instantiating groups... [0.000s CPU, 0.000s wall-clock]
+Collecting mutex groups... [0.000s CPU, 0.000s wall-clock]
+Choosing groups...
+807 uncovered facts
+Choosing groups: [0.000s CPU, 0.000s wall-clock]
+Building translation key... [0.000s CPU, 0.002s wall-clock]
+Computing fact groups: [0.040s CPU, 0.038s wall-clock]
+Building STRIPS to SAS dictionary... [0.000s CPU, 0.001s wall-clock]
+Building dictionary for full mutex groups... [0.000s CPU, 0.001s wall-clock]
+Building mutex information...
+Building mutex information: [0.000s CPU, 0.001s wall-clock]
+Translating task...
+Processing axioms...
+Simplifying axioms... [0.000s CPU, 0.001s wall-clock]
+Translator axioms removed by simplifying: 0
+Skipping negative axioms because FD_DISABLE_NEGATIVE_AXIOMS is set.
+Processing axioms: [0.250s CPU, 0.261s wall-clock]
+Translating task: [9.150s CPU, 9.228s wall-clock]
+170048 effect conditions simplified
+0 implied preconditions added
+Detecting unreachable propositions...
+16808 operators removed
+8 axioms removed
+20 propositions removed
+Detecting unreachable propositions: [3.650s CPU, 3.672s wall-clock]
+Reordering and filtering variables...
+801 of 801 variables necessary.
+0 of 2 mutex groups necessary.
+65069 of 65069 operators necessary.
+89 of 89 axiom rules necessary.
+Reordering and filtering variables: [1.720s CPU, 1.739s wall-clock]
+Translator variables: 801
+Translator derived variables: 2
+Translator facts: 1656
+Translator goal facts: 1
+Translator mutex groups: 0
+Translator total mutex groups size: 0
+Translator operators: 65069
+Translator axioms: 89
+Translator task size: 778868
+Translator peak memory: 542184 KB
+Writing output... [1.340s CPU, 1.348s wall-clock]
+Done! [25.050s CPU, 25.296s wall-clock]
+translate exit code: 0
+
+INFO     Running search (release).
+INFO     search stdin: output.sas
+INFO     search time limit: None
+INFO     search memory limit: 24576 MB
+INFO     search command line string: /app/paper_2024/planners/fast-downward/builds/release/bin/downward --search 'astar(blind())' --internal-plan-file /app/paper_2024/results/samples-instances/fdm-opt-blind/plan/plt3_7_7_6_24.plan < output.sas
+[t=0.00160809s, 11640 KB] reading input...
+[t=1.11536s, 44464 KB] done reading input!
+[t=1.11954s, 44728 KB] Initializing blind search heuristic...
+[t=1.1199s, 44728 KB] Building successor generator...done!
+[t=1.17829s, 53100 KB] peak memory difference for successor generator creation: 8372 KB
+[t=1.17837s, 53100 KB] time for successor generation creation: 0.0560762s
+[t=1.17843s, 53100 KB] Variables: 801
+[t=1.17847s, 53100 KB] FactPairs: 1656
+[t=1.1785s, 53100 KB] Bytes per state: 104
+[t=1.17858s, 53100 KB] Conducting best first search with reopening closed nodes, (real) bound = 2147483647
+[t=1.17865s, 53100 KB] New best heuristic value for blind(): 0
+[t=1.17868s, 53100 KB] g=0, 1 evaluated, 0 expanded
+[t=1.17873s, 53100 KB] f = 0, 1 evaluated, 0 expanded
+[t=1.17881s, 53100 KB] Initial heuristic value for blind(): 0
+[t=1.17884s, 53100 KB] pruning method: none
+[t=1.18074s, 53100 KB] f = 1, 112 evaluated, 7 expanded
+[t=1.19128s, 53100 KB] f = 2, 464 evaluated, 254 expanded
+[t=1.21762s, 53100 KB] f = 3, 1262 evaluated, 767 expanded
+[t=1.26673s, 53100 KB] f = 4, 2954 evaluated, 1874 expanded
+[t=1.38503s, 53100 KB] f = 5, 6687 evaluated, 4437 expanded
+[t=1.58546s, 53100 KB] f = 6, 14455 evaluated, 10075 expanded
+[t=1.99211s, 53100 KB] f = 7, 30900 evaluated, 21600 expanded
+[t=2.87536s, 57080 KB] f = 8, 65010 evaluated, 46920 expanded
+[t=4.48779s, 66160 KB] f = 9, 131460 evaluated, 97980 expanded
+[t=6.9233s, 83784 KB] f = 10, 258868 evaluated, 196337 expanded
+[t=11.9237s, 120848 KB] f = 11, 527620 evaluated, 390099 expanded
+[t=28.3283s, 244312 KB] f = 12, 1459998 evaluated, 873684 expanded
+[t=170.701s, 1291720 KB] f = 13, 8981854 evaluated, 3809543 expanded
+Peak memory: 5534844 KB
+caught signal 15 -- exiting
+
+Tempo esecuzione Fast Downward: 900.016 sec

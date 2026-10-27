@@ -1,0 +1,53 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 12115
+UFX:false
+|F|:130
+|X|:1
+|A|:192
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 2, Evaluated States: 11, Time: 0.003) Frontier Size: 9
+f(n) = 2.0 (Expanded Nodes: 12, Evaluated States: 38, Time: 0.008) Frontier Size: 26
+f(n) = 3.0 (Expanded Nodes: 39, Evaluated States: 111, Time: 0.01) Frontier Size: 72
+f(n) = 4.0 (Expanded Nodes: 112, Evaluated States: 292, Time: 0.013) Frontier Size: 180
+f(n) = 5.0 (Expanded Nodes: 293, Evaluated States: 733, Time: 0.017) Frontier Size: 440
+f(n) = 6.0 (Expanded Nodes: 734, Evaluated States: 1681, Time: 0.027) Frontier Size: 947
+f(n) = 7.0 (Expanded Nodes: 1682, Evaluated States: 3657, Time: 0.045) Frontier Size: 1975
+f(n) = 8.0 (Expanded Nodes: 3658, Evaluated States: 7853, Time: 0.083) Frontier Size: 4195
+f(n) = 9.0 (Expanded Nodes: 7854, Evaluated States: 16130, Time: 0.164) Frontier Size: 8276
+f(n) = 10.0 (Expanded Nodes: 16131, Evaluated States: 30817, Time: 0.327) Frontier Size: 14686
+f(n) = 11.0 (Expanded Nodes: 30818, Evaluated States: 53391, Time: 0.618) Frontier Size: 22573
+f(n) = 12.0 (Expanded Nodes: 53392, Evaluated States: 81877, Time: 1.066) Frontier Size: 28485
+f(n) = 13.0 (Expanded Nodes: 81878, Evaluated States: 109929, Time: 1.651) Frontier Size: 28051
+Problem Solved
+
+Found Plan:
+0.0: (shoot-partial-row r1c5 c1)
+1.0: (shoot-partial-row r5c1 c1)
+2.0: (shoot-partial-row r4c1 c3)
+3.0: (shoot-column r5c1 c2)
+4.0: (shoot-column r2c5 c2)
+5.0: (shoot-partial-row r5c2 c1)
+6.0: (shoot-partial-row r3c4 c3)
+7.0: (shoot-column r3c3 c2)
+8.0: (shoot-column r4c2 c1)
+9.0: (shoot-column r3c5 c3)
+10.0: (shoot-partial-row r3c5 c2)
+11.0: (shoot-partial-row r4c3 c2)
+12.0: (shoot-partial-row r5c5 c1)
+
+Plan-Length:13
+Metric (Search):13.0
+Planning Time (msec): 1714
+Heuristic Time (msec): 2
+Search Time (msec): 1712
+Expanded Nodes:84847
+States Evaluated:112383
+Number of Dead-Ends detected:0
+Number of Duplicates detected:90175
+
+Tempo esecuzione ENHSP: 17.227 sec

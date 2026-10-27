@@ -1,0 +1,55 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 226
+UFX:false
+|F|:350
+|X|:0
+|A|:13804
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 6, Evaluated States: 55, Time: 0.021) Frontier Size: 49
+f(n) = 2.0 (Expanded Nodes: 109, Evaluated States: 198, Time: 0.118) Frontier Size: 89
+f(n) = 3.0 (Expanded Nodes: 326, Evaluated States: 555, Time: 0.307) Frontier Size: 229
+f(n) = 4.0 (Expanded Nodes: 981, Evaluated States: 1818, Time: 0.853) Frontier Size: 837
+Problem Solved
+
+Found Plan:
+0.0: (colour_roulette red)
+1.0: (shooting_row_4)
+2.0: (horizontal_bullet_advancing_absorbing loc_1_4 loc_2_4 red n18 n17)
+3.0: (horizontal_bullet_advancing_absorbing loc_2_4 loc_3_4 red n17 n16)
+4.0: (horizontal_bullet_bouncing loc_3_4 loc_4_4 red green)
+5.0: (shooting_column_2)
+6.0: (vertical_bullet_advancing_non_absorbing loc_2_5 loc_2_4)
+7.0: (vertical_bullet_advancing_absorbing loc_2_4 loc_2_3 green n16 n15)
+8.0: (vertical_bullet_bouncing loc_2_3 loc_2_2 green red)
+9.0: (shooting_row_4)
+10.0: (horizontal_bullet_advancing_non_absorbing loc_1_4 loc_2_4)
+11.0: (horizontal_bullet_advancing_non_absorbing loc_2_4 loc_3_4)
+12.0: (horizontal_bullet_advancing_absorbing loc_3_4 loc_4_4 red n15 n14)
+13.0: (horizontal_bullet_advancing_absorbing loc_4_4 loc_5_4 red n14 n13)
+14.0: (horizontal_bullet_bouncing loc_5_4 loc_6_4 red green)
+15.0: (shooting_row_2)
+16.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 green n13 n12)
+17.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 green n12 n11)
+18.0: (horizontal_bullet_advancing_absorbing loc_3_2 loc_4_2 green n11 n10)
+19.0: (horizontal_bullet_advancing_absorbing loc_4_2 loc_5_2 green n10 n9)
+20.0: (horizontal_bullet_bouncing loc_5_2 loc_6_2 green yellow)
+21.0: (fall_block loc_5_3 loc_5_2 yellow)
+22.0: (fall_block loc_3_3 loc_3_2 red)
+23.0: (fall_block loc_4_3 loc_4_2 red)
+
+Plan-Length:24
+Metric (Search):4.0
+Planning Time (msec): 2959
+Heuristic Time (msec): 3
+Search Time (msec): 2957
+Expanded Nodes:3645
+States Evaluated:7635
+Number of Dead-Ends detected:0
+Number of Duplicates detected:1806
+
+Tempo esecuzione ENHSP: 3.726 sec

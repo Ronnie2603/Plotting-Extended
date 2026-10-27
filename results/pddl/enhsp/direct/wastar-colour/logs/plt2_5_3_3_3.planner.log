@@ -1,0 +1,56 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 4145
+UFX:false
+|F|:80
+|X|:1
+|A|:126
+|P|:0
+|E|:0
+[CustomColourHeuristic] Activated
+[CustomColourHeuristic] goalTotalBlock=3.0  initialTotalBlock=15.0  cells=15
+h(I):3.0
+f(n) = 3.0 (Expanded Nodes: 1, Evaluated States: 1, Time: 0.003) Frontier Size: 0
+f(n) = 3.998 (Expanded Nodes: 2, Evaluated States: 9, Time: 0.007) Frontier Size: 7
+f(n) = 3.999 (Expanded Nodes: 3, Evaluated States: 14, Time: 0.007) Frontier Size: 11
+f(n) = 4.995 (Expanded Nodes: 10, Evaluated States: 34, Time: 0.009) Frontier Size: 24
+f(n) = 4.9960003 (Expanded Nodes: 11, Evaluated States: 34, Time: 0.009) Frontier Size: 23
+f(n) = 4.9969997 (Expanded Nodes: 18, Evaluated States: 48, Time: 0.01) Frontier Size: 30
+f(n) = 4.998 (Expanded Nodes: 28, Evaluated States: 70, Time: 0.011) Frontier Size: 42
+f(n) = 5.991 (Expanded Nodes: 40, Evaluated States: 94, Time: 0.012) Frontier Size: 54
+f(n) = 5.993 (Expanded Nodes: 43, Evaluated States: 99, Time: 0.012) Frontier Size: 56
+f(n) = 5.994 (Expanded Nodes: 47, Evaluated States: 104, Time: 0.013) Frontier Size: 57
+f(n) = 5.995 (Expanded Nodes: 53, Evaluated States: 108, Time: 0.013) Frontier Size: 55
+f(n) = 5.9960003 (Expanded Nodes: 90, Evaluated States: 160, Time: 0.015) Frontier Size: 70
+f(n) = 5.9969997 (Expanded Nodes: 109, Evaluated States: 187, Time: 0.016) Frontier Size: 78
+f(n) = 6.99 (Expanded Nodes: 125, Evaluated States: 220, Time: 0.016) Frontier Size: 95
+f(n) = 6.991 (Expanded Nodes: 133, Evaluated States: 228, Time: 0.017) Frontier Size: 95
+f(n) = 6.992 (Expanded Nodes: 145, Evaluated States: 242, Time: 0.017) Frontier Size: 97
+f(n) = 6.993 (Expanded Nodes: 148, Evaluated States: 247, Time: 0.018) Frontier Size: 99
+f(n) = 6.994 (Expanded Nodes: 178, Evaluated States: 286, Time: 0.019) Frontier Size: 108
+f(n) = 6.995 (Expanded Nodes: 229, Evaluated States: 366, Time: 0.021) Frontier Size: 137
+f(n) = 6.9960003 (Expanded Nodes: 277, Evaluated States: 434, Time: 0.022) Frontier Size: 157
+Problem Solved
+
+Found Plan:
+0.0: (shoot-partial-row r2c1 c3)
+1.0: (shoot-partial-row r4c1 c1)
+2.0: (shoot-row-and-column r1c3 r2c3 c2)
+3.0: (shoot-column r5c1 c1)
+4.0: (shoot-partial-row r4c2 c1)
+5.0: (shoot-partial-row r5c2 c2)
+6.0: (shoot-column r5c2 c3)
+
+Plan-Length:7
+Metric (Search):7.0
+Planning Time (msec): 24
+Heuristic Time (msec): 9
+Search Time (msec): 23
+Expanded Nodes:304
+States Evaluated:464
+Number of Dead-Ends detected:0
+Number of Duplicates detected:218
+
+Tempo esecuzione ENHSP: 5.410 sec

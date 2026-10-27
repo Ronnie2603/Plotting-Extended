@@ -1,0 +1,55 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 264
+UFX:false
+|F|:309
+|X|:0
+|A|:11627
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 5, Evaluated States: 44, Time: 0.016) Frontier Size: 39
+f(n) = 2.0 (Expanded Nodes: 95, Evaluated States: 184, Time: 0.094) Frontier Size: 89
+f(n) = 3.0 (Expanded Nodes: 353, Evaluated States: 771, Time: 0.299) Frontier Size: 418
+f(n) = 4.0 (Expanded Nodes: 1907, Evaluated States: 5653, Time: 1.785) Frontier Size: 3746
+Problem Solved
+
+Found Plan:
+0.0: (colour_roulette red)
+1.0: (shooting_column_2)
+2.0: (vertical_bullet_advancing_absorbing loc_2_5 loc_2_4 red n18 n17)
+3.0: (vertical_bullet_advancing_absorbing loc_2_4 loc_2_3 red n17 n16)
+4.0: (vertical_bullet_bouncing loc_2_3 loc_2_2 red green)
+5.0: (shooting_column_5)
+6.0: (vertical_bullet_advancing_absorbing loc_5_5 loc_5_4 green n16 n15)
+7.0: (vertical_bullet_advancing_absorbing loc_5_4 loc_5_3 green n15 n14)
+8.0: (vertical_bullet_bouncing loc_5_3 loc_5_2 green red)
+9.0: (shooting_row_2)
+10.0: (horizontal_bullet_advancing_absorbing loc_1_2 loc_2_2 red n14 n13)
+11.0: (horizontal_bullet_advancing_absorbing loc_2_2 loc_3_2 red n13 n12)
+12.0: (horizontal_bullet_bouncing loc_3_2 loc_4_2 red green)
+13.0: (fall_block loc_3_3 loc_3_2 blue)
+14.0: (fall_block loc_3_4 loc_3_3 green)
+15.0: (shooting_row_3)
+16.0: (horizontal_bullet_advancing_non_absorbing loc_1_3 loc_2_3)
+17.0: (horizontal_bullet_advancing_absorbing loc_2_3 loc_3_3 green n12 n11)
+18.0: (horizontal_bullet_advancing_absorbing loc_3_3 loc_4_3 green n11 n10)
+19.0: (horizontal_bullet_advancing_non_absorbing loc_4_3 loc_5_3)
+20.0: (horizontal_bullet_advancing_absorbing loc_5_3 loc_6_3 green n10 n9)
+21.0: (horizontal_bullet_bouncing loc_6_3 loc_7_3 green red)
+22.0: (fall_block loc_6_4 loc_6_3 green)
+23.0: (fall_block loc_4_4 loc_4_3 red)
+
+Plan-Length:24
+Metric (Search):4.0
+Planning Time (msec): 2204
+Heuristic Time (msec): 4
+Search Time (msec): 2202
+Expanded Nodes:2420
+States Evaluated:7121
+Number of Dead-Ends detected:0
+Number of Duplicates detected:1828
+
+Tempo esecuzione ENHSP: 2.995 sec

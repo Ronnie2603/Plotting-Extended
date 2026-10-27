@@ -1,0 +1,965 @@
+MINION 3
+# CSETopLevel_number = 0
+# CSETopLevel_eliminated_expressions = 0
+# CSETopLevel_total_size = 0
+# CSE_active_number = 305
+# CSE_active_eliminated_expressions = 1837
+# CSE_active_total_size = 2439
+**VARIABLES**
+DISCRETE fpRow_00001 #
+{0..5}
+DISCRETE fpRow_00002 #
+{0..5}
+DISCRETE fpCol_00001 #
+{0..5}
+DISCRETE fpCol_00002 #
+{0..5}
+DISCRETE grid_00001_00001_00001 #
+{0..4}
+DISCRETE grid_00001_00001_00002 #
+{0..4}
+DISCRETE grid_00001_00001_00003 #
+{0..4}
+DISCRETE grid_00001_00001_00004 #
+{0..4}
+DISCRETE grid_00001_00001_00005 #
+{0..4}
+DISCRETE grid_00001_00002_00001 #
+{0..4}
+DISCRETE grid_00001_00002_00002 #
+{0..4}
+DISCRETE grid_00001_00002_00003 #
+{0..4}
+DISCRETE grid_00001_00002_00004 #
+{0..4}
+DISCRETE grid_00001_00002_00005 #
+{0..4}
+DISCRETE grid_00001_00003_00001 #
+{0..4}
+DISCRETE grid_00001_00003_00002 #
+{0..4}
+DISCRETE grid_00001_00003_00003 #
+{0..4}
+DISCRETE grid_00001_00003_00004 #
+{0..4}
+DISCRETE grid_00001_00003_00005 #
+{0..4}
+DISCRETE grid_00001_00004_00001 #
+{0..4}
+DISCRETE grid_00001_00004_00002 #
+{0..4}
+DISCRETE grid_00001_00004_00003 #
+{0..4}
+DISCRETE grid_00001_00004_00004 #
+{0..4}
+DISCRETE grid_00001_00004_00005 #
+{0..4}
+DISCRETE grid_00001_00005_00001 #
+{0..4}
+DISCRETE grid_00001_00005_00002 #
+{0..4}
+DISCRETE grid_00001_00005_00003 #
+{0..4}
+DISCRETE grid_00001_00005_00004 #
+{0..4}
+DISCRETE grid_00001_00005_00005 #
+{0..4}
+DISCRETE grid_00002_00001_00001 #
+{0..4}
+DISCRETE grid_00002_00001_00002 #
+{0..4}
+DISCRETE grid_00002_00001_00003 #
+{0..4}
+DISCRETE grid_00002_00001_00004 #
+{0..4}
+DISCRETE grid_00002_00001_00005 #
+{0..4}
+DISCRETE grid_00002_00002_00001 #
+{0..4}
+DISCRETE grid_00002_00002_00002 #
+{0..4}
+DISCRETE grid_00002_00002_00003 #
+{0..4}
+DISCRETE grid_00002_00002_00004 #
+{0..4}
+DISCRETE grid_00002_00002_00005 #
+{0..4}
+DISCRETE grid_00002_00003_00001 #
+{0..4}
+DISCRETE grid_00002_00003_00002 #
+{0..4}
+DISCRETE grid_00002_00003_00003 #
+{0..4}
+DISCRETE grid_00002_00003_00004 #
+{0..4}
+DISCRETE grid_00002_00003_00005 #
+{0..4}
+DISCRETE grid_00002_00004_00001 #
+{0..4}
+DISCRETE grid_00002_00004_00002 #
+{0..4}
+DISCRETE grid_00002_00004_00003 #
+{0..4}
+DISCRETE grid_00002_00004_00004 #
+{0..4}
+DISCRETE grid_00002_00004_00005 #
+{0..4}
+DISCRETE grid_00002_00005_00001 #
+{0..4}
+DISCRETE grid_00002_00005_00002 #
+{0..4}
+DISCRETE grid_00002_00005_00003 #
+{0..4}
+DISCRETE grid_00002_00005_00004 #
+{0..4}
+DISCRETE grid_00002_00005_00005 #
+{0..4}
+DISCRETE hand_00000 #
+{1..4}
+DISCRETE hand_00001 #
+{1..4}
+**CONSTRAINTS**
+w-inintervalset(hand_00001, [1,2,4,4])
+**VARIABLES**
+DISCRETE hand_00002 #
+{1..4}
+BOOL aux24 #Active-CSE: 2 occurrences of this expression or equivalent: (((fpRow_00001 in int(1..5)) /\ (ElementOne([1, 1, 1, 2, 2], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000)) \/ ((fpRow_00001 in int(1..5)) /\ (ElementOne([1, 1, 1, 2, 4], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000)) \/ ((fpRow_00001 in int(1..5)) /\ (ElementOne([1, 1, 1, 3, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000)) \/ ((fpRow_00001 in int(1..5)) /\ (ElementOne([1, 1, 1, 4, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000)))
+BOOL aux25 #Active-CSE: 8 occurrences of this expression or equivalent: (((ElementOne([grid_00001_00001_00003, grid_00001_00002_00003, grid_00001_00003_00003, grid_00001_00004_00003, grid_00001_00005_00003], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001) /\ (fpRow_00002 in int(1..5))) \/ ((fpRow_00002 in int(1..5)) /\ (0=ElementOne([grid_00001_00001_00003, grid_00001_00002_00003, grid_00001_00003_00003, grid_00001_00004_00003, grid_00001_00005_00003], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)))))
+BOOL aux26 #Active-CSE: 6 occurrences of this expression or equivalent: (((fpRow_00002 in int(1..5)) /\ (0=ElementOne([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)))) \/ ((fpRow_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001)))
+BOOL aux27 #Active-CSE: 3 occurrences of this expression or equivalent: (((fpCol_00002 in int(1..5)) /\ (ElementOne([grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=hand_00001)) \/ ((ElementOne([grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=0) /\ (fpCol_00002 in int(1..5))))
+BOOL aux28 #Active-CSE: 7 occurrences of this expression or equivalent: (((fpRow_00002 in int(1..5)) /\ (0=ElementOne([grid_00001_00001_00004, grid_00001_00002_00004, grid_00001_00003_00004, grid_00001_00004_00004, grid_00001_00005_00004], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)))) \/ ((fpRow_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00004, grid_00001_00002_00004, grid_00001_00003_00004, grid_00001_00004_00004, grid_00001_00005_00004], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001)))
+BOOL aux29 #Active-CSE: 4 occurrences of this expression or equivalent: (((fpCol_00002 in int(1..5)) /\ (0=ElementOne([grid_00001_00001_00001, grid_00001_00001_00002, grid_00001_00001_00003, grid_00001_00001_00004, grid_00001_00001_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)))) \/ ((fpCol_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00001, grid_00001_00001_00002, grid_00001_00001_00003, grid_00001_00001_00004, grid_00001_00001_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=hand_00001)))
+BOOL aux30 #Active-CSE: 9 occurrences of this expression or equivalent: (((fpRow_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00002, grid_00001_00002_00002, grid_00001_00003_00002, grid_00001_00004_00002, grid_00001_00005_00002], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001)) \/ ((fpRow_00002 in int(1..5)) /\ (0=ElementOne([grid_00001_00001_00002, grid_00001_00002_00002, grid_00001_00003_00002, grid_00001_00004_00002, grid_00001_00005_00002], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)))))
+BOOL aux31 #Active-CSE: 10 occurrences of this expression or equivalent: (((fpRow_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00001, grid_00001_00002_00001, grid_00001_00003_00001, grid_00001_00004_00001, grid_00001_00005_00001], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001)) \/ ((fpRow_00002 in int(1..5)) /\ (0=ElementOne([grid_00001_00001_00001, grid_00001_00002_00001, grid_00001_00003_00001, grid_00001_00004_00001, grid_00001_00005_00001], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)))))
+BOOL aux32 #Active-CSE: 2 occurrences of this expression or equivalent: (((fpCol_00002 in int(1..5)) /\ (ElementOne([grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=hand_00001)) \/ ((fpCol_00002 in int(1..5)) /\ (0=ElementOne([grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)))))
+BOOL aux33 #Active-CSE: 3 occurrences of this expression or equivalent: (ElementOne([grid_00002_00005_00001, grid_00002_00005_00002, grid_00002_00005_00003, grid_00002_00005_00004, grid_00002_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=ElementOne([grid_00001_00005_00001, grid_00001_00005_00002, grid_00001_00005_00003, grid_00001_00005_00004, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)))
+BOOL aux34 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))=ElementOne([2, 3, 2, 4, 4], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001)))
+BOOL aux35 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=ElementOne([grid_00002_00004_00001, grid_00002_00004_00002, grid_00002_00004_00003, grid_00002_00004_00004, grid_00002_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)))
+BOOL aux36 #Active-CSE: 3 occurrences of this expression or equivalent: (ElementOne([4, 1, 2, 1, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))=ElementOne([grid_00001_00005_00001, grid_00001_00005_00002, grid_00001_00005_00003, grid_00001_00005_00004, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001)))
+BOOL aux37 #Active-CSE: 9 occurrences of this expression or equivalent: ((ElementOne([grid_00001_00001_00003, grid_00001_00002_00003, grid_00001_00003_00003, grid_00001_00004_00003, grid_00001_00005_00003], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001) /\ (fpRow_00002 in int(1..5)))
+BOOL aux38 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00001, grid_00001_00002_00001, grid_00001_00003_00001, grid_00001_00004_00001, grid_00001_00005_00001], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001))
+BOOL aux39 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00001 in int(1..5)) /\ (ElementOne([1, 1, 1, 3, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000))
+BOOL aux40 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00004, grid_00001_00002_00004, grid_00001_00003_00004, grid_00001_00004_00004, grid_00001_00005_00004], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001))
+BOOL aux41 #Active-CSE: 6 occurrences of this expression or equivalent: ((fpRow_00001 in int(1..5)) /\ (ElementOne([1, 1, 1, 4, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000))
+BOOL aux42 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001))
+BOOL aux43 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00002 in int(1..5)) /\ (ElementOne([grid_00001_00001_00002, grid_00001_00002_00002, grid_00001_00003_00002, grid_00001_00004_00002, grid_00001_00005_00002], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001))
+BOOL aux44 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00001 in int(1..5)) /\ (ElementOne([1, 1, 1, 2, 2], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000))
+BOOL aux45 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00001 in int(1..5)) /\ (ElementOne([1, 1, 1, 2, 4], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000))
+BOOL aux46 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00001_00004, grid_00001_00002_00004, grid_00001_00003_00004, grid_00001_00004_00004, grid_00001_00005_00004], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)) != hand_00001)
+BOOL aux47 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00001_00002, grid_00001_00002_00002, grid_00001_00003_00002, grid_00001_00004_00002, grid_00001_00005_00002], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)) != hand_00001)
+BOOL aux48 #Active-CSE: 11 occurrences of this expression or equivalent: (ElementOne([1, 1, 1, 3, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001)) != hand_00000)
+BOOL aux49 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([4, 1, 2, 1, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001)) != hand_00000)
+BOOL aux50 #Active-CSE: 3 occurrences of this expression or equivalent: (ElementOne([grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)) != hand_00001)
+BOOL aux51 #Active-CSE: 3 occurrences of this expression or equivalent: (ElementOne([grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)) != hand_00001)
+BOOL aux52 #Active-CSE: 3 occurrences of this expression or equivalent: (ElementOne([grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)) != hand_00001)
+BOOL aux53 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)) != hand_00001)
+BOOL aux54 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00001_00003, grid_00001_00002_00003, grid_00001_00003_00003, grid_00001_00004_00003, grid_00001_00005_00003], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)) != hand_00001)
+BOOL aux55 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00005_00001, grid_00001_00005_00002, grid_00001_00005_00003, grid_00001_00005_00004, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)) != hand_00001)
+BOOL aux56 #Active-CSE: 3 occurrences of this expression or equivalent: (ElementOne([2, 3, 2, 4, 4], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001)) != hand_00000)
+BOOL aux57 #Active-CSE: 10 occurrences of this expression or equivalent: (ElementOne([1, 1, 1, 2, 2], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001)) != hand_00000)
+BOOL aux58 #Active-CSE: 7 occurrences of this expression or equivalent: (ElementOne([1, 1, 1, 1, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001)) != hand_00000)
+BOOL aux59 #Active-CSE: 10 occurrences of this expression or equivalent: (ElementOne([1, 1, 1, 4, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001)) != hand_00000)
+BOOL aux60 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00001_00001, grid_00001_00002_00001, grid_00001_00003_00001, grid_00001_00004_00001, grid_00001_00005_00001], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))=hand_00001)
+BOOL aux61 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([1, 1, 1, 4, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00001)
+BOOL aux62 #Active-CSE: 3 occurrences of this expression or equivalent: (0=ElementOne([grid_00002_00003_00001, grid_00002_00003_00002, grid_00002_00003_00003, grid_00002_00003_00004, grid_00002_00003_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)))
+BOOL aux63 #Active-CSE: 11 occurrences of this expression or equivalent: (ElementOne([1, 1, 1, 2, 4], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))=hand_00000)
+BOOL aux64 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([1, 1, 1, 1, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))=hand_00001)
+BOOL aux65 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))=0)
+BOOL aux66 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00002_00004_00001, grid_00002_00004_00002, grid_00002_00004_00003, grid_00002_00004_00004, grid_00002_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=0)
+BOOL aux67 #Active-CSE: 2 occurrences of this expression or equivalent: (ElementOne([grid_00001_00001_00001, grid_00001_00001_00002, grid_00001_00001_00003, grid_00001_00001_00004, grid_00001_00001_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=hand_00001)
+BOOL aux68 #Active-CSE: 5 occurrences of this expression or equivalent: (0=ElementOne([grid_00002_00001_00001, grid_00002_00001_00002, grid_00002_00001_00003, grid_00002_00001_00004, grid_00002_00001_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)))
+BOOL aux69 #Active-CSE: 3 occurrences of this expression or equivalent: (0=ElementOne([grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001)))
+BOOL aux70 #Active-CSE: 4 occurrences of this expression or equivalent: (ElementOne([grid_00002_00002_00001, grid_00002_00002_00002, grid_00002_00002_00003, grid_00002_00002_00004, grid_00002_00002_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))=0)
+BOOL aux71 #Active-CSE: 4 occurrences of this expression or equivalent: (ElementOne([grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))=0)
+BOOL aux72 #Active-CSE: 5 occurrences of this expression or equivalent: (0=ElementOne([grid_00001_00001_00001, grid_00001_00001_00002, grid_00001_00001_00003, grid_00001_00001_00004, grid_00001_00001_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001)))
+BOOL aux73 #Active-CSE: 7 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((5<=fpRow_00002) -> (grid_00001_00004_00004=grid_00002_00005_00004)))
+BOOL aux74 #Active-CSE: 10 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((5<=fpRow_00002) -> (grid_00001_00004_00001=grid_00002_00005_00001)))
+BOOL aux75 #Active-CSE: 8 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((4<=fpRow_00001) -> (grid_00001_00004_00003=1)))
+BOOL aux76 #Active-CSE: 9 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((3<=fpRow_00001) -> (1=grid_00001_00003_00002)))
+BOOL aux77 #Active-CSE: 7 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((2<=fpRow_00002) -> (grid_00001_00001_00004=grid_00002_00002_00004)))
+BOOL aux78 #Active-CSE: 10 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((3<=fpRow_00002) -> (grid_00001_00002_00001=grid_00002_00003_00001)))
+BOOL aux79 #Active-CSE: 10 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((5<=fpRow_00001) -> (grid_00001_00005_00001=2)))
+BOOL aux80 #Active-CSE: 10 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((4<=fpRow_00002) -> (grid_00001_00003_00001=grid_00002_00004_00001)))
+BOOL aux81 #Active-CSE: 7 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((4<=fpRow_00002) -> (grid_00001_00003_00004=grid_00002_00004_00004)))
+BOOL aux82 #Active-CSE: 10 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((4<=fpRow_00001) -> (grid_00001_00004_00001=1)))
+BOOL aux83 #Active-CSE: 7 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((4<=fpRow_00001) -> (grid_00001_00004_00004=1)))
+BOOL aux84 #Active-CSE: 10 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((3<=fpRow_00001) -> (1=grid_00001_00003_00001)))
+BOOL aux85 #Active-CSE: 9 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((5<=fpRow_00002) -> (grid_00001_00004_00002=grid_00002_00005_00002)))
+BOOL aux86 #Active-CSE: 10 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((2<=fpRow_00001) -> (1=grid_00001_00002_00001)))
+BOOL aux87 #Active-CSE: 7 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((3<=fpRow_00001) -> (1=grid_00001_00003_00004)))
+BOOL aux88 #Active-CSE: 9 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((4<=fpRow_00002) -> (grid_00001_00003_00002=grid_00002_00004_00002)))
+BOOL aux89 #Active-CSE: 10 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((2<=fpRow_00002) -> (grid_00001_00001_00001=grid_00002_00002_00001)))
+BOOL aux90 #Active-CSE: 9 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((2<=fpRow_00001) -> (1=grid_00001_00002_00002)))
+BOOL aux91 #Active-CSE: 7 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((3<=fpRow_00002) -> (grid_00001_00002_00004=grid_00002_00003_00004)))
+BOOL aux92 #Active-CSE: 8 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((3<=fpRow_00001) -> (1=grid_00001_00003_00003)))
+BOOL aux93 #Active-CSE: 9 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((3<=fpRow_00002) -> (grid_00001_00002_00002=grid_00002_00003_00002)))
+BOOL aux94 #Active-CSE: 9 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((5<=fpRow_00001) -> (grid_00001_00005_00002=3)))
+BOOL aux95 #Active-CSE: 8 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((2<=fpRow_00001) -> (1=grid_00001_00002_00003)))
+BOOL aux96 #Active-CSE: 8 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((5<=fpRow_00002) -> (grid_00001_00004_00003=grid_00002_00005_00003)))
+BOOL aux97 #Active-CSE: 7 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((2<=fpRow_00001) -> (1=grid_00001_00002_00004)))
+BOOL aux98 #Active-CSE: 9 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((2<=fpRow_00002) -> (grid_00001_00001_00002=grid_00002_00002_00002)))
+BOOL aux99 #Active-CSE: 7 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((5<=fpRow_00001) -> (grid_00001_00005_00004=4)))
+BOOL aux100 #Active-CSE: 8 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((2<=fpRow_00002) -> (grid_00001_00001_00003=grid_00002_00002_00003)))
+BOOL aux101 #Active-CSE: 8 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((4<=fpRow_00002) -> (grid_00001_00003_00003=grid_00002_00004_00003)))
+BOOL aux102 #Active-CSE: 8 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((5<=fpRow_00001) -> (grid_00001_00005_00003=2)))
+BOOL aux103 #Active-CSE: 8 occurrences of this expression or equivalent: ((1<fpRow_00002) -> ((3<=fpRow_00002) -> (grid_00001_00002_00003=grid_00002_00003_00003)))
+BOOL aux104 #Active-CSE: 9 occurrences of this expression or equivalent: ((1<fpRow_00001) -> ((4<=fpRow_00001) -> (grid_00001_00004_00002=1)))
+DISCRETE aux105 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00002_00004_00001, grid_00002_00004_00002, grid_00002_00004_00003, grid_00002_00004_00004, grid_00002_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux106 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux107 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00004, grid_00001_00002_00004, grid_00001_00003_00004, grid_00001_00004_00004, grid_00001_00005_00004], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))
+{0..4}
+DISCRETE aux108 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))
+{0..4}
+BOOL aux109 #Active-CSE: 5 occurrences of this expression or equivalent: ((grid_00001_00001_00005=0) \/ (grid_00001_00001_00005=hand_00001) \/ (1<=fpRow_00002))
+DISCRETE aux110 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))
+{0..4}
+DISCRETE aux111 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))
+{0..4}
+DISCRETE aux112 #Active-CSE: 2 occurrences of this expression or equivalent: ElementOne([1, 1, 1, 2, 2], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))
+{1..2}
+DISCRETE aux113 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([4, 1, 2, 1, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))
+{1..4}
+**CONSTRAINTS**
+w-inintervalset(aux113, [1,2,4,4])
+**VARIABLES**
+DISCRETE aux114 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00002_00003_00001, grid_00002_00003_00002, grid_00002_00003_00003, grid_00002_00003_00004, grid_00002_00003_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux115 #Active-CSE: 2 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00001, grid_00001_00002_00001, grid_00001_00003_00001, grid_00001_00004_00001, grid_00001_00005_00001], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))
+{0..4}
+DISCRETE aux116 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00002_00005_00001, grid_00002_00005_00002, grid_00002_00005_00003, grid_00002_00005_00004, grid_00002_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux117 #Active-CSE: 4 occurrences of this expression or equivalent: ElementOne([grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux118 #Active-CSE: 2 occurrences of this expression or equivalent: ElementOne([1, 1, 1, 3, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))
+{1..3}
+**CONSTRAINTS**
+w-inintervalset(aux118, [1,1,3,3])
+**VARIABLES**
+DISCRETE aux119 #Active-CSE: 2 occurrences of this expression or equivalent: ElementOne([grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))
+{0..4}
+DISCRETE aux120 #Active-CSE: 2 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00001, grid_00001_00001_00002, grid_00001_00001_00003, grid_00001_00001_00004, grid_00001_00001_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux121 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([2, 3, 2, 4, 4], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))
+{2..4}
+DISCRETE aux122 #Active-CSE: 2 occurrences of this expression or equivalent: ElementOne([grid_00002_00002_00001, grid_00002_00002_00002, grid_00002_00002_00003, grid_00002_00002_00004, grid_00002_00002_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux123 #Active-CSE: 4 occurrences of this expression or equivalent: ElementOne([grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux124 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00005_00001, grid_00001_00005_00002, grid_00001_00005_00003, grid_00001_00005_00004, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002))
+{0..4}
+DISCRETE aux125 #Active-CSE: 2 occurrences of this expression or equivalent: ElementOne([1, 1, 1, 4, 1], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001))
+{1..4}
+**CONSTRAINTS**
+w-inintervalset(aux125, [1,1,4,4])
+**VARIABLES**
+DISCRETE aux127 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00003, grid_00001_00002_00003, grid_00001_00003_00003, grid_00001_00004_00003, grid_00001_00005_00003], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))
+{0..4}
+DISCRETE aux128 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00005_00001, grid_00001_00005_00002, grid_00001_00005_00003, grid_00001_00005_00004, grid_00001_00005_00005], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001))
+{0..4}
+BOOL aux129 #Active-CSE: 3 occurrences of this expression or equivalent: ((grid_00001_00003_00005=hand_00001) \/ (3<=fpRow_00002) \/ (0=grid_00001_00003_00005))
+DISCRETE aux130 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00002, grid_00001_00002_00002, grid_00001_00003_00002, grid_00001_00004_00002, grid_00001_00005_00002], Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002))
+{0..4}
+BOOL aux131 #Active-CSE: 4 occurrences of this expression or equivalent: ((2<=fpRow_00002) \/ (0=grid_00001_00002_00005) \/ (grid_00001_00002_00005=hand_00001))
+BOOL aux132 #Active-CSE: 2 occurrences of this expression or equivalent: ((grid_00001_00004_00005=0) \/ (4<=fpRow_00002) \/ (grid_00001_00004_00005=hand_00001))
+DISCRETE aux133 #Active-CSE: 5 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005], Mapping({2=1, 3=2, 4=3, 5=4, 6=5}, fpRow_00002))
+{0..4}
+DISCRETE aux134 #Active-CSE: 5 occurrences of this expression or equivalent: ElementOne([1, 1, 1, 4], Mapping({2=1, 3=2, 4=3, 5=4, 6=5}, fpRow_00001))
+{1..4}
+**CONSTRAINTS**
+w-inintervalset(aux134, [1,1,4,4])
+**VARIABLES**
+DISCRETE aux135 #Active-CSE: 4 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005], Mapping({3=1, 4=2, 5=3, 6=4, 7=5}, fpRow_00002))
+{0..4}
+BOOL aux137 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00002<1) -> (grid_00002_00001_00001=grid_00001_00001_00001))
+BOOL aux138 #Active-CSE: 4 occurrences of this expression or equivalent: ((1=hand_00000) /\ (fpRow_00001<2))
+BOOL aux139 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00001<3) -> (1=grid_00001_00003_00001))
+BOOL aux140 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00002<4) -> (grid_00001_00004_00001=grid_00002_00004_00001))
+BOOL aux141 #Active-CSE: 5 occurrences of this expression or equivalent: ((1=hand_00000) /\ (fpRow_00001<1))
+BOOL aux142 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00002<1) -> (grid_00002_00001_00002=grid_00001_00001_00002))
+BOOL aux143 #Active-CSE: 2 occurrences of this expression or equivalent: ((4=hand_00000) /\ (fpRow_00001<4))
+BOOL aux144 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00002<2) -> (grid_00002_00002_00002=grid_00001_00002_00002))
+BOOL aux145 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00001<1) -> (grid_00001_00001_00004=1))
+BOOL aux146 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00001<3) -> (1=grid_00001_00003_00003))
+BOOL aux147 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00001<3) -> (1=grid_00001_00003_00002))
+BOOL aux148 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00001<5) -> (grid_00001_00005_00002=1))
+BOOL aux150 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00001<2) -> (1=grid_00001_00002_00002))
+BOOL aux151 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00002<2) -> (grid_00002_00002_00001=grid_00001_00002_00001))
+BOOL aux152 #Active-CSE: 5 occurrences of this expression or equivalent: ((grid_00001_00001_00005=hand_00001) /\ (fpRow_00002<1))
+BOOL aux153 #Active-CSE: 3 occurrences of this expression or equivalent: ((1=hand_00000) /\ (fpRow_00001<3))
+BOOL aux154 #Active-CSE: 3 occurrences of this expression or equivalent: ((1=hand_00000) \/ (3<=fpRow_00001))
+BOOL aux155 #Active-CSE: 4 occurrences of this expression or equivalent: ((grid_00001_00002_00005=hand_00001) /\ (fpRow_00002<2))
+BOOL aux156 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00002<3) -> (grid_00002_00003_00001=grid_00001_00003_00001))
+BOOL aux157 #Active-CSE: 3 occurrences of this expression or equivalent: ((grid_00001_00003_00005=hand_00001) /\ (fpRow_00002<3))
+BOOL aux158 #Active-CSE: 2 occurrences of this expression or equivalent: ((grid_00001_00004_00005=hand_00001) /\ (fpRow_00002<4))
+BOOL aux159 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00002<5) -> (grid_00002_00005_00001=grid_00001_00005_00001))
+BOOL aux160 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00002<3) -> (grid_00002_00003_00004=grid_00001_00003_00004))
+BOOL aux161 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00001<1) -> (grid_00001_00001_00001=1))
+BOOL aux162 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00002<5) -> (grid_00002_00005_00002=grid_00001_00005_00002))
+BOOL aux163 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00001<2) -> (1=grid_00001_00002_00004))
+DISCRETE aux164 #Active-CSE: 3 occurrences of this expression or equivalent: ElementOne([grid_00001_00001_00005, grid_00001_00002_00005], Mapping({4=1, 5=2, 6=3, 7=4, 8=5}, fpRow_00002))
+{0..4}
+BOOL aux165 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00001<1) -> (grid_00001_00001_00002=1))
+BOOL aux166 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00001<1) -> (grid_00001_00001_00003=1))
+BOOL aux167 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00001<5) -> (grid_00001_00005_00004=1))
+BOOL aux168 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00001<4) -> (grid_00001_00004_00004=4))
+BOOL aux169 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00001<2) -> (1=grid_00001_00002_00003))
+BOOL aux170 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00002<1) -> (grid_00002_00001_00003=grid_00001_00001_00003))
+BOOL aux171 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00001<3) -> (1=grid_00001_00003_00004))
+BOOL aux172 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00001<4) -> (grid_00001_00004_00001=2))
+BOOL aux173 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00002<4) -> (grid_00001_00004_00002=grid_00002_00004_00002))
+BOOL aux174 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00001<4) -> (grid_00001_00004_00003=2))
+BOOL aux175 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00002<2) -> (grid_00002_00002_00004=grid_00001_00002_00004))
+BOOL aux176 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00002<2) -> (grid_00002_00002_00003=grid_00001_00002_00003))
+BOOL aux177 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00002<4) -> (grid_00001_00004_00004=grid_00002_00004_00004))
+BOOL aux178 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00001<2) -> (1=grid_00001_00002_00001))
+BOOL aux179 #Active-CSE: 4 occurrences of this expression or equivalent: ((1=hand_00000) \/ (2<=fpRow_00001))
+BOOL aux180 #Active-CSE: 2 occurrences of this expression or equivalent: ((4=hand_00000) \/ (4<=fpRow_00001))
+BOOL aux181 #Active-CSE: 10 occurrences of this expression or equivalent: ((fpRow_00001<5) -> (grid_00001_00005_00001=4))
+BOOL aux182 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00002<3) -> (grid_00002_00003_00003=grid_00001_00003_00003))
+BOOL aux183 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00002<5) -> (grid_00002_00005_00003=grid_00001_00005_00003))
+BOOL aux184 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00002<4) -> (grid_00001_00004_00003=grid_00002_00004_00003))
+BOOL aux185 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00002<1) -> (grid_00002_00001_00004=grid_00001_00001_00004))
+BOOL aux186 #Active-CSE: 5 occurrences of this expression or equivalent: ((1=hand_00000) \/ (1<=fpRow_00001))
+BOOL aux187 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00002<3) -> (grid_00002_00003_00002=grid_00001_00003_00002))
+BOOL aux188 #Active-CSE: 7 occurrences of this expression or equivalent: ((fpRow_00002<5) -> (grid_00002_00005_00004=grid_00001_00005_00004))
+BOOL aux189 #Active-CSE: 8 occurrences of this expression or equivalent: ((fpRow_00001<5) -> (grid_00001_00005_00003=2))
+BOOL aux190 #Active-CSE: 9 occurrences of this expression or equivalent: ((fpRow_00001<4) -> (grid_00001_00004_00002=3))
+BOOL aux193 #Active-CSE: 5 occurrences of this expression or equivalent: ((fpRow_00002 + -1) in int(1..5))
+BOOL aux194 #Active-CSE: 5 occurrences of this expression or equivalent: (1 != fpCol_00002)
+BOOL aux195 #Active-CSE: 5 occurrences of this expression or equivalent: (1 != fpCol_00001)
+BOOL aux196 #Active-CSE: 5 occurrences of this expression or equivalent: (2 != fpCol_00002)
+BOOL aux197 #Active-CSE: 5 occurrences of this expression or equivalent: (2 != fpCol_00001)
+BOOL aux198 #Active-CSE: 5 occurrences of this expression or equivalent: (5 != fpCol_00002)
+BOOL aux199 #Active-CSE: 5 occurrences of this expression or equivalent: (5 != fpCol_00001)
+BOOL aux200 #Active-CSE: 5 occurrences of this expression or equivalent: (3 != fpCol_00002)
+BOOL aux201 #Active-CSE: 5 occurrences of this expression or equivalent: (3 != fpCol_00001)
+BOOL aux202 #Active-CSE: 5 occurrences of this expression or equivalent: (4 != fpCol_00002)
+BOOL aux203 #Active-CSE: 5 occurrences of this expression or equivalent: (4 != fpCol_00001)
+BOOL aux204 #Active-CSE: 5 occurrences of this expression or equivalent: ((fpRow_00001 + -1) in int(1..5))
+BOOL aux205 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00002 != 4)
+BOOL aux206 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00002 != 2)
+BOOL aux207 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00002 != 3)
+BOOL aux208 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00002 != 1)
+BOOL aux209 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00002 != 5)
+BOOL aux210 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00001 != 1)
+BOOL aux211 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00001 != 5)
+BOOL aux212 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00001 != 4)
+BOOL aux213 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00001 != 3)
+BOOL aux214 #Active-CSE: 4 occurrences of this expression or equivalent: (fpRow_00001 != 2)
+BOOL aux215 #Active-CSE: 2 occurrences of this expression or equivalent: ((fpRow_00002 + -4) in int(1..5))
+BOOL aux216 #Active-CSE: 2 occurrences of this expression or equivalent: ((fpRow_00001 + -4) in int(1..5))
+BOOL aux217 #Active-CSE: 12 occurrences of this expression or equivalent: (1 != hand_00000)
+BOOL aux218 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00003_00005 != hand_00001)
+BOOL aux219 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00005_00005 != hand_00001)
+BOOL aux220 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00001_00005 != hand_00001)
+BOOL aux221 #Active-CSE: 3 occurrences of this expression or equivalent: (4 != hand_00000)
+BOOL aux222 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00002_00005 != hand_00001)
+BOOL aux223 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00004_00005 != hand_00001)
+BOOL aux224 #Active-CSE: 3 occurrences of this expression or equivalent: ((fpRow_00002 + -3) in int(1..5))
+BOOL aux225 #Active-CSE: 3 occurrences of this expression or equivalent: ((fpRow_00001 + -3) in int(1..5))
+BOOL aux226 #Active-CSE: 4 occurrences of this expression or equivalent: ((fpRow_00001 + -2) in int(1..5))
+BOOL aux227 #Active-CSE: 4 occurrences of this expression or equivalent: ((fpRow_00002 + -2) in int(1..5))
+BOOL aux228 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00001_00001_00001=1)
+BOOL aux229 #Active-CSE: 8 occurrences of this expression or equivalent: (grid_00001_00001_00003=0)
+BOOL aux230 #Active-CSE: 6 occurrences of this expression or equivalent: (0=grid_00001_00002_00005)
+BOOL aux231 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00004_00002=3)
+BOOL aux232 #Active-CSE: 4 occurrences of this expression or equivalent: (1=grid_00001_00003_00002)
+BOOL aux233 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00002_00003_00004=grid_00001_00003_00004)
+BOOL aux234 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00002_00003_00002=grid_00001_00003_00002)
+BOOL aux235 #Active-CSE: 9 occurrences of this expression or equivalent: (grid_00001_00005_00005=1)
+BOOL aux236 #Active-CSE: 4 occurrences of this expression or equivalent: (grid_00001_00004_00003=2)
+BOOL aux237 #Active-CSE: 11 occurrences of this expression or equivalent: (3<=fpRow_00002)
+BOOL aux238 #Active-CSE: 8 occurrences of this expression or equivalent: (grid_00001_00004_00005=grid_00002_00004_00005)
+BOOL aux239 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00002_00005_00005=0)
+BOOL aux240 #Active-CSE: 8 occurrences of this expression or equivalent: (grid_00002_00001_00003=0)
+BOOL aux241 #Active-CSE: 9 occurrences of this expression or equivalent: (fpRow_00001<=2)
+BOOL aux242 #Active-CSE: 26 occurrences of this expression or equivalent: (0<fpCol_00001)
+BOOL aux243 #Active-CSE: 11 occurrences of this expression or equivalent: (fpRow_00001<3)
+BOOL aux244 #Active-CSE: 6 occurrences of this expression or equivalent: (grid_00002_00002_00005=grid_00001_00002_00005)
+BOOL aux245 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00002_00002_00004=grid_00001_00002_00004)
+BOOL aux246 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00002_00002_00002=grid_00001_00002_00002)
+BOOL aux247 #Active-CSE: 7 occurrences of this expression or equivalent: (1<=fpRow_00002)
+BOOL aux248 #Active-CSE: 7 occurrences of this expression or equivalent: (1<=fpRow_00001)
+BOOL aux249 #Active-CSE: 26 occurrences of this expression or equivalent: (0<fpCol_00002)
+BOOL aux250 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00005_00002=1)
+BOOL aux251 #Active-CSE: 14 occurrences of this expression or equivalent: (fpRow_00002 in int(1..5))
+BOOL aux252 #Active-CSE: 4 occurrences of this expression or equivalent: (1=grid_00001_00002_00002)
+BOOL aux253 #Active-CSE: 5 occurrences of this expression or equivalent: (fpRow_00002<=4)
+BOOL aux254 #Active-CSE: 5 occurrences of this expression or equivalent: (fpRow_00001<=4)
+BOOL aux255 #Active-CSE: 5 occurrences of this expression or equivalent: (0=grid_00001_00003_00005)
+BOOL aux256 #Active-CSE: 8 occurrences of this expression or equivalent: (grid_00001_00004_00005=4)
+BOOL aux257 #Active-CSE: 14 occurrences of this expression or equivalent: (fpRow_00001 in int(1..5))
+BOOL aux258 #Active-CSE: 6 occurrences of this expression or equivalent: (fpRow_00001<=0)
+BOOL aux259 #Active-CSE: 7 occurrences of this expression or equivalent: (grid_00001_00001_00005=0)
+BOOL aux260 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00002_00001_00002=grid_00001_00001_00002)
+BOOL aux261 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00002_00001_00004=grid_00001_00001_00004)
+BOOL aux262 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00001_00001_00004=1)
+BOOL aux263 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00001_00005_00001=4)
+BOOL aux264 #Active-CSE: 4 occurrences of this expression or equivalent: (grid_00001_00004_00005=0)
+BOOL aux265 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00004_00002=grid_00002_00004_00002)
+BOOL aux266 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00001_00004_00004=grid_00002_00004_00004)
+BOOL aux267 #Active-CSE: 11 occurrences of this expression or equivalent: (4<=fpRow_00002)
+BOOL aux268 #Active-CSE: 11 occurrences of this expression or equivalent: (fpRow_00001<5)
+BOOL aux269 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00002_00005_00001=grid_00001_00005_00001)
+BOOL aux270 #Active-CSE: 7 occurrences of this expression or equivalent: (fpRow_00001<=3)
+BOOL aux271 #Active-CSE: 7 occurrences of this expression or equivalent: (fpRow_00002<=3)
+BOOL aux272 #Active-CSE: 6 occurrences of this expression or equivalent: (1=grid_00001_00003_00004)
+BOOL aux273 #Active-CSE: 4 occurrences of this expression or equivalent: (grid_00002_00005_00003=grid_00001_00005_00003)
+BOOL aux274 #Active-CSE: 7 occurrences of this expression or equivalent: (grid_00002_00001_00004=0)
+BOOL aux275 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00001_00005_00003=2)
+BOOL aux276 #Active-CSE: 27 occurrences of this expression or equivalent: (1<fpRow_00001)
+BOOL aux277 #Active-CSE: 3 occurrences of this expression or equivalent: (1=grid_00001_00003_00001)
+BOOL aux278 #Active-CSE: 6 occurrences of this expression or equivalent: (fpRow_00002<=0)
+BOOL aux279 #Active-CSE: 4 occurrences of this expression or equivalent: (grid_00001_00001_00003=1)
+BOOL aux280 #Active-CSE: 2 occurrences of this expression or equivalent: (hand_00001=hand_00002)
+BOOL aux281 #Active-CSE: 2 occurrences of this expression or equivalent: (hand_00000=hand_00001)
+BOOL aux282 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00005_00005=0)
+BOOL aux283 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00001_00001_00005=1)
+BOOL aux284 #Active-CSE: 3 occurrences of this expression or equivalent: (1=grid_00001_00002_00001)
+BOOL aux285 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00001_00004_00001=2)
+BOOL aux286 #Active-CSE: 10 occurrences of this expression or equivalent: (grid_00002_00001_00001=0)
+BOOL aux287 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00002_00003_00001=grid_00001_00003_00001)
+BOOL aux288 #Active-CSE: 4 occurrences of this expression or equivalent: (grid_00002_00003_00003=grid_00001_00003_00003)
+BOOL aux289 #Active-CSE: 10 occurrences of this expression or equivalent: (grid_00001_00001_00001=0)
+BOOL aux290 #Active-CSE: 6 occurrences of this expression or equivalent: (1=grid_00001_00002_00005)
+BOOL aux291 #Active-CSE: 11 occurrences of this expression or equivalent: (fpRow_00002<2)
+BOOL aux292 #Active-CSE: 5 occurrences of this expression or equivalent: (fpCol_00001 in int(1..5))
+BOOL aux293 #Active-CSE: 3 occurrences of this expression or equivalent: (0=grid_00002_00004_00005)
+BOOL aux294 #Active-CSE: 4 occurrences of this expression or equivalent: (1=hand_00001)
+BOOL aux295 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00001_00005_00004=1)
+BOOL aux296 #Active-CSE: 7 occurrences of this expression or equivalent: (grid_00001_00001_00004=0)
+BOOL aux297 #Active-CSE: 27 occurrences of this expression or equivalent: (1<fpRow_00002)
+BOOL aux298 #Active-CSE: 4 occurrences of this expression or equivalent: (grid_00002_00002_00003=grid_00001_00002_00003)
+BOOL aux299 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00002_00002_00001=grid_00001_00002_00001)
+BOOL aux300 #Active-CSE: 7 occurrences of this expression or equivalent: (1=grid_00001_00003_00005)
+BOOL aux301 #Active-CSE: 4 occurrences of this expression or equivalent: (0=grid_00002_00003_00005)
+BOOL aux302 #Active-CSE: 5 occurrences of this expression or equivalent: (0=grid_00002_00002_00005)
+BOOL aux303 #Active-CSE: 9 occurrences of this expression or equivalent: (grid_00001_00001_00002=0)
+BOOL aux304 #Active-CSE: 11 occurrences of this expression or equivalent: (fpRow_00001<2)
+BOOL aux305 #Active-CSE: 9 occurrences of this expression or equivalent: (fpRow_00002<=2)
+BOOL aux306 #Active-CSE: 9 occurrences of this expression or equivalent: (grid_00002_00001_00002=0)
+BOOL aux307 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00001_00001_00002=1)
+BOOL aux308 #Active-CSE: 11 occurrences of this expression or equivalent: (fpRow_00002<5)
+BOOL aux309 #Active-CSE: 5 occurrences of this expression or equivalent: (1=grid_00001_00002_00003)
+BOOL aux310 #Active-CSE: 6 occurrences of this expression or equivalent: (1=grid_00001_00002_00004)
+BOOL aux311 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00002_00001_00001=grid_00001_00001_00001)
+BOOL aux312 #Active-CSE: 4 occurrences of this expression or equivalent: (grid_00002_00001_00003=grid_00001_00001_00003)
+BOOL aux313 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00001_00004_00004=4)
+BOOL aux314 #Active-CSE: 2 occurrences of this expression or equivalent: (grid_00001_00004_00001=grid_00002_00004_00001)
+BOOL aux315 #Active-CSE: 4 occurrences of this expression or equivalent: (grid_00001_00004_00003=grid_00002_00004_00003)
+BOOL aux316 #Active-CSE: 11 occurrences of this expression or equivalent: (4<=fpRow_00001)
+BOOL aux317 #Active-CSE: 13 occurrences of this expression or equivalent: (fpCol_00002 in int(1..5))
+BOOL aux318 #Active-CSE: 9 occurrences of this expression or equivalent: (grid_00002_00005_00005=grid_00001_00005_00005)
+BOOL aux319 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00002_00001_00005=grid_00001_00001_00005)
+BOOL aux320 #Active-CSE: 5 occurrences of this expression or equivalent: (1=grid_00001_00003_00003)
+BOOL aux321 #Active-CSE: 6 occurrences of this expression or equivalent: (grid_00002_00001_00005=0)
+BOOL aux322 #Active-CSE: 3 occurrences of this expression or equivalent: (grid_00002_00005_00002=grid_00001_00005_00002)
+BOOL aux323 #Active-CSE: 5 occurrences of this expression or equivalent: (grid_00002_00005_00004=grid_00001_00005_00004)
+BOOL aux324 #Active-CSE: 7 occurrences of this expression or equivalent: (grid_00002_00003_00005=grid_00001_00003_00005)
+DISCRETE aux325 #Active-CSE: 8 occurrences of this expression or equivalent: Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00001)
+{1..5}
+DISCRETE aux326 #Active-CSE: 10 occurrences of this expression or equivalent: Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpCol_00002)
+{1..5}
+DISCRETE aux327 #Active-CSE: 8 occurrences of this expression or equivalent: Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00001)
+{1..5}
+DISCRETE aux328 #Active-CSE: 9 occurrences of this expression or equivalent: Mapping({1=1, 2=2, 3=3, 4=4, 5=5}, fpRow_00002)
+{1..5}
+DISCRETE aux329 #Mapping({2=1, 3=2, 4=3, 5=4, 6=5}, fpRow_00002)
+{1..4}
+DISCRETE aux330 #Mapping({2=1, 3=2, 4=3, 5=4, 6=5}, fpRow_00001)
+{1..4}
+DISCRETE aux331 #Mapping({3=1, 4=2, 5=3, 6=4, 7=5}, fpRow_00002)
+{1..3}
+DISCRETE aux332 #Mapping({3=1, 4=2, 5=3, 6=4, 7=5}, fpRow_00001)
+{1..3}
+DISCRETE aux333 #Mapping({4=1, 5=2, 6=3, 7=4, 8=5}, fpRow_00001)
+{1..2}
+DISCRETE aux334 #Mapping({4=1, 5=2, 6=3, 7=4, 8=5}, fpRow_00002)
+{1..2}
+DISCRETE aux337 #(fpRow_00002 + -1)
+{-1..4}
+DISCRETE aux338 #(fpRow_00001 + -1)
+{-1..4}
+DISCRETE aux339 #(fpRow_00002 + -4)
+{-4..1}
+DISCRETE aux340 #(fpRow_00001 + -4)
+{-4..1}
+DISCRETE aux341 #(fpRow_00002 + -3)
+{-3..2}
+DISCRETE aux342 #(fpRow_00001 + -3)
+{-3..2}
+DISCRETE aux343 #(fpRow_00001 + -2)
+{-2..3}
+DISCRETE aux344 #(fpRow_00002 + -2)
+{-2..3}
+**TUPLELIST**
+aux350 6 2
+0 1 
+1 1 
+2 2 
+3 3 
+4 4 
+5 5 
+**VARIABLES**
+ALIAS aux350[6,2]=[[0, 1], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5]]
+**SHORTTUPLELIST**
+aux23 10
+[(0,0),(1,1),]
+[(0,0),(1,2),]
+[(0,0),(1,3),]
+[(0,0),(1,4),]
+[(0,0),(1,5),]
+[(0,1),(1,0),]
+[(0,2),(1,0),]
+[(0,3),(1,0),]
+[(0,4),(1,0),]
+[(0,5),(1,0),]
+**VARIABLES**
+ALIAS aux23[10,2,2]=[[[1, 0], [2, 1]], [[1, 0], [2, 2]], [[1, 0], [2, 3]], [[1, 0], [2, 4]], [[1, 0], [2, 5]], [[1, 1], [2, 0]], [[1, 2], [2, 0]], [[1, 3], [2, 0]], [[1, 4], [2, 0]], [[1, 5], [2, 0]]]
+**TUPLELIST**
+aux349 6 1
+0 
+1 
+2 
+3 
+4 
+5 
+**VARIABLES**
+ALIAS aux349[6,1]=[[0], [1], [2], [3], [4], [5]]
+**TUPLELIST**
+initGrid 5 5
+1 1 1 1 1 
+1 1 1 1 1 
+1 1 1 1 1 
+2 3 2 4 4 
+4 1 2 1 1 
+**VARIABLES**
+ALIAS initGrid[5,5]=[[1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1], [2, 3, 2, 4, 4], [4, 1, 2, 1, 1]]
+**TUPLELIST**
+aux347 6 2
+0 1 
+1 1 
+2 1 
+3 1 
+4 1 
+5 2 
+**VARIABLES**
+ALIAS aux347[6,2]=[[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 2]]
+**TUPLELIST**
+aux348 6 2
+0 1 
+1 1 
+2 1 
+3 1 
+4 1 
+5 1 
+**VARIABLES**
+ALIAS aux348[6,2]=[[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+**TUPLELIST**
+aux345 6 2
+0 1 
+1 1 
+2 1 
+3 2 
+4 3 
+5 4 
+**VARIABLES**
+ALIAS aux345[6,2]=[[0, 1], [1, 1], [2, 1], [3, 2], [4, 3], [5, 4]]
+**TUPLELIST**
+aux346 6 2
+0 1 
+1 1 
+2 1 
+3 1 
+4 2 
+5 3 
+**VARIABLES**
+ALIAS aux346[6,2]=[[0, 1], [1, 1], [2, 1], [3, 1], [4, 2], [5, 3]]
+**SEARCH**
+PRINT[[fpRow_00001],[fpRow_00002],[fpCol_00001],[fpCol_00002],[grid_00001_00001_00001],[grid_00001_00001_00002],[grid_00001_00001_00003],[grid_00001_00001_00004],[grid_00001_00001_00005],[grid_00001_00002_00001],[grid_00001_00002_00002],[grid_00001_00002_00003],[grid_00001_00002_00004],[grid_00001_00002_00005],[grid_00001_00003_00001],[grid_00001_00003_00002],[grid_00001_00003_00003],[grid_00001_00003_00004],[grid_00001_00003_00005],[grid_00001_00004_00001],[grid_00001_00004_00002],[grid_00001_00004_00003],[grid_00001_00004_00004],[grid_00001_00004_00005],[grid_00001_00005_00001],[grid_00001_00005_00002],[grid_00001_00005_00003],[grid_00001_00005_00004],[grid_00001_00005_00005],[grid_00002_00001_00001],[grid_00002_00001_00002],[grid_00002_00001_00003],[grid_00002_00001_00004],[grid_00002_00001_00005],[grid_00002_00002_00001],[grid_00002_00002_00002],[grid_00002_00002_00003],[grid_00002_00002_00004],[grid_00002_00002_00005],[grid_00002_00003_00001],[grid_00002_00003_00002],[grid_00002_00003_00003],[grid_00002_00003_00004],[grid_00002_00003_00005],[grid_00002_00004_00001],[grid_00002_00004_00002],[grid_00002_00004_00003],[grid_00002_00004_00004],[grid_00002_00004_00005],[grid_00002_00005_00001],[grid_00002_00005_00002],[grid_00002_00005_00003],[grid_00002_00005_00004],[grid_00002_00005_00005],[hand_00000],[hand_00001],[hand_00002]]
+**CONSTRAINTS**
+table([fpRow_00002, aux329], aux345)
+table([fpRow_00001, aux330], aux345)
+table([fpRow_00002, aux331], aux346)
+table([fpRow_00001, aux332], aux346)
+table([fpRow_00001, aux333], aux347)
+table([fpRow_00002, aux334], aux347)
+reify(watched-or({w-literal(aux44,1),w-literal(aux45,1),w-literal(aux39,1),w-literal(aux41,1)}), aux24)
+reify(watched-or({w-literal(aux37,1),watched-and({w-literal(aux251,1),w-literal(aux127,0)})}), aux25)
+reify(watched-or({watched-and({w-literal(aux251,1),w-literal(aux110,0)}),w-literal(aux42,1)}), aux26)
+reify(watched-or({watched-and({w-literal(aux317,1),w-literal(aux51,0)}),watched-and({w-literal(aux106,0),w-literal(aux317,1)})}), aux27)
+reify(watched-or({watched-and({w-literal(aux251,1),w-literal(aux107,0)}),w-literal(aux40,1)}), aux28)
+reify(watched-or({watched-and({w-literal(aux317,1),w-literal(aux120,0)}),watched-and({w-literal(aux317,1),w-literal(aux67,1)})}), aux29)
+reify(watched-or({w-literal(aux43,1),watched-and({w-literal(aux251,1),w-literal(aux130,0)})}), aux30)
+reify(watched-or({w-literal(aux38,1),watched-and({w-literal(aux251,1),w-literal(aux115,0)})}), aux31)
+reify(watched-or({watched-and({w-literal(aux317,1),w-literal(aux52,0)}),watched-and({w-literal(aux317,1),w-literal(aux117,0)})}), aux32)
+reify(gaceq(aux116,aux124), aux33)
+reify(gaceq(aux108,aux121), aux34)
+reify(gaceq(aux123,aux105), aux35)
+reify(gaceq(aux113,aux128), aux36)
+reify(watched-and({w-literal(aux54,0),w-literal(aux251,1)}), aux37)
+reify(watched-and({w-literal(aux251,1),w-literal(aux60,1)}), aux38)
+reify(watched-and({w-literal(aux257,1),w-literal(aux48,0)}), aux39)
+reify(watched-and({w-literal(aux251,1),w-literal(aux46,0)}), aux40)
+reify(watched-and({w-literal(aux257,1),w-literal(aux59,0)}), aux41)
+reify(watched-and({w-literal(aux251,1),w-literal(aux53,0)}), aux42)
+reify(watched-and({w-literal(aux251,1),w-literal(aux47,0)}), aux43)
+reify(watched-and({w-literal(aux257,1),w-literal(aux57,0)}), aux44)
+reify(watched-and({w-literal(aux257,1),w-literal(aux63,1)}), aux45)
+reify(diseq(aux107,hand_00001), aux46)
+reify(diseq(aux130,hand_00001), aux47)
+reify(diseq(aux118,hand_00000), aux48)
+reify(diseq(aux113,hand_00000), aux49)
+reify(diseq(aux123,hand_00001), aux50)
+reify(diseq(aux106,hand_00001), aux51)
+reify(diseq(aux117,hand_00001), aux52)
+reify(diseq(aux110,hand_00001), aux53)
+reify(diseq(aux127,hand_00001), aux54)
+reify(diseq(aux124,hand_00001), aux55)
+reify(diseq(aux121,hand_00000), aux56)
+reify(diseq(aux112,hand_00000), aux57)
+reify(diseq(1,hand_00000), aux58)
+reify(diseq(aux125,hand_00000), aux59)
+reify(gaceq(aux115,hand_00001), aux60)
+reify(gaceq(aux125,hand_00001), aux61)
+reify(w-literal(aux114,0), aux62)
+reify(watchelement_one([1, 1, 1, 2, 4], aux327, hand_00000), aux63)
+reify(w-literal(hand_00001,1), aux64)
+reify(w-literal(aux108,0), aux65)
+reify(w-literal(aux105,0), aux66)
+reify(gaceq(aux120,hand_00001), aux67)
+reify(watchelement_one([grid_00002_00001_00001, grid_00002_00001_00002, grid_00002_00001_00003, grid_00002_00001_00004, grid_00002_00001_00005], aux326, 0), aux68)
+reify(w-literal(aux111,0), aux69)
+reify(w-literal(aux122,0), aux70)
+reify(w-literal(aux119,0), aux71)
+reify(watchelement_one([grid_00001_00001_00001, grid_00001_00001_00002, grid_00001_00001_00003, grid_00001_00001_00004, grid_00001_00001_00005], aux325, 0), aux72)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00004_00004,grid_00002_00005_00004), !aux308), aux297), aux73)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00004_00001,grid_00002_00005_00001), !aux308), aux297), aux74)
+reify(reifyimply(reifyimply(w-literal(grid_00001_00004_00003,1), aux316), aux276), aux75)
+reify(reifyimply(ineq(!aux243, aux232, 0), aux276), aux76)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00001_00004,grid_00002_00002_00004), !aux291), aux297), aux77)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00002_00001,grid_00002_00003_00001), aux237), aux297), aux78)
+reify(reifyimply(reifyimply(w-literal(grid_00001_00005_00001,2), !aux268), aux276), aux79)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00003_00001,grid_00002_00004_00001), aux267), aux297), aux80)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00003_00004,grid_00002_00004_00004), aux267), aux297), aux81)
+reify(reifyimply(reifyimply(w-literal(grid_00001_00004_00001,1), aux316), aux276), aux82)
+reify(reifyimply(reifyimply(w-literal(grid_00001_00004_00004,1), aux316), aux276), aux83)
+reify(reifyimply(ineq(!aux243, aux277, 0), aux276), aux84)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00004_00002,grid_00002_00005_00002), !aux308), aux297), aux85)
+reify(reifyimply(ineq(!aux304, aux284, 0), aux276), aux86)
+reify(reifyimply(ineq(!aux243, aux272, 0), aux276), aux87)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00003_00002,grid_00002_00004_00002), aux267), aux297), aux88)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00001_00001,grid_00002_00002_00001), !aux291), aux297), aux89)
+reify(reifyimply(ineq(!aux304, aux252, 0), aux276), aux90)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00002_00004,grid_00002_00003_00004), aux237), aux297), aux91)
+reify(reifyimply(ineq(!aux243, aux320, 0), aux276), aux92)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00002_00002,grid_00002_00003_00002), aux237), aux297), aux93)
+reify(reifyimply(reifyimply(w-literal(grid_00001_00005_00002,3), !aux268), aux276), aux94)
+reify(reifyimply(ineq(!aux304, aux309, 0), aux276), aux95)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00004_00003,grid_00002_00005_00003), !aux308), aux297), aux96)
+reify(reifyimply(ineq(!aux304, aux310, 0), aux276), aux97)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00001_00002,grid_00002_00002_00002), !aux291), aux297), aux98)
+reify(reifyimply(reifyimply(w-literal(grid_00001_00005_00004,4), !aux268), aux276), aux99)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00001_00003,grid_00002_00002_00003), !aux291), aux297), aux100)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00003_00003,grid_00002_00004_00003), aux267), aux297), aux101)
+reify(reifyimply(ineq(!aux268, aux275, 0), aux276), aux102)
+reify(reifyimply(reifyimply(gaceq(grid_00001_00002_00003,grid_00002_00003_00003), aux237), aux297), aux103)
+reify(reifyimply(reifyimply(w-literal(grid_00001_00004_00002,1), aux316), aux276), aux104)
+watchelement_one([grid_00002_00004_00001, grid_00002_00004_00002, grid_00002_00004_00003, grid_00002_00004_00004, grid_00002_00004_00005], aux326, aux105)
+watchelement_one([grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005], aux326, aux106)
+watchelement_one([grid_00001_00001_00004, grid_00001_00002_00004, grid_00001_00003_00004, grid_00001_00004_00004, grid_00001_00005_00004], aux328, aux107)
+watchelement_one([grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005], aux325, aux108)
+reify(watched-or({w-literal(aux259,1),w-literal(aux220,0),w-literal(aux247,1)}), aux109)
+watchelement_one([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005, grid_00001_00005_00005], aux328, aux110)
+watchelement_one([grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005], aux325, aux111)
+watchelement_one([1, 1, 1, 2, 2], aux327, aux112)
+watchelement_one([4, 1, 2, 1, 1], aux325, aux113)
+watchelement_one([grid_00002_00003_00001, grid_00002_00003_00002, grid_00002_00003_00003, grid_00002_00003_00004, grid_00002_00003_00005], aux326, aux114)
+watchelement_one([grid_00001_00001_00001, grid_00001_00002_00001, grid_00001_00003_00001, grid_00001_00004_00001, grid_00001_00005_00001], aux328, aux115)
+watchelement_one([grid_00002_00005_00001, grid_00002_00005_00002, grid_00002_00005_00003, grid_00002_00005_00004, grid_00002_00005_00005], aux326, aux116)
+watchelement_one([grid_00001_00003_00001, grid_00001_00003_00002, grid_00001_00003_00003, grid_00001_00003_00004, grid_00001_00003_00005], aux326, aux117)
+watchelement_one([1, 1, 1, 3, 1], aux327, aux118)
+watchelement_one([grid_00001_00002_00001, grid_00001_00002_00002, grid_00001_00002_00003, grid_00001_00002_00004, grid_00001_00002_00005], aux325, aux119)
+watchelement_one([grid_00001_00001_00001, grid_00001_00001_00002, grid_00001_00001_00003, grid_00001_00001_00004, grid_00001_00001_00005], aux326, aux120)
+watchelement_one([2, 3, 2, 4, 4], aux325, aux121)
+watchelement_one([grid_00002_00002_00001, grid_00002_00002_00002, grid_00002_00002_00003, grid_00002_00002_00004, grid_00002_00002_00005], aux326, aux122)
+watchelement_one([grid_00001_00004_00001, grid_00001_00004_00002, grid_00001_00004_00003, grid_00001_00004_00004, grid_00001_00004_00005], aux326, aux123)
+watchelement_one([grid_00001_00005_00001, grid_00001_00005_00002, grid_00001_00005_00003, grid_00001_00005_00004, grid_00001_00005_00005], aux326, aux124)
+watchelement_one([1, 1, 1, 4, 1], aux327, aux125)
+watchelement_one([1, 1, 1, 1, 1], aux325, 1)
+watchelement_one([grid_00001_00001_00003, grid_00001_00002_00003, grid_00001_00003_00003, grid_00001_00004_00003, grid_00001_00005_00003], aux328, aux127)
+watchelement_one([grid_00001_00005_00001, grid_00001_00005_00002, grid_00001_00005_00003, grid_00001_00005_00004, grid_00001_00005_00005], aux325, aux128)
+reify(watched-or({w-literal(aux218,0),w-literal(aux237,1),w-literal(aux255,1)}), aux129)
+watchelement_one([grid_00001_00001_00002, grid_00001_00002_00002, grid_00001_00003_00002, grid_00001_00004_00002, grid_00001_00005_00002], aux328, aux130)
+reify(watched-or({w-literal(aux291,0),w-literal(aux230,1),w-literal(aux222,0)}), aux131)
+reify(watched-or({w-literal(aux264,1),w-literal(aux267,1),w-literal(aux223,0)}), aux132)
+watchelement_one([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005], aux329, aux133)
+watchelement_one([1, 1, 1, 4], aux330, aux134)
+watchelement_one([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005], aux331, aux135)
+watchelement_one([1, 1, 1], aux332, 1)
+reify(ineq(!aux247, aux311, 0), aux137)
+reify(watched-and({w-literal(aux217,0),w-literal(aux304,1)}), aux138)
+reify(ineq(aux243, aux277, 0), aux139)
+reify(ineq(!aux267, aux314, 0), aux140)
+reify(watched-and({w-literal(aux217,0),w-literal(aux248,0)}), aux141)
+reify(ineq(!aux247, aux260, 0), aux142)
+reify(watched-and({w-literal(aux221,0),w-literal(aux316,0)}), aux143)
+reify(ineq(aux291, aux246, 0), aux144)
+reify(ineq(!aux248, aux262, 0), aux145)
+reify(ineq(aux243, aux320, 0), aux146)
+reify(ineq(aux243, aux232, 0), aux147)
+reify(ineq(aux268, aux250, 0), aux148)
+watchelement_one([1, 1], aux333, 1)
+reify(ineq(aux304, aux252, 0), aux150)
+reify(ineq(aux291, aux299, 0), aux151)
+reify(watched-and({w-literal(aux220,0),w-literal(aux247,0)}), aux152)
+reify(watched-and({w-literal(aux217,0),w-literal(aux243,1)}), aux153)
+reify(watched-or({w-literal(aux217,0),w-literal(aux243,0)}), aux154)
+reify(watched-and({w-literal(aux222,0),w-literal(aux291,1)}), aux155)
+reify(ineq(!aux237, aux287, 0), aux156)
+reify(watched-and({w-literal(aux218,0),w-literal(aux237,0)}), aux157)
+reify(watched-and({w-literal(aux223,0),w-literal(aux267,0)}), aux158)
+reify(ineq(aux308, aux269, 0), aux159)
+reify(ineq(!aux237, aux233, 0), aux160)
+reify(ineq(!aux248, aux228, 0), aux161)
+reify(ineq(aux308, aux322, 0), aux162)
+reify(ineq(aux304, aux310, 0), aux163)
+watchelement_one([grid_00001_00001_00005, grid_00001_00002_00005], aux334, aux164)
+reify(ineq(!aux248, aux307, 0), aux165)
+reify(ineq(!aux248, aux279, 0), aux166)
+reify(ineq(aux268, aux295, 0), aux167)
+reify(ineq(!aux316, aux313, 0), aux168)
+reify(ineq(aux304, aux309, 0), aux169)
+reify(ineq(!aux247, aux312, 0), aux170)
+reify(ineq(aux243, aux272, 0), aux171)
+reify(ineq(!aux316, aux285, 0), aux172)
+reify(ineq(!aux267, aux265, 0), aux173)
+reify(ineq(!aux316, aux236, 0), aux174)
+reify(ineq(aux291, aux245, 0), aux175)
+reify(ineq(aux291, aux298, 0), aux176)
+reify(ineq(!aux267, aux266, 0), aux177)
+reify(ineq(aux304, aux284, 0), aux178)
+reify(watched-or({w-literal(aux217,0),w-literal(aux304,0)}), aux179)
+reify(watched-or({w-literal(aux221,0),w-literal(aux316,1)}), aux180)
+reify(ineq(aux268, aux263, 0), aux181)
+reify(ineq(!aux237, aux288, 0), aux182)
+reify(ineq(aux308, aux273, 0), aux183)
+reify(ineq(!aux267, aux315, 0), aux184)
+reify(ineq(!aux247, aux261, 0), aux185)
+reify(watched-or({w-literal(aux217,0),w-literal(aux248,1)}), aux186)
+reify(ineq(!aux237, aux234, 0), aux187)
+reify(ineq(aux308, aux323, 0), aux188)
+reify(ineq(aux268, aux275, 0), aux189)
+reify(ineq(!aux316, aux231, 0), aux190)
+reify(w-inintervalset(aux337,[1,5]), aux193)
+reify(diseq(1,fpCol_00002), aux194)
+reify(diseq(1,fpCol_00001), aux195)
+reify(diseq(2,fpCol_00002), aux196)
+reify(diseq(2,fpCol_00001), aux197)
+reify(diseq(5,fpCol_00002), aux198)
+reify(diseq(5,fpCol_00001), aux199)
+reify(diseq(3,fpCol_00002), aux200)
+reify(diseq(3,fpCol_00001), aux201)
+reify(diseq(4,fpCol_00002), aux202)
+reify(diseq(4,fpCol_00001), aux203)
+reify(w-inintervalset(aux338,[1,5]), aux204)
+reify(diseq(fpRow_00002,4), aux205)
+reify(diseq(fpRow_00002,2), aux206)
+reify(diseq(fpRow_00002,3), aux207)
+reify(diseq(fpRow_00002,1), aux208)
+reify(diseq(fpRow_00002,5), aux209)
+reify(diseq(fpRow_00001,1), aux210)
+reify(diseq(fpRow_00001,5), aux211)
+reify(diseq(fpRow_00001,4), aux212)
+reify(diseq(fpRow_00001,3), aux213)
+reify(diseq(fpRow_00001,2), aux214)
+reify(w-inintervalset(aux339,[1,5]), aux215)
+reify(w-inintervalset(aux340,[1,5]), aux216)
+reify(diseq(1,hand_00000), aux217)
+reify(diseq(grid_00001_00003_00005,hand_00001), aux218)
+reify(diseq(grid_00001_00005_00005,hand_00001), aux219)
+reify(diseq(grid_00001_00001_00005,hand_00001), aux220)
+reify(diseq(4,hand_00000), aux221)
+reify(diseq(grid_00001_00002_00005,hand_00001), aux222)
+reify(diseq(grid_00001_00004_00005,hand_00001), aux223)
+reify(w-inintervalset(aux341,[1,5]), aux224)
+reify(w-inintervalset(aux342,[1,5]), aux225)
+reify(w-inintervalset(aux343,[1,5]), aux226)
+reify(w-inintervalset(aux344,[1,5]), aux227)
+reify(w-literal(grid_00001_00001_00001,1), aux228)
+reify(w-literal(grid_00001_00001_00003,0), aux229)
+reify(w-literal(grid_00001_00002_00005,0), aux230)
+reify(w-literal(grid_00001_00004_00002,3), aux231)
+reify(w-literal(grid_00001_00003_00002,1), aux232)
+reify(gaceq(grid_00002_00003_00004,grid_00001_00003_00004), aux233)
+reify(gaceq(grid_00002_00003_00002,grid_00001_00003_00002), aux234)
+reify(w-literal(grid_00001_00005_00005,1), aux235)
+reify(w-literal(grid_00001_00004_00003,2), aux236)
+reify(ineq(3, fpRow_00002, 0), aux237)
+reify(gaceq(grid_00001_00004_00005,grid_00002_00004_00005), aux238)
+reify(w-literal(grid_00002_00005_00005,0), aux239)
+reify(w-literal(grid_00002_00001_00003,0), aux240)
+reify(ineq(fpRow_00001, 2, 0), aux241)
+reify(ineq(0, fpCol_00001, -1), aux242)
+reify(ineq(fpRow_00001, 3, -1), aux243)
+reify(gaceq(grid_00002_00002_00005,grid_00001_00002_00005), aux244)
+reify(gaceq(grid_00002_00002_00004,grid_00001_00002_00004), aux245)
+reify(gaceq(grid_00002_00002_00002,grid_00001_00002_00002), aux246)
+reify(ineq(1, fpRow_00002, 0), aux247)
+reify(ineq(1, fpRow_00001, 0), aux248)
+reify(ineq(0, fpCol_00002, -1), aux249)
+reify(w-literal(grid_00001_00005_00002,1), aux250)
+reify(w-inintervalset(fpRow_00002,[1,5]), aux251)
+reify(w-literal(grid_00001_00002_00002,1), aux252)
+reify(ineq(fpRow_00002, 4, 0), aux253)
+reify(ineq(fpRow_00001, 4, 0), aux254)
+reify(w-literal(grid_00001_00003_00005,0), aux255)
+reify(w-literal(grid_00001_00004_00005,4), aux256)
+reify(w-inintervalset(fpRow_00001,[1,5]), aux257)
+reify(ineq(fpRow_00001, 0, 0), aux258)
+reify(w-literal(grid_00001_00001_00005,0), aux259)
+reify(gaceq(grid_00002_00001_00002,grid_00001_00001_00002), aux260)
+reify(gaceq(grid_00002_00001_00004,grid_00001_00001_00004), aux261)
+reify(w-literal(grid_00001_00001_00004,1), aux262)
+reify(w-literal(grid_00001_00005_00001,4), aux263)
+reify(w-literal(grid_00001_00004_00005,0), aux264)
+reify(gaceq(grid_00001_00004_00002,grid_00002_00004_00002), aux265)
+reify(gaceq(grid_00001_00004_00004,grid_00002_00004_00004), aux266)
+reify(ineq(4, fpRow_00002, 0), aux267)
+reify(ineq(fpRow_00001, 5, -1), aux268)
+reify(gaceq(grid_00002_00005_00001,grid_00001_00005_00001), aux269)
+reify(ineq(fpRow_00001, 3, 0), aux270)
+reify(ineq(fpRow_00002, 3, 0), aux271)
+reify(w-literal(grid_00001_00003_00004,1), aux272)
+reify(gaceq(grid_00002_00005_00003,grid_00001_00005_00003), aux273)
+reify(w-literal(grid_00002_00001_00004,0), aux274)
+reify(w-literal(grid_00001_00005_00003,2), aux275)
+reify(ineq(1, fpRow_00001, -1), aux276)
+reify(w-literal(grid_00001_00003_00001,1), aux277)
+reify(ineq(fpRow_00002, 0, 0), aux278)
+reify(w-literal(grid_00001_00001_00003,1), aux279)
+reify(gaceq(hand_00001,hand_00002), aux280)
+reify(gaceq(hand_00000,hand_00001), aux281)
+reify(w-literal(grid_00001_00005_00005,0), aux282)
+reify(w-literal(grid_00001_00001_00005,1), aux283)
+reify(w-literal(grid_00001_00002_00001,1), aux284)
+reify(w-literal(grid_00001_00004_00001,2), aux285)
+reify(w-literal(grid_00002_00001_00001,0), aux286)
+reify(gaceq(grid_00002_00003_00001,grid_00001_00003_00001), aux287)
+reify(gaceq(grid_00002_00003_00003,grid_00001_00003_00003), aux288)
+reify(w-literal(grid_00001_00001_00001,0), aux289)
+reify(w-literal(grid_00001_00002_00005,1), aux290)
+reify(ineq(fpRow_00002, 2, -1), aux291)
+reify(w-inintervalset(fpCol_00001,[1,5]), aux292)
+reify(w-literal(grid_00002_00004_00005,0), aux293)
+reify(w-literal(hand_00001,1), aux294)
+reify(w-literal(grid_00001_00005_00004,1), aux295)
+reify(w-literal(grid_00001_00001_00004,0), aux296)
+reify(ineq(1, fpRow_00002, -1), aux297)
+reify(gaceq(grid_00002_00002_00003,grid_00001_00002_00003), aux298)
+reify(gaceq(grid_00002_00002_00001,grid_00001_00002_00001), aux299)
+reify(w-literal(grid_00001_00003_00005,1), aux300)
+reify(w-literal(grid_00002_00003_00005,0), aux301)
+reify(w-literal(grid_00002_00002_00005,0), aux302)
+reify(w-literal(grid_00001_00001_00002,0), aux303)
+reify(ineq(fpRow_00001, 2, -1), aux304)
+reify(ineq(fpRow_00002, 2, 0), aux305)
+reify(w-literal(grid_00002_00001_00002,0), aux306)
+reify(w-literal(grid_00001_00001_00002,1), aux307)
+reify(ineq(fpRow_00002, 5, -1), aux308)
+reify(w-literal(grid_00001_00002_00003,1), aux309)
+reify(w-literal(grid_00001_00002_00004,1), aux310)
+reify(gaceq(grid_00002_00001_00001,grid_00001_00001_00001), aux311)
+reify(gaceq(grid_00002_00001_00003,grid_00001_00001_00003), aux312)
+reify(w-literal(grid_00001_00004_00004,4), aux313)
+reify(gaceq(grid_00001_00004_00001,grid_00002_00004_00001), aux314)
+reify(gaceq(grid_00001_00004_00003,grid_00002_00004_00003), aux315)
+reify(ineq(4, fpRow_00001, 0), aux316)
+reify(w-inintervalset(fpCol_00002,[1,5]), aux317)
+reify(gaceq(grid_00002_00005_00005,grid_00001_00005_00005), aux318)
+reify(gaceq(grid_00002_00001_00005,grid_00001_00001_00005), aux319)
+reify(w-literal(grid_00001_00003_00003,1), aux320)
+reify(w-literal(grid_00002_00001_00005,0), aux321)
+reify(gaceq(grid_00002_00005_00002,grid_00001_00005_00002), aux322)
+reify(gaceq(grid_00002_00005_00004,grid_00001_00005_00004), aux323)
+reify(gaceq(grid_00002_00003_00005,grid_00001_00003_00005), aux324)
+table([fpCol_00001, aux325], aux350)
+table([fpCol_00002, aux326], aux350)
+table([fpRow_00001, aux327], aux350)
+table([fpRow_00002, aux328], aux350)
+watched-or({watched-and({w-literal(aux49,1),w-literal(aux71,1),w-literal(aux58,0),w-literal(aux292,1),w-literal(aux65,1),w-literal(aux56,0),w-literal(aux72,1),gaceq(aux128,hand_00000),w-literal(aux69,1),gaceq(aux113,hand_00001)}),watched-and({w-literal(aux71,1),w-literal(aux58,0),w-literal(aux64,1),w-literal(aux292,1),w-literal(aux34,1),w-literal(aux58,1),gaceq(aux111,hand_00000),w-literal(aux72,1),w-literal(aux36,1)}),watched-and({w-literal(aux111,1),w-literal(aux58,0),w-literal(aux64,1),w-literal(aux292,1),w-literal(aux34,1),w-literal(aux58,1),gaceq(aux119,hand_00000),w-literal(aux72,1),w-literal(aux36,1)}),watched-and({w-literal(aux71,1),w-literal(aux281,1),w-literal(aux58,0),w-literal(aux292,1),w-literal(aux65,1),w-literal(aux56,0),w-literal(aux72,1),w-literal(aux69,1),w-literal(aux49,0),w-literal(aux128,0)}),w-literal(aux242,0),watched-and({w-literal(aux71,1),w-literal(aux58,0),w-literal(aux292,1),gaceq(aux121,hand_00001),w-literal(aux56,1),w-literal(aux72,1),gaceq(aux108,hand_00000),w-literal(aux69,1),w-literal(aux36,1)})})
+reifyimply(ineq(aux195, aux228, 0), aux242)
+reifyimply(ineq(aux195, aux284, 0), aux242)
+reifyimply(ineq(aux195, aux277, 0), aux242)
+reifyimply(ineq(aux195, aux285, 0), aux242)
+reifyimply(ineq(aux195, aux263, 0), aux242)
+reifyimply(ineq(aux197, aux307, 0), aux242)
+reifyimply(ineq(aux197, aux252, 0), aux242)
+reifyimply(ineq(aux197, aux232, 0), aux242)
+reifyimply(ineq(aux197, aux231, 0), aux242)
+reifyimply(ineq(aux197, aux250, 0), aux242)
+reifyimply(ineq(aux201, aux279, 0), aux242)
+reifyimply(ineq(aux201, aux309, 0), aux242)
+reifyimply(ineq(aux201, aux320, 0), aux242)
+reifyimply(ineq(aux201, aux236, 0), aux242)
+reifyimply(ineq(aux201, aux275, 0), aux242)
+reifyimply(ineq(aux203, aux262, 0), aux242)
+reifyimply(ineq(aux203, aux310, 0), aux242)
+reifyimply(ineq(aux203, aux272, 0), aux242)
+reifyimply(ineq(aux203, aux313, 0), aux242)
+reifyimply(ineq(aux203, aux295, 0), aux242)
+reifyimply(ineq(aux199, aux283, 0), aux242)
+reifyimply(ineq(aux199, aux290, 0), aux242)
+reifyimply(ineq(aux199, aux300, 0), aux242)
+reifyimply(ineq(aux199, aux256, 0), aux242)
+reifyimply(ineq(aux199, aux235, 0), aux242)
+watched-or({watched-and({w-literal(aux29,1),gaceq(hand_00001,aux114),w-literal(aux70,1),w-literal(aux35,1),w-literal(aux317,1),w-literal(aux51,0),gaceq(aux117,hand_00002),w-literal(aux52,1),w-literal(aux33,1),w-literal(aux68,1)}),watched-and({gaceq(aux116,hand_00001),w-literal(aux27,1),w-literal(aux62,1),w-literal(aux55,1),w-literal(aux29,1),w-literal(aux70,1),w-literal(aux317,1),w-literal(aux66,1),w-literal(aux32,1),w-literal(aux50,0),gaceq(aux124,hand_00002),w-literal(aux68,1)}),watched-and({w-literal(aux27,1),w-literal(aux62,1),w-literal(aux29,1),w-literal(aux280,1),w-literal(aux70,1),w-literal(aux317,1),watched-or({watched-and({w-literal(aux317,1),w-literal(aux50,0)}),watched-and({w-literal(aux317,1),w-literal(aux123,0)})}),w-literal(aux66,1),w-literal(aux32,1),w-literal(aux116,0),w-literal(aux55,0),w-literal(aux68,1)}),watched-and({w-literal(aux27,1),w-literal(aux50,1),w-literal(aux62,1),w-literal(aux29,1),w-literal(aux70,1),w-literal(aux317,1),w-literal(aux52,0),gaceq(aux123,hand_00002),gaceq(aux105,hand_00001),w-literal(aux33,1),w-literal(aux68,1)}),watched-and({w-literal(aux35,1),w-literal(aux317,1),w-literal(aux67,1),gaceq(aux106,hand_00002),gaceq(aux122,hand_00001),gaceq(aux117,aux114),w-literal(aux51,1),w-literal(aux33,1),w-literal(aux68,1)}),w-literal(aux249,0)})
+reifyimply(ineq(aux194, aux311, 0), aux249)
+reifyimply(ineq(aux194, aux299, 0), aux249)
+reifyimply(ineq(aux194, aux287, 0), aux249)
+reifyimply(ineq(aux194, aux314, 0), aux249)
+reifyimply(ineq(aux194, aux269, 0), aux249)
+reifyimply(ineq(aux196, aux260, 0), aux249)
+reifyimply(ineq(aux196, aux246, 0), aux249)
+reifyimply(ineq(aux196, aux234, 0), aux249)
+reifyimply(ineq(aux196, aux265, 0), aux249)
+reifyimply(ineq(aux196, aux322, 0), aux249)
+reifyimply(ineq(aux200, aux312, 0), aux249)
+reifyimply(ineq(aux200, aux298, 0), aux249)
+reifyimply(ineq(aux200, aux288, 0), aux249)
+reifyimply(ineq(aux200, aux315, 0), aux249)
+reifyimply(ineq(aux200, aux273, 0), aux249)
+reifyimply(ineq(aux202, aux261, 0), aux249)
+reifyimply(ineq(aux202, aux245, 0), aux249)
+reifyimply(ineq(aux202, aux233, 0), aux249)
+reifyimply(ineq(aux202, aux266, 0), aux249)
+reifyimply(ineq(aux202, aux323, 0), aux249)
+reifyimply(ineq(aux198, aux319, 0), aux249)
+reifyimply(ineq(aux198, aux244, 0), aux249)
+reifyimply(ineq(aux198, aux324, 0), aux249)
+reifyimply(ineq(aux198, aux238, 0), aux249)
+reifyimply(ineq(aux198, aux318, 0), aux249)
+watched-or({watched-and({ineq(aux241, aux259, 0),w-literal(aux294,1),w-literal(aux289,1),w-literal(aux303,1),w-literal(aux229,1),w-literal(aux296,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux75,1),w-literal(aux83,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux169,1),w-literal(aux163,1),w-literal(aux257,1),gaceq(grid_00001_00003_00005,hand_00000),w-literal(aux217,1),w-literal(aux256,1),w-literal(aux139,1),w-literal(aux147,1),w-literal(aux146,1),w-literal(aux171,1),w-literal(aux161,1),w-literal(aux165,1),w-literal(aux166,1),w-literal(aux145,1),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux102,1),w-literal(aux99,1),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux95,1),w-literal(aux97,1),w-literal(aux172,1),w-literal(aux190,1),w-literal(aux174,1),w-literal(aux168,1),watched-or({watched-and({w-literal(grid_00001_00001_00005,1),w-literal(aux226,1)}),w-literal(aux241,1)}),watched-or({watched-and({gaceq(grid_00001_00002_00005,aux134),w-literal(aux204,1)}),w-literal(aux276,0)}),w-literal(aux235,1),w-literal(aux186,1),w-literal(aux179,1),ineq(!aux276, aux230, 0),watched-or({w-literal(aux44,1),w-literal(aux45,1),w-literal(aux39,1),w-literal(aux41,1),w-literal(aux141,1),w-literal(aux138,1)}),w-literal(aux84,1),w-literal(aux76,1),w-literal(aux92,1),w-literal(aux87,1),w-literal(aux243,1),ineq(aux258, aux255, 0),w-literal(aux181,1),w-literal(aux148,1),w-literal(aux189,1),w-literal(aux167,1),w-literal(aux57,0),w-literal(aux63,1),w-literal(aux48,0),w-literal(aux59,0)}),watched-and({reifyimply(w-literal(grid_00001_00004_00005,1), !aux241),w-literal(aux289,1),w-literal(aux303,1),w-literal(aux229,1),w-literal(aux296,1),w-literal(aux259,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux75,1),w-literal(aux83,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux169,1),w-literal(aux163,1),watched-or({w-literal(aux44,1),w-literal(aux45,1),w-literal(aux39,1),w-literal(aux41,1),w-literal(aux141,1),w-literal(aux138,1),w-literal(aux153,1),watched-and({w-literal(aux217,0),w-literal(aux268,1)}),w-literal(aux143,1)}),w-literal(aux257,1),ineq(aux241, aux264, 0),w-literal(aux139,1),w-literal(aux147,1),w-literal(aux146,1),w-literal(aux171,1),w-literal(aux281,1),w-literal(aux161,1),w-literal(aux165,1),w-literal(aux166,1),w-literal(aux145,1),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux102,1),w-literal(aux99,1),reifyimply(w-literal(grid_00001_00002_00005,1), !aux254),ineq(aux276, aux204, 0),ineq(!aux241, aux226, 0),ineq(!aux270, aux225, 0),ineq(!aux254, aux216, 0),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux95,1),w-literal(aux97,1),w-literal(aux172,1),w-literal(aux190,1),w-literal(aux174,1),w-literal(aux168,1),ineq(!aux276, aux282, 0),w-literal(aux186,1),w-literal(aux179,1),w-literal(aux154,1),watched-or({w-literal(aux217,0),w-literal(aux268,0)}),w-literal(aux180,1),reifyimply(gaceq(grid_00001_00005_00005,aux134), aux276),ineq(aux254, aux230, 0),w-literal(aux84,1),w-literal(aux76,1),w-literal(aux92,1),w-literal(aux87,1),reifyimply(w-literal(grid_00001_00003_00005,1), !aux270),ineq(aux270, aux255, 0),w-literal(aux181,1),w-literal(aux148,1),w-literal(aux189,1),w-literal(aux167,1),w-literal(aux57,0),w-literal(aux63,1),w-literal(aux48,0),w-literal(aux59,0)}),watched-and({watchelement_one([grid_00001_00001_00003, grid_00001_00002_00003, grid_00001_00003_00003, grid_00001_00004_00003, grid_00001_00005_00003], aux327, hand_00000),w-literal(aux289,1),w-literal(aux303,1),w-literal(aux262,1),w-literal(aux283,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux257,1),w-literal(aux57,1),w-literal(aux313,1),w-literal(aux256,1),w-literal(aux139,1),w-literal(aux147,1),ineq(aux211, aux275, 0),w-literal(aux161,1),w-literal(aux165,1),ineq(aux214, aux309, 0),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux172,1),w-literal(aux190,1),ineq(aux213, aux320, 0),ineq(aux210, aux279, 0),w-literal(aux295,1),w-literal(aux235,1),w-literal(aux310,1),w-literal(aux290,1),w-literal(aux84,1),w-literal(aux76,1),ineq(aux212, aux236, 0),watched-or({w-literal(aux45,1),w-literal(aux39,1)}),w-literal(aux272,1),w-literal(aux300,1),w-literal(aux181,1),w-literal(aux148,1),gaceq(aux112,hand_00001),w-literal(aux63,1),w-literal(aux48,0)}),watched-and({w-literal(aux289,1),w-literal(aux303,1),w-literal(aux229,1),w-literal(aux283,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux75,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux169,1),w-literal(aux257,1),w-literal(aux59,1),watchelement_one([grid_00001_00001_00004, grid_00001_00002_00004, grid_00001_00003_00004, grid_00001_00004_00004, grid_00001_00005_00004], aux327, hand_00000),w-literal(aux256,1),w-literal(aux139,1),w-literal(aux147,1),w-literal(aux146,1),ineq(aux211, aux295, 0),w-literal(aux161,1),w-literal(aux165,1),w-literal(aux166,1),ineq(aux214, aux310, 0),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux102,1),watched-or({w-literal(aux44,1),w-literal(aux45,1),w-literal(aux39,1)}),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux95,1),w-literal(aux172,1),w-literal(aux190,1),w-literal(aux174,1),ineq(aux213, aux272, 0),ineq(aux210, aux262, 0),w-literal(aux235,1),w-literal(aux290,1),w-literal(aux84,1),w-literal(aux76,1),w-literal(aux92,1),ineq(aux212, aux313, 0),w-literal(aux300,1),w-literal(aux181,1),w-literal(aux148,1),w-literal(aux189,1),w-literal(aux57,0),w-literal(aux63,1),w-literal(aux48,0),w-literal(aux61,1)}),watched-and({ineq(aux258, aux259, 0),w-literal(aux294,1),w-literal(aux289,1),w-literal(aux303,1),w-literal(aux229,1),w-literal(aux296,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux75,1),w-literal(aux83,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux169,1),w-literal(aux163,1),w-literal(aux257,1),w-literal(aux217,1),w-literal(aux256,1),w-literal(aux139,1),w-literal(aux147,1),w-literal(aux146,1),w-literal(aux171,1),w-literal(aux161,1),w-literal(aux165,1),w-literal(aux166,1),w-literal(aux145,1),gaceq(grid_00001_00001_00005,hand_00000),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux102,1),w-literal(aux99,1),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux95,1),w-literal(aux97,1),w-literal(aux172,1),w-literal(aux190,1),w-literal(aux174,1),w-literal(aux168,1),w-literal(aux24,1),w-literal(aux235,1),w-literal(aux290,1),w-literal(aux84,1),w-literal(aux76,1),w-literal(aux92,1),w-literal(aux87,1),w-literal(aux248,0),w-literal(aux300,1),w-literal(aux181,1),w-literal(aux148,1),w-literal(aux189,1),w-literal(aux167,1),w-literal(aux57,0),w-literal(aux63,1),w-literal(aux48,0),w-literal(aux59,0)}),watched-and({ineq(aux254, aux259, 0),w-literal(aux294,1),gaceq(grid_00001_00005_00005,hand_00000),w-literal(aux289,1),w-literal(aux303,1),w-literal(aux229,1),w-literal(aux296,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux75,1),w-literal(aux83,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux169,1),w-literal(aux163,1),w-literal(aux257,1),ineq(!aux276, aux264, 0),w-literal(aux217,1),w-literal(aux139,1),w-literal(aux147,1),w-literal(aux146,1),w-literal(aux171,1),watched-or({w-literal(aux270,1),watched-and({w-literal(grid_00001_00002_00005,1),w-literal(aux225,1)})}),watched-or({w-literal(aux44,1),w-literal(aux45,1),w-literal(aux39,1),w-literal(aux41,1),w-literal(aux141,1),w-literal(aux138,1),w-literal(aux153,1),w-literal(aux143,1)}),w-literal(aux161,1),w-literal(aux165,1),w-literal(aux166,1),w-literal(aux145,1),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux102,1),w-literal(aux99,1),watched-or({watched-and({gaceq(grid_00001_00004_00005,aux134),w-literal(aux204,1)}),w-literal(aux276,0)}),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux95,1),w-literal(aux97,1),w-literal(aux172,1),w-literal(aux190,1),w-literal(aux174,1),w-literal(aux168,1),ineq(aux258, aux282, 0),w-literal(aux186,1),w-literal(aux179,1),w-literal(aux154,1),w-literal(aux180,1),ineq(aux270, aux230, 0),w-literal(aux84,1),w-literal(aux76,1),w-literal(aux92,1),w-literal(aux87,1),watched-or({watched-and({w-literal(grid_00001_00001_00005,1),w-literal(aux216,1)}),w-literal(aux254,1)}),w-literal(aux268,1),ineq(aux241, aux255, 0),watched-or({watched-and({w-literal(grid_00001_00003_00005,1),w-literal(aux226,1)}),w-literal(aux241,1)}),w-literal(aux181,1),w-literal(aux148,1),w-literal(aux189,1),w-literal(aux167,1),w-literal(aux57,0),w-literal(aux63,1),w-literal(aux48,0),w-literal(aux59,0)}),watched-and({ineq(!aux276, aux259, 0),w-literal(aux294,1),watched-or({w-literal(aux44,1),w-literal(aux45,1),w-literal(aux39,1),w-literal(aux41,1),w-literal(aux141,1)}),w-literal(aux289,1),w-literal(aux303,1),w-literal(aux229,1),w-literal(aux296,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux75,1),w-literal(aux83,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux169,1),w-literal(aux163,1),w-literal(aux257,1),w-literal(aux217,1),watched-or({w-literal(aux276,0),watched-and({gaceq(grid_00001_00001_00005,aux134),w-literal(aux204,1)})}),w-literal(aux256,1),w-literal(aux139,1),w-literal(aux147,1),w-literal(aux146,1),w-literal(aux171,1),w-literal(aux161,1),w-literal(aux165,1),w-literal(aux166,1),w-literal(aux145,1),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux102,1),w-literal(aux99,1),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux95,1),w-literal(aux97,1),w-literal(aux172,1),w-literal(aux190,1),w-literal(aux174,1),w-literal(aux168,1),w-literal(aux235,1),w-literal(aux186,1),ineq(aux258, aux230, 0),w-literal(aux84,1),w-literal(aux76,1),w-literal(aux92,1),w-literal(aux87,1),gaceq(grid_00001_00002_00005,hand_00000),w-literal(aux304,1),w-literal(aux300,1),w-literal(aux181,1),w-literal(aux148,1),w-literal(aux189,1),w-literal(aux167,1),w-literal(aux57,0),w-literal(aux63,1),w-literal(aux48,0),w-literal(aux59,0)}),watched-and({w-literal(aux289,1),w-literal(aux279,1),w-literal(aux262,1),w-literal(aux283,1),w-literal(aux82,1),w-literal(aux178,1),w-literal(aux257,1),w-literal(aux48,1),w-literal(aux236,1),w-literal(aux313,1),w-literal(aux256,1),w-literal(aux139,1),ineq(aux211, aux250, 0),w-literal(aux161,1),ineq(aux214, aux252, 0),w-literal(aux79,1),w-literal(aux86,1),w-literal(aux172,1),ineq(aux213, aux232, 0),ineq(aux210, aux307, 0),w-literal(aux275,1),w-literal(aux295,1),w-literal(aux235,1),w-literal(aux309,1),w-literal(aux310,1),w-literal(aux290,1),w-literal(aux84,1),watchelement_one([grid_00001_00001_00002, grid_00001_00002_00002, grid_00001_00003_00002, grid_00001_00004_00002, grid_00001_00005_00002], aux327, hand_00000),ineq(aux212, aux231, 0),w-literal(aux320,1),w-literal(aux272,1),w-literal(aux300,1),w-literal(aux181,1),w-literal(aux63,1),gaceq(aux118,hand_00001)}),w-literal(aux258,1),watched-and({w-literal(aux289,1),w-literal(aux303,1),w-literal(aux229,1),w-literal(aux296,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux75,1),w-literal(aux83,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux169,1),w-literal(aux163,1),w-literal(aux257,1),w-literal(aux59,1),w-literal(aux139,1),w-literal(aux147,1),w-literal(aux146,1),w-literal(aux171,1),ineq(aux211, aux235, 0),w-literal(aux161,1),w-literal(aux165,1),w-literal(aux166,1),w-literal(aux145,1),ineq(aux214, aux290, 0),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux102,1),w-literal(aux99,1),watchelement_one([grid_00001_00001_00005, grid_00001_00002_00005, grid_00001_00003_00005, grid_00001_00004_00005, grid_00001_00005_00005], aux327, hand_00000),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux95,1),w-literal(aux97,1),w-literal(aux172,1),w-literal(aux190,1),w-literal(aux174,1),w-literal(aux168,1),ineq(aux213, aux300, 0),w-literal(aux24,1),ineq(aux210, aux283, 0),w-literal(aux84,1),w-literal(aux76,1),w-literal(aux92,1),w-literal(aux87,1),ineq(aux212, aux256, 0),w-literal(aux181,1),w-literal(aux148,1),w-literal(aux189,1),w-literal(aux167,1),w-literal(aux57,0),w-literal(aux63,1),w-literal(aux48,0),w-literal(aux59,0),w-literal(aux61,1)}),watched-and({ineq(aux270, aux259, 0),w-literal(hand_00001,4),w-literal(aux289,1),w-literal(aux303,1),w-literal(aux229,1),w-literal(aux296,1),w-literal(aux82,1),w-literal(aux104,1),w-literal(aux75,1),w-literal(aux83,1),w-literal(aux178,1),w-literal(aux150,1),w-literal(aux169,1),w-literal(aux163,1),watched-or({w-literal(aux44,1),w-literal(aux45,1),w-literal(aux39,1),w-literal(aux41,1),w-literal(aux141,1),w-literal(aux138,1),w-literal(aux153,1)}),w-literal(aux257,1),ineq(aux258, aux264, 0),w-literal(aux221,1),watched-or({watched-and({w-literal(grid_00001_00001_00005,1),w-literal(aux225,1)}),w-literal(aux270,1)}),w-literal(aux139,1),w-literal(aux147,1),w-literal(aux146,1),w-literal(aux171,1),w-literal(aux161,1),w-literal(aux165,1),w-literal(aux166,1),w-literal(aux145,1),w-literal(aux79,1),w-literal(aux94,1),w-literal(aux102,1),w-literal(aux99,1),watched-or({watched-and({w-literal(grid_00001_00002_00005,1),w-literal(aux226,1)}),w-literal(aux241,1)}),w-literal(aux86,1),w-literal(aux90,1),w-literal(aux95,1),w-literal(aux97,1),w-literal(aux172,1),w-literal(aux190,1),w-literal(aux174,1),w-literal(aux168,1),watched-or({watched-and({gaceq(grid_00001_00003_00005,aux134),w-literal(aux204,1)}),w-literal(aux276,0)}),gaceq(grid_00001_00004_00005,hand_00000),w-literal(aux235,1),w-literal(aux186,1),w-literal(aux179,1),w-literal(aux154,1),ineq(aux241, aux230, 0),w-literal(aux84,1),w-literal(aux76,1),w-literal(aux92,1),w-literal(aux87,1),w-literal(aux316,0),ineq(!aux276, aux255, 0),w-literal(aux181,1),w-literal(aux148,1),w-literal(aux189,1),w-literal(aux167,1),w-literal(aux57,0),w-literal(aux63,1),w-literal(aux48,0),w-literal(aux59,0)})})
+watched-or({watched-and({w-literal(aux31,1),w-literal(aux140,1),w-literal(aux288,1),w-literal(aux233,1),w-literal(aux324,1),w-literal(aux47,1),ineq(aux206, aux246, 0),w-literal(aux80,1),w-literal(aux137,1),w-literal(aux251,1),w-literal(aux273,1),w-literal(aux323,1),w-literal(aux318,1),watchelement_one([grid_00002_00001_00002, grid_00002_00002_00002, grid_00002_00003_00002, grid_00002_00004_00002, grid_00002_00005_00002], aux328, hand_00001),ineq(aux205, aux265, 0),w-literal(aux156,1),w-literal(aux298,1),w-literal(aux245,1),w-literal(aux244,1),ineq(aux208, aux260, 0),w-literal(aux78,1),w-literal(aux159,1),w-literal(aux60,1),ineq(aux207, aux234, 0),w-literal(aux315,1),w-literal(aux266,1),w-literal(aux238,1),w-literal(aux74,1),w-literal(aux151,1),gaceq(aux130,hand_00002),w-literal(aux312,1),w-literal(aux261,1),w-literal(aux319,1),w-literal(aux89,1),ineq(aux209, aux322, 0),w-literal(aux286,1)}),watched-and({w-literal(aux25,1),w-literal(aux31,1),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux184,1),w-literal(aux177,1),ineq(aux206, aux244, 0),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux101,1),w-literal(aux81,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux170,1),w-literal(aux185,1),w-literal(aux251,1),watchelement_one([grid_00002_00001_00005, grid_00002_00002_00005, grid_00002_00003_00005, grid_00002_00004_00005, grid_00002_00005_00005], aux328, hand_00001),ineq(aux205, aux238, 0),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux182,1),w-literal(aux160,1),watched-or({w-literal(aux38,1),w-literal(aux37,1),w-literal(aux43,1),w-literal(aux40,1)}),ineq(aux208, aux319, 0),gaceq(aux110,hand_00002),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux103,1),w-literal(aux91,1),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux183,1),w-literal(aux188,1),w-literal(aux28,1),w-literal(aux30,1),ineq(aux207, aux324, 0),w-literal(aux53,1),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux96,1),w-literal(aux73,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux176,1),w-literal(aux175,1),w-literal(aux89,1),w-literal(aux98,1),w-literal(aux100,1),w-literal(aux77,1),ineq(aux209, aux318, 0),w-literal(aux286,1),w-literal(aux306,1),w-literal(aux240,1),w-literal(aux274,1)}),watched-and({w-literal(aux25,1),w-literal(aux109,1),w-literal(aux31,1),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux184,1),w-literal(aux177,1),ineq(aux305, aux293, 0),w-literal(aux26,1),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux101,1),w-literal(aux81,1),w-literal(aux132,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux170,1),w-literal(aux185,1),reifyimply(gaceq(aux164,grid_00002_00003_00005), !aux271),w-literal(aux280,1),watched-or({w-literal(aux219,0),w-literal(aux308,0),w-literal(aux282,1)}),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux182,1),w-literal(aux160,1),reifyimply(gaceq(aux135,grid_00002_00004_00005), !aux305),reifyimply(gaceq(grid_00002_00005_00005,aux133), aux297),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux103,1),w-literal(aux91,1),ineq(!aux297, aux239, 0),ineq(aux297, aux193, 0),ineq(!aux305, aux227, 0),ineq(!aux271, aux224, 0),ineq(!aux253, aux215, 0),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux183,1),w-literal(aux188,1),w-literal(aux28,1),ineq(aux253, aux302, 0),w-literal(aux30,1),reifyimply(gaceq(grid_00001_00001_00005,grid_00002_00002_00005), !aux253),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux96,1),w-literal(aux73,1),w-literal(aux129,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux176,1),w-literal(aux175,1),w-literal(aux131,1),ineq(aux271, aux301, 0),watched-or({w-literal(aux158,1),w-literal(aux38,1),w-literal(aux37,1),w-literal(aux43,1),w-literal(aux152,1),w-literal(aux157,1),watched-and({w-literal(aux219,0),w-literal(aux308,1)}),w-literal(aux40,1),w-literal(aux155,1),w-literal(aux42,1)}),w-literal(aux89,1),w-literal(aux98,1),w-literal(aux100,1),w-literal(aux77,1),w-literal(aux286,1),w-literal(aux306,1),w-literal(aux240,1),w-literal(aux274,1),w-literal(aux321,1)}),watched-and({w-literal(aux25,1),gaceq(grid_00001_00005_00005,hand_00002),w-literal(aux109,1),w-literal(aux31,1),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux184,1),w-literal(aux177,1),watched-or({w-literal(aux305,1),watched-and({gaceq(aux135,grid_00002_00003_00005),w-literal(aux227,1)})}),ineq(!aux297, aux293, 0),w-literal(aux26,1),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux101,1),w-literal(aux81,1),w-literal(aux132,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux170,1),w-literal(aux185,1),watched-or({w-literal(aux253,1),watched-and({gaceq(grid_00002_00001_00005,grid_00001_00001_00005),w-literal(aux215,1)})}),w-literal(aux219,1),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux182,1),w-literal(aux160,1),watched-or({w-literal(aux158,1),w-literal(aux38,1),w-literal(aux37,1),w-literal(aux43,1),w-literal(aux152,1),w-literal(aux157,1),w-literal(aux40,1),w-literal(aux155,1),w-literal(aux42,1)}),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux103,1),w-literal(aux91,1),ineq(aux278, aux239, 0),watched-or({watched-and({gaceq(aux164,grid_00002_00002_00005),w-literal(aux224,1)}),w-literal(aux271,1)}),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux183,1),w-literal(aux188,1),w-literal(aux28,1),ineq(aux271, aux302, 0),w-literal(aux30,1),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux96,1),w-literal(aux73,1),w-literal(aux129,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux176,1),w-literal(aux175,1),w-literal(aux131,1),watched-or({watched-and({gaceq(aux133,grid_00002_00004_00005),w-literal(aux193,1)}),w-literal(aux297,0)}),ineq(aux305, aux301, 0),ineq(aux253, aux321, 0),w-literal(aux89,1),w-literal(aux98,1),w-literal(aux100,1),w-literal(aux77,1),w-literal(aux308,1),gaceq(grid_00002_00005_00005,hand_00001),w-literal(aux286,1),w-literal(aux306,1),w-literal(aux240,1),w-literal(aux274,1)}),watched-and({w-literal(aux25,1),w-literal(aux109,1),w-literal(aux31,1),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux184,1),w-literal(aux177,1),watched-or({w-literal(aux297,0),watched-and({gaceq(grid_00002_00002_00005,aux133),w-literal(aux193,1)})}),w-literal(aux26,1),gaceq(grid_00002_00003_00005,hand_00001),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux101,1),w-literal(aux81,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux170,1),w-literal(aux185,1),gaceq(grid_00001_00003_00005,hand_00002),watched-or({watched-and({gaceq(grid_00002_00001_00005,aux135),w-literal(aux227,1)}),w-literal(aux305,1)}),w-literal(aux318,1),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux182,1),w-literal(aux160,1),w-literal(aux218,1),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux103,1),w-literal(aux91,1),watched-or({w-literal(aux38,1),w-literal(aux37,1),w-literal(aux43,1),w-literal(aux152,1),w-literal(aux40,1),w-literal(aux155,1),w-literal(aux42,1)}),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux183,1),w-literal(aux188,1),w-literal(aux28,1),ineq(!aux297, aux302, 0),w-literal(aux30,1),w-literal(aux238,1),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux96,1),w-literal(aux73,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux176,1),w-literal(aux175,1),w-literal(aux131,1),ineq(aux278, aux301, 0),ineq(aux305, aux321, 0),w-literal(aux89,1),w-literal(aux98,1),w-literal(aux100,1),w-literal(aux77,1),w-literal(aux237,0),w-literal(aux286,1),w-literal(aux306,1),w-literal(aux240,1),w-literal(aux274,1)}),watched-and({gaceq(aux127,hand_00002),w-literal(aux31,1),watched-or({w-literal(aux38,1),w-literal(aux43,1)}),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux233,1),w-literal(aux324,1),ineq(aux206, aux298, 0),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux251,1),w-literal(aux54,1),w-literal(aux323,1),w-literal(aux318,1),watchelement_one([grid_00002_00001_00003, grid_00002_00002_00003, grid_00002_00003_00003, grid_00002_00004_00003, grid_00002_00005_00003], aux328, hand_00001),ineq(aux205, aux315, 0),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux245,1),w-literal(aux244,1),ineq(aux208, aux312, 0),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux30,1),ineq(aux207, aux288, 0),w-literal(aux266,1),w-literal(aux238,1),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux261,1),w-literal(aux319,1),w-literal(aux89,1),w-literal(aux98,1),ineq(aux209, aux273, 0),w-literal(aux286,1),w-literal(aux306,1)}),watched-and({w-literal(aux25,1),w-literal(aux31,1),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux184,1),w-literal(aux177,1),w-literal(aux324,1),w-literal(aux26,1),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux101,1),w-literal(aux81,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux170,1),w-literal(aux185,1),gaceq(grid_00002_00001_00005,hand_00001),w-literal(aux318,1),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux182,1),w-literal(aux160,1),gaceq(grid_00001_00001_00005,hand_00002),w-literal(aux244,1),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux103,1),w-literal(aux91,1),watched-or({w-literal(aux38,1),w-literal(aux37,1),w-literal(aux43,1),w-literal(aux40,1),w-literal(aux42,1)}),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux183,1),w-literal(aux188,1),w-literal(aux220,1),w-literal(aux28,1),w-literal(aux30,1),w-literal(aux238,1),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux96,1),w-literal(aux73,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux176,1),w-literal(aux175,1),ineq(aux278, aux321, 0),w-literal(aux89,1),w-literal(aux98,1),w-literal(aux100,1),w-literal(aux77,1),w-literal(aux247,0),w-literal(aux286,1),w-literal(aux306,1),w-literal(aux240,1),w-literal(aux274,1)}),watched-and({w-literal(aux25,1),w-literal(aux109,1),w-literal(aux31,1),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux184,1),w-literal(aux177,1),w-literal(aux222,1),w-literal(aux324,1),w-literal(aux26,1),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux101,1),w-literal(aux81,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux170,1),w-literal(aux185,1),w-literal(aux318,1),watched-or({watched-and({gaceq(grid_00002_00001_00005,aux133),w-literal(aux193,1)}),w-literal(aux297,0)}),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux182,1),w-literal(aux160,1),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux103,1),w-literal(aux91,1),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux183,1),w-literal(aux188,1),w-literal(aux28,1),ineq(aux278, aux302, 0),w-literal(aux30,1),gaceq(grid_00002_00002_00005,hand_00001),w-literal(aux238,1),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux96,1),w-literal(aux73,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux176,1),w-literal(aux175,1),gaceq(grid_00001_00002_00005,hand_00002),watched-or({w-literal(aux38,1),w-literal(aux37,1),w-literal(aux43,1),w-literal(aux152,1),w-literal(aux40,1),w-literal(aux42,1)}),ineq(!aux297, aux321, 0),w-literal(aux89,1),w-literal(aux98,1),w-literal(aux100,1),w-literal(aux77,1),w-literal(aux291,1),w-literal(aux286,1),w-literal(aux306,1),w-literal(aux240,1),w-literal(aux274,1)}),watched-and({watched-or({watched-and({gaceq(aux164,grid_00002_00001_00005),w-literal(aux224,1)}),w-literal(aux271,1)}),w-literal(aux25,1),w-literal(aux109,1),w-literal(aux31,1),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux184,1),w-literal(aux177,1),ineq(aux278, aux293, 0),w-literal(aux26,1),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux101,1),w-literal(aux81,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux170,1),w-literal(aux185,1),watched-or({watched-and({gaceq(aux135,grid_00002_00002_00005),w-literal(aux227,1)}),w-literal(aux305,1)}),watched-or({watched-and({gaceq(grid_00002_00003_00005,aux133),w-literal(aux193,1)}),w-literal(aux297,0)}),w-literal(aux318,1),watched-or({w-literal(aux38,1),w-literal(aux37,1),w-literal(aux43,1),w-literal(aux152,1),w-literal(aux157,1),w-literal(aux40,1),w-literal(aux155,1),w-literal(aux42,1)}),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux182,1),w-literal(aux160,1),gaceq(hand_00001,grid_00002_00004_00005),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux103,1),w-literal(aux91,1),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux183,1),w-literal(aux188,1),gaceq(grid_00001_00004_00005,hand_00002),w-literal(aux28,1),ineq(aux305, aux302, 0),w-literal(aux30,1),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux96,1),w-literal(aux73,1),w-literal(aux129,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux176,1),w-literal(aux175,1),w-literal(aux131,1),ineq(!aux297, aux301, 0),w-literal(aux223,1),ineq(aux271, aux321, 0),w-literal(aux89,1),w-literal(aux98,1),w-literal(aux100,1),w-literal(aux77,1),w-literal(aux267,0),w-literal(aux286,1),w-literal(aux306,1),w-literal(aux240,1),w-literal(aux274,1)}),w-literal(aux278,1),watched-and({w-literal(aux25,1),w-literal(aux31,1),w-literal(aux140,1),w-literal(aux173,1),w-literal(aux184,1),w-literal(aux324,1),ineq(aux206, aux245, 0),w-literal(aux80,1),w-literal(aux88,1),w-literal(aux101,1),w-literal(aux137,1),w-literal(aux142,1),w-literal(aux170,1),w-literal(aux251,1),gaceq(aux107,hand_00002),w-literal(aux318,1),watchelement_one([grid_00002_00001_00004, grid_00002_00002_00004, grid_00002_00003_00004, grid_00002_00004_00004, grid_00002_00005_00004], aux328, hand_00001),ineq(aux205, aux266, 0),w-literal(aux156,1),w-literal(aux187,1),w-literal(aux182,1),w-literal(aux244,1),ineq(aux208, aux261, 0),w-literal(aux46,1),w-literal(aux78,1),w-literal(aux93,1),w-literal(aux103,1),watched-or({w-literal(aux38,1),w-literal(aux37,1),w-literal(aux43,1)}),w-literal(aux159,1),w-literal(aux162,1),w-literal(aux183,1),w-literal(aux30,1),ineq(aux207, aux233, 0),w-literal(aux238,1),w-literal(aux74,1),w-literal(aux85,1),w-literal(aux96,1),w-literal(aux151,1),w-literal(aux144,1),w-literal(aux176,1),w-literal(aux319,1),w-literal(aux89,1),w-literal(aux98,1),w-literal(aux100,1),ineq(aux209, aux323, 0),w-literal(aux286,1),w-literal(aux306,1),w-literal(aux240,1)})})
+shortstr2([fpCol_00001, fpRow_00001], aux23)
+shortstr2([fpCol_00002, fpRow_00002], aux23)
+occurrencegeq([grid_00002_00005_00001, grid_00002_00005_00002, grid_00002_00005_00003, grid_00002_00005_00004, grid_00002_00005_00005, grid_00002_00001_00001, grid_00002_00001_00002, grid_00002_00001_00003, grid_00002_00001_00004, grid_00002_00001_00005, grid_00002_00002_00001, grid_00002_00002_00002, grid_00002_00002_00003, grid_00002_00002_00004, grid_00002_00002_00005, grid_00002_00003_00001, grid_00002_00003_00002, grid_00002_00003_00003, grid_00002_00003_00004, grid_00002_00003_00005, grid_00002_00004_00001, grid_00002_00004_00002, grid_00002_00004_00003, grid_00002_00004_00004, grid_00002_00004_00005], 0, 13)
+sumleq([fpRow_00002,-1],aux337)
+sumgeq([fpRow_00002,-1],aux337)
+sumleq([fpRow_00001,-1],aux338)
+sumgeq([fpRow_00001,-1],aux338)
+sumleq([fpRow_00002,-4],aux339)
+sumgeq([fpRow_00002,-4],aux339)
+sumleq([fpRow_00001,-4],aux340)
+sumgeq([fpRow_00001,-4],aux340)
+sumleq([fpRow_00002,-3],aux341)
+sumgeq([fpRow_00002,-3],aux341)
+sumleq([fpRow_00001,-3],aux342)
+sumgeq([fpRow_00001,-3],aux342)
+sumleq([fpRow_00001,-2],aux343)
+sumgeq([fpRow_00001,-2],aux343)
+sumleq([fpRow_00002,-2],aux344)
+sumgeq([fpRow_00002,-2],aux344)
+**EOF**
