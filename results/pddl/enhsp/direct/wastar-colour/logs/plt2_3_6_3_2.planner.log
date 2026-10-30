@@ -49,11 +49,11 @@ f(n) = 6.995 (Expanded Nodes: 418, Evaluated States: 599, Time: 0.043) Frontier 
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c6 c1)
+0.0: (shoot-row r1c6 c1)
 1.0: (shoot-column r3c2 c1)
 2.0: (shoot-column r2c1 c1)
 3.0: (shoot-row-and-column r1c6 r2c6 c2)
-4.0: (shoot-partial-row r3c4 c1)
+4.0: (shoot-row r3c4 c1)
 5.0: (shoot-row-and-column r2c6 r3c6 c2)
 6.0: (shoot-column r3c3 c2)
 

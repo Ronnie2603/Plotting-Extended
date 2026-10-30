@@ -56,14 +56,14 @@ Problem Solved
 
 Found Plan:
 0.0: (shoot-column r2c3 c3)
-1.0: (shoot-partial-row r1c1 c1)
+1.0: (shoot-row r1c1 c1)
 2.0: (shoot-column r2c1 c2)
-3.0: (shoot-partial-row r4c1 c3)
-4.0: (shoot-partial-row r1c3 c1)
+3.0: (shoot-row r4c1 c3)
+4.0: (shoot-row r1c3 c1)
 5.0: (shoot-column r4c2 c3)
 6.0: (shoot-column r2c4 c1)
-7.0: (shoot-partial-row r4c3 c2)
-8.0: (shoot-partial-row r5c4 c3)
+7.0: (shoot-row r4c3 c2)
+8.0: (shoot-row r5c4 c3)
 9.0: (shoot-column r5c3 c3)
 
 Plan-Length:10

@@ -17,10 +17,10 @@ f(n) = 4.0 (Expanded Nodes: 121, Evaluated States: 308, Time: 0.012) Frontier Si
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c2 c1)
-1.0: (shoot-partial-row r2c2 c2)
-2.0: (shoot-partial-row r1c5 c1)
-3.0: (shoot-partial-row r3c3 c1)
+0.0: (shoot-row r1c2 c1)
+1.0: (shoot-row r2c2 c2)
+2.0: (shoot-row r1c5 c1)
+3.0: (shoot-row r3c3 c1)
 
 Plan-Length:4
 Metric (Search):4.0

@@ -17,10 +17,10 @@ f(n) = 4.0 (Expanded Nodes: 47, Evaluated States: 89, Time: 0.014) Frontier Size
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c2 c1)
-1.0: (shoot-partial-row r3c1 c2)
-2.0: (shoot-partial-row r4c1 c3)
-3.0: (shoot-partial-row r2c3 c2)
+0.0: (shoot-row r1c2 c1)
+1.0: (shoot-row r3c1 c2)
+2.0: (shoot-row r4c1 c3)
+3.0: (shoot-row r2c3 c2)
 
 Plan-Length:4
 Metric (Search):4.0

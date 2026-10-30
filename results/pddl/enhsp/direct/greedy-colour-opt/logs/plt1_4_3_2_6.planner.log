@@ -19,8 +19,8 @@ Problem Solved
 
 Found Plan:
 0.0: (shoot-column r1c1 c1)
-1.0: (shoot-partial-row r1c3 c2)
-2.0: (shoot-partial-row r3c1 c2)
+1.0: (shoot-row r1c3 c2)
+2.0: (shoot-row r3c1 c2)
 3.0: (shoot-row-and-column r1c3 r3c3 c1)
 
 Plan-Length:4

@@ -48,7 +48,7 @@
     (total-block)
   )
 
-  (:action shoot-partial-row
+  (:action shoot-row
     :parameters (?last - cell ?c - colour)
     :precondition
       (and
@@ -121,29 +121,29 @@
           (assign (hand-colour) (colour-id ?c)))))
 
   (:action shoot-column
-    :parameters (?target - cell ?c - colour)
+    :parameters (?last - cell ?c - colour)
     :precondition
       (and
-        (not (blockedcol ?target))
+        (not (blockedcol ?last))
         (> (colour-id ?c) 0)
 
         (or (= (hand-colour) (colour-id ?c))
             (< (hand-colour) 0))
 
-        (= (colour-of ?target) (colour-id ?c))
+        (= (colour-of ?last) (colour-id ?c))
 
         (forall (?x - cell)
           (or
-            (not (= (col ?x) (col ?target)))
-            (> (row ?x) (row ?target))
+            (not (= (col ?x) (col ?last)))
+            (> (row ?x) (row ?last))
             (= (colour-of ?x) (colour-id ?c))
             (= (colour-of ?x) 0)))
 
         (or
-          (isbottomrow ?target)
+          (isbottomrow ?last)
           (exists (?b - cell)
             (and
-              (above ?target ?b)
+              (above ?last ?b)
               (> (colour-of ?b) 0)
               (not (= (colour-of ?b) (colour-id ?c)))))))
 
@@ -152,8 +152,8 @@
         (forall (?x - cell)
           (when
             (and
-              (= (col ?x) (col ?target))
-              (<= (row ?x) (row ?target))
+              (= (col ?x) (col ?last))
+              (<= (row ?x) (row ?last))
               (= (colour-of ?x) (colour-id ?c)))
             (and
               (assign (colour-of ?x) 0)
@@ -162,8 +162,8 @@
         (forall (?b - cell)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?b)
+              (not (isbottomrow ?last))
+              (above ?last ?b)
               (> (colour-of ?b) 0)
               (not (= (colour-of ?b) (colour-id ?c))))
             (and
@@ -171,20 +171,20 @@
               (assign (colour-of ?b) (colour-id ?c)))))
 
         (when
-          (isbottomrow ?target)
+          (isbottomrow ?last)
           (assign (hand-colour) (colour-id ?c)))))
 
   (:action shoot-row-and-column
-    :parameters (?row-end ?target - cell ?c - colour)
+    :parameters (?row-end ?last - cell ?c - colour)
     :precondition
       (and
         (islastcol ?row-end)
-        (islastcol ?target)
-        (> (row ?target) (row ?row-end))
+        (islastcol ?last)
+        (> (row ?last) (row ?row-end))
         (> (colour-id ?c) 0)
 
         (not (blockedrow ?row-end))
-        (not (blockedcol ?target))
+        (not (blockedcol ?last))
 
         (or (= (hand-colour) (colour-id ?c))
             (< (hand-colour) 0))
@@ -199,7 +199,7 @@
           (or
             (not (islastcol ?x))
             (<= (row ?x) (row ?row-end))
-            (> (row ?x) (row ?target))
+            (> (row ?x) (row ?last))
             (= (colour-of ?x) (colour-id ?c))
             (= (colour-of ?x) 0)))
 
@@ -211,13 +211,13 @@
               (and
                 (islastcol ?x)
                 (> (row ?x) (row ?row-end))
-                (<= (row ?x) (row ?target))))))
+                (<= (row ?x) (row ?last))))))
 
         (or
-          (isbottomrow ?target)
+          (isbottomrow ?last)
           (exists (?b - cell)
             (and
-              (above ?target ?b)
+              (above ?last ?b)
               (> (colour-of ?b) 0)
               (not (= (colour-of ?b) (colour-id ?c)))))))
 
@@ -235,7 +235,7 @@
             (and
               (islastcol ?x)
               (> (row ?x) (row ?row-end))
-              (<= (row ?x) (row ?target))
+              (<= (row ?x) (row ?last))
               (= (colour-of ?x) (colour-id ?c)))
             (decrease (total-block) 1)))
 
@@ -259,7 +259,7 @@
           (when
             (and
               (islastcol ?d)
-              (<= (row ?d) (+ (- (row ?target) (row ?row-end)) 1)))
+              (<= (row ?d) (+ (- (row ?last) (row ?row-end)) 1)))
             (assign (colour-of ?d) 0)))
 
         (forall (?d ?s - cell)
@@ -267,17 +267,17 @@
             (and
               (islastcol ?d)
               (islastcol ?s)
-              (<= (row ?d) (row ?target))
-              (> (row ?d) (+ (- (row ?target) (row ?row-end)) 1))
+              (<= (row ?d) (row ?last))
+              (> (row ?d) (+ (- (row ?last) (row ?row-end)) 1))
               (= (row ?s)
-                 (- (row ?d) (+ (- (row ?target) (row ?row-end)) 1))))
+                 (- (row ?d) (+ (- (row ?last) (row ?row-end)) 1))))
             (assign (colour-of ?d) (colour-of ?s))))
 
         (forall (?b - cell)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?b)
+              (not (isbottomrow ?last))
+              (above ?last ?b)
               (> (colour-of ?b) 0)
               (not (= (colour-of ?b) (colour-id ?c))))
             (and
@@ -285,6 +285,6 @@
               (assign (colour-of ?b) (colour-id ?c)))))
 
         (when
-          (isbottomrow ?target)
+          (isbottomrow ?last)
           (assign (hand-colour) (colour-id ?c)))))
 )

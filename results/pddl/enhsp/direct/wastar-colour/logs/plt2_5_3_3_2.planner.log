@@ -49,14 +49,14 @@ f(n) = 8.9939995 (Expanded Nodes: 755, Evaluated States: 853, Time: 0.045) Front
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c1 c1)
+0.0: (shoot-row r1c1 c1)
 1.0: (shoot-column r2c3 c2)
-2.0: (shoot-partial-row r3c1 c1)
+2.0: (shoot-row r3c1 c1)
 3.0: (shoot-column r3c1 c3)
 4.0: (shoot-column r3c2 c1)
 5.0: (shoot-row-and-column r3c3 r4c3 c2)
-6.0: (shoot-partial-row r4c1 c3)
-7.0: (shoot-partial-row r5c1 c1)
+6.0: (shoot-row r4c1 c3)
+7.0: (shoot-row r5c1 c1)
 8.0: (shoot-row-and-column r2c3 r5c3 c2)
 
 Plan-Length:9

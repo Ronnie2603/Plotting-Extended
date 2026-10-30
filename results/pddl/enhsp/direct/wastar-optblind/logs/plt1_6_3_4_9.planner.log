@@ -19,12 +19,12 @@ f(n) = 6.0 (Expanded Nodes: 86, Evaluated States: 150, Time: 0.013) Frontier Siz
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c3 c1)
-1.0: (shoot-partial-row r5c1 c1)
+0.0: (shoot-row r1c3 c1)
+1.0: (shoot-row r5c1 c1)
 2.0: (shoot-column r3c1 c2)
-3.0: (shoot-partial-row r6c1 c4)
-4.0: (shoot-partial-row r4c3 c3)
-5.0: (shoot-partial-row r3c2 c3)
+3.0: (shoot-row r6c1 c4)
+4.0: (shoot-row r4c3 c3)
+5.0: (shoot-row r3c2 c3)
 
 Plan-Length:6
 Metric (Search):6.0

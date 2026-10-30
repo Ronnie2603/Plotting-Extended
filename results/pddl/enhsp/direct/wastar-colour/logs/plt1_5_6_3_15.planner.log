@@ -24,10 +24,10 @@ f(n) = 4.998 (Expanded Nodes: 49, Evaluated States: 177, Time: 0.018) Frontier S
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c6 c1)
+0.0: (shoot-row r1c6 c1)
 1.0: (shoot-column r2c2 c1)
 2.0: (shoot-column r2c5 c2)
-3.0: (shoot-partial-row r4c5 c3)
+3.0: (shoot-row r4c5 c3)
 4.0: (shoot-column r5c5 c2)
 
 Plan-Length:5

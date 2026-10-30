@@ -28,18 +28,18 @@ h(I):10.0
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r3c2 c4)
-1.0: (shoot-partial-row r5c2 c1)
-2.0: (shoot-partial-row r4c1 c4)
+0.0: (shoot-row r3c2 c4)
+1.0: (shoot-row r5c2 c1)
+2.0: (shoot-row r4c1 c4)
 3.0: (shoot-column r1c3 c3)
 4.0: (shoot-column r4c1 c1)
-5.0: (shoot-partial-row r3c2 c2)
-6.0: (shoot-partial-row r4c3 c4)
-7.0: (shoot-partial-row r4c3 c2)
+5.0: (shoot-row r3c2 c2)
+6.0: (shoot-row r4c3 c4)
+7.0: (shoot-row r4c3 c2)
 8.0: (shoot-column r1c4 c4)
 9.0: (shoot-column r5c2 c3)
 10.0: (shoot-column r4c3 c3)
-11.0: (shoot-partial-row r3c4 c1)
+11.0: (shoot-row r3c4 c1)
 12.0: (shoot-column r5c1 c1)
 
 Plan-Length:13

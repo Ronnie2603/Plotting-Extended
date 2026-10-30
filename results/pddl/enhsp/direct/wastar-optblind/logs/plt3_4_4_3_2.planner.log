@@ -19,11 +19,11 @@ f(n) = 6.0 (Expanded Nodes: 275, Evaluated States: 310, Time: 0.015) Frontier Si
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r2c4 c1)
-1.0: (shoot-partial-row r2c4 c1)
-2.0: (shoot-partial-row r3c1 c1)
-3.0: (shoot-partial-row r4c1 c2)
-4.0: (shoot-partial-row r3c4 c1)
+0.0: (shoot-row r2c4 c1)
+1.0: (shoot-row r2c4 c1)
+2.0: (shoot-row r3c1 c1)
+3.0: (shoot-row r4c1 c2)
+4.0: (shoot-row r3c4 c1)
 5.0: (shoot-column r4c3 c1)
 
 Plan-Length:6

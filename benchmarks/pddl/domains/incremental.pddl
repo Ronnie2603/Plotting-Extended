@@ -30,7 +30,7 @@
     ;; removing a partial row:
     ;;    - we are removing part of a row and there is a next block that has a different
     ;;      colour than the first one.
-    (:action shoot-partial-row
+    (:action shoot-row
         ;; ?r - what row we are shooting
         ;; ?t - from and to, the range that we are trying to remove from the board
         ;; ?c - the colour of the range

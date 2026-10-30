@@ -28,8 +28,8 @@ f(n) = 6.9960003 (Expanded Nodes: 78, Evaluated States: 111, Time: 0.017) Fronti
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r3c1 c3)
-1.0: (shoot-partial-row r1c3 c2)
+0.0: (shoot-row r3c1 c3)
+1.0: (shoot-row r1c3 c2)
 2.0: (shoot-column r2c2 c2)
 3.0: (shoot-column r3c3 c3)
 4.0: (shoot-column r4c1 c1)

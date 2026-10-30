@@ -25,11 +25,11 @@ Found Plan:
 0.0: (shoot-column r2c3 c2)
 1.0: (shoot-column r1c5 c3)
 2.0: (shoot-column r4c3 c2)
-3.0: (shoot-partial-row r2c4 c1)
-4.0: (shoot-partial-row r3c1 c3)
+3.0: (shoot-row r2c4 c1)
+4.0: (shoot-row r3c1 c3)
 5.0: (shoot-column r5c3 c2)
-6.0: (shoot-partial-row r4c1 c2)
-7.0: (shoot-partial-row r2c5 c1)
+6.0: (shoot-row r4c1 c2)
+7.0: (shoot-row r2c5 c1)
 
 Plan-Length:8
 Metric (Search):8.0

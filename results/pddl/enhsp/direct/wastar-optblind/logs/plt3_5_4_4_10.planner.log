@@ -20,11 +20,11 @@ Problem Solved
 
 Found Plan:
 0.0: (shoot-column r1c2 c2)
-1.0: (shoot-partial-row r2c1 c4)
-2.0: (shoot-partial-row r3c1 c2)
+1.0: (shoot-row r2c1 c4)
+2.0: (shoot-row r3c1 c2)
 3.0: (shoot-column r5c3 c3)
 4.0: (shoot-column r1c4 c3)
-5.0: (shoot-partial-row r3c1 c1)
+5.0: (shoot-row r3c1 c1)
 
 Plan-Length:6
 Metric (Search):6.0

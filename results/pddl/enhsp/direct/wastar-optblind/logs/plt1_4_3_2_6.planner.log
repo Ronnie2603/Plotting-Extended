@@ -15,7 +15,7 @@ f(n) = 2.0 (Expanded Nodes: 9, Evaluated States: 33, Time: 0.009) Frontier Size:
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r4c2 c1)
+0.0: (shoot-row r4c2 c1)
 1.0: (shoot-column r2c2 c2)
 2.0: (shoot-row-and-column r2c3 r4c3 c1)
 

@@ -19,10 +19,10 @@ h(I):2.0
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c3 c1)
-1.0: (shoot-partial-row r2c1 c1)
+0.0: (shoot-row r1c3 c1)
+1.0: (shoot-row r2c1 c1)
 2.0: (shoot-column r5c3 c2)
-3.0: (shoot-partial-row r6c2 c3)
+3.0: (shoot-row r6c2 c3)
 
 Plan-Length:4
 Metric (Search):4.0

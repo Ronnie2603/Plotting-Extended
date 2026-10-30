@@ -22,15 +22,15 @@ f(n) = 9.0 (Expanded Nodes: 2860, Evaluated States: 3875, Time: 0.048) Frontier 
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c5 c1)
-1.0: (shoot-partial-row r3c1 c1)
+0.0: (shoot-row r1c5 c1)
+1.0: (shoot-row r3c1 c1)
 2.0: (shoot-column r2c3 c2)
 3.0: (shoot-column r3c5 c3)
-4.0: (shoot-partial-row r4c1 c2)
-5.0: (shoot-partial-row r2c5 c1)
-6.0: (shoot-partial-row r3c2 c1)
-7.0: (shoot-partial-row r4c3 c2)
-8.0: (shoot-partial-row r4c3 c1)
+4.0: (shoot-row r4c1 c2)
+5.0: (shoot-row r2c5 c1)
+6.0: (shoot-row r3c2 c1)
+7.0: (shoot-row r4c3 c2)
+8.0: (shoot-row r4c3 c1)
 
 Plan-Length:9
 Metric (Search):9.0

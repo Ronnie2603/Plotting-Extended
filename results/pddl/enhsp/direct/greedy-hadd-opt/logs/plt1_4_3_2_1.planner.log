@@ -22,14 +22,14 @@ h(I):11.0
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r4c2 c1)
-1.0: (shoot-partial-row r3c1 c2)
-2.0: (shoot-partial-row r3c1 c1)
+0.0: (shoot-row r4c2 c1)
+1.0: (shoot-row r3c1 c2)
+2.0: (shoot-row r3c1 c1)
 3.0: (shoot-column r4c1 c2)
 4.0: (shoot-column r1c3 c2)
 5.0: (shoot-row-and-column r3c3 r4c3 c1)
-6.0: (shoot-partial-row r4c2 c1)
-7.0: (shoot-partial-row r4c2 c2)
+6.0: (shoot-row r4c2 c1)
+7.0: (shoot-row r4c2 c2)
 
 Plan-Length:8
 Metric (Search):8.0

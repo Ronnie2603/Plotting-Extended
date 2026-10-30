@@ -103,14 +103,14 @@ f(n) = 11.991 (Expanded Nodes: 167741, Evaluated States: 370250, Time: 5.141) Fr
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r3c1 c3)
-1.0: (shoot-partial-row r1c5 c1)
-2.0: (shoot-partial-row r5c2 c1)
+0.0: (shoot-row r3c1 c3)
+1.0: (shoot-row r1c5 c1)
+2.0: (shoot-row r5c2 c1)
 3.0: (shoot-column r2c3 c2)
-4.0: (shoot-partial-row r2c5 c3)
+4.0: (shoot-row r2c5 c3)
 5.0: (shoot-column r4c2 c3)
 6.0: (shoot-column r6c4 c1)
-7.0: (shoot-partial-row r3c2 c1)
+7.0: (shoot-row r3c2 c1)
 8.0: (shoot-row-and-column r2c5 r6c5 c2)
 9.0: (shoot-column r5c1 c2)
 10.0: (shoot-column r5c2 c3)

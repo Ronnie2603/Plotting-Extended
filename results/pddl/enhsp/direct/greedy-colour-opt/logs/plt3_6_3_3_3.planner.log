@@ -23,13 +23,13 @@ h(I):6.0
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c3 c1)
-1.0: (shoot-partial-row r2c1 c1)
-2.0: (shoot-partial-row r5c3 c2)
+0.0: (shoot-row r1c3 c1)
+1.0: (shoot-row r2c1 c1)
+2.0: (shoot-row r5c3 c2)
 3.0: (shoot-column r4c1 c2)
-4.0: (shoot-partial-row r3c2 c1)
-5.0: (shoot-partial-row r5c1 c2)
-6.0: (shoot-partial-row r6c3 c3)
+4.0: (shoot-row r3c2 c1)
+5.0: (shoot-row r5c1 c2)
+6.0: (shoot-row r6c3 c3)
 7.0: (shoot-column r5c2 c3)
 8.0: (shoot-row-and-column r5c3 r6c3 c2)
 

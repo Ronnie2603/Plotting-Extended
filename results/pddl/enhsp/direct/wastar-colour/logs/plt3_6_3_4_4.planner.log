@@ -49,17 +49,17 @@ f(n) = 10.992001 (Expanded Nodes: 932, Evaluated States: 1075, Time: 0.043) Fron
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c2 c1)
-1.0: (shoot-partial-row r4c1 c2)
+0.0: (shoot-row r1c2 c1)
+1.0: (shoot-row r4c1 c2)
 2.0: (shoot-column r2c3 c1)
 3.0: (shoot-column r2c2 c4)
-4.0: (shoot-partial-row r6c1 c3)
-5.0: (shoot-partial-row r3c2 c4)
-6.0: (shoot-partial-row r6c1 c1)
-7.0: (shoot-partial-row r5c2 c3)
+4.0: (shoot-row r6c1 c3)
+5.0: (shoot-row r3c2 c4)
+6.0: (shoot-row r6c1 c1)
+7.0: (shoot-row r5c2 c3)
 8.0: (shoot-column r3c3 c4)
 9.0: (shoot-column r6c1 c2)
-10.0: (shoot-partial-row r5c2 c2)
+10.0: (shoot-row r5c2 c2)
 
 Plan-Length:11
 Metric (Search):11.0

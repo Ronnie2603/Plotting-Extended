@@ -29,21 +29,21 @@ Problem Solved
 
 Found Plan:
 0.0: (shoot-column r2c4 c1)
-1.0: (shoot-partial-row r4c4 c3)
-2.0: (shoot-partial-row r6c1 c2)
-3.0: (shoot-partial-row r6c1 c3)
-4.0: (shoot-partial-row r3c4 c2)
-5.0: (shoot-partial-row r2c5 c1)
-6.0: (shoot-partial-row r2c5 c1)
+1.0: (shoot-row r4c4 c3)
+2.0: (shoot-row r6c1 c2)
+3.0: (shoot-row r6c1 c3)
+4.0: (shoot-row r3c4 c2)
+5.0: (shoot-row r2c5 c1)
+6.0: (shoot-row r2c5 c1)
 7.0: (shoot-column r4c2 c1)
-8.0: (shoot-partial-row r3c5 c2)
+8.0: (shoot-row r3c5 c2)
 9.0: (shoot-column r4c3 c2)
 10.0: (shoot-row-and-column r2c5 r5c5 c3)
 11.0: (shoot-column r6c1 c1)
-12.0: (shoot-partial-row r4c5 c1)
-13.0: (shoot-partial-row r5c2 c1)
+12.0: (shoot-row r4c5 c1)
+13.0: (shoot-row r5c2 c1)
 14.0: (shoot-column r5c4 c2)
-15.0: (shoot-partial-row r6c3 c3)
+15.0: (shoot-row r6c3 c3)
 
 Plan-Length:16
 Metric (Search):16.0

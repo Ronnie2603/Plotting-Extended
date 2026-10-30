@@ -26,11 +26,11 @@ Found Plan:
 1.0: (shoot-row-and-column r1c3 r3c3 c2)
 2.0: (shoot-column r3c1 c1)
 3.0: (shoot-row-and-column r1c3 r4c3 c2)
-4.0: (shoot-partial-row r5c2 c3)
-5.0: (shoot-partial-row r6c1 c2)
+4.0: (shoot-row r5c2 c3)
+5.0: (shoot-row r6c1 c2)
 6.0: (shoot-column r6c1 c1)
-7.0: (shoot-partial-row r4c3 c1)
-8.0: (shoot-partial-row r5c2 c1)
+7.0: (shoot-row r4c3 c1)
+8.0: (shoot-row r5c2 c1)
 9.0: (shoot-column r5c2 c3)
 
 Plan-Length:10

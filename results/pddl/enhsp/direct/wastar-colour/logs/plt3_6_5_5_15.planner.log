@@ -28,10 +28,10 @@ f(n) = 5.9969997 (Expanded Nodes: 37, Evaluated States: 51, Time: 0.016) Frontie
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c5 c1)
-1.0: (shoot-partial-row r6c2 c1)
+0.0: (shoot-row r1c5 c1)
+1.0: (shoot-row r6c2 c1)
 2.0: (shoot-column r2c5 c3)
-3.0: (shoot-partial-row r3c2 c2)
+3.0: (shoot-row r3c2 c2)
 4.0: (shoot-column r4c1 c4)
 5.0: (shoot-row-and-column r2c5 r4c5 c3)
 

@@ -358,7 +358,7 @@ runner_extract_plotting_plan() {
     local log_file="$1"
     local plan_file="$2"
 
-    grep -Eio '\([[:space:]]*(shoot-partial-row|shoot-column|shoot-row-and-column|shoot-only-full-row)[^)]*\)' "$log_file" \
+    grep -Eio '\([[:space:]]*(shoot-row|shoot-column|shoot-row-and-column|shoot-only-full-row)[^)]*\)' "$log_file" \
         | sed 's/^[[:space:]]*//' \
         > "$plan_file" || true
 }

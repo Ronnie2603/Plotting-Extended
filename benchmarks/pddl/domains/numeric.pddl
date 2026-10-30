@@ -65,7 +65,7 @@
 
 
   ; =========================================================================
-  ; Azione: shoot-partial-row
+  ; Azione: shoot-row
   ;
   ; Spara da sinistra sulla riga di ?last.
   ; Rimuove i blocchi di colore ?c fino alla colonna di ?last inclusa.
@@ -84,7 +84,7 @@
   ;   ?c     colore sparato
   ;
   ; =========================================================================
-  (:action shoot-partial-row
+  (:action shoot-row
   :parameters (?last - cell ?c - colour)
   :precondition
     (and
@@ -255,25 +255,25 @@
   ; =========================================================================
   ; Azione: shoot-column
   ;
-  ; Spara dall'alto nella colonna di ?target.
-  ; Rimuove i blocchi di colore ?c fino alla riga di ?target inclusa.
+  ; Spara dall'alto nella colonna di ?last.
+  ; Rimuove i blocchi di colore ?c fino alla riga di ?last inclusa.
   ;
-  ; Sopra ?target devono esserci solo celle vuote oppure blocchi ?c.
+  ; Sopra ?last devono esserci solo celle vuote oppure blocchi ?c.
   ; Il tiro si ferma sul fondo della griglia oppure sul primo blocco reale
-  ; di colore diverso subito sotto ?target.
+  ; di colore diverso subito sotto ?last.
   ;
   ; In questa azione non viene applicata gravità.
   ;
   ; Parametri:
-  ;   ?target  cella più bassa eliminata nella colonna
+  ;   ?last  cella più bassa eliminata nella colonna
   ;   ?c       colore sparato
   ; =========================================================================
   ; ===========================================================================
   (:action shoot-column
-    :parameters (?target - cell ?c - colour)
+    :parameters (?last - cell ?c - colour)
     :precondition
       (and
-        (not (blockedcol ?target))
+        (not (blockedcol ?last))
         (not (= ?c null))
         (not (= ?c wildcard))
         (or (hand ?c) (hand wildcard))
@@ -282,33 +282,33 @@
           (or (= ?hc ?c) (= ?hc wildcard) (not (hand ?hc))))
 
         ; La cella bersaglio deve contenere ?c.
-        (coloured ?target ?c)
+        (coloured ?last ?c)
 
-        ; Dal bordo superiore fino a ?target sono ammessi solo ?c e null.
+        ; Dal bordo superiore fino a ?last sono ammessi solo ?c e null.
         ; Qualsiasi altro colore bloccherebbe questo tipo di tiro.
         (forall (?cell - cell)
           (or
-            (not (= (col ?cell) (col ?target)))
-            (> (row ?cell) (row ?target))
+            (not (= (col ?cell) (col ?last)))
+            (> (row ?cell) (row ?last))
             (coloured ?cell ?c)
             (coloured ?cell null)))
 
         (forall (?cell - cell ?other - colour)
           (or
-            (not (= (col ?cell) (col ?target)))
-            (> (row ?cell) (row ?target))
+            (not (= (col ?cell) (col ?last)))
+            (> (row ?cell) (row ?last))
             (= ?other ?c)
             (= ?other null)
             (= ?other wildcard)
             (not (coloured ?cell ?other))))
 
-        ; Il tiro è valido se arriva al fondo oppure se sotto ?target
+        ; Il tiro è valido se arriva al fondo oppure se sotto ?last
         ; c'è un blocco reale di colore diverso da ?c.
         (or
-          (isbottomrow ?target)
+          (isbottomrow ?last)
           (exists (?below - cell ?bcol - colour)
             (and
-              (above ?target ?below)          ; ?target è sopra ?below
+              (above ?last ?below)          ; ?last è sopra ?below
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -320,8 +320,8 @@
         (forall (?cell - cell)
           (when
             (and
-              (= (col ?cell) (col ?target))
-              (<= (row ?cell) (row ?target))
+              (= (col ?cell) (col ?last))
+              (<= (row ?cell) (row ?last))
               (coloured ?cell ?c))
             (and
               (not (coloured ?cell ?c))
@@ -334,8 +334,8 @@
         (forall (?cell - cell ?old - colour)
           (when
             (and
-              (= (col ?cell) (col ?target))
-              (<= (row ?cell) (row ?target))
+              (= (col ?cell) (col ?last))
+              (<= (row ?cell) (row ?last))
               (coloured ?cell ?old)
               (not (= ?old ?c))
               (not (= ?old null)))
@@ -345,18 +345,18 @@
         (forall (?cell - cell)
           (when
             (and
-              (= (col ?cell) (col ?target))
-              (<= (row ?cell) (row ?target))
+              (= (col ?cell) (col ?last))
+              (<= (row ?cell) (row ?last))
               (not (coloured ?cell null)))
             (coloured ?cell null)))
 
-        ; Il blocco sotto ?target assorbe il tiro
+        ; Il blocco sotto ?last assorbe il tiro
         ; Prima viene tolto il suo vecchio colore.
         (forall (?below - cell ?bcol - colour)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?below)
+              (not (isbottomrow ?last))
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -367,8 +367,8 @@
         (forall (?below - cell ?bcol - colour)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?below)
+              (not (isbottomrow ?last))
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -380,8 +380,8 @@
         (forall (?below - cell ?bcol ?h - colour)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?below)
+              (not (isbottomrow ?last))
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -390,12 +390,12 @@
               (not (= ?h ?bcol)))
             (not (hand ?h))))
 
-        ; Si prende il vecchio colore del blocco sotto ?target.
+        ; Si prende il vecchio colore del blocco sotto ?last.
         (forall (?below - cell ?bcol - colour)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?below)
+              (not (isbottomrow ?last))
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -406,13 +406,13 @@
         (forall (?h - colour)
           (when
             (and
-              (isbottomrow ?target)
+              (isbottomrow ?last)
               (hand ?h)
               (not (= ?h ?c)))
             (not (hand ?h))))
 
         (when
-          (isbottomrow ?target)
+          (isbottomrow ?last)
           (hand ?c))))
 
 
@@ -420,12 +420,12 @@
   ; Azione: shoot-row-and-column
   ;
   ; Spara una riga completa da sinistra e continua verso il basso nella
-  ; last column fino a ?target inclusa.
+  ; last column fino a ?last inclusa.
   ;
   ; La riga di ?row-cell viene rimossa su tutte le colonne; nella last column
-  ; vengono rimossi anche i blocchi tra la riga successiva e ?target.
-  ; Il blocco immediatamente sotto ?target, se esiste, assorbe il tiro:
-  ; diventa ?c e passa il suo vecchio colore alla mano. Se ?target è sul fondo,
+  ; vengono rimossi anche i blocchi tra la riga successiva e ?last.
+  ; Il blocco immediatamente sotto ?last, se esiste, assorbe il tiro:
+  ; diventa ?c e passa il suo vecchio colore alla mano. Se ?last è sul fondo,
   ; la mano resta o diventa ?c.
   ;
   ; Dopo la rimozione:
@@ -435,25 +435,25 @@
   ;
   ; Parametri:
   ;   ?row-cell  una cella qualsiasi della riga completa colpita
-  ;   ?target    cella della last column dove si ferma la parte verticale
+  ;   ?last    cella della last column dove si ferma la parte verticale
   ;   ?c         colore sparato
   ; =========================================================================
   (:action shoot-row-and-column
-    :parameters (?row-end ?target - cell ?c - colour)
+    :parameters (?row-end ?last - cell ?c - colour)
     :precondition
       (and
         ; ── Guardie statiche (valutate a grounding-time) ─────────────────
         ; Entrambe le celle devono essere nella last column.
         ; Riduce il grounding da n^2*k a n*k.
         (islastcol ?row-end)
-        (islastcol ?target)
+        (islastcol ?last)
 
         ; La parte verticale deve scendere almeno una riga sotto quella colpita.
-        (> (row ?target) (row ?row-end))
+        (> (row ?last) (row ?row-end))
 
         ; ── Guardie dinamiche ─────────────────────────────────────────────
         (not (blockedrow ?row-end))
-        (not (blockedcol ?target))
+        (not (blockedcol ?last))
 
         (not (= ?c null))
         (not (= ?c wildcard))
@@ -486,7 +486,7 @@
           (or
             (not (islastcol ?cell))
             (<= (row ?cell) (row ?row-end))
-            (> (row ?cell) (row ?target))
+            (> (row ?cell) (row ?last))
             (coloured ?cell ?c)
             (coloured ?cell null)))
 
@@ -494,7 +494,7 @@
           (or
             (not (islastcol ?cell))
             (<= (row ?cell) (row ?row-end))
-            (> (row ?cell) (row ?target))
+            (> (row ?cell) (row ?last))
             (= ?other ?c)
             (= ?other null)
             (= ?other wildcard)
@@ -509,14 +509,14 @@
               (and
                 (islastcol ?cell)
                 (> (row ?cell) (row ?row-end))
-                (<= (row ?cell) (row ?target))))))
+                (<= (row ?cell) (row ?last))))))
 
-        ; Condizione di stop: fondo griglia o blocker reale sotto ?target.
+        ; Condizione di stop: fondo griglia o blocker reale sotto ?last.
         (or
-          (isbottomrow ?target)
+          (isbottomrow ?last)
           (exists (?below - cell ?bcol - colour)
             (and
-              (above ?target ?below)
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -537,7 +537,7 @@
               (decrease (total-block) 1))))
 
         ; ── 2. Rimozione ?c dall'estensione verticale della last column ───
-        ; Righe row(?row-end)+1 ... row(?target), solo last column.
+        ; Righe row(?row-end)+1 ... row(?last), solo last column.
         ; La cella a row(?row-end) è già gestita sopra: esclusa qui
         ; per evitare doppio decremento di total-block.
         (forall (?cell - cell)
@@ -545,7 +545,7 @@
             (and
               (islastcol ?cell)
               (> (row ?cell) (row ?row-end))
-              (<= (row ?cell) (row ?target))
+              (<= (row ?cell) (row ?last))
               (coloured ?cell ?c))
             (and
               (not (coloured ?cell ?c))
@@ -554,7 +554,7 @@
         ; ── 3. Gravità sulle colonne non-last ────────────────────────────
         ; Il tiro orizzontale ha rimosso esattamente una riga, quindi ogni
         ; colonna non-last scende di 1 passo per le righe <= row(?row-end).
-        ; (Stesso meccanismo di shoot-partial-row sull'intera riga.)
+        ; (Stesso meccanismo di shoot-row sull'intera riga.)
         ; Tutti gli step leggono dallo stato ORIGINALE simultaneamente.
         ;
         ; Step 3a – elimina il colore stale dalla riga di destinazione.
@@ -602,14 +602,14 @@
         ; ── 4. Waterfall sulla last column ───────────────────────────────
         ;
         ; La last column perde in totale
-        ;   offset = row(?target) - row(?row-end) + 1   celle
+        ;   offset = row(?last) - row(?row-end) + 1   celle
         ; (1 dalla riga orizzontale + l'estensione verticale).
         ;
         ; Dopo il tiro la colonna si assesta:
         ;   - Le prime `offset` righe diventano null.
-        ;   - Ogni riga r con offset < r <= row(?target) prende il colore
+        ;   - Ogni riga r con offset < r <= row(?last) prende il colore
         ;     che era originariamente alla riga r - offset.
-        ;   - Le righe sotto row(?target) rimangono invariate.
+        ;   - Le righe sotto row(?last) rimangono invariate.
         ;
         ; Tutti gli step leggono dallo stato ORIGINALE simultaneamente.
         ;
@@ -618,8 +618,8 @@
           (when
             (and
               (islastcol ?dest)
-              (<= (row ?dest) (row ?target))
-              (<= (row ?dest) (+ (- (row ?target) (row ?row-end)) 1))
+              (<= (row ?dest) (row ?last))
+              (<= (row ?dest) (+ (- (row ?last) (row ?row-end)) 1))
               (coloured ?dest ?old)
               (not (= ?old null)))
             (not (coloured ?dest ?old))))
@@ -628,8 +628,8 @@
           (when
             (and
               (islastcol ?dest)
-              (<= (row ?dest) (row ?target))
-              (<= (row ?dest) (+ (- (row ?target) (row ?row-end)) 1))
+              (<= (row ?dest) (row ?last))
+              (<= (row ?dest) (+ (- (row ?last) (row ?row-end)) 1))
               (not (coloured ?dest null)))
             (coloured ?dest null)))
 
@@ -641,10 +641,10 @@
             (and
               (islastcol ?dest)
               (islastcol ?source)
-              (<= (row ?dest) (row ?target))
-              (> (row ?dest) (+ (- (row ?target) (row ?row-end)) 1))
+              (<= (row ?dest) (row ?last))
+              (> (row ?dest) (+ (- (row ?last) (row ?row-end)) 1))
               (= (row ?source)
-                 (- (row ?dest) (+ (- (row ?target) (row ?row-end)) 1)))
+                 (- (row ?dest) (+ (- (row ?last) (row ?row-end)) 1)))
               (coloured ?source ?sc)
               (coloured ?dest ?old)
               (not (= ?old ?sc)))
@@ -656,23 +656,23 @@
             (and
               (islastcol ?dest)
               (islastcol ?source)
-              (<= (row ?dest) (row ?target))
-              (> (row ?dest) (+ (- (row ?target) (row ?row-end)) 1))
+              (<= (row ?dest) (row ?last))
+              (> (row ?dest) (+ (- (row ?last) (row ?row-end)) 1))
               (= (row ?source)
-                 (- (row ?dest) (+ (- (row ?target) (row ?row-end)) 1)))
+                 (- (row ?dest) (+ (- (row ?last) (row ?row-end)) 1)))
               (coloured ?source ?sc))
             (coloured ?dest ?sc)))
 
-        ; ── 5. Il blocker sotto ?target assorbe il colpo ─────────────────
-        ; La cella immediatamente sotto ?target (se non è sul fondo) diventa
+        ; ── 5. Il blocker sotto ?last assorbe il colpo ─────────────────
+        ; La cella immediatamente sotto ?last (se non è sul fondo) diventa
         ; ?c e il suo vecchio colore passa alla mano.
         ;
         ; Elimina il vecchio colore del blocker.
         (forall (?below - cell ?bcol - colour)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?below)
+              (not (isbottomrow ?last))
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -683,8 +683,8 @@
         (forall (?below - cell ?bcol - colour)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?below)
+              (not (isbottomrow ?last))
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -697,8 +697,8 @@
         (forall (?below - cell ?bcol ?h - colour)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?below)
+              (not (isbottomrow ?last))
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -710,8 +710,8 @@
         (forall (?below - cell ?bcol - colour)
           (when
             (and
-              (not (isbottomrow ?target))
-              (above ?target ?below)
+              (not (isbottomrow ?last))
+              (above ?last ?below)
               (coloured ?below ?bcol)
               (not (= ?bcol ?c))
               (not (= ?bcol null))
@@ -722,13 +722,13 @@
         (forall (?h - colour)
           (when
             (and
-              (isbottomrow ?target)
+              (isbottomrow ?last)
               (hand ?h)
               (not (= ?h ?c)))
             (not (hand ?h))))
 
         (when
-          (isbottomrow ?target)
+          (isbottomrow ?last)
           (hand ?c))))
 
 

@@ -20,10 +20,10 @@ h(I):7.0
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r3c1 c2)
-1.0: (shoot-partial-row r2c3 c1)
-2.0: (shoot-partial-row r3c1 c3)
-3.0: (shoot-partial-row r2c2 c2)
+0.0: (shoot-row r3c1 c2)
+1.0: (shoot-row r2c3 c1)
+2.0: (shoot-row r3c1 c3)
+3.0: (shoot-row r2c2 c2)
 4.0: (shoot-row-and-column r1c4 r2c4 c1)
 5.0: (shoot-column r2c3 c2)
 

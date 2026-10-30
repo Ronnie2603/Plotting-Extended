@@ -30,7 +30,7 @@ f(n) = 5.9969997 (Expanded Nodes: 124, Evaluated States: 244, Time: 0.018) Front
 Problem Solved
 
 Found Plan:
-0.0: (shoot-partial-row r1c1 c1)
+0.0: (shoot-row r1c1 c1)
 1.0: (shoot-column r3c3 c2)
 2.0: (shoot-column r2c4 c2)
 3.0: (shoot-column r1c5 c3)
