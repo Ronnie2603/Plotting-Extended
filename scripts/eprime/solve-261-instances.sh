@@ -238,6 +238,7 @@ while IFS= read -r problem || [[ -n "$problem" ]]; do
         exit 1
     fi
     problem_log="$LOG_DIR/$problem.log"
+    csv_problem_log="/app/${problem_log#"$PROJECT_ROOT"/}"
     if awk -F',' -v p="\"$problem\"" '$1 == p && $3 == "\"solved\"" { found=1 } END { exit !found }' "$CSV_FILE"; then
         echo "[$problem] Already solved; skipping"
         continue
@@ -261,6 +262,7 @@ while IFS= read -r problem || [[ -n "$problem" ]]; do
         param_file="${problem}_${step}.param"
         param_path="$INSTANCE_DIR/$param_file"
         [[ -f "$param_path" ]] || continue
+        csv_param_path="/app/${param_path#"$PROJECT_ROOT"/}"
         remaining_ns=$((problem_deadline_ns - $(date +%s%N)))
         if ((remaining_ns <= 0)); then
             break
@@ -305,16 +307,18 @@ while IFS= read -r problem || [[ -n "$problem" ]]; do
             attempt_status=timeout
         fi
         solution_file=""
+        csv_solution_file=""
         if [[ "$attempt_status" == solved ]]; then
             generated_solution="$step_dir/$param_file.solution"
             if [[ -f "$generated_solution" ]]; then
                 solution_file="$SOLUTION_DIR/$problem.solution"
                 cp "$generated_solution" "$solution_file"
+                csv_solution_file="/app/${solution_file#"$PROJECT_ROOT"/}"
             fi
         fi
         printf '"%s",%s,"%s",%s,%s,"%s","%s",%s,"%s","%s","%s"\n' \
             "$problem" "$step" "$attempt_status" "$attempt_seconds" "$cumulative_seconds" \
-            "$solver_seconds" "$savilerow_seconds" "$status" "$param_file" "$problem_log" "$solution_file" >> "$CSV_FILE"
+            "$solver_seconds" "$savilerow_seconds" "$status" "$csv_param_path" "$csv_problem_log" "$csv_solution_file" >> "$CSV_FILE"
         if [[ "$attempt_status" == solved ]]; then
             echo "[$problem] Solved at noSteps=$step after ${cumulative_seconds}s total"
             group_solved=1
@@ -329,7 +333,7 @@ while IFS= read -r problem || [[ -n "$problem" ]]; do
     done
     ((total += 1))
     if ((group_attempted == 0)); then
-        printf '"%s",,"missing",0,0,,,,"","%s",""\n' "$problem" "$problem_log" >> "$CSV_FILE"
+        printf '"%s",,"missing",0,0,,,,"","%s",""\n' "$problem" "$csv_problem_log" >> "$CSV_FILE"
         ((missing += 1))
         echo "[$problem] No .param candidates found"
     elif ((group_solved)); then
