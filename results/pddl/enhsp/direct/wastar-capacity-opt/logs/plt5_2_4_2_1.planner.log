@@ -1,0 +1,41 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 51
+UFX:false
+|F|:0
+|X|:10
+|A|:34
+|P|:0
+|E|:0
+[CapacityOptHeuristic-HybridFast] Activated
+[CapacityOptHeuristic-HybridFast] goalTotalBlock=1.0  initialTotalBlock=8.0  cells=8  rows=2  cols=4  maxLine=4  maxActionCapacity=5  unblockedRows=2  unblockedCols=4  numericColourFluents=8
+h(I):2.0
+f(n) = 2.0 (Expanded Nodes: 1, Evaluated States: 1, Time: 0.003) Frontier Size: 0
+f(n) = 2.996 (Expanded Nodes: 5, Evaluated States: 9, Time: 0.008) Frontier Size: 4
+f(n) = 2.997 (Expanded Nodes: 6, Evaluated States: 9, Time: 0.008) Frontier Size: 3
+f(n) = 2.999 (Expanded Nodes: 7, Evaluated States: 14, Time: 0.008) Frontier Size: 7
+f(n) = 3.994 (Expanded Nodes: 16, Evaluated States: 30, Time: 0.008) Frontier Size: 14
+f(n) = 3.995 (Expanded Nodes: 17, Evaluated States: 32, Time: 0.008) Frontier Size: 15
+f(n) = 3.996 (Expanded Nodes: 21, Evaluated States: 35, Time: 0.009) Frontier Size: 14
+f(n) = 3.997 (Expanded Nodes: 25, Evaluated States: 43, Time: 0.009) Frontier Size: 18
+Problem Solved
+
+Found Plan:
+0.0: (shoot-column r2c1 c1)
+1.0: (shoot-column r1c3 c1)
+2.0: (shoot-row-and-column r1c4 r2c4 c2)
+3.0: (shoot-column r2c2 c2)
+
+Plan-Length:4
+Metric (Search):4.0
+Planning Time (msec): 11
+Heuristic Time (msec): 1
+Search Time (msec): 9
+Expanded Nodes:31
+States Evaluated:50
+Number of Dead-Ends detected:0
+Number of Duplicates detected:20
+
+Tempo esecuzione ENHSP: 0.247 sec

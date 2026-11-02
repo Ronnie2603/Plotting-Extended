@@ -1,0 +1,53 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 138
+UFX:false
+|F|:0
+|X|:14
+|A|:90
+|P|:0
+|E|:0
+[CapacityOptHeuristic-HybridFast] Activated
+[CapacityOptHeuristic-HybridFast] goalTotalBlock=2.0  initialTotalBlock=12.0  cells=12  rows=4  cols=3  maxLine=4  maxActionCapacity=6  unblockedRows=4  unblockedCols=3  numericColourFluents=12
+h(I):2.0
+f(n) = 2.0 (Expanded Nodes: 1, Evaluated States: 1, Time: 0.003) Frontier Size: 0
+f(n) = 2.9980001 (Expanded Nodes: 2, Evaluated States: 8, Time: 0.008) Frontier Size: 6
+f(n) = 2.999 (Expanded Nodes: 5, Evaluated States: 12, Time: 0.009) Frontier Size: 7
+f(n) = 3.997 (Expanded Nodes: 9, Evaluated States: 21, Time: 0.01) Frontier Size: 12
+f(n) = 3.9980001 (Expanded Nodes: 29, Evaluated States: 61, Time: 0.012) Frontier Size: 32
+f(n) = 4.993 (Expanded Nodes: 42, Evaluated States: 88, Time: 0.013) Frontier Size: 46
+f(n) = 4.994 (Expanded Nodes: 43, Evaluated States: 88, Time: 0.014) Frontier Size: 45
+f(n) = 4.995 (Expanded Nodes: 55, Evaluated States: 108, Time: 0.015) Frontier Size: 53
+f(n) = 4.9969997 (Expanded Nodes: 84, Evaluated States: 141, Time: 0.016) Frontier Size: 57
+f(n) = 5.992 (Expanded Nodes: 92, Evaluated States: 146, Time: 0.017) Frontier Size: 54
+f(n) = 5.993 (Expanded Nodes: 93, Evaluated States: 146, Time: 0.017) Frontier Size: 53
+f(n) = 5.994 (Expanded Nodes: 118, Evaluated States: 174, Time: 0.019) Frontier Size: 56
+f(n) = 6.992 (Expanded Nodes: 147, Evaluated States: 200, Time: 0.021) Frontier Size: 53
+f(n) = 6.993 (Expanded Nodes: 176, Evaluated States: 229, Time: 0.023) Frontier Size: 53
+f(n) = 7.991 (Expanded Nodes: 201, Evaluated States: 246, Time: 0.024) Frontier Size: 45
+f(n) = 7.992 (Expanded Nodes: 231, Evaluated States: 256, Time: 0.026) Frontier Size: 25
+Problem Solved
+
+Found Plan:
+0.0: (shoot-row r1c2 c1)
+1.0: (shoot-column r2c2 c2)
+2.0: (shoot-row r1c3 c1)
+3.0: (shoot-row r4c2 c1)
+4.0: (shoot-column r3c1 c3)
+5.0: (shoot-column r4c2 c2)
+6.0: (shoot-row-and-column r1c3 r2c3 c2)
+7.0: (shoot-column r4c1 c3)
+
+Plan-Length:8
+Metric (Search):8.0
+Planning Time (msec): 30
+Heuristic Time (msec): 1
+Search Time (msec): 27
+Expanded Nodes:247
+States Evaluated:264
+Number of Dead-Ends detected:0
+Number of Duplicates detected:93
+
+Tempo esecuzione ENHSP: 0.385 sec
