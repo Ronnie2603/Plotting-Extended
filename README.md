@@ -1,42 +1,42 @@
 # Plotting Planning Benchmarks
 
-Extended workspace per eseguire e confrontare esperimenti sul dominio **Plotting** con:
+Extended workspace for running and comparing experiments on the **Plotting** domain using:
 
-- ENHSP sui modelli PDDL direct, direct-opt e granular;
-- Savile Row + Chuffed sui modelli Essence Prime;
-- VAL per la validazione dei piani PDDL;
-- script Python per generare il campione comune e confrontare i risultati.
+- ENHSP with the direct, direct-opt, and granular PDDL models;
+- Savile Row + Chuffed with Essence Prime models;
+- VAL for PDDL plan validation;
+- Python scripts to generate the shared sample and compare results.
 
-## Avvio ENHSP
+## Running ENHSP
 
-### Eseguire esperimenti su più istanze
+### Running experiments on multiple instances
 
-_Sintassi_:
+_Syntax_:
 
 ```bash
-./scripts/enhsp/run-all.sh [MODELLO] [ISTANZE] [opzioni]
+./scripts/enhsp/run-all.sh [MODEL] [INSTANCES] [options]
 ```
 
-_Modelli disponibili_:
+_Available models_:
 
-| Modello | Dominio | Directory delle istanze |
+| Model | Domain | Instance directory |
 | --- | --- | --- |
 | `direct` | `benchmarks/pddl/domains/numeric.pddl` | `instances-direct-numeric` |
 | `direct-opt` | `benchmarks/pddl/domains/numeric-opt.pddl` | `instances-direct-numeric-opt` |
-| `granular` | un dominio per istanza | `instances-granular-enhsp-compatible` |
+| `granular` | one domain per instance | `instances-granular-enhsp-compatible` |
 
-_Selezioni delle istanze_:
+_Instance selections_:
 
-- `samples`: usa i 261 samples scelti all'interno `benchmarks/manifests/sample-instances.txt`;
-- `all`: usa tutte le istanze compatibili presenti nella directory del modello.
+- `samples`: uses the 261 instances listed in `benchmarks/manifests/sample-instances.txt`;
+- `all`: uses all compatible instances in the model's directory.
 
-Se utilizzato senza argomenti usa `direct samples` come default.
+When called without arguments, the default is `direct samples`.
 
-_Opzioni_:
+_Options_:
 
-- `--build`: costruisce l'immagine `pddl-plotting` prima dell'esecuzione;
+- `--build`: builds the `pddl-plotting` image before running;
 
-_Esempi_:
+_Examples_:
 
 ```bash
 ./scripts/enhsp/run-all.sh direct samples
@@ -45,18 +45,18 @@ _Esempi_:
 ./scripts/enhsp/run-all.sh granular all --build
 ```
 
-### Eseguire una singola istanza
+### Running a single instance
 
-Il runner singolo usa `direct` come modello predefinito:
+The single-instance runner uses `direct` as its default model:
 
 ```bash
 ./scripts/enhsp/run-one.sh \
   benchmarks/pddl/instances-direct-numeric/plt0_2_4_2_1.pddl
 ```
 
-Per scegliere un altro modello usa `PDDL_MODEL`.
+Use `PDDL_MODEL` to select a different model.
 
-_Esempi_:
+_Examples_:
 
 ```bash
 PDDL_MODEL=direct-opt \
@@ -68,26 +68,26 @@ PDDL_MODEL=granular \
   benchmarks/pddl/instances-granular-enhsp-compatible/plt0_2_4_2_1-problem.pddl
 ```
 
-Anche `run-one.sh` accetta `--build`.
+`run-one.sh` also accepts `--build`.
 
-### Configurazione ENHSP
+### ENHSP configuration
 
-Le opzioni principali si possono impostare tramite variabili d'ambiente:
+The main options can be set through environment variables:
 
-| Variabile | Default | Descrizione |
+| Variable | Default | Description |
 | --- | --- | --- |
-| `TIME_LIMIT` | `900` | timeout per ogni istanza, in secondi |
-| `JAVA_OPTS` | `-Xmx24G` | opzioni della JVM |
-| `VALIDATE_PLANS` | `1` | valida ogni piano con VAL; usa `0` per saltare |
-| `SKIP_EXISTING_RESULTS` | `1` | riusa i log esistenti; usa `0` per rieseguire |
-| `OUTPUT_DIR` | `results/pddl/enhsp/<encoding>/<configurazione>/` | percorso di output dei risultati |
-| `PLANNER` | dipende dal modello | configurazione ENHSP |
-| `HEURISTIC` | derivata da `PLANNER` | euristica |
-| `SEARCH` | `WAStar` o `gbfs` | strategia di ricerca |
-| `WH` | `1` | peso dell'euristica |
-| `TIES` | dipende dalla ricerca | criterio di tie-breaking |
+| `TIME_LIMIT` | `900` | timeout per instance, in seconds |
+| `JAVA_OPTS` | `-Xmx24G` | JVM options |
+| `VALIDATE_PLANS` | `1` | validates each plan with VAL; use `0` to skip validation |
+| `SKIP_EXISTING_RESULTS` | `1` | reuses existing logs; use `0` to rerun |
+| `OUTPUT_DIR` | `results/pddl/enhsp/<encoding>/<configuration>/` | output path for results |
+| `PLANNER` | depends on the model | ENHSP configuration |
+| `HEURISTIC` | derived from `PLANNER` | heuristic |
+| `SEARCH` | `WAStar` or `gbfs` | search strategy |
+| `WH` | `1` | heuristic weight |
+| `TIES` | depends on the search strategy | tie-breaking criterion |
 
-_Esempi_:
+_Examples_:
 
 ```bash
 TIME_LIMIT=300 ./scripts/enhsp/run-all.sh direct samples
@@ -99,36 +99,36 @@ SKIP_EXISTING_RESULTS=0 OUTPUT_DIR=results/pddl/enhsp/direct/test \
   ./scripts/enhsp/run-all.sh direct samples
 ```
 
-### Risultati ENHSP
+### ENHSP results
 
-I risultati predefiniti vengono salvati sotto:
+By default, results are saved under:
 
 ```text
-results/pddl/enhsp/<encoding>/<configurazione>/
+results/pddl/enhsp/<encoding>/<configuration>/
 ├── stats.csv
 ├── plans/
 ├── logs/
 └── validation/
 ```
 
-`stats.csv` contiene, per ogni istanza, stato, validità, runtime, numero di azioni, nodi espansi, exit code e percorsi degli artefatti.
+For each instance, `stats.csv` contains the status, validity, runtime, number of actions, expanded nodes, exit code, and artifact paths.
 
-I principali stati sono `ok`, `timeout`, `unsolved`, `invalid_plan`, `planner_not_found` e `planner_error`. Con `VALIDATE_PLANS=0`, una soluzione riuscita viene registrata con `valid=skipped`.
+The main statuses are `ok`, `timeout`, `unsolved`, `invalid_plan`, `planner_not_found`, and `planner_error`. With `VALIDATE_PLANS=0`, a successful solution is recorded with `valid=skipped`.
 
-## Essence Prime e Chuffed
+## Essence Prime and Chuffed
 
-Lo script esegue tutti i nomi presenti nel manifest comune e, per ogni nome, tutti i file `.param` corrispondenti:
+The script runs every name in the shared manifest and, for each name, all matching `.param` files:
 
 ```bash
-./scripts/eprime/solve-261-instances.sh [MODELLO] [VINCOLI] [opzioni]
+./scripts/eprime/solve-261-instances.sh [MODEL] [CONSTRAINTS] [options]
 ```
 
-_Modelli_:
+_Models_:
 
 - `s`;
 - `sa` (default).
 
-_Configurazioni dei vincoli_:
+_Constraint configurations_:
 
 - `deadend`;
 - `empty`;
@@ -136,25 +136,25 @@ _Configurazioni dei vincoli_:
 - `nosymm` (default);
 - `symm`.
 
-_Opzioni_:
+_Options_:
 
-- `--build`: ricostruisce l'immagine `chuffed-plotting`;
-- `--fail-fast`: interrompe l'esperimento al primo problema fallito;
-- `--model-family NAME`: seleziona una directory sotto `benchmarks/eprime/models`;
-- `--model PATH`: usa un modello `.eprime` esplicito, relativo a `benchmarks/eprime`;
-- `-h`, `--help`: mostra l'help completo.
+- `--build`: rebuilds the `chuffed-plotting` image;
+- `--fail-fast`: stops the experiment at the first failed problem;
+- `--model-family NAME`: selects a directory under `benchmarks/eprime/models`;
+- `--model PATH`: uses an explicit `.eprime` model, relative to `benchmarks/eprime`;
+- `-h`, `--help`: displays the full help message.
 
-Le stesse scelte si possono impostare con `EPRIME_MODEL`, `EPRIME_CONSTRAINTS`, `EPRIME_MODEL_FAMILY`, `CHUFFED_MODEL` e `OUTPUT_DIR`.
+The same settings can be configured through `EPRIME_MODEL`, `EPRIME_CONSTRAINTS`, `EPRIME_MODEL_FAMILY`, `CHUFFED_MODEL`, and `OUTPUT_DIR`.
 
-I risultati predefiniti vengono salvati sotto:
+By default, results are saved under:
 
 ```text
-results/eprime/chuffed/<famiglia>/<configurazione>/<problema>/
+results/eprime/chuffed/<family>/<configuration>/<problem>/
 ```
 
-Ogni directory contiene gli stream standard del solver, l'exit code, i dati di timing, il file informativo prodotto da Savile Row e una copia dei parametri usati.
+Each directory contains the solver's standard output and error streams, exit code, timing data, the information file produced by Savile Row, and a copy of the parameters used.
 
-_Esempi_:
+_Examples_:
 
 ```bash
 ./scripts/eprime/solve-261-instances.sh sa nosymm
@@ -165,19 +165,19 @@ _Esempi_:
   --model models/sat-finetune/plotting_sa_deadend_v5.eprime
 ```
 
-## Campione comune di 261 istanze
+## Shared sample of 261 instances
 
-Il file `benchmarks/manifests/sample-instances.txt` contiene tre repliche, scelte deterministicamente con seed `42`, per ognuna delle 87 configurazioni disponibili.
+The file `benchmarks/manifests/sample-instances.txt` contains three replicates, selected deterministically with seed `42`, for each of the 87 available configurations.
 
-Per rigenerarlo:
+To regenerate it:
 
 ```bash
 python3 scripts/sample_instances.py
 ```
 
-## Confrontare i risultati
+## Comparing results
 
-Installa le dipendenze Python se vuoi generare tabelle e grafici dalla macchina host:
+Install the Python dependencies to generate tables and plots on the host machine:
 
 ```bash
 python3 -m venv .venv
@@ -185,42 +185,10 @@ source .venv/bin/activate
 python3 -m pip install -r requirements.txt
 ```
 
-Per generare tutti i confronti predefiniti:
+To generate all default comparisons:
 
 ```bash
 python3 scripts/global_comparison.py
 ```
 
-Lo script non accetta opzioni: individua automaticamente tutti gli `stats.csv` sotto `results/pddl/` e `results/eprime/` e genera le comparazioni `greedy`, `enhsp`, `eprime` e `all-runs`, quando disponibili.
-
-La run storica su 522 istanze in `results/pddl/enhsp/direct/greedy-colour-opt/` è esclusa da tutte le comparazioni; i suoi dati originali restano conservati.
-
-I risultati direct sono salvati direttamente sotto `results/pddl/enhsp/direct/<configurazione>/`, inclusa la run WA* opt-blind in `wastar-optblind/`.
-
-Gli output vengono scritti in `results/comparisons/`.
-
-Il grafico `results/comparisons/plots/all-runs/all-tested-solved-over-time.png` (disponibile anche in SVG) include tutte le configurazioni considerate nel confronto, sia PDDL sia Essence Prime con Chuffed o SAT. Usa tutti i risultati completati disponibili per ciascuna configurazione; le esecuzioni parziali possono quindi avere campioni diversi. La tabella corrispondente è `tables/all-runs/all-tested-summary.csv` e riporta il numero di istanze per configurazione. Gli altri grafici di confronto usano le istanze completate comuni alle configurazioni della suite.
-
-Per Essence Prime, i tentativi con `noSteps` crescente vengono aggregati per istanza: il runtime è il tempo cumulativo fino alla soluzione o alla conclusione della ricerca, comprensivo dei tentativi precedenti. Una soluzione è riconosciuta dallo stato `solved` registrato dal runner sulla base di `SolverSatisfiable`; per i piani PDDL continua a essere richiesta la validazione VAL. La soglia di confronto è 900 secondi.
-
-## Struttura del repository
-
-```text
-benchmarks/
-├── eprime/
-│   ├── instances/
-│   └── models/
-├── manifests/
-└── pddl/
-    ├── domains/
-    ├── instances-direct-numeric/
-    ├── instances-direct-numeric-opt/
-    └── instances-granular-enhsp-compatible/
-docker/
-enhsp-heuristics/
-results/
-scripts/
-├── enhsp/
-├── eprime/
-└── utils/
-```
+The script accepts no options: it automatically discovers all `stats.csv` files under `results/pddl/` and `results/eprime/` and generates the `greedy`, `enhsp`, `eprime`, and `all-runs` comparisons when available.

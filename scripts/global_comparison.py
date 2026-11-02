@@ -131,10 +131,6 @@ def average(values: list[float]) -> float | None:
     return statistics.mean(values) if values else None
 
 
-def median(values: list[float]) -> float | None:
-    return statistics.median(values) if values else None
-
-
 def metric_values(rows: list[Row], field: str) -> list[float]:
     return [value for r in rows if (value := getattr(r, field)) is not None]
 
@@ -193,16 +189,33 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
         valid = item["valid"].strip().lower()
         runtime = number(item.get("total_runtime_sec"))
         source_status = status
+        log = local_artifact(directory, item.get("planner_log", ""), "logs", f"{problem}.planner.log")
+        log_text = log.read_text(encoding="utf-8", errors="replace") if log else ""
+        # The historical "unsolved" status also covers heap failures. Only
+        # explicit impossibility proofs count as solved, as in the paper.
+        resource_failure = number(item.get("exit_code")) in {124, 137, 143} or bool(re.search(
+            r"OutOfMemoryError|Java heap space|out of memory|memory limit (?:reached|exceeded)|"
+            r"\btimeout\b|time limit (?:reached|exceeded)", log_text, re.I,
+        ))
+        proven_unsolvable = status in {"unsolved", "unsolvable"} and not resource_failure and bool(re.search(
+            r"^\s*Problem unsolvable\b|Completely explored state space.*no solution|"
+            r"^\s*search exit code:\s*12\s*$", log_text, re.I | re.M,
+        ))
         if valid == "false":
             status = "invalid_plan"
-        elif status == "ok" and runtime is not None and runtime > timeout:
+        elif (status == "ok" or proven_unsolvable) and runtime is not None and runtime > timeout:
             status = "timeout"
-        solved = status == "ok" and valid == "true"
-        if status == "ok" and not solved:
+        has_plan = status == "ok" and valid == "true"
+        solved = runtime is not None and runtime <= timeout and (
+            has_plan or (proven_unsolvable and status in {"unsolved", "unsolvable"})
+        )
+        if solved and proven_unsolvable:
+            status = "unsolvable"
+        if status == "ok" and not has_plan:
             status = "unvalidated"
         plan = local_artifact(directory, item.get("plan_file", ""), "plans", f"{problem}.plan")
-        actions, shots, cost_source = plan_metrics(plan) if solved else (None, None, "")
-        if actions is None:
+        actions, shots, cost_source = plan_metrics(plan) if has_plan else (None, None, "")
+        if actions is None and not proven_unsolvable:
             actions = number(item.get("actions"))
         expanded = number(item.get("expanded_nodes"))
         visited = number(item.get("states_evaluated"))
@@ -212,8 +225,6 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
         if search_time_ms is None:
             search_time_sec = number(item.get("search_time_sec"))
             search_time_ms = search_time_sec * 1000 if search_time_sec is not None else None
-        log = local_artifact(directory, item.get("planner_log", ""), "logs", f"{problem}.planner.log")
-        log_text = log.read_text(encoding="utf-8", errors="replace") if log else ""
         if expanded is None:
             expanded = last_metric(log_text, (r"^Expanded Nodes:\s*(\d+)", r"\] Expanded\s+(\d+)\s+state"))
         if visited is None:
@@ -237,7 +248,7 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
             heuristic_time_ms = last_metric(
                 log_text, (r"^Heuristic Time \(msec\):\s*([\d.eE+-]+)\s*$",)
             )
-        if solved and shots is None:
+        if has_plan and shots is None:
             shots = number(item.get("metric"))
             cost_source = "csv_metric" if shots is not None else ""
             if shots is None:
@@ -256,7 +267,7 @@ def read_eprime_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[
 
     The runner's cumulative time includes all earlier unsatisfiable horizons,
     Savile Row translation and container overhead, not just the final solve.
-    Solver satisfiability is the success criterion; VAL only applies to PDDL.
+    Both SAT and exhaustive UNSAT are successful outcomes; VAL only applies to PDDL.
     """
     path = spec.path / "stats.csv"
     records = list(csv.DictReader(path.read_text(encoding="utf-8").splitlines()))
@@ -284,22 +295,32 @@ def read_eprime_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[
         source_status = final["status"].strip().lower()
         runtime = number(final["cumulative_runtime_sec"])
         step = number(final.get("step"))
-        # An UNSAT horizon does not establish failure while later horizons remain.
+        # UNSAT counts as solved only after all horizons used by the runner
+        # (1 through rows * cols - goal) have completed successfully.
+        proven_unsolvable = False
         if source_status == "unsolved":
             match = re.fullmatch(r"plt\d+_(\d+)_(\d+)_(\d+)_\d+", problem)
             if match and step is not None:
                 rows, cols, goal = map(int, match.groups())
-                if step < rows * cols - goal:
-                    warnings.append(f"Unfinished EPrime horizon search: {problem} in {path}")
-                    continue
-        solved = source_status == "solved" and runtime <= timeout
-        status = "ok" if solved else "timeout" if source_status == "solved" else source_status
+                max_steps = rows * cols - goal
+                proven_unsolvable = max_steps > 0 and {
+                    number(entry.get("step")) for entry in entries
+                    if entry["status"].strip().lower() == "unsolved"
+                    and number(entry.get("exit_code")) == 0
+                } == set(range(1, max_steps + 1))
+            if not proven_unsolvable:
+                warnings.append(f"Unfinished EPrime horizon search: {problem} in {path}")
+                continue
+        has_plan = source_status == "solved" and runtime <= timeout
+        solved = (source_status == "solved" or proven_unsolvable) and runtime <= timeout
+        status = ("unsolvable" if solved and proven_unsolvable else "ok" if has_plan
+                  else "timeout" if source_status == "solved" or proven_unsolvable else source_status)
         solver_times = [number(entry.get("solver_runtime_sec")) for entry in entries]
         search_time_ms = sum(solver_times) * 1000 if all(t is not None for t in solver_times) else None
         result[problem] = Row(
             problem=problem, status=status, valid="solver" if solved else "",
-            runtime=runtime, expanded_nodes=None, shots=step if solved else None,
-            actions=None, cost_source="eprime_horizon" if solved else "",
+            runtime=runtime, expanded_nodes=None, shots=step if has_plan else None,
+            actions=None, cost_source="eprime_horizon" if has_plan else "",
             source_status=source_status, solved=solved, search_time_ms=search_time_ms,
         )
     return result
@@ -327,13 +348,18 @@ def heuristic_ms_per_evaluation(rows: list[Row]) -> float | None:
     return average(measured)
 
 
+def par2_cost(row: Row, timeout: float) -> float:
+    """Use actual time for SAT/proven UNSAT, twice the limit for every failure."""
+    if row.solved and row.runtime is not None and 0 <= row.runtime <= timeout:
+        return row.runtime
+    return 2 * timeout
+
+
 def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[str], timeout: float) -> dict:
     rows = [data[p] for p in sorted(cohort) if p in data]
     solved = [r for r in rows if r.solved]
     matched = [data[p] for p in sorted(shared)]
-    penalties = [min(r.runtime, timeout) if r.solved and r.runtime is not None
-                 else 2 * timeout if not r.solved else None for r in rows]
-    complete_times = all(p is not None for p in penalties)
+    penalties = [par2_cost(r, timeout) for r in rows]
     solved_times = [r.runtime for r in solved if r.runtime is not None]
     expanded_rates = []
     evaluated_rates = []
@@ -351,8 +377,8 @@ def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[s
         "completed": len(rows), "missing": len(cohort) - len(rows),
         "solved": len(solved), "failed": len(rows) - len(solved),
         "coverage_completed_pct": 100 * len(solved) / len(rows) if rows else None,
-        "par2_mean_sec": average(penalties) if complete_times else None,
-        "par2_sum_sec": sum(penalties) if complete_times else None,
+        "par2_mean_sec": average(penalties),
+        "par2_sum_sec": sum(penalties),
         "timeout_sec": timeout,
         "statuses": json.dumps(dict(sorted(Counter(r.status for r in rows).items()))),
         "jointly_solved": len(matched),
@@ -367,7 +393,6 @@ def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[s
             values = metric_values(chosen, field)
             output[f"{scope}_{field}_n"] = len(values)
             output[f"{scope}_{field}_mean"] = average(values)
-            output[f"{scope}_{field}_median"] = median(values)
     # Do not divide search time by expanded/evaluated nodes here:
     # that is a search throughput measure, not heuristic evaluation time.
     output["ms_per_heuristic_evaluation"] = heuristic_ms_per_evaluation(solved)
@@ -384,13 +409,10 @@ def compact_summary(item: dict) -> dict:
         "par2_timeout_sec": item["timeout_sec"],
         "par2_score": item["par2_sum_sec"],
         "best_runtime_sec": item["best_runtime_sec"],
-        "median_solved_runtime_sec": item["solved_runtime_median"],
         "mean_solved_runtime_sec": item["solved_runtime_mean"],
         "worst_solved_runtime_sec": item["worst_solved_runtime_sec"],
         "mean_search_time_ms": item["solved_search_time_ms_mean"],
-        "median_search_time_ms": item["solved_search_time_ms_median"],
         "mean_expanded_nodes": item["solved_expanded_nodes_mean"],
-        "median_expanded_nodes": item["solved_expanded_nodes_median"],
         "mean_states_evaluated": item["solved_visited_nodes_mean"],
         "expanded_nodes_per_sec": item["expanded_nodes_per_sec"],
         "states_evaluated_per_sec": item["states_evaluated_per_sec"],
