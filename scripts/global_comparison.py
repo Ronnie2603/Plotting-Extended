@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-"""Generate all global comparisons for the completed Plotting runs.
-
-Inspired by old/scripts/global_comparison.py; uses validated solutions and
-explicit intersections instead of treating absent results as failed runs.
+"""
+Generate all global comparisons for the completed Plotting runs.
 """
 
 from __future__ import annotations
@@ -20,15 +18,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "results/comparisons"
+SAMPLE_MANIFEST = ROOT / "benchmarks/manifests/sample-instances.txt"
 TIMEOUT = 900.0
-# Exclude the historical full-suite run and the superseded direct-opt blind run.
-EXCLUDED_PDDL_RUNS = {
-    "enhsp/direct/greedy-colour-opt",
-    "enhsp/direct/wastar-optblind-opt",
-}
+# All runs are included, restricted to the shared benchmark sample.
+EXCLUDED_PDDL_RUNS: set[str] = set()
 ACTION = re.compile(r"^\s*(?:\d+(?:\.\d+)?\s*:\s*)?\(([\w-]+)\b", re.M)
 METRICS = ("runtime", "search_time_ms", "expanded_nodes", "visited_nodes", "shots", "actions")
-TITLES = {"runtime": "Runtime (s)", "expanded_nodes": "Expanded nodes",
+TITLES = {"runtime": "Runtime (s)", "search_time_ms": "Search (ms)", "expanded_nodes": "Expanded nodes",
           "visited_nodes": "Visited nodes", "shots": "Shots / plan cost",
           "actions": "PDDL actions"}
 
@@ -57,6 +53,9 @@ class Row:
     visited_nodes: float | None = None
     search_time_ms: float | None = None
     peak_memory_kb: float | None = None
+    # ENHSP's reported Heuristic Time (msec).
+    heuristic_time_ms: float | None = None
+    heuristic_evaluations: float | None = None
 
 
 def defaults() -> tuple[dict[str, RunSpec], dict[str, list[str]]]:
@@ -66,6 +65,7 @@ def defaults() -> tuple[dict[str, RunSpec], dict[str, list[str]]]:
         "enhsp/granular/greedy-hadd": ("granular-hadd", "Granular GBFS hadd", "granular"),
         "enhsp/granular/wastar-optblind": ("granular-wastar-blind", "Granular WA* opt-blind", "granular"),
         "enhsp/direct/greedy-colour": ("direct-colour", "Direct GBFS colour", "direct"),
+        "enhsp/direct/greedy-colour-opt": ("direct-greedy-colour-opt", "Direct GBFS colour-opt", "direct"),
         "enhsp/direct/greedy-hadd": ("direct-hadd", "Direct GBFS hadd", "direct"),
         "enhsp/direct/wastar-colour": ("direct-wastar-colour", "Direct WA* colour", "direct"),
         "enhsp/direct/wastar-optblind": ("direct-wastar-blind", "Direct WA* opt-blind", "direct"),
@@ -233,14 +233,27 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
         if peak_memory_kb is None:
             bracket_memory = [number(value) for value in re.findall(r"\[t=[^\]]+,\s*([\d.eE+-]+)\s+KB\]", log_text)]
             peak_memory_kb = max((value for value in bracket_memory if value is not None), default=None)
+        heuristic_time_ms = number(item.get("heuristic_time_ms"))
+        if heuristic_time_ms is None:
+            heuristic_time_ms = last_metric(
+                log_text, (r"^Heuristic Time \(msec\):\s*([\d.eE+-]+)\s*$",)
+            )
+        heuristic_evaluations = number(item.get("heuristic_evaluations"))
+        if heuristic_evaluations is None:
+            heuristic_evaluations = last_metric(
+                log_text, (r"^Heuristic Evaluations:\s*([\d.eE+-]+)\s*$",)
+            )
         if solved and shots is None:
             shots = number(item.get("metric"))
             cost_source = "csv_metric" if shots is not None else ""
             if shots is None:
                 shots = last_metric(log_text, (r"^Metric \(Search\):\s*([\d.eE+-]+)", r"\] Plan cost:\s*([\d.eE+-]+)"))
                 cost_source = "log_metric" if shots is not None else ""
-        result[problem] = Row(problem, status, valid, runtime, expanded, shots, actions,
-                              cost_source, source_status, solved, visited, search_time_ms, peak_memory_kb)
+        result[problem] = Row(
+            problem, status, valid, runtime, expanded, shots, actions,
+            cost_source, source_status, solved, visited, search_time_ms, peak_memory_kb,
+            heuristic_time_ms, heuristic_evaluations,
+        )
     return result
 
 
@@ -311,6 +324,15 @@ def write_csv(path: Path, rows: list[dict], fields: list[str] | None = None) -> 
         )
 
 
+def heuristic_ms_per_evaluation(rows: list[Row]) -> tuple[float | None, int]:
+    """Arithmetic mean of per-instance Heuristic Time / States Evaluated."""
+    measured = [r.heuristic_time_ms / r.visited_nodes for r in rows
+                if r.heuristic_time_ms is not None
+                and r.visited_nodes is not None
+                and r.visited_nodes > 0]
+    return average(measured), len(measured)
+
+
 def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[str], timeout: float) -> dict:
     rows = [data[p] for p in sorted(cohort) if p in data]
     solved = [r for r in rows if r.solved]
@@ -352,18 +374,19 @@ def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[s
             output[f"{scope}_{field}_n"] = len(values)
             output[f"{scope}_{field}_mean"] = average(values)
             output[f"{scope}_{field}_median"] = median(values)
-    timed_nodes = [(r.search_time_ms, r.expanded_nodes) for r in solved
-                   if r.search_time_ms is not None and r.expanded_nodes is not None
-                   and r.expanded_nodes > 0]
-    output["solved_ms_per_node"] = (
-        sum(time for time, _ in timed_nodes) / sum(nodes for _, nodes in timed_nodes)
-        if timed_nodes else None
+    # Do not divide search time by expanded/evaluated nodes here:
+    # that is a search throughput measure, not heuristic evaluation time.
+    output["solved_ms_per_heuristic_evaluation"], output["solved_heuristic_data_n"] = (
+        heuristic_ms_per_evaluation(solved)
+    )
+    output["joint_ms_per_heuristic_evaluation"], output["joint_heuristic_data_n"] = (
+        heuristic_ms_per_evaluation(matched)
     )
     return output
 
 
 def compact_summary(item: dict) -> dict:
-    """Use the same columns and ordering as old/results/comparison/summary.csv."""
+    """Extend the legacy summary columns with search-time statistics in ms."""
     return {
         "run": item["run"],
         "instances": item["completed"],
@@ -375,11 +398,24 @@ def compact_summary(item: dict) -> dict:
         "median_solved_runtime_sec": item["solved_runtime_median"],
         "mean_solved_runtime_sec": item["solved_runtime_mean"],
         "worst_solved_runtime_sec": item["worst_solved_runtime_sec"],
+        "mean_search_time_ms": item["solved_search_time_ms_mean"],
+        "median_search_time_ms": item["solved_search_time_ms_median"],
         "mean_expanded_nodes": item["solved_expanded_nodes_mean"],
         "median_expanded_nodes": item["solved_expanded_nodes_median"],
         "mean_states_evaluated": item["solved_visited_nodes_mean"],
         "expanded_nodes_per_sec": item["expanded_nodes_per_sec"],
         "states_evaluated_per_sec": item["states_evaluated_per_sec"],
+        # 6 decimals to retain sub-millisecond differences between heuristics.
+        "ms_per_heuristic_evaluation": (
+            f"{item['solved_ms_per_heuristic_evaluation']:.6f}"
+            if item["solved_ms_per_heuristic_evaluation"] is not None else ""
+        ),
+        "heuristic_measurements_n": item["solved_heuristic_data_n"],
+        "joint_ms_per_heuristic_evaluation": (
+            f"{item['joint_ms_per_heuristic_evaluation']:.6f}"
+            if item["joint_ms_per_heuristic_evaluation"] is not None else ""
+        ),
+        "joint_heuristic_measurements_n": item["joint_heuristic_data_n"],
         "mean_peak_memory_mb": item["mean_peak_memory_mb"],
     }
 
@@ -493,6 +529,12 @@ def main() -> None:
         data = {key: read_run(specs[key], TIMEOUT, warnings) for key in sorted(keys)}
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
+    sample = {normalize(line) for line in SAMPLE_MANIFEST.read_text(encoding="utf-8").splitlines()
+              if line.strip()}
+    if not sample:
+        raise SystemExit(f"Empty benchmark sample: {SAMPLE_MANIFEST}")
+    data = {key: {problem: row for problem, row in rows.items() if problem in sample}
+            for key, rows in data.items()}
     for warning in warnings:
         print(f"Warning: {warning}", file=sys.stderr)
     try:

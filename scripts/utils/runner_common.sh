@@ -160,9 +160,13 @@ runner_require_dir() {
 
 runner_init_stats_csv() {
     local csv_file="$1"
+    local extra_columns=""
+    if [ "${RUNNER_ENHSP_STATS:-0}" = "1" ]; then
+        extra_columns=",heuristic_time_ms,states_evaluated"
+    fi
 
     printf '%s\n' \
-        "problem,status,valid,total_runtime_sec,actions,expanded_nodes,exit_code,plan_file,planner_log,val_log" \
+        "problem,status,valid,total_runtime_sec,actions,expanded_nodes,exit_code,plan_file,planner_log,val_log$extra_columns" \
         > "$csv_file"
 }
 
@@ -170,7 +174,21 @@ runner_append_stats_row() {
     local csv_file="$1"
     shift
 
-    printf '"%s","%s","%s","%s","%s","%s","%s","%s","%s","%s"\n' "$@" >> "$csv_file"
+    local heuristic_time_ms states_evaluated metrics="|"
+    if [ "${RUNNER_ENHSP_STATS:-0}" = "1" ]; then
+        if [ -f "$9" ]; then
+            metrics="$(awk '
+                /^Heuristic Time \(msec\):/ { heuristic = $NF }
+                /^States Evaluated:/ { evaluated = $NF }
+                END { printf "%s|%s", heuristic, evaluated }
+            ' "$9")"
+        fi
+        IFS='|' read -r heuristic_time_ms states_evaluated <<< "$metrics"
+        printf '"%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s","%s"\n' \
+            "$@" "$heuristic_time_ms" "$states_evaluated" >> "$csv_file"
+    else
+        printf '"%s","%s","%s","%s","%s","%s","%s","%s","%s","%s"\n' "$@" >> "$csv_file"
+    fi
 }
 
 runner_run_id() {
