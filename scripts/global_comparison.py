@@ -55,7 +55,6 @@ class Row:
     peak_memory_kb: float | None = None
     # ENHSP's reported Heuristic Time (msec).
     heuristic_time_ms: float | None = None
-    heuristic_evaluations: float | None = None
 
 
 def defaults() -> tuple[dict[str, RunSpec], dict[str, list[str]]]:
@@ -238,11 +237,6 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
             heuristic_time_ms = last_metric(
                 log_text, (r"^Heuristic Time \(msec\):\s*([\d.eE+-]+)\s*$",)
             )
-        heuristic_evaluations = number(item.get("heuristic_evaluations"))
-        if heuristic_evaluations is None:
-            heuristic_evaluations = last_metric(
-                log_text, (r"^Heuristic Evaluations:\s*([\d.eE+-]+)\s*$",)
-            )
         if solved and shots is None:
             shots = number(item.get("metric"))
             cost_source = "csv_metric" if shots is not None else ""
@@ -252,7 +246,7 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
         result[problem] = Row(
             problem, status, valid, runtime, expanded, shots, actions,
             cost_source, source_status, solved, visited, search_time_ms, peak_memory_kb,
-            heuristic_time_ms, heuristic_evaluations,
+            heuristic_time_ms,
         )
     return result
 
@@ -324,13 +318,13 @@ def write_csv(path: Path, rows: list[dict], fields: list[str] | None = None) -> 
         )
 
 
-def heuristic_ms_per_evaluation(rows: list[Row]) -> tuple[float | None, int]:
+def heuristic_ms_per_evaluation(rows: list[Row]) -> float | None:
     """Arithmetic mean of per-instance Heuristic Time / States Evaluated."""
     measured = [r.heuristic_time_ms / r.visited_nodes for r in rows
                 if r.heuristic_time_ms is not None
                 and r.visited_nodes is not None
                 and r.visited_nodes > 0]
-    return average(measured), len(measured)
+    return average(measured)
 
 
 def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[str], timeout: float) -> dict:
@@ -376,12 +370,7 @@ def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[s
             output[f"{scope}_{field}_median"] = median(values)
     # Do not divide search time by expanded/evaluated nodes here:
     # that is a search throughput measure, not heuristic evaluation time.
-    output["solved_ms_per_heuristic_evaluation"], output["solved_heuristic_data_n"] = (
-        heuristic_ms_per_evaluation(solved)
-    )
-    output["joint_ms_per_heuristic_evaluation"], output["joint_heuristic_data_n"] = (
-        heuristic_ms_per_evaluation(matched)
-    )
+    output["ms_per_heuristic_evaluation"] = heuristic_ms_per_evaluation(solved)
     return output
 
 
@@ -407,15 +396,9 @@ def compact_summary(item: dict) -> dict:
         "states_evaluated_per_sec": item["states_evaluated_per_sec"],
         # 6 decimals to retain sub-millisecond differences between heuristics.
         "ms_per_heuristic_evaluation": (
-            f"{item['solved_ms_per_heuristic_evaluation']:.6f}"
-            if item["solved_ms_per_heuristic_evaluation"] is not None else ""
+            f"{item['ms_per_heuristic_evaluation']:.6f}"
+            if item["ms_per_heuristic_evaluation"] is not None else ""
         ),
-        "heuristic_measurements_n": item["solved_heuristic_data_n"],
-        "joint_ms_per_heuristic_evaluation": (
-            f"{item['joint_ms_per_heuristic_evaluation']:.6f}"
-            if item["joint_ms_per_heuristic_evaluation"] is not None else ""
-        ),
-        "joint_heuristic_measurements_n": item["joint_heuristic_data_n"],
         "mean_peak_memory_mb": item["mean_peak_memory_mb"],
     }
 
