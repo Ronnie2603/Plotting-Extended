@@ -1,0 +1,53 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 821
+UFX:false
+|F|:0
+|X|:32
+|A|:225
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 2, Evaluated States: 12, Time: 0.005) Frontier Size: 10
+f(n) = 2.0 (Expanded Nodes: 13, Evaluated States: 60, Time: 0.012) Frontier Size: 47
+f(n) = 3.0 (Expanded Nodes: 61, Evaluated States: 230, Time: 0.016) Frontier Size: 169
+f(n) = 4.0 (Expanded Nodes: 231, Evaluated States: 779, Time: 0.024) Frontier Size: 548
+f(n) = 5.0 (Expanded Nodes: 780, Evaluated States: 2472, Time: 0.042) Frontier Size: 1692
+f(n) = 6.0 (Expanded Nodes: 2473, Evaluated States: 7340, Time: 0.096) Frontier Size: 4867
+f(n) = 7.0 (Expanded Nodes: 7341, Evaluated States: 20441, Time: 0.238) Frontier Size: 13100
+f(n) = 8.0 (Expanded Nodes: 20442, Evaluated States: 52654, Time: 0.63) Frontier Size: 32212
+f(n) = 9.0 (Expanded Nodes: 52655, Evaluated States: 121852, Time: 1.533) Frontier Size: 69197
+f(n) = 10.0 (Expanded Nodes: 121853, Evaluated States: 254414, Time: 3.528) Frontier Size: 132561
+f(n) = 11.0 (Expanded Nodes: 254415, Evaluated States: 480099, Time: 7.428) Frontier Size: 225684
+-------------Time: 10s ; Expanded Nodes: 342253 (Avg-Speed 34225.0 n/s); Evaluated States: 623440
+f(n) = 12.0 (Expanded Nodes: 480100, Evaluated States: 821556, Time: 14.176) Frontier Size: 341456
+-------------Time: 20s ; Expanded Nodes: 673951 (Avg-Speed 33697.0 n/s); Evaluated States: 1099301
+Problem Solved
+
+Found Plan:
+0.0: (shoot-row r2c4 c2)
+1.0: (shoot-column r3c1 c1)
+2.0: (shoot-column r2c3 c2)
+3.0: (shoot-row r3c2 c3)
+4.0: (shoot-column r2c5 c2)
+5.0: (shoot-row r6c3 c3)
+6.0: (shoot-column r6c1 c1)
+7.0: (shoot-column r5c2 c1)
+8.0: (shoot-row-and-column r5c5 r6c5 c2)
+9.0: (shoot-column r5c5 c2)
+10.0: (shoot-column r5c4 c1)
+11.0: (shoot-column r6c3 c3)
+
+Plan-Length:12
+Metric (Search):12.0
+Planning Time (msec): 23944
+Heuristic Time (msec): 26
+Search Time (msec): 23944
+Expanded Nodes:805065
+States Evaluated:1247592
+Number of Dead-Ends detected:0
+Number of Duplicates detected:1309911
+
+Tempo esecuzione ENHSP: 25.172 sec
