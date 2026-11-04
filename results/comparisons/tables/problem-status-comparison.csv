@@ -1,0 +1,19 @@
+run,configuration,plt4_6_5_5_5,plt1_4_4_4_3
+pddl/enhsp/direct/greedy-capacity-opt,Direct GBFS capacity-opt,ok,ok
+pddl/enhsp/direct/greedy-colour,Direct GBFS colour,unsolvable,unsolvable
+pddl/enhsp/direct/greedy-colour-opt,Direct GBFS colour-opt,ok,ok
+pddl/enhsp/direct/greedy-hadd,Direct GBFS hadd,ok,ok
+pddl/enhsp/direct/greedy-hadd-opt,Direct GBFS hadd-opt,ok,ok
+pddl/enhsp/direct/wastar-capacity-opt,Direct WA* capacity-opt,ok,ok
+pddl/enhsp/direct/wastar-colour,Direct WA* colour,unsolvable,unsolvable
+pddl/enhsp/direct/wastar-colour-opt,Direct WA* colour-opt,ok,ok
+pddl/enhsp/direct/wastar-optblind,Direct WA* opt-blind,unsolvable,unsolvable
+pddl/enhsp/direct/wastar-optblind-opt,Direct WA* opt-blind-opt,ok,ok
+pddl/enhsp/granular/greedy-colour,Granular GBFS colour,ok,timeout
+pddl/enhsp/granular/greedy-hadd,Granular GBFS hadd,ok,ok
+pddl/enhsp/granular/wastar-optblind,Granular WA* opt-blind,timeout,ok
+pddl/fast-downward/fdm-opt-blind,FD(m) opt-blind,timeout,ok
+pddl/symk,SymK,timeout,ok
+eprime/chuffed/default-models/sa-nosymm,EPrime chuffed / default-models / sa-nosymm,ok,ok
+eprime/chuffed/sat-finetune/sa-deadend-v5,EPrime chuffed / sat-finetune / sa-deadend-v5,ok,ok
+eprime/sat/sat-finetune/sa-deadend-v5,EPrime sat / sat-finetune / sa-deadend-v5,ok,ok

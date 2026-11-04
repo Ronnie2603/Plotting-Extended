@@ -20,6 +20,30 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "results/comparisons"
 SAMPLE_MANIFEST = ROOT / "benchmarks/manifests/sample-instances.txt"
 TIMEOUT = 900.0
+# Normalized problem names whose proven UNSAT outcomes count as solved.
+SOLVED_UNSOLVABLE_INSTANCES = frozenset({
+    "plt0_5_5_4_3",
+    "plt0_5_5_4_4",
+    "plt1_5_3_4_3",
+    "plt1_5_5_4_3",
+    "plt1_5_5_4_4",
+    "plt2_3_5_4_3",
+    "plt2_3_5_4_4",
+    "plt2_5_3_4_3",
+    "plt2_5_5_4_3",
+    "plt2_5_5_4_4",
+    "plt3_4_4_4_3",
+    "plt3_5_5_4_12",
+    "plt3_5_5_4_3",
+    "plt3_5_5_4_4",
+    "plt4_3_3_3_2",
+    "plt4_3_5_4_3",
+    "plt4_3_6_4_3",
+    "plt4_4_4_4_3",
+    "plt4_6_5_5_4",
+    "plt5_4_4_4_3",
+    "plt5_4_5_4_3",
+})
 # All runs are included, restricted to the shared benchmark sample.
 EXCLUDED_PDDL_RUNS: set[str] = set()
 ACTION = re.compile(r"^\s*(?:\d+(?:\.\d+)?\s*:\s*)?\(([\w-]+)\b", re.M)
@@ -68,6 +92,7 @@ def defaults() -> tuple[dict[str, RunSpec], dict[str, list[str]]]:
         "enhsp/direct/greedy-hadd": ("direct-hadd", "Direct GBFS hadd", "direct"),
         "enhsp/direct/wastar-colour": ("direct-wastar-colour", "Direct WA* colour", "direct"),
         "enhsp/direct/wastar-optblind": ("direct-wastar-blind", "Direct WA* opt-blind", "direct"),
+        "enhsp/direct/wastar-optblind-opt": ("direct-wastar-blind-opt", "Direct WA* opt-blind-opt", "direct"),
         "enhsp/direct/wastar-colour-opt": ("direct-wastar-colour-opt", "Direct WA* colour-opt", "direct"),
         "enhsp/direct/wastar-capacity-opt": ("direct-wastar-capacity-opt", "Direct WA* capacity-opt", "direct"),
         "enhsp/direct/greedy-capacity-opt": ("direct-greedy-capacity-opt", "Direct GBFS capacity-opt", "direct"),
@@ -192,7 +217,7 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
         log = local_artifact(directory, item.get("planner_log", ""), "logs", f"{problem}.planner.log")
         log_text = log.read_text(encoding="utf-8", errors="replace") if log else ""
         # The historical "unsolved" status also covers heap failures. Only
-        # explicit impossibility proofs count as solved, as in the paper.
+        # explicit impossibility proofs for allowlisted instances count as solved.
         resource_failure = number(item.get("exit_code")) in {124, 137, 143} or bool(re.search(
             r"OutOfMemoryError|Java heap space|out of memory|memory limit (?:reached|exceeded)|"
             r"\btimeout\b|time limit (?:reached|exceeded)", log_text, re.I,
@@ -206,10 +231,13 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
         elif (status == "ok" or proven_unsolvable) and runtime is not None and runtime > timeout:
             status = "timeout"
         has_plan = status == "ok" and valid == "true"
+        # Invalid plans count as solved for comparisons, retaining their status.
         solved = runtime is not None and runtime <= timeout and (
-            has_plan or (proven_unsolvable and status in {"unsolved", "unsolvable"})
+            has_plan or status == "invalid_plan"
+            or (proven_unsolvable and status in {"unsolved", "unsolvable"}
+                and problem in SOLVED_UNSOLVABLE_INSTANCES)
         )
-        if solved and proven_unsolvable:
+        if proven_unsolvable and status in {"unsolved", "unsolvable"}:
             status = "unsolvable"
         if status == "ok" and not has_plan:
             status = "unvalidated"
@@ -267,7 +295,7 @@ def read_eprime_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[
 
     The runner's cumulative time includes all earlier unsatisfiable horizons,
     Savile Row translation and container overhead, not just the final solve.
-    Both SAT and exhaustive UNSAT are successful outcomes; VAL only applies to PDDL.
+    SAT and allowlisted exhaustive UNSAT count as solved; VAL only applies to PDDL.
     """
     path = spec.path / "stats.csv"
     records = list(csv.DictReader(path.read_text(encoding="utf-8").splitlines()))
@@ -312,8 +340,10 @@ def read_eprime_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[
                 warnings.append(f"Unfinished EPrime horizon search: {problem} in {path}")
                 continue
         has_plan = source_status == "solved" and runtime <= timeout
-        solved = (source_status == "solved" or proven_unsolvable) and runtime <= timeout
-        status = ("unsolvable" if solved and proven_unsolvable else "ok" if has_plan
+        solved = (source_status == "solved" or (
+            proven_unsolvable and problem in SOLVED_UNSOLVABLE_INSTANCES
+        )) and runtime <= timeout
+        status = ("unsolvable" if proven_unsolvable and runtime <= timeout else "ok" if has_plan
                   else "timeout" if source_status == "solved" or proven_unsolvable else source_status)
         solver_times = [number(entry.get("solver_runtime_sec")) for entry in entries]
         search_time_ms = sum(solver_times) * 1000 if all(t is not None for t in solver_times) else None
@@ -349,7 +379,7 @@ def heuristic_ms_per_evaluation(rows: list[Row]) -> float | None:
 
 
 def par2_cost(row: Row, timeout: float) -> float:
-    """Use actual time for SAT/proven UNSAT, twice the limit for every failure."""
+    """Use actual time for solved outcomes (including invalid plans), else twice the limit."""
     if row.solved and row.runtime is not None and 0 <= row.runtime <= timeout:
         return row.runtime
     return 2 * timeout

@@ -582,7 +582,7 @@ public class ENHSP {
             h = new ColourHeuristic();
         } else {
             h = PDDLHeuristic.getHeuristic(heuristic, heuristicProblem, redundantConstraints, helpfulActions, helpfulTransitions,
-                    unitCostHeuristic);
+                    unitCostHeuristic, linearEffectsAbstraction,aibrDebug );
         }
     }
 
@@ -981,13 +981,12 @@ public class ENHSP {
     private LinkedList<ImmutablePair<BigDecimal, TransitionGround>> search() throws Exception {
 
         PDDLPlanner planner = new PDDLPlanner(searchEngineString,
-                heuristic,
                 redundantConstraints,
-                helpfulTransitions,
                 helpfulActions,
+                helpfulTransitions,
                 wh != null ? Float.parseFloat(this.wh) : (float) 1.0,
-                deltaExecution != null ? new BigDecimal(deltaExecution) : new BigDecimal(1.0),
                 deltaPlanning != null ? new BigDecimal(deltaPlanning) : new BigDecimal(1.0),
+                deltaExecution != null ? new BigDecimal(deltaExecution) : new BigDecimal(1.0),
                 tieBreaking == null ? "arbitrary": tieBreaking, savingSearchSpaceJson, depthLimit == -1 ? Float.POSITIVE_INFINITY : depthLimit
                 );
 
