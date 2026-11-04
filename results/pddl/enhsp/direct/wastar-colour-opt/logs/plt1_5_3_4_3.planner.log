@@ -1,0 +1,41 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 367
+UFX:false
+|F|:0
+|X|:17
+|A|:160
+|P|:0
+|E|:0
+[ColourOptHeuristic-HybridFast] Activated
+[ColourOptHeuristic-HybridFast] goalTotalBlock=3.0  initialTotalBlock=15.0  cells=15  rows=5  cols=3  maxLine=5  unblockedRows=5  unblockedCols=3  numericColourFluents=15
+h(I):9.0
+f(n) = 9.0 (Expanded Nodes: 1, Evaluated States: 1, Time: 0.002) Frontier Size: 0
+f(n) = 9.991 (Expanded Nodes: 129, Evaluated States: 145, Time: 0.013) Frontier Size: 16
+f(n) = 9.992001 (Expanded Nodes: 130, Evaluated States: 145, Time: 0.013) Frontier Size: 15
+f(n) = 9.993 (Expanded Nodes: 131, Evaluated States: 145, Time: 0.013) Frontier Size: 14
+f(n) = 9.9939995 (Expanded Nodes: 154, Evaluated States: 165, Time: 0.014) Frontier Size: 10
+f(n) = 9.995 (Expanded Nodes: 161, Evaluated States: 170, Time: 0.014) Frontier Size: 8
+f(n) = 9.996 (Expanded Nodes: 162, Evaluated States: 174, Time: 0.014) Frontier Size: 11
+f(n) = 9.997 (Expanded Nodes: 189, Evaluated States: 201, Time: 0.015) Frontier Size: 10
+f(n) = 10.992001 (Expanded Nodes: 194, Evaluated States: 206, Time: 0.015) Frontier Size: 10
+f(n) = 10.993 (Expanded Nodes: 197, Evaluated States: 209, Time: 0.016) Frontier Size: 10
+f(n) = 10.9939995 (Expanded Nodes: 212, Evaluated States: 222, Time: 0.016) Frontier Size: 8
+f(n) = 10.995 (Expanded Nodes: 227, Evaluated States: 235, Time: 0.016) Frontier Size: 6
+f(n) = 11.991 (Expanded Nodes: 228, Evaluated States: 237, Time: 0.016) Frontier Size: 7
+f(n) = 11.993 (Expanded Nodes: 236, Evaluated States: 243, Time: 0.017) Frontier Size: 5
+f(n) = 11.9939995 (Expanded Nodes: 249, Evaluated States: 253, Time: 0.017) Frontier Size: 2
+f(n) = 11.995 (Expanded Nodes: 261, Evaluated States: 263, Time: 0.018) Frontier Size: 0
+Problem unsolvable
+Metric (Search):-1.0
+Planning Time (msec): 19
+Heuristic Time (msec): 0
+Search Time (msec): 0
+Expanded Nodes:266
+States Evaluated:268
+Number of Dead-Ends detected:0
+Number of Duplicates detected:71
+
+Tempo esecuzione ENHSP: 0.644 sec
