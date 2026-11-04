@@ -2,15 +2,15 @@ Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 Domain parsed
 Problem parsed
 Grounding..
-Grounding Time: 755
+Grounding Time: 737
 UFX:false
 |F|:52
 |X|:1
-|A|:66
+|A|:60
 |P|:0
 |E|:0
-[CustomColourHeuristic] Activated
-[CustomColourHeuristic] goalTotalBlock=6.0  initialTotalBlock=12.0  cells=12
+[ColourHeuristic] Activated
+[ColourHeuristic] goalTotalBlock=6.0  initialTotalBlock=12.0  cells=12
 h(I):3.0
 Problem Solved
 
@@ -20,11 +20,11 @@ Found Plan:
 Plan-Length:1
 Metric (Search):1.0
 Planning Time (msec): 5
-Heuristic Time (msec): 1
-Search Time (msec): 4
+Heuristic Time (msec): 3
+Search Time (msec): 5
 Expanded Nodes:2
 States Evaluated:9
 Number of Dead-Ends detected:0
 Number of Duplicates detected:0
 
-Tempo esecuzione ENHSP: 1.187 sec
+Tempo esecuzione ENHSP: 1.160 sec

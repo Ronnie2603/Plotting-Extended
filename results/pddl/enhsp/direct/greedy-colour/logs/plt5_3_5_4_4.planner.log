@@ -2,22 +2,21 @@ Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 Domain parsed
 Problem parsed
 Grounding..
-Grounding Time: 3349
+Grounding Time: 3378
 UFX:false
 |F|:96
 |X|:1
-|A|:132
+|A|:140
 |P|:0
 |E|:0
-[CustomColourHeuristic] Activated
-[CustomColourHeuristic] goalTotalBlock=4.0  initialTotalBlock=15.0  cells=15
+[ColourHeuristic] Activated
+[ColourHeuristic] goalTotalBlock=4.0  initialTotalBlock=15.0  cells=15
 h(I):3.0
  g(n)= 1.0 h(n)=2.997
  g(n)= 2.0 h(n)=2.995
  g(n)= 3.0 h(n)=2.993
  g(n)= 4.0 h(n)=2.992
- g(n)= 4.0 h(n)=1.993
- g(n)= 6.0 h(n)=0.991
+ g(n)= 6.0 h(n)=1.991
  g(n)= 7.0 h(n)=0.99
 Problem Solved
 
@@ -25,18 +24,17 @@ Found Plan:
 0.0: (shoot-column r2c5 c4)
 1.0: (shoot-column r2c3 c3)
 2.0: (shoot-column r2c2 c2)
-3.0: (shoot-row r1c5 c1)
-4.0: (shoot-column r3c1 c1)
-5.0: (shoot-column r2c4 c1)
+3.0: (shoot-column r3c1 c1)
+4.0: (shoot-column r2c4 c1)
 
-Plan-Length:6
-Metric (Search):6.0
-Planning Time (msec): 16
-Heuristic Time (msec): 4
-Search Time (msec): 15
-Expanded Nodes:105
-States Evaluated:116
+Plan-Length:5
+Metric (Search):5.0
+Planning Time (msec): 10
+Heuristic Time (msec): 1
+Search Time (msec): 9
+Expanded Nodes:46
+States Evaluated:58
 Number of Dead-Ends detected:0
-Number of Duplicates detected:8
+Number of Duplicates detected:2
 
-Tempo esecuzione ENHSP: 4.424 sec
+Tempo esecuzione ENHSP: 4.546 sec
