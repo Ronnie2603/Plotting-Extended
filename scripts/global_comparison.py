@@ -12,7 +12,7 @@ import re
 import statistics
 import sys
 from collections import Counter
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 
@@ -20,29 +20,32 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "results/comparisons"
 SAMPLE_MANIFEST = ROOT / "benchmarks/manifests/sample-instances.txt"
 TIMEOUT = 900.0
-# Normalized problem names whose proven UNSAT outcomes count as solved.
+ENCODING_LABELS = {"direct-base": "Direct base", "direct-new": "Direct new", "granular": "Granular"}
+# New numeric model: keep the planner order and notation of the heuristic table.
+HEURISTIC_COMPARISON_LABELS = {
+    "direct-new-wastar-capacity": r"$A^*\! -\! h^{capacity}$",
+    "direct-new-wastar-colour": r"$A^*\! -\! h^{colour}$",
+    "direct-new-greedy-capacity": r"$GBFS\! -\! h^{capacity}$",
+    "direct-new-greedy-colour": r"$GBFS\! -\! h^{colour}$",
+}
+# Planner comparison table: exclude Chuffed sa-deadend-v5 (commented-out row).
+PLANNER_COMPARISON_LABELS = {
+    "direct-new-wastar-blind": r"ENHSP (Direct new) $A^*$ — blind",
+    "direct-new-wastar-colour": r"ENHSP (Direct new) $A^*$ — $h^{colour}$",
+    "direct-new-greedy-hadd": r"ENHSP (Direct new) $GBFS$ — $h^{add}$",
+    "direct-new-greedy-colour": r"ENHSP (Direct new) $GBFS$ — $h^{colour}$",
+    "fdm": r"FD(m) $A^*$ — blind",
+    "symk": "SymK — Bidirectional search",
+    "eprime/sat/sat-finetune/sa-deadend-v5": "SAT — sa-deadend-v5",
+    "eprime/chuffed/default-models/sa-nosymm": "Chuffed — sa-nosymm",
+}
+COMPARISON_LABELS = {
+    "heuristic-comparison": HEURISTIC_COMPARISON_LABELS,
+    "planner-comparison": PLANNER_COMPARISON_LABELS,
+}
 SOLVED_UNSOLVABLE_INSTANCES = frozenset({
-    "plt0_5_5_4_3",
-    "plt0_5_5_4_4",
-    "plt1_5_3_4_3",
-    "plt1_5_5_4_3",
-    "plt1_5_5_4_4",
-    "plt2_3_5_4_3",
-    "plt2_3_5_4_4",
-    "plt2_5_3_4_3",
     "plt2_5_5_4_3",
-    "plt2_5_5_4_4",
-    "plt3_4_4_4_3",
-    "plt3_5_5_4_12",
-    "plt3_5_5_4_3",
-    "plt3_5_5_4_4",
-    "plt4_3_3_3_2",
-    "plt4_3_5_4_3",
-    "plt4_3_6_4_3",
-    "plt4_4_4_4_3",
-    "plt4_6_5_5_4",
     "plt5_4_4_4_3",
-    "plt5_4_5_4_3",
 })
 # All runs are included, restricted to the shared benchmark sample.
 EXCLUDED_PDDL_RUNS: set[str] = set()
@@ -79,6 +82,7 @@ class Row:
     peak_memory_kb: float | None = None
     # ENHSP's reported Heuristic Time (msec).
     heuristic_time_ms: float | None = None
+    grounding_time_ms: float | None = None
 
 
 def defaults() -> tuple[dict[str, RunSpec], dict[str, list[str]]]:
@@ -86,18 +90,18 @@ def defaults() -> tuple[dict[str, RunSpec], dict[str, list[str]]]:
     known = {
         "enhsp/granular/greedy-colour": ("granular-colour", "Granular GBFS colour", "granular"),
         "enhsp/granular/greedy-hadd": ("granular-hadd", "Granular GBFS hadd", "granular"),
-        "enhsp/granular/wastar-optblind": ("granular-wastar-blind", "Granular WA* opt-blind", "granular"),
-        "enhsp/direct/greedy-colour": ("direct-colour", "Direct GBFS colour", "direct"),
-        "enhsp/direct/greedy-colour-opt": ("direct-greedy-colour-opt", "Direct GBFS colour-opt", "direct"),
-        "enhsp/direct/greedy-hadd": ("direct-hadd", "Direct GBFS hadd", "direct"),
-        "enhsp/direct/wastar-colour": ("direct-wastar-colour", "Direct WA* colour", "direct"),
-        "enhsp/direct/wastar-optblind": ("direct-wastar-blind", "Direct WA* opt-blind", "direct"),
-        "enhsp/direct/wastar-optblind-opt": ("direct-wastar-blind-opt", "Direct WA* opt-blind-opt", "direct"),
-        "enhsp/direct/wastar-colour-opt": ("direct-wastar-colour-opt", "Direct WA* colour-opt", "direct"),
-        "enhsp/direct/wastar-capacity-opt": ("direct-wastar-capacity-opt", "Direct WA* capacity-opt", "direct"),
-        "enhsp/direct/greedy-capacity-opt": ("direct-greedy-capacity-opt", "Direct GBFS capacity-opt", "direct"),
-        "enhsp/direct/greedy-hadd-opt": ("direct-greedy-hadd-opt", "Direct GBFS hadd-opt", "direct"),
-        "fast-downward/fdm-opt-blind": ("fdm", "FD(m) opt-blind", "granular"),
+        "enhsp/granular/wastar-blind": ("granular-wastar-blind", "Granular WA* blind", "granular"),
+        "enhsp/direct-base/greedy-colour-base": ("direct-base-greedy-colour", "Direct base GBFS colour", "direct-base"),
+        "enhsp/direct-new/greedy-colour-new": ("direct-new-greedy-colour", "Direct new GBFS colour", "direct-new"),
+        "enhsp/direct-base/greedy-hadd-base": ("direct-base-greedy-hadd", "Direct base GBFS hadd", "direct-base"),
+        "enhsp/direct-base/wastar-colour-base": ("direct-base-wastar-colour", "Direct base WA* colour", "direct-base"),
+        "enhsp/direct-base/wastar-blind-base": ("direct-base-wastar-blind", "Direct base WA* blind", "direct-base"),
+        "enhsp/direct-new/wastar-blind-new": ("direct-new-wastar-blind", "Direct new WA* blind", "direct-new"),
+        "enhsp/direct-new/wastar-colour-new": ("direct-new-wastar-colour", "Direct new WA* colour", "direct-new"),
+        "enhsp/direct-new/wastar-capacity-new": ("direct-new-wastar-capacity", "Direct new WA* capacity", "direct-new"),
+        "enhsp/direct-new/greedy-capacity-new": ("direct-new-greedy-capacity", "Direct new GBFS capacity", "direct-new"),
+        "enhsp/direct-new/greedy-hadd-new": ("direct-new-greedy-hadd", "Direct new GBFS hadd", "direct-new"),
+        "fast-downward/fdm-new-blind": ("fdm", "FD(m) blind", "granular"),
         "symk": ("symk", "SymK", "granular"),
     }
     specs = []
@@ -108,14 +112,17 @@ def defaults() -> tuple[dict[str, RunSpec], dict[str, list[str]]]:
         if relative in EXCLUDED_PDDL_RUNS:
             continue
         default_encoding = (
-            "direct" if relative.startswith("enhsp/direct/")
-            else "granular" if relative.startswith("enhsp/granular/")
+            directory.parent.name
+            if relative.startswith("enhsp/") and directory.parent.name in ENCODING_LABELS
             else "unknown"
         )
         key, label, encoding = known.get(
             relative,
             (relative.replace("/", "-"), relative.replace("/", " / ").replace("-", " "), default_encoding),
         )
+        if relative not in known and encoding in {"direct-base", "direct-new"}:
+            configuration = directory.name.removesuffix("-new").removesuffix("-base").replace("-", " ")
+            label = f"{ENCODING_LABELS[encoding]} / {configuration}"
         specs.append(RunSpec(key, label, directory, encoding))
 
     eprime_results = ROOT / "results/eprime"
@@ -130,9 +137,11 @@ def defaults() -> tuple[dict[str, RunSpec], dict[str, list[str]]]:
     by_key = {spec.key: spec for spec in specs}
     if not specs:
         raise SystemExit("No results found under results/pddl or results/eprime")
-    greedy = [key for key in ("granular-colour", "granular-hadd", "direct-colour", "direct-hadd") if key in by_key]
+    greedy = [key for key in ("granular-colour", "granular-hadd", "direct-base-greedy-colour", "direct-base-greedy-hadd") if key in by_key]
     suites = {
         "greedy": greedy,
+        "heuristic-comparison": [key for key in HEURISTIC_COMPARISON_LABELS if key in by_key],
+        "planner-comparison": [key for key in PLANNER_COMPARISON_LABELS if key in by_key],
         "enhsp": [spec.key for spec in specs if spec.source == "pddl" and spec.path.relative_to(results).parts[0] == "enhsp"],
         "eprime": [spec.key for spec in specs if spec.source == "eprime"],
         "all-runs": [spec.key for spec in specs],
@@ -176,6 +185,25 @@ def last_metric(text: str, patterns: tuple[str, ...]) -> float | None:
         if matches:
             return number(matches[-1])
     return None
+
+
+def grounding_time_ms(item: dict, log_text: str) -> float | None:
+    """Read measured grounding time; FD/SymK use instantiation wall time."""
+    value = number(item.get("grounding_time_ms"))
+    if value is not None:
+        return value
+    seconds = number(item.get("grounding_time_sec"))
+    if seconds is not None:
+        return seconds * 1000
+    value = last_metric(log_text, (
+        r"^\s*Grounding Time(?: \(msec\))?:\s*([\d.eE+-]+)\s*$",
+    ))
+    if value is not None:
+        return value
+    seconds = last_metric(log_text, (
+        r"^Instantiating:\s*\[[\d.eE+-]+s CPU,\s*([\d.eE+-]+)s wall-clock\]",
+    ))
+    return seconds * 1000 if seconds is not None else None
 
 
 def plan_metrics(path: Path | None) -> tuple[float | None, float | None, str]:
@@ -226,6 +254,7 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
             r"^\s*Problem unsolvable\b|Completely explored state space.*no solution|"
             r"^\s*search exit code:\s*12\s*$", log_text, re.I | re.M,
         ))
+        accepted_unsolvable = proven_unsolvable and problem in SOLVED_UNSOLVABLE_INSTANCES
         if valid == "false":
             status = "invalid_plan"
         elif (status == "ok" or proven_unsolvable) and runtime is not None and runtime > timeout:
@@ -234,11 +263,10 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
         # Invalid plans count as solved for comparisons, retaining their status.
         solved = runtime is not None and runtime <= timeout and (
             has_plan or status == "invalid_plan"
-            or (proven_unsolvable and status in {"unsolved", "unsolvable"}
-                and problem in SOLVED_UNSOLVABLE_INSTANCES)
+            or (accepted_unsolvable and status in {"unsolved", "unsolvable"})
         )
-        if proven_unsolvable and status in {"unsolved", "unsolvable"}:
-            status = "unsolvable"
+        if status in {"unsolved", "unsolvable"}:
+            status = "unsolvable" if accepted_unsolvable else "unsolved"
         if status == "ok" and not has_plan:
             status = "unvalidated"
         plan = local_artifact(directory, item.get("plan_file", ""), "plans", f"{problem}.plan")
@@ -285,7 +313,7 @@ def read_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[str, Ro
         result[problem] = Row(
             problem, status, valid, runtime, expanded, shots, actions,
             cost_source, source_status, solved, visited, search_time_ms, peak_memory_kb,
-            heuristic_time_ms,
+            heuristic_time_ms, grounding_time_ms(item, log_text),
         )
     return result
 
@@ -340,10 +368,10 @@ def read_eprime_run(spec: RunSpec, timeout: float, warnings: list[str]) -> dict[
                 warnings.append(f"Unfinished EPrime horizon search: {problem} in {path}")
                 continue
         has_plan = source_status == "solved" and runtime <= timeout
-        solved = (source_status == "solved" or (
-            proven_unsolvable and problem in SOLVED_UNSOLVABLE_INSTANCES
-        )) and runtime <= timeout
-        status = ("unsolvable" if proven_unsolvable and runtime <= timeout else "ok" if has_plan
+        accepted_unsolvable = proven_unsolvable and problem in SOLVED_UNSOLVABLE_INSTANCES
+        solved = (source_status == "solved" or accepted_unsolvable) and runtime <= timeout
+        status = (("unsolvable" if accepted_unsolvable else "unsolved")
+                  if proven_unsolvable and runtime <= timeout else "ok" if has_plan
                   else "timeout" if source_status == "solved" or proven_unsolvable else source_status)
         solver_times = [number(entry.get("solver_runtime_sec")) for entry in entries]
         search_time_ms = sum(solver_times) * 1000 if all(t is not None for t in solver_times) else None
@@ -402,6 +430,9 @@ def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[s
         if row.visited_nodes is not None:
             evaluated_rates.append(row.visited_nodes / elapsed_sec)
     memory_mb = [row.peak_memory_kb / 1024 for row in solved if row.peak_memory_kb is not None]
+    # Grounding can finish even when search fails: use every measured row in
+    # the cohort, independently of the search outcome.
+    grounding_times = metric_values(rows, "grounding_time_ms")
     output = {
         "run": spec.label, "encoding": spec.encoding, "cohort": len(cohort),
         "completed": len(rows), "missing": len(cohort) - len(rows),
@@ -417,6 +448,8 @@ def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[s
         "expanded_nodes_per_sec": average(expanded_rates),
         "states_evaluated_per_sec": average(evaluated_rates),
         "mean_peak_memory_mb": average(memory_mb),
+        "grounding_time_n": len(grounding_times),
+        "mean_grounding_time_ms": average(grounding_times),
     }
     for field in METRICS:
         for scope, chosen in (("solved", solved), ("joint", matched)):
@@ -430,7 +463,7 @@ def summary(spec: RunSpec, data: dict[str, Row], cohort: set[str], shared: set[s
 
 
 def compact_summary(item: dict) -> dict:
-    """Extend the legacy summary columns with search-time statistics in ms."""
+    """Extend the legacy summary columns with timing statistics in ms."""
     return {
         "run": item["run"],
         "instances": item["completed"],
@@ -442,6 +475,8 @@ def compact_summary(item: dict) -> dict:
         "mean_solved_runtime_sec": item["solved_runtime_mean"],
         "worst_solved_runtime_sec": item["worst_solved_runtime_sec"],
         "mean_search_time_ms": item["solved_search_time_ms_mean"],
+        "grounding_time_n": item["grounding_time_n"],
+        "mean_grounding_time_ms": item["mean_grounding_time_ms"],
         "mean_expanded_nodes": item["solved_expanded_nodes_mean"],
         "mean_states_evaluated": item["solved_visited_nodes_mean"],
         "expanded_nodes_per_sec": item["expanded_nodes_per_sec"],
@@ -455,9 +490,302 @@ def compact_summary(item: dict) -> dict:
     }
 
 
+def enhsp_grounding_measurements(
+    specs: list[RunSpec], data: dict[str, dict[str, Row]],
+) -> tuple[dict[str, list[RunSpec]], dict[str, dict[str, list[float]]]]:
+    """Group available ENHSP grounding measurements by encoding and instance."""
+    groups: dict[str, list[RunSpec]] = {}
+    for spec in specs:
+        if spec.source != "pddl":
+            continue
+        try:
+            relative = spec.path.relative_to(ROOT / "results/pddl/enhsp")
+        except ValueError:
+            continue
+        if len(relative.parts) != 2 or relative.parts[0] not in ENCODING_LABELS:
+            continue
+        encoding = relative.parts[0]
+        groups.setdefault(encoding, []).append(spec)
+
+    measurements: dict[str, dict[str, list[float]]] = {}
+    for encoding, runs in groups.items():
+        measured: dict[str, list[float]] = {}
+        for spec in runs:
+            for problem, row in data[spec.key].items():
+                if row.grounding_time_ms is not None:
+                    measured.setdefault(problem, []).append(row.grounding_time_ms)
+        measurements[encoding] = measured
+    return groups, measurements
+
+
+def grounding_by_encoding(specs: list[RunSpec], data: dict[str, dict[str, Row]]) -> list[dict]:
+    """Average ENHSP measurements per instance first, then across instances.
+
+    Keep both all measured instances and a common measured cohort across
+    encodings. Missing measurements are never treated as zero or as timeouts.
+    """
+    groups, measurements = enhsp_grounding_measurements(specs, data)
+    common = set.intersection(*(set(measured) for measured in measurements.values())) if measurements else set()
+    output = []
+    for encoding in ("direct-base", "direct-new", "granular"):
+        if encoding not in groups:
+            continue
+        runs = groups[encoding]
+        measured = measurements[encoding]
+        instance_means = {problem: statistics.mean(values) for problem, values in measured.items()}
+        output.append({
+            "planner": "ENHSP", "encoding": encoding, "runs": len(runs),
+            "instances": len(set().union(*(set(data[spec.key]) for spec in runs))),
+            "grounding_instances": len(measured),
+            "grounding_time_n": sum(len(values) for values in measured.values()),
+            "mean_grounding_time_ms": average(list(instance_means.values())),
+            "common_grounding_instances": len(common),
+            "common_grounding_time_n": sum(len(measured[problem]) for problem in common),
+            "common_mean_grounding_time_ms": average([instance_means[problem] for problem in sorted(common)]),
+        })
+    return output
+
+
 def group_key(problem: str) -> tuple[int, int, int]:
     match = re.match(r"plt\d+_(\d+)_(\d+)_(\d+)_", problem)
     return tuple(map(int, match.groups())) if match else (0, 0, 0)
+
+
+def grounding_plots(
+    directory: Path, table_directory: Path,
+    specs: list[RunSpec], data: dict[str, dict[str, Row]],
+) -> list[str]:
+    """Grounding overviews and paired scatter plots using instance means."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import FuncFormatter, MaxNLocator, NullLocator
+
+    groups, measurements = enhsp_grounding_measurements(specs, data)
+    if not groups:
+        return []
+    common = set.intersection(*(set(measured) for measured in measurements.values()))
+    names = ENCODING_LABELS
+    colours = {"direct-base": "#3366a6", "direct-new": "#df8430", "granular": "#278875"}
+    encodings = [key for key in names if key in groups]
+    instance_means = {
+        encoding: {problem: statistics.mean(values) / 1000 for problem, values in measured.items()}
+        for encoding, measured in measurements.items()
+    }
+    table_directory.mkdir(parents=True, exist_ok=True)
+    write_csv(table_directory / "grounding-by-instance.csv", [
+        {"encoding": encoding, "problem": problem,
+         "rows": group_key(problem)[0], "cols": group_key(problem)[1],
+         "colours": group_key(problem)[2],
+         "grounding_time_n": len(measurements[encoding][problem]),
+         "mean_grounding_time_ms": value * 1000, "common_cohort": problem in common}
+        for encoding in encodings
+        for problem, value in sorted(instance_means[encoding].items())
+    ])
+    if not common:
+        return []
+    directory.mkdir(parents=True, exist_ok=True)
+    values = {key: [instance_means[key][p] for p in sorted(common)] for key in encodings}
+    palette = [colours[key] for key in encodings]
+    labels = [names[key] for key in encodings]
+    sizes = sorted({group_key(p)[0] * group_key(p)[1] for p in common})
+    size_values = {
+        key: {size: [instance_means[key][p] for p in sorted(common)
+                     if group_key(p)[0] * group_key(p)[1] == size] for size in sizes}
+        for key in encodings
+    }
+    subtitle = f"ENHSP | {len(common)} common measured instances | runs averaged per instance"
+    observed = set().union(*(set(data[run.key]) for runs in groups.values() for run in runs))
+    footer = f"{len(observed) - len(common)} of {len(observed)} tested instances excluded: grounding unavailable in at least one encoding."
+    formatter = FuncFormatter(lambda value, position: f"{value:g}")
+
+    def log_scale(ax, axis):
+        positive = all(value > 0 for series in values.values() for value in series)
+        options = {} if positive else {"linthresh": .001}
+        getattr(ax, f"set_{axis}scale")("log" if positive else "symlog", **options)
+        getattr(ax, f"{axis}axis").set_major_formatter(formatter)
+        getattr(ax, f"{axis}axis").set_minor_locator(NullLocator())
+
+    def draw_mean(ax):
+        means = [statistics.mean(values[key]) for key in encodings]
+        ax.barh(labels, means, color=palette, height=.52)
+        for index, value in enumerate(means):
+            ax.annotate(f"{value:.3f} s", (value, index), xytext=(7, 0),
+                        textcoords="offset points", va="center", fontweight="bold")
+        ax.invert_yaxis()
+        ax.set_xlim(0, max(means) * 1.24 if max(means) > 0 else 1)
+        ax.set(xlabel="Mean grounding time (s)", title="A. Mean by encoding")
+        ax.grid(axis="x", alpha=.18)
+
+    def draw_distribution(ax):
+        boxes = ax.boxplot([values[key] for key in encodings], vert=False,
+                           patch_artist=True, widths=.5, showfliers=True,
+                           medianprops={"color": "#202d3a", "linewidth": 1.8},
+                           flierprops={"marker": ".", "markersize": 4, "alpha": .5})
+        for patch, colour in zip(boxes["boxes"], palette):
+            patch.set(facecolor=colour, alpha=.7)
+        ax.set_yticks(range(1, len(labels) + 1), labels)
+        ax.invert_yaxis()
+        log_scale(ax, "x")
+        ax.set(xlabel="Grounding time per instance (s, log scale)",
+               title="B. Distribution across instances")
+        ax.grid(axis="x", which="major", alpha=.18)
+
+    def draw_scalability(ax):
+        for key in encodings:
+            means, lower, upper = [], [], []
+            for size in sizes:
+                measured = size_values[key][size]
+                means.append(statistics.mean(measured))
+                quartiles = statistics.quantiles(measured, n=4, method="inclusive") if len(measured) > 1 else measured * 3
+                lower.append(quartiles[0])
+                upper.append(quartiles[2])
+            ax.plot(sizes, means, marker="o", markersize=4, color=colours[key], label=names[key])
+            ax.fill_between(sizes, lower, upper, color=colours[key], alpha=.12)
+        log_scale(ax, "y")
+        ax.set_xticks(sizes)
+        ax.set(xlabel="Grid cells (rows × columns)", ylabel="Grounding time (s, log scale)",
+               title="C. Scalability: mean and interquartile range")
+        ax.legend(frameon=False, fontsize=9)
+        ax.grid(which="major", alpha=.18)
+
+    def draw_cumulative(ax):
+        for key in encodings:
+            ordered = sorted(values[key])
+            ax.step([ordered[0], *ordered], [0, *[100 * i / len(ordered) for i in range(1, len(ordered) + 1)]],
+                    where="post", color=colours[key], label=names[key])
+        log_scale(ax, "x")
+        ax.set(xlabel="Grounding time per instance (s, log scale)",
+               ylabel="Instances grounded within this time (%)", ylim=(0, 102),
+               title="D. Cumulative grounding time distribution")
+        ax.yaxis.set_major_locator(MaxNLocator(5))
+        ax.legend(frameon=False, fontsize=9, loc="lower right")
+        ax.grid(which="major", alpha=.18)
+
+    def size_axis(ax, title, categorical=False, logarithmic=True):
+        ax.set_yticks(range(len(sizes)) if categorical else sizes, [str(size) for size in sizes])
+        if logarithmic:
+            log_scale(ax, "x")
+        ax.set(xlabel="Grounding time (s, log scale)" if logarithmic else "Mean grounding time (s)",
+               ylabel="Grid cells (rows × columns)", title=title)
+        ax.grid(which="major", alpha=.18)
+        ax.legend(frameon=False, fontsize=9, loc="lower right")
+
+    def draw_size_mean(ax):
+        width = .75 / len(encodings)
+        for index, key in enumerate(encodings):
+            positions = [position + (index - (len(encodings) - 1) / 2) * width
+                         for position in range(len(sizes))]
+            ax.barh(positions, [statistics.mean(size_values[key][size]) for size in sizes],
+                    height=width * .9, color=colours[key], label=names[key])
+        size_axis(ax, "A. Mean grounding time by grid size", categorical=True, logarithmic=False)
+
+    def draw_size_distribution(ax):
+        width = .75 / len(encodings)
+        for index, key in enumerate(encodings):
+            positions = [position + (index - (len(encodings) - 1) / 2) * width
+                         for position in range(len(sizes))]
+            boxes = ax.boxplot([size_values[key][size] for size in sizes],
+                               positions=positions, widths=width * .8, vert=False,
+                               patch_artist=True, manage_ticks=False,
+                               medianprops={"color": "#202d3a", "linewidth": 1.2},
+                               flierprops={"marker": ".", "markersize": 3, "alpha": .4,
+                                           "markeredgecolor": colours[key]})
+            for patch in boxes["boxes"]:
+                patch.set(facecolor=colours[key], alpha=.7)
+            boxes["boxes"][0].set_label(names[key])
+        size_axis(ax, "B. Distribution within each grid size", categorical=True)
+
+    def draw_size_scalability(ax):
+        for key in encodings:
+            measured = [size_values[key][size] for size in sizes]
+            means = [statistics.mean(series) for series in measured]
+            quartiles = [statistics.quantiles(series, n=4, method="inclusive")
+                         if len(series) > 1 else series * 3 for series in measured]
+            ax.plot(means, sizes, marker="o", markersize=4, color=colours[key], label=names[key])
+            ax.fill_betweenx(sizes, [q[0] for q in quartiles], [q[2] for q in quartiles],
+                             color=colours[key], alpha=.12)
+        size_axis(ax, "C. Scalability: mean and interquartile range")
+
+    def draw_size_instances(ax):
+        for index, key in enumerate(encodings):
+            problems = sorted(common)
+            ax.scatter([instance_means[key][p] for p in problems],
+                       [group_key(p)[0] * group_key(p)[1] for p in problems],
+                       s=18, alpha=.45, linewidths=0, marker=("o", "s", "^")[index],
+                       color=colours[key], label=names[key])
+        size_axis(ax, "D. Individual instances by grid size")
+
+    def save(fig, name):
+        fig.savefig(directory / f"{name}.png", dpi=180, bbox_inches="tight")
+        plt.close(fig)
+
+    files = []
+    views = [("grounding-mean", draw_mean), ("grounding-distribution", draw_distribution),
+             ("grounding-scalability", draw_scalability), ("grounding-cumulative", draw_cumulative)]
+    size_views = [("grounding-grid-y-mean", draw_size_mean),
+                  ("grounding-grid-y-distribution", draw_size_distribution),
+                  ("grounding-grid-y-scalability", draw_size_scalability),
+                  ("grounding-grid-y-instances", draw_size_instances)]
+    with plt.rc_context({"font.size": 10, "axes.spines.top": False,
+                         "axes.spines.right": False, "axes.axisbelow": True}):
+        for chart_views, overview, title, height in (
+            (views, "grounding-overview", "Grounding comparison by encoding", 9),
+            (size_views, "grounding-grid-y-overview", "Grounding comparison by grid size", 11),
+        ):
+            for name, draw in chart_views:
+                fig, ax = plt.subplots(figsize=(8.5, 4.8 if chart_views is views else 6.2))
+                draw(ax)
+                fig.suptitle(subtitle, fontsize=10, y=.98, color="#4b5563")
+                fig.text(.5, .015, footer, ha="center", fontsize=8, color="#4b5563")
+                fig.tight_layout(rect=(0, .055, 1, .94))
+                save(fig, name)
+                files.append(name)
+            fig, axes = plt.subplots(2, 2, figsize=(14, height))
+            for ax, (_, draw) in zip(axes.flat, chart_views):
+                draw(ax)
+            fig.suptitle(f"{title}\n{subtitle}", fontsize=13, y=.99)
+            fig.text(.5, .012, footer, ha="center", fontsize=9, color="#4b5563")
+            fig.tight_layout(rect=(0, .045, 1, .93), h_pad=3, w_pad=3)
+            save(fig, overview)
+            files.append(overview)
+        all_values = [value for series in values.values() for value in series]
+        lower = min(all_values) / 1.3 if min(all_values) > 0 else 0
+        upper = max(all_values) * 1.3 if max(all_values) > 0 else 1
+        problems = sorted(common)
+        markers = {"direct-base": "o", "direct-new": "s", "granular": "^"}
+        for reference in ("direct-new", "direct-base", "granular"):
+            if reference not in encodings or len(encodings) < 2:
+                continue
+            fig, ax = plt.subplots(figsize=(8, 7.5))
+            for compared in encodings:
+                if compared == reference:
+                    continue
+                ax.scatter([instance_means[reference][p] for p in problems],
+                           [instance_means[compared][p] for p in problems],
+                           color=colours[compared], marker=markers[compared],
+                           s=27, alpha=.6, linewidths=0, label=names[compared], zorder=3)
+            ax.plot([lower, upper], [lower, upper], linestyle="--", color="#59636e",
+                    linewidth=1.2, label="Equal grounding time (y = x)", zorder=2)
+            log_scale(ax, "x")
+            log_scale(ax, "y")
+            ax.set(xlim=(lower, upper), ylim=(lower, upper),
+                   xlabel=f"{names[reference]} grounding time (s, log scale)",
+                   ylabel="Compared encoding grounding time (s, log scale)",
+                   title=f"Grounding time — reference: {names[reference]}")
+            ax.set_aspect("equal", adjustable="box")
+            ax.grid(which="major", alpha=.18)
+            ax.legend(frameon=False, fontsize=9,
+                      loc="upper left" if reference == "direct-base" else "lower right")
+            fig.suptitle(subtitle, fontsize=10, y=.98, color="#4b5563")
+            fig.text(.5, .04, "Each point pairs the same instance; below the diagonal = faster than the reference.",
+                     ha="center", fontsize=8, color="#4b5563")
+            fig.text(.5, .015, footer, ha="center", fontsize=8, color="#4b5563")
+            fig.tight_layout(rect=(0, .075, 1, .94))
+            name = f"grounding-scatter-{reference}"
+            save(fig, name)
+            files.append(name)
+    return files
 
 
 def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]], common: set[str], timeout: float, all_tested: bool = False) -> list[str]:
@@ -468,8 +796,21 @@ def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]]
     plt.rcParams.update({"font.size": 10, "axes.spines.top": False, "axes.spines.right": False})
     files = []
     prefix = "all-tested-" if all_tested else ""
+    heuristic_comparison = directory.name == "heuristic-comparison"
+    planner_comparison = directory.name == "planner-comparison"
 
     def style(index):
+        if heuristic_comparison:
+            # Colour identifies the heuristic; line style identifies the search.
+            key = specs[index].key
+            return {"color": plt.get_cmap("tab10")(0 if "capacity" in key else 1),
+                    "linestyle": "--" if "greedy" in key else "-"}
+        if planner_comparison:
+            key = specs[index].key
+            linestyle = ("--" if specs[index].source == "eprime"
+                         else ":" if key in {"fdm", "symk"} else "-")
+            return {"color": plt.get_cmap("tab10")(index % 10),
+                    "linestyle": linestyle}
         return {"color": plt.get_cmap("tab20")(index % 20),
                 "linestyle": ("-", "--", "-.", ":")[(index // 20) % 4]}
 
@@ -500,11 +841,47 @@ def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]]
         y_ticks.append(instance_count)
     ax.set_ylim(0, max(1, instance_count))
     ax.set_yticks(y_ticks)
-    ax.set(xlabel="Runtime per instance (s, log3 scale)", ylabel="Number of instances solved",
-           title=(f"All tested models — {instance_count} observed instances (partial runs included)" if all_tested
-                  else f"Coverage over time — {instance_count} common completed instances"))
+    if planner_comparison:
+        ax.set_xlabel("Runtime in second (log3 scale)", fontweight="bold")
+        ax.set_ylabel("Number of solved instances", fontweight="bold")
+    else:
+        ax.set(xlabel="Runtime per instance (s, log3 scale)", ylabel="Number of instances solved",
+               title=(f"All tested models — {instance_count} observed instances (partial runs included)" if all_tested
+                      else f"Heuristic comparison — Direct new numeric model — {instance_count} instances" if heuristic_comparison
+                      else f"Coverage over time — {instance_count} common completed instances"))
     ax.grid(alpha=.2)
-    ax.legend(fontsize=8, loc="upper left", bbox_to_anchor=(1.02, 1))
+    if planner_comparison:
+        from matplotlib.lines import Line2D
+        from matplotlib.offsetbox import AnchoredOffsetbox, DrawingArea, HPacker, TextArea, VPacker
+
+        legend_fontsize = 10
+        encodings = [ENCODING_LABELS.get(spec.encoding, "")
+                     for spec in specs]
+        label_boxes = [TextArea(spec.label, textprops={"fontsize": legend_fontsize}) for spec in specs]
+        for label_box in label_boxes:
+            label_box.set_figure(fig)
+        renderer = fig.canvas.get_renderer()
+        label_width = max(box.get_bbox(renderer).width for box in label_boxes) * 72 / fig.dpi
+        legend_rows = []
+        for index, (label_box, encoding) in enumerate(zip(label_boxes, encodings)):
+            sample = DrawingArea(24, 10)
+            sample.add_artist(Line2D([0, 24], [5, 5], **style(index)))
+            entry = HPacker(children=[sample, label_box], align="center", pad=0, sep=6)
+            label_padding = label_width - label_box.get_bbox(renderer).width * 72 / fig.dpi
+            legend_rows.append(HPacker(
+                children=[entry, TextArea(encoding, textprops={"fontsize": legend_fontsize})],
+                align="center", pad=0, sep=14 + label_padding,
+            ))
+        # Pack each label and encoding together to align their rows even when
+        # math superscripts make the planner labels taller than plain text.
+        legend = AnchoredOffsetbox(
+            loc="lower right", child=VPacker(children=legend_rows, align="left", pad=0, sep=4),
+            prop={"size": legend_fontsize}, pad=.4, borderpad=.5, frameon=True,
+        )
+        legend.patch.set(facecolor="white", edgecolor=".8", alpha=.95)
+        ax.add_artist(legend)
+    else:
+        ax.legend(fontsize=8, loc="upper left", bbox_to_anchor=(1.02, 1))
     save(fig, "solved-over-time")
 
     groups = sorted({group_key(p) for p in common}, key=lambda g: (g[0] * g[1], *g))
@@ -580,9 +957,17 @@ def main() -> None:
     plot_output = OUTPUT / "plots"
     table_output.mkdir(parents=True, exist_ok=True)
     plot_output.mkdir(parents=True, exist_ok=True)
+    write_csv(table_output / "grounding-by-encoding.csv",
+              grounding_by_encoding([specs[key] for key in sorted(keys)], data))
+    grounding_plots(plot_output / "grounding", table_output,
+                    [specs[key] for key in sorted(keys)], data)
     reports = []
     for name, suite_keys in suites.items():
-        report = write_suite(table_output / name, plot_output / name, [specs[k] for k in suite_keys], data, TIMEOUT)
+        suite_specs = [specs[k] for k in suite_keys]
+        if name in COMPARISON_LABELS:
+            suite_specs = [replace(spec, label=COMPARISON_LABELS[name][spec.key])
+                           for spec in suite_specs]
+        report = write_suite(table_output / name, plot_output / name, suite_specs, data, TIMEOUT)
         reports.append(report)
     write_csv(table_output / "comparisons.csv", reports)
 

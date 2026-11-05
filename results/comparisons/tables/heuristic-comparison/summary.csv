@@ -1,0 +1,5 @@
+run,instances,solved,coverage_percent,par2_timeout_sec,par2_score,best_runtime_sec,mean_solved_runtime_sec,worst_solved_runtime_sec,mean_search_time_ms,grounding_time_n,mean_grounding_time_ms,mean_expanded_nodes,mean_states_evaluated,expanded_nodes_per_sec,states_evaluated_per_sec,ms_per_heuristic_evaluation,mean_peak_memory_mb
+$A^*\! -\! h^{capacity}$,261,247/261,94.636,900.000,25828.886,0.229,2.546,117.716,1763.263,261,495.234,35037.713,53076.854,15208.038,24084.464,0.010871,
+$A^*\! -\! h^{colour}$,261,251/261,96.169,900.000,18312.627,0.213,1.246,44.346,413.618,261,491.989,4195.502,6470.789,5612.985,9256.639,0.028939,
+$GBFS\! -\! h^{capacity}$,261,251/261,96.169,900.000,18248.499,0.284,0.990,7.834,30.104,261,548.590,250.932,268.494,2698.328,4649.267,0.045013,
+$GBFS\! -\! h^{colour}$,261,251/261,96.169,900.000,18229.305,0.203,0.914,8.196,38.251,261,518.042,321.857,339.454,3221.670,5087.432,0.047562,

@@ -1,5 +1,5 @@
-run,instances,solved,coverage_percent,par2_timeout_sec,par2_score,best_runtime_sec,mean_solved_runtime_sec,worst_solved_runtime_sec,mean_search_time_ms,mean_expanded_nodes,mean_states_evaluated,expanded_nodes_per_sec,states_evaluated_per_sec,ms_per_heuristic_evaluation,mean_peak_memory_mb
-Granular GBFS colour,261,220/261,84.291,900.000,75751.226,0.428,8.869,548.155,7881.123,3688.632,6298.505,616.960,1335.887,0.105162,
-Granular GBFS hadd,261,244/261,93.487,900.000,37223.496,0.547,27.145,845.467,24924.439,672.607,1045.111,162.396,236.426,9.880478,
-Direct GBFS colour,261,250/261,95.785,900.000,23071.456,0.600,13.086,84.172,20.016,319.820,336.236,2809.287,4716.434,0.083002,
-Direct GBFS hadd,261,250/261,95.785,900.000,26451.661,0.639,26.607,625.168,11185.708,49.496,62.308,38.021,84.468,74.334902,
+run,instances,solved,coverage_percent,par2_timeout_sec,par2_score,best_runtime_sec,mean_solved_runtime_sec,worst_solved_runtime_sec,mean_search_time_ms,grounding_time_n,mean_grounding_time_ms,mean_expanded_nodes,mean_states_evaluated,expanded_nodes_per_sec,states_evaluated_per_sec,ms_per_heuristic_evaluation,mean_peak_memory_mb
+Granular GBFS colour,261,220/261,84.291,900.000,75751.226,0.428,8.869,548.155,7881.123,261,317.751,3688.632,6298.505,616.960,1335.887,0.105162,
+Granular GBFS hadd,261,244/261,93.487,900.000,37223.496,0.547,27.145,845.467,24924.439,261,326.682,672.607,1045.111,162.396,236.426,9.880478,
+Direct base GBFS colour,261,240/261,91.954,900.000,40861.082,0.603,12.755,84.395,27.450,252,10157.734,625.542,642.492,3053.487,4914.502,0.087773,
+Direct base GBFS hadd,261,240/261,91.954,900.000,43953.647,0.639,25.640,625.168,11651.779,252,10161.944,46.171,59.517,39.356,87.739,68.848645,
