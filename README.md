@@ -191,7 +191,7 @@ To generate all default comparisons:
 python3 scripts/global_comparison.py
 ```
 
-The script accepts no options: it automatically discovers all `stats.csv` files under `results/pddl/` and `results/eprime/` and generates the `greedy`, `enhsp`, `eprime`, and `all-runs` comparisons when available.
+The script accepts no options: it automatically discovers all `stats.csv` files under `results/pddl/` and `results/eprime/` and generates comparison tables for all available suites. Plots are saved only as SVG and PDF; each PDF is converted from its SVG using `rsvg-convert`, which must be installed and available on `PATH`. The `greedy` and `eprime` suites produce tables only. The heuristic and planner comparisons produce only the solved-over-time plot.
 
 
 Model names, planner presets and files use the same naming convention:

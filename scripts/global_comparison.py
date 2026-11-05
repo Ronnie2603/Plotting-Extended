@@ -9,7 +9,9 @@ import csv
 import json
 import math
 import re
+import shutil
 import statistics
+import subprocess
 import sys
 from collections import Counter
 from dataclasses import dataclass, replace
@@ -30,10 +32,10 @@ HEURISTIC_COMPARISON_LABELS = {
 }
 # Planner comparison table: exclude Chuffed sa-deadend-v5 (commented-out row).
 PLANNER_COMPARISON_LABELS = {
-    "direct-new-wastar-blind": r"ENHSP (Direct new) $A^*$ — blind",
-    "direct-new-wastar-colour": r"ENHSP (Direct new) $A^*$ — $h^{colour}$",
-    "direct-new-greedy-hadd": r"ENHSP (Direct new) $GBFS$ — $h^{add}$",
-    "direct-new-greedy-colour": r"ENHSP (Direct new) $GBFS$ — $h^{colour}$",
+    "direct-new-wastar-blind": r"ENHSP $A^*$ — blind",
+    "direct-new-wastar-colour": r"ENHSP $A^*$ — $h^{colour}$",
+    "direct-new-greedy-hadd": r"ENHSP $GBFS$ — $h^{add}$",
+    "direct-new-greedy-colour": r"ENHSP $GBFS$ — $h^{colour}$",
     "fdm": r"FD(m) $A^*$ — blind",
     "symk": "SymK — Bidirectional search",
     "eprime/sat/sat-finetune/sa-deadend-v5": "SAT — sa-deadend-v5",
@@ -551,6 +553,14 @@ def group_key(problem: str) -> tuple[int, int, int]:
     return tuple(map(int, match.groups())) if match else (0, 0, 0)
 
 
+def save_vector_plot(fig, path: Path, bbox_inches: str | None = "tight") -> None:
+    """Save the SVG source, then convert that exact SVG to PDF."""
+    svg = path.with_suffix(".svg")
+    fig.savefig(svg, bbox_inches=bbox_inches)
+    subprocess.run(["rsvg-convert", "--format=pdf", "--output", str(path.with_suffix(".pdf")),
+                    str(svg)], check=True)
+
+
 def grounding_plots(
     directory: Path, table_directory: Path,
     specs: list[RunSpec], data: dict[str, dict[str, Row]],
@@ -559,7 +569,7 @@ def grounding_plots(
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from matplotlib.ticker import FuncFormatter, MaxNLocator, NullLocator
+    from matplotlib.ticker import FuncFormatter, NullLocator
 
     groups, measurements = enhsp_grounding_measurements(specs, data)
     if not groups:
@@ -594,7 +604,6 @@ def grounding_plots(
                      if group_key(p)[0] * group_key(p)[1] == size] for size in sizes}
         for key in encodings
     }
-    subtitle = f"ENHSP | {len(common)} common measured instances | runs averaged per instance"
     observed = set().union(*(set(data[run.key]) for runs in groups.values() for run in runs))
     footer = f"{len(observed) - len(common)} of {len(observed)} tested instances excluded: grounding unavailable in at least one encoding."
     formatter = FuncFormatter(lambda value, position: f"{value:g}")
@@ -614,22 +623,8 @@ def grounding_plots(
                         textcoords="offset points", va="center", fontweight="bold")
         ax.invert_yaxis()
         ax.set_xlim(0, max(means) * 1.24 if max(means) > 0 else 1)
-        ax.set(xlabel="Mean grounding time (s)", title="A. Mean by encoding")
+        ax.set(xlabel="Mean grounding time (s)")
         ax.grid(axis="x", alpha=.18)
-
-    def draw_distribution(ax):
-        boxes = ax.boxplot([values[key] for key in encodings], vert=False,
-                           patch_artist=True, widths=.5, showfliers=True,
-                           medianprops={"color": "#202d3a", "linewidth": 1.8},
-                           flierprops={"marker": ".", "markersize": 4, "alpha": .5})
-        for patch, colour in zip(boxes["boxes"], palette):
-            patch.set(facecolor=colour, alpha=.7)
-        ax.set_yticks(range(1, len(labels) + 1), labels)
-        ax.invert_yaxis()
-        log_scale(ax, "x")
-        ax.set(xlabel="Grounding time per instance (s, log scale)",
-               title="B. Distribution across instances")
-        ax.grid(axis="x", which="major", alpha=.18)
 
     def draw_scalability(ax):
         for key in encodings:
@@ -644,48 +639,31 @@ def grounding_plots(
             ax.fill_between(sizes, lower, upper, color=colours[key], alpha=.12)
         log_scale(ax, "y")
         ax.set_xticks(sizes)
-        ax.set(xlabel="Grid cells (rows × columns)", ylabel="Grounding time (s, log scale)",
-               title="C. Scalability: mean and interquartile range")
+        ax.set(xlabel="Grid cells (rows × columns)", ylabel="Grounding time in seconds (log scale)")
         ax.legend(frameon=False, fontsize=9)
         ax.grid(which="major", alpha=.18)
 
-    def draw_cumulative(ax):
-        for key in encodings:
-            ordered = sorted(values[key])
-            ax.step([ordered[0], *ordered], [0, *[100 * i / len(ordered) for i in range(1, len(ordered) + 1)]],
-                    where="post", color=colours[key], label=names[key])
-        log_scale(ax, "x")
-        ax.set(xlabel="Grounding time per instance (s, log scale)",
-               ylabel="Instances grounded within this time (%)", ylim=(0, 102),
-               title="D. Cumulative grounding time distribution")
-        ax.yaxis.set_major_locator(MaxNLocator(5))
-        ax.legend(frameon=False, fontsize=9, loc="lower right")
-        ax.grid(which="major", alpha=.18)
-
-    def size_axis(ax, title, categorical=False, logarithmic=True):
-        ax.set_yticks(range(len(sizes)) if categorical else sizes, [str(size) for size in sizes])
-        if logarithmic:
-            log_scale(ax, "x")
-        ax.set(xlabel="Grounding time (s, log scale)" if logarithmic else "Mean grounding time (s)",
-               ylabel="Grid cells (rows × columns)", title=title)
-        ax.grid(which="major", alpha=.18)
-        ax.legend(frameon=False, fontsize=9, loc="lower right")
-
-    def draw_size_mean(ax):
-        width = .75 / len(encodings)
-        for index, key in enumerate(encodings):
-            positions = [position + (index - (len(encodings) - 1) / 2) * width
-                         for position in range(len(sizes))]
-            ax.barh(positions, [statistics.mean(size_values[key][size]) for size in sizes],
-                    height=width * .9, color=colours[key], label=names[key])
-        size_axis(ax, "A. Mean grounding time by grid size", categorical=True, logarithmic=False)
-
     def draw_size_distribution(ax):
+        legend_names = {"direct-base": r"Direct $\mathit{Base}$",
+                        "direct-new": r"Direct $\mathit{New}$", "granular": "Granular"}
+        # Each encoding contributes all measured instances, including grid sizes
+        # for which another encoding has no grounding measurements.
+        distribution_sizes = sorted({group_key(p)[0] * group_key(p)[1]
+                                     for measured in instance_means.values() for p in measured})
         width = .75 / len(encodings)
         for index, key in enumerate(encodings):
+            measured_by_size = {
+                size: [value for p, value in sorted(instance_means[key].items())
+                       if group_key(p)[0] * group_key(p)[1] == size]
+                for size in distribution_sizes
+            }
+            available = [(position, measured_by_size[size])
+                         for position, size in enumerate(distribution_sizes) if measured_by_size[size]]
+            if not available:
+                continue
             positions = [position + (index - (len(encodings) - 1) / 2) * width
-                         for position in range(len(sizes))]
-            boxes = ax.boxplot([size_values[key][size] for size in sizes],
+                         for position, _ in available]
+            boxes = ax.boxplot([measured for _, measured in available],
                                positions=positions, widths=width * .8, vert=False,
                                patch_artist=True, manage_ticks=False,
                                medianprops={"color": "#202d3a", "linewidth": 1.2},
@@ -693,68 +671,53 @@ def grounding_plots(
                                            "markeredgecolor": colours[key]})
             for patch in boxes["boxes"]:
                 patch.set(facecolor=colours[key], alpha=.7)
-            boxes["boxes"][0].set_label(names[key])
-        size_axis(ax, "B. Distribution within each grid size", categorical=True)
-
-    def draw_size_scalability(ax):
-        for key in encodings:
-            measured = [size_values[key][size] for size in sizes]
-            means = [statistics.mean(series) for series in measured]
-            quartiles = [statistics.quantiles(series, n=4, method="inclusive")
-                         if len(series) > 1 else series * 3 for series in measured]
-            ax.plot(means, sizes, marker="o", markersize=4, color=colours[key], label=names[key])
-            ax.fill_betweenx(sizes, [q[0] for q in quartiles], [q[2] for q in quartiles],
-                             color=colours[key], alpha=.12)
-        size_axis(ax, "C. Scalability: mean and interquartile range")
-
-    def draw_size_instances(ax):
-        for index, key in enumerate(encodings):
-            problems = sorted(common)
-            ax.scatter([instance_means[key][p] for p in problems],
-                       [group_key(p)[0] * group_key(p)[1] for p in problems],
-                       s=18, alpha=.45, linewidths=0, marker=("o", "s", "^")[index],
-                       color=colours[key], label=names[key])
-        size_axis(ax, "D. Individual instances by grid size")
+            boxes["boxes"][0].set_label(legend_names[key])
+        ax.set_yticks(range(len(distribution_sizes)), [str(size) for size in distribution_sizes])
+        log_scale(ax, "x")
+        ax.set_xlabel("Grounding time in seconds (log scale)", fontsize=14, fontweight="bold")
+        ax.set_ylabel("Grid cells (rows × columns)", fontsize=14, fontweight="bold")
+        ax.grid(which="major", alpha=.18)
+        ax.tick_params(axis="both", which="both", labelsize=12)
+        legend = ax.legend(fontsize=11, loc="lower right", frameon=True,
+                           facecolor="white", edgecolor="black", framealpha=1,
+                           fancybox=False, borderpad=.6, labelspacing=.5, handlelength=2.2)
+        legend.get_frame().set_linewidth(1)
 
     def save(fig, name):
-        fig.savefig(directory / f"{name}.png", dpi=180, bbox_inches="tight")
+        # Preserve the square canvas for the standalone grid distribution.
+        bbox = None if name == "grounding-grid-y-distribution" else "tight"
+        save_vector_plot(fig, directory / name, bbox_inches=bbox)
         plt.close(fig)
 
     files = []
-    views = [("grounding-mean", draw_mean), ("grounding-distribution", draw_distribution),
-             ("grounding-scalability", draw_scalability), ("grounding-cumulative", draw_cumulative)]
-    size_views = [("grounding-grid-y-mean", draw_size_mean),
-                  ("grounding-grid-y-distribution", draw_size_distribution),
-                  ("grounding-grid-y-scalability", draw_size_scalability),
-                  ("grounding-grid-y-instances", draw_size_instances)]
+    views = [("grounding-mean", draw_mean), ("grounding-scalability", draw_scalability)]
     with plt.rc_context({"font.size": 10, "axes.spines.top": False,
                          "axes.spines.right": False, "axes.axisbelow": True}):
-        for chart_views, overview, title, height in (
-            (views, "grounding-overview", "Grounding comparison by encoding", 9),
-            (size_views, "grounding-grid-y-overview", "Grounding comparison by grid size", 11),
-        ):
-            for name, draw in chart_views:
-                fig, ax = plt.subplots(figsize=(8.5, 4.8 if chart_views is views else 6.2))
-                draw(ax)
-                fig.suptitle(subtitle, fontsize=10, y=.98, color="#4b5563")
-                fig.text(.5, .015, footer, ha="center", fontsize=8, color="#4b5563")
-                fig.tight_layout(rect=(0, .055, 1, .94))
-                save(fig, name)
-                files.append(name)
-            fig, axes = plt.subplots(2, 2, figsize=(14, height))
-            for ax, (_, draw) in zip(axes.flat, chart_views):
-                draw(ax)
-            fig.suptitle(f"{title}\n{subtitle}", fontsize=13, y=.99)
-            fig.text(.5, .012, footer, ha="center", fontsize=9, color="#4b5563")
-            fig.tight_layout(rect=(0, .045, 1, .93), h_pad=3, w_pad=3)
-            save(fig, overview)
-            files.append(overview)
+        for name, draw in views:
+            fig, ax = plt.subplots(figsize=(8.5, 4.8))
+            draw(ax)
+            fig.text(.5, .015, footer, ha="center", fontsize=8, color="#4b5563")
+            fig.tight_layout(rect=(0, .055, 1, 1))
+            save(fig, name)
+            files.append(name)
+        fig, axes = plt.subplots(1, 2, figsize=(14, 4.8))
+        for ax, (_, draw) in zip(axes, views):
+            draw(ax)
+        fig.text(.5, .012, footer, ha="center", fontsize=9, color="#4b5563")
+        fig.tight_layout(rect=(0, .045, 1, 1), w_pad=3)
+        save(fig, "grounding-overview")
+        files.append("grounding-overview")
+        fig, ax = plt.subplots(figsize=(8.5, 8.5))
+        draw_size_distribution(ax)
+        fig.tight_layout()
+        save(fig, "grounding-grid-y-distribution")
+        files.append("grounding-grid-y-distribution")
         all_values = [value for series in values.values() for value in series]
         lower = min(all_values) / 1.3 if min(all_values) > 0 else 0
         upper = max(all_values) * 1.3 if max(all_values) > 0 else 1
         problems = sorted(common)
         markers = {"direct-base": "o", "direct-new": "s", "granular": "^"}
-        for reference in ("direct-new", "direct-base", "granular"):
+        for reference in ("direct-new",):
             if reference not in encodings or len(encodings) < 2:
                 continue
             fig, ax = plt.subplots(figsize=(8, 7.5))
@@ -771,17 +734,15 @@ def grounding_plots(
             log_scale(ax, "y")
             ax.set(xlim=(lower, upper), ylim=(lower, upper),
                    xlabel=f"{names[reference]} grounding time (s, log scale)",
-                   ylabel="Compared encoding grounding time (s, log scale)",
-                   title=f"Grounding time — reference: {names[reference]}")
+                   ylabel="Compared encoding grounding time (s, log scale)")
             ax.set_aspect("equal", adjustable="box")
             ax.grid(which="major", alpha=.18)
             ax.legend(frameon=False, fontsize=9,
                       loc="upper left" if reference == "direct-base" else "lower right")
-            fig.suptitle(subtitle, fontsize=10, y=.98, color="#4b5563")
             fig.text(.5, .04, "Each point pairs the same instance; below the diagonal = faster than the reference.",
                      ha="center", fontsize=8, color="#4b5563")
             fig.text(.5, .015, footer, ha="center", fontsize=8, color="#4b5563")
-            fig.tight_layout(rect=(0, .075, 1, .94))
+            fig.tight_layout(rect=(0, .075, 1, 1))
             name = f"grounding-scatter-{reference}"
             save(fig, name)
             files.append(name)
@@ -789,6 +750,8 @@ def grounding_plots(
 
 
 def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]], common: set[str], timeout: float, all_tested: bool = False) -> list[str]:
+    if directory.name in {"greedy", "eprime"}:
+        return []
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -816,18 +779,17 @@ def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]]
 
     def save(fig, name):
         fig.tight_layout()
-        for suffix in ("svg", "png"):
-            fig.savefig(directory / f"{prefix}{name}.{suffix}", dpi=160, bbox_inches="tight")
+        save_vector_plot(fig, directory / f"{prefix}{name}")
         plt.close(fig)
         files.append(name)
 
     log_base = 3
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(8.5 if planner_comparison else 10, 5))
     for index, spec in enumerate(specs):
         times = sorted(data[spec.key][p].runtime for p in common
                        if p in data[spec.key] and data[spec.key][p].solved
                        and data[spec.key][p].runtime is not None)
-        ax.step([0, *times, timeout], [0, *range(1, len(times) + 1), len(times)],
+        ax.step([0, *times], [0, *range(1, len(times) + 1)],
                 where="post", label=spec.label, **style(index))
     ticks = [0, 1]
     ticks.extend(log_base ** exponent for exponent in range(1, math.floor(math.log(timeout / log_base, log_base)) + 1))
@@ -835,6 +797,7 @@ def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]]
         ticks.append(timeout)
     ax.set_xscale("symlog", base=log_base, linthresh=1)
     ax.set_xticks(ticks, [f"{tick:g}" for tick in ticks])
+    ax.set_xlim(left=0)
     instance_count = len(common)
     y_ticks = list(range(0, instance_count, 50))
     if instance_count not in y_ticks:
@@ -842,20 +805,18 @@ def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]]
     ax.set_ylim(0, max(1, instance_count))
     ax.set_yticks(y_ticks)
     if planner_comparison:
-        ax.set_xlabel("Runtime in second (log3 scale)", fontweight="bold")
-        ax.set_ylabel("Number of solved instances", fontweight="bold")
+        ax.set_xlabel("Runtime in seconds (log scale)", fontsize=14, fontweight="bold")
+        ax.set_ylabel("Number of solved instances", fontsize=14, fontweight="bold")
     else:
-        ax.set(xlabel="Runtime per instance (s, log3 scale)", ylabel="Number of instances solved",
-               title=(f"All tested models — {instance_count} observed instances (partial runs included)" if all_tested
-                      else f"Heuristic comparison — Direct new numeric model — {instance_count} instances" if heuristic_comparison
-                      else f"Coverage over time — {instance_count} common completed instances"))
+        ax.set(xlabel="Runtime per instance (s, log3 scale)", ylabel="Number of instances solved")
     ax.grid(alpha=.2)
     if planner_comparison:
         from matplotlib.lines import Line2D
         from matplotlib.offsetbox import AnchoredOffsetbox, DrawingArea, HPacker, TextArea, VPacker
 
-        legend_fontsize = 10
-        encodings = [ENCODING_LABELS.get(spec.encoding, "")
+        legend_fontsize = 11
+        encoding_labels = {"direct-base": "Direct", "direct-new": "Direct", "granular": "Granular"}
+        encodings = [encoding_labels.get(spec.encoding, "")
                      for spec in specs]
         label_boxes = [TextArea(spec.label, textprops={"fontsize": legend_fontsize}) for spec in specs]
         for label_box in label_boxes:
@@ -866,23 +827,29 @@ def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]]
         for index, (label_box, encoding) in enumerate(zip(label_boxes, encodings)):
             sample = DrawingArea(24, 10)
             sample.add_artist(Line2D([0, 24], [5, 5], **style(index)))
-            entry = HPacker(children=[sample, label_box], align="center", pad=0, sep=6)
-            label_padding = label_width - label_box.get_bbox(renderer).width * 72 / fig.dpi
+            # A fixed first-column width keeps Direct and Granular aligned
+            # across renderers, including SVG and its PDF conversion.
+            entry = HPacker(children=[sample, label_box], align="center", pad=0, sep=6,
+                            width=24 + 6 + label_width)
             legend_rows.append(HPacker(
                 children=[entry, TextArea(encoding, textprops={"fontsize": legend_fontsize})],
-                align="center", pad=0, sep=14 + label_padding,
+                align="center", pad=0, sep=10,
             ))
         # Pack each label and encoding together to align their rows even when
         # math superscripts make the planner labels taller than plain text.
         legend = AnchoredOffsetbox(
             loc="lower right", child=VPacker(children=legend_rows, align="left", pad=0, sep=4),
-            prop={"size": legend_fontsize}, pad=.4, borderpad=.5, frameon=True,
+            bbox_to_anchor=(1.005, .015), bbox_transform=ax.transAxes,
+            prop={"size": legend_fontsize}, pad=.4, borderpad=.3, frameon=True,
         )
         legend.patch.set(facecolor="white", edgecolor=".8", alpha=.95)
         ax.add_artist(legend)
     else:
         ax.legend(fontsize=8, loc="upper left", bbox_to_anchor=(1.02, 1))
-    save(fig, "solved-over-time")
+    save(fig, "planner_cumulative_instances" if planner_comparison else "solved-over-time")
+
+    if heuristic_comparison or planner_comparison:
+        return files
 
     groups = sorted({group_key(p) for p in common}, key=lambda g: (g[0] * g[1], *g))
     fig, ax = plt.subplots(figsize=(max(11, len(groups) * .38), 5))
@@ -893,9 +860,7 @@ def plots(directory: Path, specs: list[RunSpec], data: dict[str, dict[str, Row]]
             rates.append(100 * sum(data[spec.key][p].solved for p in members) / len(members) if members else math.nan)
         ax.plot(range(len(groups)), rates, marker=".", label=spec.label, **style(index))
     ax.set_xticks(range(len(groups)), [f"{r}×{c}, {k}c" for r, c, k in groups], rotation=70, ha="right")
-    ax.set(ylabel="Coverage (%)", ylim=(-3, 103),
-           title=("All tested models — coverage on each run's completed instances" if all_tested
-                  else "Coverage by grid size and colours — common completed cohort"))
+    ax.set(ylabel="Coverage (%)", ylim=(-3, 103))
     ax.legend(fontsize=8, loc="upper left", bbox_to_anchor=(1.02, 1))
     ax.grid(alpha=.2)
     save(fig, "scalability")
@@ -918,7 +883,7 @@ def write_suite(table_directory: Path, plot_directory: Path, specs: list[RunSpec
             grouped.append({"rows": group[0], "cols": group[1], "colours": group[2],
                             **summary(s, data[s.key], cohort, shared & cohort, timeout)})
     write_csv(table_directory / "by-size-summary.csv", grouped)
-    if common:
+    if common and table_directory.name not in {"greedy", "eprime"}:
         plot_directory.mkdir(parents=True, exist_ok=True)
         plots(plot_directory, specs, data, common, timeout)
     if table_directory.name == "all-runs":
@@ -934,6 +899,8 @@ def write_suite(table_directory: Path, plot_directory: Path, specs: list[RunSpec
 def main() -> None:
     if len(sys.argv) != 1:
         raise SystemExit("global_comparison.py does not accept arguments")
+    if shutil.which("rsvg-convert") is None:
+        raise SystemExit("SVG-to-PDF conversion requires rsvg-convert (see README.md).")
     specs, suites = defaults()
     keys = {key for values in suites.values() for key in values}
     warnings = []
