@@ -267,7 +267,7 @@ public class ENHSP {
                 + "hmrp, heuristic based on MRP extraction\n"
                 + "blcost, goal sensitive heuristic (1 to non goal-states, 0 to goal-states)\n"
                 + "blind, full blind heuristic (0 to all states)\n"
-                + "capacity-opt, structural lower bound using max L-shot capacity\n"
+                + "capacity-new, structural lower bound using max L-shot capacity\n"
                 + "ngc, Numeric Goal Counting Heuristic");
         options.addOption("s", true, "allows to select search strategy (default is WAStar):\n"
                 + "gbfs, Greedy Best First Search (f(n) = h(n))\n"
@@ -546,17 +546,17 @@ public class ENHSP {
                 wh = "1";
                 aibrPreprocessing = false;
                 break;
-            case "wastar-colour-opt":
-            case "wastar-capacity-opt":
-                heuristic = "capacity-opt";
+            case "wastar-colour-new":
+            case "wastar-capacity-new":
+                heuristic = "capacity-new";
                 searchEngineString = "WAStar";
                 tieBreaking = "larger_g";
                 if (wh == null) wh = "1";
                 aibrPreprocessing = false;
                 break;
-            case "greedy-colour-opt":
-            case "greedy-capacity-opt":
-                heuristic = "capacity-opt";
+            case "greedy-colour-new":
+            case "greedy-capacity-new":
+                heuristic = "capacity-new";
                 searchEngineString = "gbfs";
                 tieBreaking = "smaller_g";
                 if (wh == null) wh = "1";
@@ -580,8 +580,8 @@ public class ENHSP {
 
     private void setHeuristic() {
 //        System.out.println("ha:" + helpfulActionsPruning + " ht" + helpfulTransitions);
-        if ("colour-opt".equalsIgnoreCase(heuristic)
-                || "capacity-opt".equalsIgnoreCase(heuristic)) {
+        if ("colour-new".equalsIgnoreCase(heuristic)
+                || "capacity-new".equalsIgnoreCase(heuristic)) {
             h = new CapacityOptHeuristic();
         } else {
             h = PDDLHeuristic.getHeuristic(heuristic, heuristicProblem, redundantConstraints, helpfulActions, helpfulTransitions,

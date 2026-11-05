@@ -5,6 +5,23 @@ runner_die() {
     exit 1
 }
 
+runner_enhsp_model() {
+    case "$1" in
+        direct-base|direct-new|granular) printf '%s\n' "$1" ;;
+        *) runner_die "modello non supportato: $1 (valori ammessi: direct-base, direct-new, granular)" ;;
+    esac
+}
+
+runner_enhsp_source() {
+    case "$1:$2" in
+        direct-base:capacity-base) printf 'ENHSP-capacity-base.java\n' ;;
+        direct-base:*) printf 'ENHSP-base.java\n' ;;
+        direct-new:capacity-new) printf 'ENHSP-capacity-new.java\n' ;;
+        direct-new:*) printf 'ENHSP-colour-new.java\n' ;;
+        granular:*) printf 'ENHSP-colour-granular.java\n' ;;
+    esac
+}
+
 runner_abs_path() {
     local path="$1"
     local base="${2:-$(pwd)}"
@@ -132,11 +149,13 @@ runner_problem_list_stream() {
             */*) runner_die "nella lista sono ammessi solo nomi file: $entry" ;;
         esac
         problem_name="$(runner_problem_name_for_model "$entry" "$pddl_model")"
-        if [ "$pddl_model" = "direct" ] || [ "$pddl_model" = "direct-opt" ]; then
-            case "$problem_name" in
-                *-domain.pddl|*-problem.pddl) runner_die "nome problem direct non valido nella lista: $entry" ;;
-            esac
-        fi
+        case "$pddl_model" in
+            direct-base|direct-new)
+                case "$problem_name" in
+                    *-domain.pddl|*-problem.pddl) runner_die "nome problem direct non valido nella lista: $entry" ;;
+                esac
+                ;;
+        esac
         [[ "$problem_name" == $pattern ]] || runner_die "nome problem non valido nella lista: $entry"
         [ -z "${seen[$problem_name]+x}" ] || runner_die "problem duplicato nella lista: $entry"
         seen["$problem_name"]=1

@@ -13,20 +13,20 @@ the state representation to the colleague-style balanced model:
   * islastcol / isbottomrow and blockedrow / blockedcol facts
 
 Supported sources:
-  --model direct    pddl/instances-direct-numeric/*.pddl
-  --model granular  pddl/instances/*-problem.pddl
-  --model balanced  already-balanced problem files
+  --model direct-base    benchmarks/pddl/instances-direct-base-numeric/*.pddl
+  --model granular  benchmarks/pddl/instances-granular-enhsp-compatible/*-problem.pddl
+  --model direct-new  already-balanced problem files
   --model auto      auto-detect
 
-The output is intended for pddl/domains/numeric-balanced-best.pddl, not the
+The output is intended for the plain balanced numeric domain, not the
 hybrid domain with precompiled geometric footprints.
 
 Examples:
-  python3 scripts/convert_to_balanced_plain.py --model direct \
-      pddl/instances-direct-numeric --overwrite
+  python3 scripts/utils/convert_to_balanced_plain.py --model direct-base \
+      benchmarks/pddl/instances-direct-base-numeric --overwrite
 
-  python3 scripts/convert_to_balanced_plain.py --model granular \
-      pddl/instances --overwrite
+  python3 scripts/utils/convert_to_balanced_plain.py --model granular \
+      benchmarks/pddl/instances-granular-enhsp-compatible --overwrite
 """
 
 from __future__ import annotations
@@ -36,6 +36,8 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+
+DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parents[2] / "benchmarks/pddl/instances-direct-new-numeric"
 
 
 CELL_RE = re.compile(r"^r(\d+)c(\d+)$", re.IGNORECASE)
@@ -431,11 +433,11 @@ def normalize_granular(text: str, source: str) -> NormalizedProblem:
 def detect_model(text: str) -> str:
     low = text.lower()
     if "(colour-of " in low or "(colour-id " in low:
-        return "balanced"
+        return "direct-new"
     if "loc_" in low and "(blocks_remaining " in low:
         return "granular"
     if "(coloured " in low and re.search(r"\br\d+c\d+\b", low):
-        return "direct"
+        return "direct-base"
     raise ValueError("Cannot auto-detect source model")
 
 
@@ -526,11 +528,11 @@ def normalize(text: str, source: str, model: str) -> NormalizedProblem:
     if not balanced_parentheses(text):
         raise ValueError(f"{source}: unbalanced parentheses")
     effective = detect_model(text) if model == "auto" else model
-    if effective == "direct":
+    if effective == "direct-base":
         return normalize_direct(text, source)
     if effective == "granular":
         return normalize_granular(text, source)
-    if effective == "balanced":
+    if effective == "direct-new":
         return normalize_balanced(text, source)
     raise ValueError(f"Unsupported model {effective}")
 
@@ -571,10 +573,10 @@ def main() -> int:
         "-o",
         "--output-dir",
         type=Path,
-        default=Path("pddl/instances-direct-numeric-opt"),
-        help="Output directory (default: pddl/instances-direct-numeric-opt)",
+        default=DEFAULT_OUTPUT_DIR,
+        help="Output directory (default: %(default)s)",
     )
-    ap.add_argument("--model", choices=["auto", "direct", "granular", "balanced"], default="auto")
+    ap.add_argument("--model", choices=["auto", "direct-base", "granular", "direct-new"], default="auto")
     ap.add_argument("--overwrite", action="store_true")
     ap.add_argument("--fail-fast", action="store_true", help="Stop on first conversion error")
     args = ap.parse_args()

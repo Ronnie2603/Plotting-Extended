@@ -268,7 +268,7 @@ public class ENHSP {
                 + "hmrp, heuristic based on MRP extraction\n"
                 + "blcost, goal sensitive heuristic (1 to non goal-states, 0 to goal-states)\n"
                 + "blind, full blind heuristic (0 to all states)\n"
-                + "colour-opt, fast domain-specific heuristic for the plotting numeric domain\n"
+                + "colour-new, fast domain-specific heuristic for the plotting numeric domain\n"
                 + "ngc, Numeric Goal Counting Heuristic");
         options.addOption("s", true, "allows to select search strategy (default is WAStar):\n"
                 + "gbfs, Greedy Best First Search (f(n) = h(n))\n"
@@ -547,15 +547,15 @@ public class ENHSP {
                 wh = "1";
                 aibrPreprocessing = false;
                 break;
-            case "wastar-colour-opt":
-                heuristic = "colour-opt";
+            case "wastar-colour-new":
+                heuristic = "colour-new";
                 searchEngineString = "WAStar";
                 tieBreaking = "larger_g";
                 if (wh == null) wh = "1";
                 aibrPreprocessing = false;
                 break;
-            case "greedy-colour-opt":
-                heuristic = "colour-opt";
+            case "greedy-colour-new":
+                heuristic = "colour-new";
                 searchEngineString = "gbfs";
                 tieBreaking = "smaller_g";
                 if (wh == null) wh = "1";
@@ -579,7 +579,7 @@ public class ENHSP {
 
     private void setHeuristic() {
 //        System.out.println("ha:" + helpfulActionsPruning + " ht" + helpfulTransitions);
-        if ("colour-opt".equalsIgnoreCase(heuristic)) {
+        if ("colour-new".equalsIgnoreCase(heuristic)) {
             h = new ColourOptHeuristic();
         } else {
             h = PDDLHeuristic.getHeuristic(heuristic, heuristicProblem, redundantConstraints, helpfulActions, helpfulTransitions,

@@ -2,7 +2,7 @@
 
 Extended workspace for running and comparing experiments on the **Plotting** domain using:
 
-- ENHSP with the direct, direct-opt, and granular PDDL models;
+- ENHSP with the Direct base, Direct new, and Granular PDDL models;
 - Savile Row + Chuffed with Essence Prime models;
 - VAL for PDDL plan validation;
 - Python scripts to generate the shared sample and compare results.
@@ -21,8 +21,8 @@ _Available models_:
 
 | Model | Domain | Instance directory |
 | --- | --- | --- |
-| `direct` | `benchmarks/pddl/domains/numeric.pddl` | `instances-direct-numeric` |
-| `direct-opt` | `benchmarks/pddl/domains/numeric-opt.pddl` | `instances-direct-numeric-opt` |
+| Direct base (`direct-base`) | `benchmarks/pddl/domains/numeric-base.pddl` | `instances-direct-base-numeric` |
+| Direct new (`direct-new`) | `benchmarks/pddl/domains/numeric-new.pddl` | `instances-direct-new-numeric` |
 | `granular` | one domain per instance | `instances-granular-enhsp-compatible` |
 
 _Instance selections_:
@@ -30,7 +30,7 @@ _Instance selections_:
 - `samples`: uses the 261 instances listed in `benchmarks/manifests/sample-instances.txt`;
 - `all`: uses all compatible instances in the model's directory.
 
-When called without arguments, the default is `direct samples`.
+When called without arguments, the default is `direct-base samples`.
 
 _Options_:
 
@@ -39,19 +39,19 @@ _Options_:
 _Examples_:
 
 ```bash
-./scripts/enhsp/run-all.sh direct samples
-./scripts/enhsp/run-all.sh direct-opt all
+./scripts/enhsp/run-all.sh direct-base samples
+./scripts/enhsp/run-all.sh direct-new all
 ./scripts/enhsp/run-all.sh granular samples
 ./scripts/enhsp/run-all.sh granular all --build
 ```
 
 ### Running a single instance
 
-The single-instance runner uses `direct` as its default model:
+The single-instance runner uses Direct base (`direct-base`) as its default model:
 
 ```bash
 ./scripts/enhsp/run-one.sh \
-  benchmarks/pddl/instances-direct-numeric/plt0_2_4_2_1.pddl
+  benchmarks/pddl/instances-direct-base-numeric/plt0_2_4_2_1.pddl
 ```
 
 Use `PDDL_MODEL` to select a different model.
@@ -59,9 +59,9 @@ Use `PDDL_MODEL` to select a different model.
 _Examples_:
 
 ```bash
-PDDL_MODEL=direct-opt \
+PDDL_MODEL=direct-new \
   ./scripts/enhsp/run-one.sh \
-  benchmarks/pddl/instances-direct-numeric-opt/plt0_2_4_2_1.pddl
+  benchmarks/pddl/instances-direct-new-numeric/plt0_2_4_2_1.pddl
 
 PDDL_MODEL=granular \
   ./scripts/enhsp/run-one.sh \
@@ -90,13 +90,13 @@ The main options can be set through environment variables:
 _Examples_:
 
 ```bash
-TIME_LIMIT=300 ./scripts/enhsp/run-all.sh direct samples
+TIME_LIMIT=300 ./scripts/enhsp/run-all.sh direct-base samples
 
 JAVA_OPTS=-Xmx8G VALIDATE_PLANS=0 \
   ./scripts/enhsp/run-all.sh granular samples
 
-SKIP_EXISTING_RESULTS=0 OUTPUT_DIR=results/pddl/enhsp/direct/test \
-  ./scripts/enhsp/run-all.sh direct samples
+SKIP_EXISTING_RESULTS=0 OUTPUT_DIR=results/pddl/enhsp/direct-base/test \
+  ./scripts/enhsp/run-all.sh direct-base samples
 ```
 
 ### ENHSP results
@@ -192,3 +192,23 @@ python3 scripts/global_comparison.py
 ```
 
 The script accepts no options: it automatically discovers all `stats.csv` files under `results/pddl/` and `results/eprime/` and generates the `greedy`, `enhsp`, `eprime`, and `all-runs` comparisons when available.
+
+
+Model names, planner presets and files use the same naming convention:
+
+| Model | Planner examples | Java source | Domain |
+| --- | --- | --- | --- |
+| `direct-base` | `wastar-colour-base`, `greedy-hadd-base`, `wastar-blind-base` | `ENHSP-colour-base.java` (active default: `ENHSP-base.java`) | `numeric-base.pddl` |
+| `direct-new` | `wastar-colour-new`, `greedy-hadd-new`, `wastar-blind-new` | `ENHSP-colour-new.java` or `ENHSP-capacity-new.java` | `numeric-new.pddl` |
+| `granular` | `greedy-colour`, `greedy-hadd`, `wastar-blind` | `ENHSP-colour-granular.java` | one domain per instance |
+
+The capacity heuristic for Direct base is in `ENHSP-capacity-base.java`, with the `wastar-capacity-base` and `greedy-capacity-base` presets. Model arguments must be `direct-base`, `direct-new` or `granular`; planner and heuristic identifiers use the corresponding `base` / `new` names. The converter uses `--model direct-base` and `--model direct-new` for these input formats.
+
+The runners select the Java source from the model and heuristic automatically. Set `ENHSP_SOURCE` to choose a specific variant when building and running Docker, for example:
+
+```bash
+ENHSP_SOURCE=ENHSP-colour-new.java ./scripts/enhsp/run-all.sh direct-new samples --build
+ENHSP_SOURCE=ENHSP-colour-granular.java ./scripts/enhsp/run-all.sh granular samples --build
+```
+
+Rebuild the image after changing the Java source or its planner identifiers. The compiled upstream Java class remains `planners.ENHSP`, as required by ENHSP's entry point.

@@ -37,19 +37,19 @@ while (($# > 0)); do
     shift
 done
 
-PDDL_MODEL="${PDDL_MODEL:-direct}"
+PDDL_MODEL="$(runner_enhsp_model "${PDDL_MODEL:-direct-base}")"
 case "$PDDL_MODEL" in
-    "direct")
-        DEFAULT_DOMAIN="$PDDL_ROOT/domains/numeric.pddl"
-        DEFAULT_PROBLEMS_DIR="$PDDL_ROOT/instances-direct-numeric"
-        DEFAULT_PROBLEM_EXAMPLE="$PDDL_ROOT/instances-direct-numeric/plt0_2_4_2_1.pddl"
-        DEFAULT_PLANNER="wastar-colour"
+    "direct-base")
+        DEFAULT_DOMAIN="$PDDL_ROOT/domains/numeric-base.pddl"
+        DEFAULT_PROBLEMS_DIR="$PDDL_ROOT/instances-direct-base-numeric"
+        DEFAULT_PROBLEM_EXAMPLE="$PDDL_ROOT/instances-direct-base-numeric/plt0_2_4_2_1.pddl"
+        DEFAULT_PLANNER="wastar-colour-base"
         ;;
-    "direct-opt")
-        DEFAULT_DOMAIN="$PDDL_ROOT/domains/numeric-opt.pddl"
-        DEFAULT_PROBLEMS_DIR="$PDDL_ROOT/instances-direct-numeric-opt"
-        DEFAULT_PROBLEM_EXAMPLE="$PDDL_ROOT/instances-direct-numeric-opt/plt0_2_4_2_1.pddl"
-        DEFAULT_PLANNER="wastar-colour-opt"
+    "direct-new")
+        DEFAULT_DOMAIN="$PDDL_ROOT/domains/numeric-new.pddl"
+        DEFAULT_PROBLEMS_DIR="$PDDL_ROOT/instances-direct-new-numeric"
+        DEFAULT_PROBLEM_EXAMPLE="$PDDL_ROOT/instances-direct-new-numeric/plt0_2_4_2_1.pddl"
+        DEFAULT_PLANNER="wastar-colour-new"
         ;;
     "granular")
         DEFAULT_DOMAIN=""
@@ -58,7 +58,7 @@ case "$PDDL_MODEL" in
         DEFAULT_PLANNER="greedy-hadd"
         ;;
     *)
-        runner_die "PDDL_MODEL non supportato: $PDDL_MODEL (valori ammessi: direct, direct-opt, granular)"
+        runner_die "PDDL_MODEL non supportato: $PDDL_MODEL (valori ammessi: direct-base, direct-new, granular)"
         ;;
 esac
 
@@ -68,7 +68,6 @@ TIME_LIMIT="${TIME_LIMIT:-900}"
 JAVA_OPTS="${JAVA_OPTS:--Xmx24G}"
 PLANNER="${PLANNER:-$DEFAULT_PLANNER}"
 
-DEFAULT_RUN_NAME="enhsp-$PLANNER"
 case "$PLANNER" in
     wastar-*)
         DEFAULT_HEURISTIC="${PLANNER#wastar-}"
@@ -82,31 +81,23 @@ case "$PLANNER" in
         ;;
     *)
         DEFAULT_HEURISTIC="colour"
+        if [ "$PDDL_MODEL" != "granular" ]; then
+            DEFAULT_HEURISTIC="colour-${PDDL_MODEL#direct-}"
+        fi
         SEARCH="${SEARCH:-WAStar}"
         TIES="${TIES:-larger_g}"
         ;;
 esac
-DEFAULT_HEURISTIC="${DEFAULT_HEURISTIC%-opt}"
-if [ "$DEFAULT_HEURISTIC" = "optblind" ]; then
-    DEFAULT_HEURISTIC="blind"
-fi
+case "$DEFAULT_HEURISTIC" in
+    blind-base|blind-new) DEFAULT_HEURISTIC="blind" ;;
+    hadd-base|hadd-new) DEFAULT_HEURISTIC="hadd" ;;
+esac
 HEURISTIC="${HEURISTIC:-$DEFAULT_HEURISTIC}"
+export ENHSP_SOURCE="${ENHSP_SOURCE:-$(runner_enhsp_source "$PDDL_MODEL" "$HEURISTIC")}"
 
-if [ "$PDDL_MODEL" = "direct-opt" ]; then
-    case "$DEFAULT_RUN_NAME" in
-        *-opt) ;;
-        *) DEFAULT_RUN_NAME="$DEFAULT_RUN_NAME-opt" ;;
-    esac
-fi
-
-if [ "$PDDL_MODEL" = "granular" ]; then
-    DEFAULT_RUN_NAME="${DEFAULT_RUN_NAME/enhsp-/enhsp-granular-}"
-    RESULT_ENCODING="granular"
-else
-    DEFAULT_RUN_NAME="${DEFAULT_RUN_NAME/enhsp-/enhsp-direct-}"
-    RESULT_ENCODING="direct"
-fi
-RESULT_RUN_NAME="${DEFAULT_RUN_NAME#enhsp-${RESULT_ENCODING}-}"
+RESULT_ENCODING="$PDDL_MODEL"
+RESULT_RUN_NAME="$PLANNER"
+DEFAULT_RUN_NAME="enhsp-$RESULT_ENCODING-$RESULT_RUN_NAME"
 
 WH="${WH:-1}"
 OUTPUT_DIR="${OUTPUT_DIR:-$APP_ROOT/results/pddl/enhsp/$RESULT_ENCODING/$RESULT_RUN_NAME}"
@@ -138,6 +129,7 @@ Variabili opzionali:
   WH=$WH
   TIES=$TIES
   PLANNER=$PLANNER
+  ENHSP_SOURCE=$ENHSP_SOURCE
   VALIDATE_PLANS=$VALIDATE_PLANS
 EOF
 }
@@ -170,7 +162,7 @@ if [ "${PLOTTING_RUNNER_IN_DOCKER:-0}" != "1" ]; then
         --env "PDDL_MODEL=$PDDL_MODEL"
     )
     runner_add_compose_env_args DOCKER_ENV_ARGS \
-        TIME_LIMIT JAVA_OPTS PLANNER SEARCH TIES HEURISTIC WH \
+        TIME_LIMIT JAVA_OPTS PLANNER SEARCH TIES HEURISTIC WH ENHSP_SOURCE \
         VALIDATE_PLANS JAVA_BIN FD_DISABLE_NEGATIVE_AXIOMS
     runner_add_compose_path_env_args "$APP_ROOT" DOCKER_ENV_ARGS \
         PDDL_ROOT DOMAIN PROBLEMS_DIR OUTPUT_DIR BIN_DIR \

@@ -8,7 +8,7 @@ REPLICAS_PER_CONFIGURATION = 3
 SAMPLES_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SAMPLES_DIR.parent
 PDDL_DIR = PROJECT_ROOT / "benchmarks/pddl"
-DIRECT_SOURCE = PDDL_DIR / "instances-direct-numeric"
+DIRECT_SOURCE = PDDL_DIR / "instances-direct-base-numeric"
 GRANULAR_SOURCE = PDDL_DIR / "instances-granular-enhsp-compatible"
 SAMPLE_MANIFEST = PROJECT_ROOT / "benchmarks/manifests/sample-instances.txt"
 

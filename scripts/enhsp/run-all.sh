@@ -19,16 +19,16 @@ Uso: $(basename "$0") [MODELLO] [ISTANZE] [opzioni]
 Esegue ENHSP su un insieme di istanze tramite Docker Compose.
 
 Argomenti:
-  MODELLO       granular, direct-opt o direct (default: direct).
+  MODELLO       granular, direct-new o direct-base (default: direct-base).
   ISTANZE       samples o all (default: samples).
 
 Opzioni:
   --build       Costruisce l'immagine Docker prima dell'esecuzione.
 
 Esempi:
-  $(basename "$0") direct samples --build
+  $(basename "$0") direct-base samples --build
   $(basename "$0") granular all
-  TIME_LIMIT=300 $(basename "$0") direct-opt samples
+  TIME_LIMIT=300 $(basename "$0") direct-new samples
 EOF
 }
 
@@ -63,9 +63,9 @@ fi
 if [ -n "${POSITIONAL[0]:-}" ]; then
     PDDL_MODEL="${POSITIONAL[0]}"
 elif [ -z "${PDDL_MODEL:-}" ] && [ -t 0 ]; then
-    read -r -p "Modello (granular/direct-opt/direct): " PDDL_MODEL
+    read -r -p "Modello (granular/direct-new/direct-base): " PDDL_MODEL
 else
-    PDDL_MODEL="${PDDL_MODEL:-direct}"
+    PDDL_MODEL="${PDDL_MODEL:-direct-base}"
 fi
 
 if [ -n "${POSITIONAL[1]:-}" ]; then
@@ -82,20 +82,21 @@ case "$INSTANCE_SET" in
 esac
 
 RUN_ONE="${RUN_ONE:-$SCRIPT_DIR/run-one.sh}"
+PDDL_MODEL="$(runner_enhsp_model "$PDDL_MODEL")"
 case "$PDDL_MODEL" in
-    "direct")
-        DEFAULT_DOMAIN="$PDDL_ROOT/domains/numeric.pddl"
-        DEFAULT_PROBLEMS_DIR="$PDDL_ROOT/instances-direct-numeric"
+    "direct-base")
+        DEFAULT_DOMAIN="$PDDL_ROOT/domains/numeric-base.pddl"
+        DEFAULT_PROBLEMS_DIR="$PDDL_ROOT/instances-direct-base-numeric"
         DEFAULT_SAMPLE_LIST="$APP_ROOT/benchmarks/manifests/sample-instances.txt"
         DEFAULT_PROBLEM_NAME_PATTERN="*.pddl"
-        DEFAULT_PLANNER="wastar-colour"
+        DEFAULT_PLANNER="wastar-colour-base"
         ;;
-    "direct-opt")
-        DEFAULT_DOMAIN="$PDDL_ROOT/domains/numeric-opt.pddl"
-        DEFAULT_PROBLEMS_DIR="$PDDL_ROOT/instances-direct-numeric-opt"
+    "direct-new")
+        DEFAULT_DOMAIN="$PDDL_ROOT/domains/numeric-new.pddl"
+        DEFAULT_PROBLEMS_DIR="$PDDL_ROOT/instances-direct-new-numeric"
         DEFAULT_SAMPLE_LIST="$APP_ROOT/benchmarks/manifests/sample-instances.txt"
         DEFAULT_PROBLEM_NAME_PATTERN="*.pddl"
-        DEFAULT_PLANNER="wastar-colour-opt"
+        DEFAULT_PLANNER="wastar-colour-new"
         ;;
     "granular")
         DEFAULT_DOMAIN=""
@@ -105,7 +106,7 @@ case "$PDDL_MODEL" in
         DEFAULT_PLANNER="greedy-hadd"
         ;;
     *)
-        runner_die "modello non supportato: $PDDL_MODEL (valori ammessi: granular, direct-opt, direct)"
+        runner_die "modello non supportato: $PDDL_MODEL (valori ammessi: granular, direct-new, direct-base)"
         ;;
 esac
 
@@ -123,7 +124,6 @@ TIME_LIMIT="${TIME_LIMIT:-900}"
 JAVA_OPTS="${JAVA_OPTS:--Xmx24G}"
 PLANNER="${PLANNER:-$DEFAULT_PLANNER}"
 
-DEFAULT_RUN_NAME="enhsp-$PLANNER"
 case "$PLANNER" in
     wastar-*)
         DEFAULT_HEURISTIC="${PLANNER#wastar-}"
@@ -137,31 +137,23 @@ case "$PLANNER" in
         ;;
     *)
         DEFAULT_HEURISTIC="colour"
+        if [ "$PDDL_MODEL" != "granular" ]; then
+            DEFAULT_HEURISTIC="colour-${PDDL_MODEL#direct-}"
+        fi
         SEARCH="${SEARCH:-WAStar}"
         TIES="${TIES:-larger_g}"
         ;;
 esac
-DEFAULT_HEURISTIC="${DEFAULT_HEURISTIC%-opt}"
-if [ "$DEFAULT_HEURISTIC" = "optblind" ]; then
-    DEFAULT_HEURISTIC="blind"
-fi
+case "$DEFAULT_HEURISTIC" in
+    blind-base|blind-new) DEFAULT_HEURISTIC="blind" ;;
+    hadd-base|hadd-new) DEFAULT_HEURISTIC="hadd" ;;
+esac
 HEURISTIC="${HEURISTIC:-$DEFAULT_HEURISTIC}"
+export ENHSP_SOURCE="${ENHSP_SOURCE:-$(runner_enhsp_source "$PDDL_MODEL" "$HEURISTIC")}"
 
-if [ "$PDDL_MODEL" = "direct-opt" ]; then
-    case "$DEFAULT_RUN_NAME" in
-        *-opt) ;;
-        *) DEFAULT_RUN_NAME="$DEFAULT_RUN_NAME-opt" ;;
-    esac
-fi
-
-if [ "$PDDL_MODEL" = "granular" ]; then
-    DEFAULT_RUN_NAME="${DEFAULT_RUN_NAME/enhsp-/enhsp-granular-}"
-    RESULT_ENCODING="granular"
-else
-    DEFAULT_RUN_NAME="${DEFAULT_RUN_NAME/enhsp-/enhsp-direct-}"
-    RESULT_ENCODING="direct"
-fi
-RESULT_RUN_NAME="${DEFAULT_RUN_NAME#enhsp-${RESULT_ENCODING}-}"
+RESULT_ENCODING="$PDDL_MODEL"
+RESULT_RUN_NAME="$PLANNER"
+DEFAULT_RUN_NAME="enhsp-$RESULT_ENCODING-$RESULT_RUN_NAME"
 
 WH="${WH:-1}"
 OUTPUT_DIR="${OUTPUT_DIR:-$APP_ROOT/results/pddl/enhsp/$RESULT_ENCODING/$RESULT_RUN_NAME}"
@@ -183,7 +175,7 @@ if [ "${PLOTTING_RUNNER_IN_DOCKER:-0}" != "1" ]; then
 
     DOCKER_ENV_ARGS=(--env PLOTTING_RUNNER_IN_DOCKER=1)
     runner_add_compose_env_args DOCKER_ENV_ARGS \
-        TIME_LIMIT JAVA_OPTS PLANNER SEARCH TIES HEURISTIC WH \
+        TIME_LIMIT JAVA_OPTS PLANNER SEARCH TIES HEURISTIC WH ENHSP_SOURCE \
         PROBLEM_NAME_PATTERN VALIDATE_PLANS SKIP_EXISTING_RESULTS \
         PAPER2024_SELECTION JAVA_BIN FD_DISABLE_NEGATIVE_AXIOMS
     runner_add_compose_path_env_args "$APP_ROOT" DOCKER_ENV_ARGS \
@@ -328,7 +320,7 @@ run_single_problem() {
 }
 
 FIND_FILTER=(-name "$PROBLEM_NAME_PATTERN")
-if [ "$PDDL_MODEL" = "direct" ] || [ "$PDDL_MODEL" = "direct-opt" ]; then
+if [ "$PDDL_MODEL" = "direct-base" ] || [ "$PDDL_MODEL" = "direct-new" ]; then
     FIND_FILTER+=(! -name "*-domain.pddl" ! -name "*-problem.pddl")
 fi
 
