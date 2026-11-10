@@ -1,0 +1,52 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 782
+UFX:false
+|F|:0
+|X|:32
+|A|:225
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 2, Evaluated States: 12, Time: 0.005) Frontier Size: 10
+f(n) = 2.0 (Expanded Nodes: 13, Evaluated States: 50, Time: 0.014) Frontier Size: 37
+f(n) = 3.0 (Expanded Nodes: 51, Evaluated States: 175, Time: 0.018) Frontier Size: 124
+f(n) = 4.0 (Expanded Nodes: 176, Evaluated States: 576, Time: 0.024) Frontier Size: 400
+f(n) = 5.0 (Expanded Nodes: 577, Evaluated States: 1712, Time: 0.038) Frontier Size: 1135
+f(n) = 6.0 (Expanded Nodes: 1713, Evaluated States: 4964, Time: 0.069) Frontier Size: 3251
+f(n) = 7.0 (Expanded Nodes: 4965, Evaluated States: 14000, Time: 0.165) Frontier Size: 9035
+f(n) = 8.0 (Expanded Nodes: 14001, Evaluated States: 37674, Time: 0.392) Frontier Size: 23673
+f(n) = 9.0 (Expanded Nodes: 37675, Evaluated States: 96618, Time: 0.979) Frontier Size: 58943
+f(n) = 10.0 (Expanded Nodes: 96619, Evaluated States: 229318, Time: 2.495) Frontier Size: 132699
+f(n) = 11.0 (Expanded Nodes: 229319, Evaluated States: 497049, Time: 5.968) Frontier Size: 267730
+-------------Time: 10s ; Expanded Nodes: 381801 (Avg-Speed 38180.0 n/s); Evaluated States: 779960
+f(n) = 12.0 (Expanded Nodes: 497050, Evaluated States: 960440, Time: 13.243) Frontier Size: 463390
+Problem Solved
+
+Found Plan:
+0.0: (shoot-row r3c1 c3)
+1.0: (shoot-row r1c5 c1)
+2.0: (shoot-row r5c2 c1)
+3.0: (shoot-column r2c3 c2)
+4.0: (shoot-row r2c5 c3)
+5.0: (shoot-column r4c2 c3)
+6.0: (shoot-column r6c4 c1)
+7.0: (shoot-row r3c2 c1)
+8.0: (shoot-column r6c5 c2)
+9.0: (shoot-column r5c1 c2)
+10.0: (shoot-column r5c2 c3)
+11.0: (shoot-column r5c3 c1)
+
+Plan-Length:12
+Metric (Search):12.0
+Planning Time (msec): 17693
+Heuristic Time (msec): 23
+Search Time (msec): 17691
+Expanded Nodes:662388
+States Evaluated:1222331
+Number of Dead-Ends detected:0
+Number of Duplicates detected:875020
+
+Tempo esecuzione ENHSP: 18.873 sec

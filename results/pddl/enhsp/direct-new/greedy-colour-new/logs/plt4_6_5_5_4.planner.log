@@ -1,0 +1,43 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 1131
+UFX:false
+|F|:0
+|X|:32
+|A|:375
+|P|:0
+|E|:0
+[ColourOptHeuristic-HybridFast] Activated
+[ColourOptHeuristic-HybridFast] goalTotalBlock=4.0  initialTotalBlock=30.0  cells=30  rows=6  cols=5  maxLine=6  unblockedRows=6  unblockedCols=5  numericColourFluents=30
+h(I):12.0
+ g(n)= 1.0 h(n)=10.998
+ g(n)= 2.0 h(n)=9.996
+ g(n)= 4.0 h(n)=9.995
+ g(n)= 4.0 h(n)=8.994
+ g(n)= 5.0 h(n)=8.993
+ g(n)= 6.0 h(n)=8.991
+ g(n)= 7.0 h(n)=7.99
+ g(n)= 7.0 h(n)=7.989
+ g(n)= 8.0 h(n)=6.985
+ g(n)= 13.0 h(n)=6.984
+ g(n)= 14.0 h(n)=6.982
+ g(n)= 15.0 h(n)=5.98
+ g(n)= 16.0 h(n)=4.98
+ g(n)= 17.0 h(n)=3.978
+ g(n)= 18.0 h(n)=2.977
+ g(n)= 19.0 h(n)=1.976
+ g(n)= 17.0 h(n)=0.976
+ g(n)= 19.0 h(n)=0.975
+Problem unsolvable
+Metric (Search):-1.0
+Planning Time (msec): 91
+Heuristic Time (msec): 3
+Search Time (msec): 0
+Expanded Nodes:1120
+States Evaluated:1120
+Number of Dead-Ends detected:0
+Number of Duplicates detected:136
+
+Tempo esecuzione ENHSP: 1.745 sec

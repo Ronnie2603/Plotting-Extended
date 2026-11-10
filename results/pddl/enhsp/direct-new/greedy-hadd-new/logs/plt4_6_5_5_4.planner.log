@@ -1,0 +1,45 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 1368
+UFX:false
+|F|:0
+|X|:32
+|A|:375
+|P|:0
+|E|:0
+Numeric Error for Complex Condition Activated
+H1 Setup Time (msec): 239
+h(I):26.0
+ g(n)= 1.0 h(n)=24.0
+ g(n)= 3.0 h(n)=22.0
+ g(n)= 4.0 h(n)=21.0
+ g(n)= 3.0 h(n)=20.0
+ g(n)= 5.0 h(n)=19.0
+ g(n)= 6.0 h(n)=17.0
+ g(n)= 6.0 h(n)=16.0
+ g(n)= 9.0 h(n)=15.0
+ g(n)= 9.0 h(n)=14.0
+ g(n)= 10.0 h(n)=13.0
+ g(n)= 11.0 h(n)=12.0
+ g(n)= 12.0 h(n)=11.0
+ g(n)= 13.0 h(n)=8.0
+ g(n)= 14.0 h(n)=7.0
+ g(n)= 15.0 h(n)=6.0
+ g(n)= 16.0 h(n)=4.0
+ g(n)= 17.0 h(n)=3.0
+-------------Time: 10s ; Expanded Nodes: 262 (Avg-Speed 26.0 n/s); Evaluated States: 266
+ g(n)= 18.0 h(n)=2.0
+-------------Time: 20s ; Expanded Nodes: 548 (Avg-Speed 27.0 n/s); Evaluated States: 552
+Problem unsolvable
+Metric (Search):-1.0
+Planning Time (msec): 23025
+Heuristic Time (msec): 22851
+Search Time (msec): 0
+Expanded Nodes:636
+States Evaluated:636
+Number of Dead-Ends detected:514
+Number of Duplicates detected:106
+
+Tempo esecuzione ENHSP: 25.184 sec

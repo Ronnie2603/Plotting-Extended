@@ -1,0 +1,42 @@
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Domain parsed
+Problem parsed
+Grounding..
+Grounding Time: 117
+UFX:false
+|F|:202
+|X|:0
+|A|:5250
+|P|:0
+|E|:0
+h(I):0.0
+f(n) = 1.0 (Expanded Nodes: 4, Evaluated States: 27, Time: 0.01) Frontier Size: 23
+f(n) = 2.0 (Expanded Nodes: 65, Evaluated States: 120, Time: 0.039) Frontier Size: 55
+Problem Solved
+
+Found Plan:
+0.0: (colour_roulette red)
+1.0: (shooting_row_4)
+2.0: (horizontal_bullet_advancing_absorbing loc_1_4 loc_2_4 red n12 n11)
+3.0: (horizontal_bullet_advancing_absorbing loc_2_4 loc_3_4 red n11 n10)
+4.0: (horizontal_bullet_advancing_absorbing loc_3_4 loc_4_4 red n10 n9)
+5.0: (horizontal_bullet_advancing_absorbing loc_4_4 loc_5_4 red n9 n8)
+6.0: (horizontal_bullet_advancing_reaching_end loc_5_4 loc_6_4)
+7.0: (vertical_bullet_advancing_absorbing loc_5_4 loc_5_3 red n8 n7)
+8.0: (vertical_bullet_bouncing loc_5_3 loc_5_2 red green)
+9.0: (shooting_column_4)
+10.0: (vertical_bullet_advancing_non_absorbing loc_4_5 loc_4_4)
+11.0: (vertical_bullet_advancing_absorbing loc_4_4 loc_4_3 green n7 n6)
+12.0: (vertical_bullet_bouncing loc_4_3 loc_4_2 green red)
+
+Plan-Length:13
+Metric (Search):2.0
+Planning Time (msec): 57
+Heuristic Time (msec): 2
+Search Time (msec): 55
+Expanded Nodes:112
+States Evaluated:158
+Number of Dead-Ends detected:0
+Number of Duplicates detected:30
+
+Tempo esecuzione ENHSP: 0.511 sec
