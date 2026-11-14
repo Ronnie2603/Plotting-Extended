@@ -2,7 +2,7 @@ Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 Domain parsed
 Problem parsed
 Grounding..
-Grounding Time: 1089
+Grounding Time: 915
 UFX:false
 |F|:0
 |X|:32
@@ -14,22 +14,20 @@ UFX:false
 h(I):3.0
  g(n)= 1.0 h(n)=2.997
  g(n)= 2.0 h(n)=2.996
- g(n)= 3.0 h(n)=1.994
- g(n)= 4.0 h(n)=1.993
- g(n)= 5.0 h(n)=1.992
+ g(n)= 3.0 h(n)=2.995
+ g(n)= 4.0 h(n)=1.994
+ g(n)= 5.0 h(n)=1.993
  g(n)= 6.0 h(n)=1.991
- g(n)= 7.0 h(n)=1.989
- g(n)= 8.0 h(n)=1.988
- g(n)= 9.0 h(n)=1.985
- g(n)= 10.0 h(n)=0.984
- g(n)= 11.0 h(n)=0.983
- g(n)= 12.0 h(n)=0.982
- g(n)= 13.0 h(n)=0.981
- g(n)= 14.0 h(n)=0.98
- g(n)= 15.0 h(n)=0.979
- g(n)= 16.0 h(n)=0.978
- g(n)= 17.0 h(n)=0.977
- g(n)= 17.0 h(n)=0.976
+ g(n)= 7.0 h(n)=1.99
+ g(n)= 9.0 h(n)=1.989
+ g(n)= 10.0 h(n)=1.987
+ g(n)= 11.0 h(n)=0.984
+ g(n)= 11.0 h(n)=0.981
+ g(n)= 12.0 h(n)=0.98
+ g(n)= 13.0 h(n)=0.979
+ g(n)= 13.0 h(n)=0.978
+ g(n)= 15.0 h(n)=0.977
+ g(n)= 16.0 h(n)=0.976
  g(n)= 18.0 h(n)=0.975
 Problem Solved
 
@@ -47,20 +45,20 @@ Found Plan:
 10.0: (shoot-column r3c5 c1)
 11.0: (shoot-row r4c2 c5)
 12.0: (shoot-column r4c5 c1)
-13.0: (shoot-row-and-column r1c6 r4c6 c3)
+13.0: (shoot-column r4c6 c3)
 14.0: (shoot-row r5c2 c4)
 15.0: (shoot-row-and-column r3c6 r4c6 c2)
 16.0: (shoot-column r5c4 c3)
-17.0: (shoot-row r5c2 c3)
+17.0: (shoot-column r5c2 c3)
 
 Plan-Length:18
 Metric (Search):18.0
-Planning Time (msec): 152
+Planning Time (msec): 45
 Heuristic Time (msec): 2
-Search Time (msec): 151
-Expanded Nodes:2219
-States Evaluated:2247
+Search Time (msec): 45
+Expanded Nodes:602
+States Evaluated:632
 Number of Dead-Ends detected:0
-Number of Duplicates detected:725
+Number of Duplicates detected:99
 
-Tempo esecuzione ENHSP: 1.761 sec
+Tempo esecuzione ENHSP: 1.458 sec

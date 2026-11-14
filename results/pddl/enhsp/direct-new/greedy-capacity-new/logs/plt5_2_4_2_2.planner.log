@@ -2,7 +2,7 @@ Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 Domain parsed
 Problem parsed
 Grounding..
-Grounding Time: 81
+Grounding Time: 51
 UFX:false
 |F|:0
 |X|:10
@@ -13,7 +13,7 @@ UFX:false
 [CapacityOptHeuristic-HybridFast] goalTotalBlock=2.0  initialTotalBlock=8.0  cells=8  rows=2  cols=4  maxLine=4  maxActionCapacity=5  unblockedRows=2  unblockedCols=4  numericColourFluents=8
 h(I):2.0
  g(n)= 1.0 h(n)=0.998
- g(n)= 2.0 h(n)=0.996
+ g(n)= 2.0 h(n)=0.997
 Problem Solved
 
 Found Plan:
@@ -23,12 +23,12 @@ Found Plan:
 
 Plan-Length:3
 Metric (Search):3.0
-Planning Time (msec): 9
-Heuristic Time (msec): 2
-Search Time (msec): 8
-Expanded Nodes:6
-States Evaluated:14
+Planning Time (msec): 6
+Heuristic Time (msec): 1
+Search Time (msec): 5
+Expanded Nodes:4
+States Evaluated:13
 Number of Dead-Ends detected:0
 Number of Duplicates detected:0
 
-Tempo esecuzione ENHSP: 0.340 sec
+Tempo esecuzione ENHSP: 0.214 sec

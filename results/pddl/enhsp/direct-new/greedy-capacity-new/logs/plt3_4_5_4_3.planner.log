@@ -2,7 +2,7 @@ Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 Domain parsed
 Problem parsed
 Grounding..
-Grounding Time: 468
+Grounding Time: 348
 UFX:false
 |F|:0
 |X|:22
@@ -34,22 +34,22 @@ Found Plan:
 4.0: (shoot-column r2c4 c3)
 5.0: (shoot-row r1c5 c2)
 6.0: (shoot-row r2c2 c2)
-7.0: (shoot-row-and-column r1c5 r2c5 c3)
+7.0: (shoot-column r2c5 c3)
 8.0: (shoot-row r3c2 c4)
 9.0: (shoot-row r4c2 c1)
 10.0: (shoot-row r3c3 c4)
-11.0: (shoot-column r3c5 c3)
+11.0: (shoot-row-and-column r1c5 r3c5 c3)
 12.0: (shoot-row r4c3 c1)
-13.0: (shoot-row r4c3 c2)
+13.0: (shoot-column r4c3 c2)
 
 Plan-Length:14
 Metric (Search):14.0
-Planning Time (msec): 24
-Heuristic Time (msec): 2
-Search Time (msec): 21
-Expanded Nodes:55
-States Evaluated:71
+Planning Time (msec): 12
+Heuristic Time (msec): 1
+Search Time (msec): 11
+Expanded Nodes:20
+States Evaluated:41
 Number of Dead-Ends detected:0
-Number of Duplicates detected:11
+Number of Duplicates detected:4
 
-Tempo esecuzione ENHSP: 0.842 sec
+Tempo esecuzione ENHSP: 0.650 sec

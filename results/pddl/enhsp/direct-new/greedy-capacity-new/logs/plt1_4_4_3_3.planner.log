@@ -2,7 +2,7 @@ Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 Domain parsed
 Problem parsed
 Grounding..
-Grounding Time: 248
+Grounding Time: 191
 UFX:false
 |F|:0
 |X|:18
@@ -15,33 +15,30 @@ h(I):2.0
  g(n)= 1.0 h(n)=1.997
  g(n)= 2.0 h(n)=1.996
  g(n)= 3.0 h(n)=1.995
- g(n)= 4.0 h(n)=0.993
- g(n)= 5.0 h(n)=0.991
- g(n)= 7.0 h(n)=0.99
- g(n)= 8.0 h(n)=0.989
- g(n)= 9.0 h(n)=0.988
+ g(n)= 4.0 h(n)=0.994
+ g(n)= 5.0 h(n)=0.993
+ g(n)= 6.0 h(n)=0.992
+ g(n)= 7.0 h(n)=0.991
 Problem Solved
 
 Found Plan:
 0.0: (shoot-row r2c3 c2)
-1.0: (shoot-column r2c1 c1)
-2.0: (shoot-column r1c4 c3)
-3.0: (shoot-column r2c3 c2)
-4.0: (shoot-row r3c1 c1)
-5.0: (shoot-row-and-column r1c4 r2c4 c3)
-6.0: (shoot-column r4c3 c2)
-7.0: (shoot-column r2c2 c2)
-8.0: (shoot-row r4c1 c1)
-9.0: (shoot-row-and-column r2c4 r3c4 c3)
+1.0: (shoot-row r4c1 c1)
+2.0: (shoot-row r1c4 c3)
+3.0: (shoot-row r4c1 c3)
+4.0: (shoot-row r4c1 c1)
+5.0: (shoot-row r3c2 c3)
+6.0: (shoot-row r4c2 c1)
+7.0: (shoot-row-and-column r2c4 r4c4 c2)
 
-Plan-Length:10
-Metric (Search):10.0
-Planning Time (msec): 9
+Plan-Length:8
+Metric (Search):8.0
+Planning Time (msec): 8
 Heuristic Time (msec): 1
-Search Time (msec): 8
-Expanded Nodes:15
-States Evaluated:30
+Search Time (msec): 7
+Expanded Nodes:9
+States Evaluated:26
 Number of Dead-Ends detected:0
-Number of Duplicates detected:3
+Number of Duplicates detected:1
 
-Tempo esecuzione ENHSP: 0.519 sec
+Tempo esecuzione ENHSP: 0.452 sec

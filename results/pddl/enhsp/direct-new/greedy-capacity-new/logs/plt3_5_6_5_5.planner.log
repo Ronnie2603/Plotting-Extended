@@ -2,7 +2,7 @@ Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
 Domain parsed
 Problem parsed
 Grounding..
-Grounding Time: 1257
+Grounding Time: 984
 UFX:false
 |F|:0
 |X|:32
@@ -21,12 +21,10 @@ h(I):3.0
  g(n)= 7.0 h(n)=1.988
  g(n)= 8.0 h(n)=1.986
  g(n)= 9.0 h(n)=0.985
- g(n)= 11.0 h(n)=0.984
- g(n)= 12.0 h(n)=0.983
- g(n)= 13.0 h(n)=0.982
+ g(n)= 11.0 h(n)=0.983
+ g(n)= 12.0 h(n)=0.982
  g(n)= 14.0 h(n)=0.981
- g(n)= 15.0 h(n)=0.98
- g(n)= 17.0 h(n)=0.979
+ g(n)= 15.0 h(n)=0.979
  g(n)= 16.0 h(n)=0.978
  g(n)= 17.0 h(n)=0.977
  g(n)= 18.0 h(n)=0.976
@@ -54,12 +52,12 @@ Found Plan:
 
 Plan-Length:18
 Metric (Search):18.0
-Planning Time (msec): 141
-Heuristic Time (msec): 2
-Search Time (msec): 140
-Expanded Nodes:1248
-States Evaluated:1267
+Planning Time (msec): 67
+Heuristic Time (msec): 1
+Search Time (msec): 65
+Expanded Nodes:1136
+States Evaluated:1152
 Number of Dead-Ends detected:0
-Number of Duplicates detected:261
+Number of Duplicates detected:219
 
-Tempo esecuzione ENHSP: 1.981 sec
+Tempo esecuzione ENHSP: 1.561 sec
