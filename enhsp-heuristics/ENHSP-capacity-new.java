@@ -609,6 +609,7 @@ public class ENHSP {
         private NumFluent totalBlockFluent;
         private double goalTotalBlock;
         private double initialTotalBlock;
+        private final double initialBlocksToRemove;
 
         private final int numCells;
         private final int numRows;
@@ -656,7 +657,16 @@ public class ENHSP {
                 }
             }
 
-            for (BoolPredicate predicate : groundedBooleanFluents) {
+            // Static blockers may have been removed from the dynamic fluent
+            // index by grounding. Keep their initial facts available as well.
+            HashSet<BoolPredicate> indexedPredicates = new HashSet<>(groundedBooleanFluents);
+            for (BoolPredicate predicate : problem.getInitBoolFluentsValues().keySet()) {
+                if ("blockedrow".equals(predicate.getName())
+                        || "blockedcol".equals(predicate.getName())) {
+                    indexedPredicates.add(predicate);
+                }
+            }
+            for (BoolPredicate predicate : indexedPredicates) {
                 String name = predicate.getName();
                 List terms = predicate.getTerms();
                 if ("coloured".equals(name) && terms.size() >= 2) {
@@ -708,12 +718,7 @@ public class ENHSP {
             for (int[] col : unblockedColCells) mLine = Math.max(mLine, col.length);
             this.maxLine = mLine;
 
-            // Safe upper capacity for one action.  Even when a particular L
-            // shot is blocked/unavailable, using the full geometric capacity
-            // only weakens the lower bound; it cannot overestimate it.
-            this.maxActionCapacity = Math.max(
-                    Math.max(1, maxLine),
-                    Math.max(1, numRows + numCols - 1));
+            this.maxActionCapacity = computeMaxActionCapacity(rawCols, blockedCols, cellList, init);
 
             this.cellNumFluents = new NumFluent[numCells];
             this.cellBoolPreds = new BoolPredicate[numCells][];
@@ -743,6 +748,7 @@ public class ENHSP {
             this.hasAnyBoolPreds = anyBool;
 
             this.initialTotalBlock = currentTotalBlock(init);
+            this.initialBlocksToRemove = Math.max(0d, initialTotalBlock - goalTotalBlock);
 
             System.out.println("[CapacityOptHeuristic-HybridFast] Activated");
             System.out.println("[CapacityOptHeuristic-HybridFast] goalTotalBlock=" + goalTotalBlock
@@ -762,10 +768,36 @@ public class ENHSP {
             double currentTotalBlock = currentTotalBlock(state);
             double blocksToRemove = Math.max(0d, currentTotalBlock - goalTotalBlock);
             if (blocksToRemove <= Utils.tolerance) return 0f;
+            if (maxActionCapacity <= 0) return Float.POSITIVE_INFINITY;
 
-            double blocksRemovedSoFar = Math.max(0d, initialTotalBlock - currentTotalBlock);
-            float base = (float) Math.ceil(blocksToRemove / maxActionCapacity);
-            return base - 0.001f * (float) blocksRemovedSoFar;
+            double base = Math.ceil(blocksToRemove / maxActionCapacity);
+            if (base <= Utils.tolerance || Double.isInfinite(base)) return (float) base;
+            double blocksRemovedSoFar = Math.max(0d, initialBlocksToRemove - blocksToRemove);
+            return (float) (base - 0.001d * blocksRemovedSoFar);
+        }
+
+        private int computeMaxActionCapacity(Map<Integer, List<CellInfo>> rawCols,
+                                             Map<Integer, List<BoolPredicate>> blockedCols,
+                                             List<CellInfo> cellList, State init) {
+            int max = maxLine;
+            int lastCol = 0;
+            for (int col : rawCols.keySet()) lastCol = Math.max(lastCol, col);
+            if (lastCol <= 0 || isLineBlocked(blockedCols.get(lastCol), init)) return max;
+
+            List<CellInfo> lastColumnCells = rawCols.get(lastCol);
+            if (lastColumnCells == null || lastColumnCells.isEmpty()) return max;
+
+            // Preserve Base's row + last-column tail bound. Availability here
+            // depends only on static line blockers, not on colours or the hand.
+            for (int[] row : unblockedRowCells) {
+                int rowIndex = cellList.get(row[0]).row;
+                int verticalTail = 0;
+                for (CellInfo cell : lastColumnCells) {
+                    if (cell.row > rowIndex) verticalTail++;
+                }
+                if (verticalTail > 0) max = Math.max(max, row.length + verticalTail);
+            }
+            return max;
         }
 
         private int readCellColour(State state, int cellId) {
